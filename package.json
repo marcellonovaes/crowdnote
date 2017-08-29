@@ -1,0 +1,38 @@
+{
+  "name": "crowdnote",
+  "version": "1.0.0",
+  "description": "A framework to build video annotation applications based on cascading crowdsourcing microtasks",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "ejs": "^2.5.6",
+    "express": "^4.15.3",
+    "express-ejs-layouts": "^2.3.0",
+    "faker": "^4.1.0",
+    "fingerprinting": "^1.0.1",
+    "mongo-express": "^0.40.0",
+    "morgan": "*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcellonovaes/crowdnote.git"
+  },
+  "keywords": [
+    "Crowdsourcing",
+    "Video",
+    "Annotation",
+    "Microtask",
+    "Human",
+    "Computation"
+  ],
+  "author": "Marcello Novaes de Amorim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/marcellonovaes/crowdnote/issues"
+  },
+  "homepage": "https://github.com/marcellonovaes/crowdnote#readme"
+}

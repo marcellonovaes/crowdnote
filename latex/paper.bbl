@@ -1,0 +1,216 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{00}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[\protect\citeauthoryear{Amorim, Santos, Mendes, and Tavares}{Amorim
+  et~al\mbox{.}}{2017}]%
+        {172450}
+\bibfield{author}{\bibinfo{person}{Marcello Amorim}, \bibinfo{person}{Celso
+  Alberto~Saibel Santos}, \bibinfo{person}{Ricardo Mendes}, {and}
+  \bibinfo{person}{Orivaldo Tavares}.} \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Video Annotation by Cascading Microtasks: a
+  Crowdsourcing Approach}. In \bibinfo{booktitle}{{\em WebMedia 2017 - Full and
+  Short papers}}. \bibinfo{address}{Gramado, RS}.
+\newblock
+\showISBNx{978-1-4503-5096-9/17/10}
+\showDOI{%
+\url{https://doi.org/10.1145/3126858.3126897}}
+
+
+\bibitem[\protect\citeauthoryear{Difallah, Catasta, Demartini, Ipeirotis, and
+  Cudr{\'e}-Mauroux}{Difallah et~al\mbox{.}}{2015}]%
+        {Difallah:2015:DMC:2736277.2741685}
+\bibfield{author}{\bibinfo{person}{Djellel~Eddine Difallah},
+  \bibinfo{person}{Michele Catasta}, \bibinfo{person}{Gianluca Demartini},
+  \bibinfo{person}{Panagiotis~G. Ipeirotis}, {and} \bibinfo{person}{Philippe
+  Cudr{\'e}-Mauroux}.} \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{The Dynamics of Micro-Task Crowdsourcing: The Case
+  of Amazon MTurk}. In \bibinfo{booktitle}{{\em Proceedings of the 24th
+  International Conference on World Wide Web}} {\em (\bibinfo{series}{WWW
+  '15})}. \bibinfo{publisher}{ACM}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{pages}{238--247}.
+\newblock
+\showISBNx{978-1-4503-3469-3}
+\showDOI{%
+\url{https://doi.org/10.1145/2736277.2741685}}
+
+
+\bibitem[\protect\citeauthoryear{Fi\~{a}o, Rom\~{a}o, Correia, Centieiro, and
+  Dias}{Fi\~{a}o et~al\mbox{.}}{2016}]%
+        {Fiao:2016:AGS:3001773.3001802}
+\bibfield{author}{\bibinfo{person}{Guilherme Fi\~{a}o}, \bibinfo{person}{Teresa
+  Rom\~{a}o}, \bibinfo{person}{Nuno Correia}, \bibinfo{person}{Pedro
+  Centieiro}, {and} \bibinfo{person}{A.~Eduardo Dias}.}
+  \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{Automatic Generation of Sport Video Highlights
+  Based on Fan's Emotions and Content}. In \bibinfo{booktitle}{{\em Proceedings
+  of the 13th International Conference on Advances in Computer Entertainment
+  Technology}} {\em (\bibinfo{series}{ACE2016})}. \bibinfo{publisher}{ACM},
+  \bibinfo{address}{New York, NY, USA}, Article \bibinfo{articleno}{29},
+  \bibinfo{numpages}{6}~pages.
+\newblock
+\showISBNx{978-1-4503-4773-0}
+\showDOI{%
+\url{https://doi.org/10.1145/3001773.3001802}}
+
+
+\bibitem[\protect\citeauthoryear{GALTON}{GALTON}{1907}]%
+        {GALTON1907}
+\bibfield{author}{\bibinfo{person}{FRANCIS GALTON}.}
+  \bibinfo{year}{1907}\natexlab{}.
+\newblock \showarticletitle{Vox Populi (The Wisdom of Crowds)}.
+\newblock \bibinfo{journal}{{\em Nature\/}} \bibinfo{volume}{75},
+  \bibinfo{number}{1949} (\bibinfo{year}{1907}), \bibinfo{pages}{450--451}.
+\newblock
+\showDOI{%
+\url{https://doi.org/10.1038/075509f0}}
+
+
+\bibitem[\protect\citeauthoryear{Goldman, Gonterman, Curless, Salesin, and
+  Seitz}{Goldman et~al\mbox{.}}{2008}]%
+        {Goldman:2008}
+\bibfield{author}{\bibinfo{person}{Dan~B. Goldman}, \bibinfo{person}{Chris
+  Gonterman}, \bibinfo{person}{Brian Curless}, \bibinfo{person}{David Salesin},
+  {and} \bibinfo{person}{Steven~M. Seitz}.} \bibinfo{year}{2008}\natexlab{}.
+\newblock \showarticletitle{Video Object Annotation, Navigation, and
+  Composition}. In \bibinfo{booktitle}{{\em Proceedings of the 21st Annual ACM
+  Symposium on UI Software and Technology}} {\em (\bibinfo{series}{UIST '08})}.
+  \bibinfo{publisher}{ACM}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{pages}{3--12}.
+\newblock
+\showISBNx{978-1-59593-975-3}
+\showDOI{%
+\url{https://doi.org/10.1145/1449715.1449719}}
+
+
+\bibitem[\protect\citeauthoryear{Novaes, Santos, and Tavares}{Novaes
+  et~al\mbox{.}}{2016}]%
+        {162960}
+\bibfield{author}{\bibinfo{person}{Marcello Novaes}, \bibinfo{person}{Celso
+  Alberto~Saibel Santos}, {and} \bibinfo{person}{Orivaldo Tavares}.}
+  \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{ExCAM - Uma metodologia Crowsourcing para a autoria
+  de conteudo extra para videos}. In \bibinfo{booktitle}{{\em WebMedia 2016
+  WTD}}. \bibinfo{address}{Teresina - PI, Brazil}.
+\newblock
+
+
+\bibitem[\protect\citeauthoryear{Wang and Hua}{Wang and Hua}{2011}]%
+        {Wang:2011:ALM:1899412.1899414}
+\bibfield{author}{\bibinfo{person}{Meng Wang} {and} \bibinfo{person}{Xian-Sheng
+  Hua}.} \bibinfo{year}{2011}\natexlab{}.
+\newblock \showarticletitle{Active Learning in Multimedia Annotation and
+  Retrieval: A Survey}.
+\newblock \bibinfo{journal}{{\em ACM Trans. Intell. Syst. Technol.\/}}
+  \bibinfo{volume}{2}, \bibinfo{number}{2}, Article \bibinfo{articleno}{10}
+  (\bibinfo{date}{Feb.} \bibinfo{year}{2011}), \bibinfo{numpages}{21}~pages.
+\newblock
+\showISSN{2157-6904}
+\showDOI{%
+\url{https://doi.org/10.1145/1899412.1899414}}
+
+
+\bibitem[\protect\citeauthoryear{Wang, Hua, Tang, and Hong}{Wang
+  et~al\mbox{.}}{2009}]%
+        {Wang:2009:BDM:1652990.1653002}
+\bibfield{author}{\bibinfo{person}{Meng Wang}, \bibinfo{person}{Xian-Sheng
+  Hua}, \bibinfo{person}{Jinhui Tang}, {and} \bibinfo{person}{Richang Hong}.}
+  \bibinfo{year}{2009}\natexlab{}.
+\newblock \showarticletitle{Beyond Distance Measurement: Constructing
+  Neighborhood Similarity for Video Annotation}.
+\newblock \bibinfo{journal}{{\em Trans. Multi.\/}} \bibinfo{volume}{11},
+  \bibinfo{number}{3} (\bibinfo{date}{April} \bibinfo{year}{2009}),
+  \bibinfo{pages}{465--476}.
+\newblock
+\showISSN{1520-9210}
+\showDOI{%
+\url{https://doi.org/10.1109/TMM.2009.2012919}}
+
+
+\bibitem[\protect\citeauthoryear{Wilk, Kopf, and Effelsberg}{Wilk
+  et~al\mbox{.}}{2015}]%
+        {Wilk:2015:VCC:2713168.2713178}
+\bibfield{author}{\bibinfo{person}{Stefan Wilk}, \bibinfo{person}{Stephan
+  Kopf}, {and} \bibinfo{person}{Wolfgang Effelsberg}.}
+  \bibinfo{year}{2015}\natexlab{}.
+\newblock \showarticletitle{Video Composition by the Crowd: A System to Compose
+  User-generated Videos in Near Real-time}. In \bibinfo{booktitle}{{\em
+  Proceedings of the 6th ACM MSC}} {\em (\bibinfo{series}{MMSys '15})}.
+  \bibinfo{publisher}{ACM}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{pages}{13--24}.
+\newblock
+\showISBNx{978-1-4503-3351-1}
+\showDOI{%
+\url{https://doi.org/10.1145/2713168.2713178}}
+
+
+\bibitem[\protect\citeauthoryear{Zhang, Fan, Wang, and Zhou}{Zhang
+  et~al\mbox{.}}{2012}]%
+        {Zhang:2012:KIE:2339530.2339620}
+\bibfield{author}{\bibinfo{person}{Jun Zhang}, \bibinfo{person}{Xiaoming Fan},
+  \bibinfo{person}{Jianyong Wang}, {and} \bibinfo{person}{Lizhu Zhou}.}
+  \bibinfo{year}{2012}\natexlab{}.
+\newblock \showarticletitle{Keyword-propagation-based Information Enriching and
+  Noise Removal for Web News Videos}. In \bibinfo{booktitle}{{\em Proceedings
+  of the 18th ACM SIGKDD International Conference on Knowledge Discovery and
+  Data Mining}} {\em (\bibinfo{series}{KDD '12})}. \bibinfo{publisher}{ACM},
+  \bibinfo{address}{New York, NY, USA}, \bibinfo{pages}{561--569}.
+\newblock
+\showISBNx{978-1-4503-1462-6}
+\showDOI{%
+\url{https://doi.org/10.1145/2339530.2339620}}
+
+
+\bibitem[\protect\citeauthoryear{Zhang, Zhang, Xu, and Lu}{Zhang
+  et~al\mbox{.}}{2007}]%
+        {Zhang:2007:PRS:1290082.1290126}
+\bibfield{author}{\bibinfo{person}{Yifan Zhang}, \bibinfo{person}{Xiaoyu
+  Zhang}, \bibinfo{person}{Changsheng Xu}, {and} \bibinfo{person}{Hanqing Lu}.}
+  \bibinfo{year}{2007}\natexlab{}.
+\newblock \showarticletitle{Personalized Retrieval of Sports Video}. In
+  \bibinfo{booktitle}{{\em Proceedings of the International Workshop on
+  Workshop on Multimedia Information Retrieval}} {\em (\bibinfo{series}{MIR
+  '07})}. \bibinfo{publisher}{ACM}, \bibinfo{address}{New York, NY, USA},
+  \bibinfo{pages}{313--322}.
+\newblock
+\showISBNx{978-1-59593-778-0}
+\showDOI{%
+\url{https://doi.org/10.1145/1290082.1290126}}
+
+
+\end{thebibliography}
