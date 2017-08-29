@@ -1,5 +1,7 @@
 // ---------------------- Includes and Globals ------------------------
 
+var activeTask = 0;
+
 var host = 'localhost';
 var http = require('http');
 var https = require('https');
@@ -32,28 +34,30 @@ app.use(function(req, res, next) {
 //Database - MongoDb
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/livesync_obama');
+mongoose.connect('mongodb://localhost/crowdnote_exp001');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('openUri', function() {});
-var ContributionSchema, Constribution;
+var ItemSchema, Item;
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 var Timestamp = Schema.Timestamp;
-contributionSchema = Schema({
+itemSchema = Schema({
+        uri: String,
         start: String,
-        stop: String,
-        fingerprint: String,
-	video_1: String,
-	video_2: String,
-	plays_1: String,
-	plays_2: String,
-	delta: String
+	end: String,   
+	instant: String,
+	point: String,
+	content: String,
+	content_type: String,
+	x: String,
+	y: String
 });
-Contribution = mongoose.model('Contribution', contributionSchema);
+Input = mongoose.model('items_'+activeTask, itemSchema);
+Output = mongoose.model('contributions_'+activeTask, itemSchema);
 
-var relations = new Array();
-var curRelation = 0;
+var input = new Array();
+var curInput = 0;
 
 
 init();
@@ -62,40 +66,42 @@ init();
 
 
 function init(){
+/*
+//Creating bootstrap;
 
-//	dal.addAsset(new d.Asset('Ul90OXkOhpM','Ul90OXkOhpM',53));
-//	dal.addAsset(new d.Asset('Leuh8lqvKyc','Leuh8lqvKyc',34));
-//	dal.addAsset(new d.Asset('6fuGNMc7ok4','6fuGNMc7ok4',118))
-var A = {'uri': 'Q6RjxZRd4Qo', 'label':'Q6RjxZRd4Qo', 'dur':'548'};
-var B = {'uri': 'un2fzaywqEk', 'label':'un2fzaywqEk', 'dur':'39'};
-var C = {'uri': 'jJfGx4G8tjo', 'label':'jJfGx4G8tjo', 'dur':'1710'};
-var D = {'uri': '1rZnG0U2g2s', 'label':'1rZnG0U2g2s', 'dur':'190'};
+input[0] = {'uri': 'UTg6fdKi9TI', 'start':'10', 'end':'18'};
+input[1] = {'uri': 'UTg6fdKi9TI', 'start':'18', 'end':'28'};
+input[2] = {'uri': 'UTg6fdKi9TI', 'start':'28', 'end':'40'};
+input[3] = {'uri': 'UTg6fdKi9TI', 'start':'40', 'end':'47'};
 
-//relations[0] = {'fingerprint':'','from':A , 'to':B};//q u 7 0 93 
-//relations[0] = {'fingerprint':'','from':A , 'to':C};//q j 5 0 -27
-//relations[0] = {'fingerprint':'','from':A , 'to':D};//q 1 4 0 91
-//relations[3] = {'fingerprint':'','from':B , 'to':C};//u j 11 3 -120
-relations[0] = {'fingerprint':'','from':B , 'to':D};//u 1 0 0 2
-//relations[5] = {'fingerprint':'','from':C , 'to':D};//j 1 6 0 117
+var c;
 
+for(var i=0; i<4; i++){
+	c = new Input({'start':input[i].start , 'end':input[i].end , 'uri':input[i].uri});
+        c.save(function (err, m0) {if (err) return console.error(err);});
+}
+*/
 
 }
 
 //-----------------------  Endpoints   -------------------------------
 
-app.get('/', function(req, res) {
 
+
+app.get('/', function(req, res) {
+	res.render('task0', null);
 });
 
 app.get('/tasks/0/job', function(req, res) {
-        var obj = relations[curRelation];
-        if(curRelation < relations.length-1){
-                curRelation++;
+        var obj = input[curInput];
+        if(curInput < input.length-1){
+                curInput++;
         }else{
-                curRelation = 0;
+                curInput = 0;
         }
 
-	obj.fingerprint = fingerprint(req);
+	obj.job_id = fingerprint(req,true);
+	obj.fingerprint = fingerprint(req,false);
 
         res.json(obj);
 });
@@ -141,10 +147,12 @@ app.get('/dataset', function(req, res) {
    	});
 });
 
-function fingerprint(req){
+function fingerprint(req,mode){
         var fingerprint = require('ip').address();
         fingerprint += req.headers['user-agent'];
-        fingerprint += Date.now();
+	if(mode){
+        	fingerprint += Date.now();
+	}
         fingerprint = require('crypto').createHash('md5').update(fingerprint).digest("hex");
         return fingerprint;
 }
