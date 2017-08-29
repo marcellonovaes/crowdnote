@@ -59,40 +59,29 @@ Output = mongoose.model('contributions_'+activeTask, itemSchema);
 var input = new Array();
 var curInput = 0;
 
-
 init();
 
 // ---------------------  Init Functions -----------------------------
 
-
 function init(){
-/*
-//Creating bootstrap;
-
-input[0] = {'uri': 'UTg6fdKi9TI', 'start':'10', 'end':'18'};
-input[1] = {'uri': 'UTg6fdKi9TI', 'start':'18', 'end':'28'};
-input[2] = {'uri': 'UTg6fdKi9TI', 'start':'28', 'end':'40'};
-input[3] = {'uri': 'UTg6fdKi9TI', 'start':'40', 'end':'47'};
-
-var c;
-
-for(var i=0; i<4; i++){
-	c = new Input({'start':input[i].start , 'end':input[i].end , 'uri':input[i].uri});
-        c.save(function (err, m0) {if (err) return console.error(err);});
+	Input.find({},function (err, V) {
+		if (err) return console.error(err);
+		for(var i=0; i < V.length; i++){
+			input[i] = V[i];
+		}
+	}).sort({'_id' : 1});
 }
-*/
 
-}
 
 //-----------------------  Endpoints   -------------------------------
 
 
 
 app.get('/', function(req, res) {
-	res.render('task0', null);
+	res.render('task_'+activeTask, null);
 });
 
-app.get('/tasks/0/job', function(req, res) {
+app.get('/job', function(req, res) {
         var obj = input[curInput];
         if(curInput < input.length-1){
                 curInput++;
@@ -106,18 +95,10 @@ app.get('/tasks/0/job', function(req, res) {
         res.json(obj);
 });
 
-app.post('/tasks/0/store', function(req, res) {
+app.post('/store', function(req, res) {
+        
 	var data = req.body;
-	var contrib = JSON.parse(data.contrib);
-        var fingerprint = data.fingerprint;
-	var start = JSON.parse(req.body.start);
-	var stop = JSON.parse(req.body.stop);
-        var plays_1 = JSON.parse(req.body.plays_1);
-        var plays_2 = JSON.parse(req.body.plays_2);
-
-	var c = new Contribution({'start':start , 'stop':stop , 'video_1':contrib.ec1, 'video_2': contrib.ec2, 'delta':contrib.delta, 'plays_1':plays_1, 'plays_2':plays_2, 'fingerprint':fingerprint });
-	
-	c.save(function (err, m0) {if (err) return console.error(err);});
+  	console.log(data);
 
 });
 
