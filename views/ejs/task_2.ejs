@@ -1,0 +1,283 @@
+
+
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Uma página para anotação de vídeo.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title>CrowdNote</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" />
+<link rel="stylesheet"  href='http://<%= host %>/include?name=client.min&mime=css' >
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src='http://<%= host %>/include?name=client.min&mime=js'></script>
+
+<style>
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
+
+</head>
+
+
+
+
+<div id="modal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+  </div>
+
+</div>
+
+<body align='center'>
+
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">
+		<b>CrowdNote:</b><i> escolha o conteúdo que melhor complementa </i><b><big><u>'<%= point %>'</u><big></b>.	
+	</span>
+
+      </div>
+    </header>
+  </div>
+
+
+
+
+
+<div id='instructions-panel' style='position: fixed;margin-top:90px; margin-left:10px;'>
+
+
+<textarea id='instructions' style='width:180%;height:222px;background-color : #eeeeff;text-align: left;font-size:14px;padding:6px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'  readonly>
+1. Selecione o tipo de conteúdo que deseja sugerir.
+
+2. Use os botões "ANTERIOR" e "PRÓXIMO" para navegar entre as sugestões de conteúdo.
+
+3. Quando decidir qual deles considera melhor, selecione-o e clique em "ESTE É O MELHOR".
+
+4. Clique no ícone da lupa para dar zoom no conteúdo selecionado.
+</textarea>
+
+</div>
+
+<div style='padding: 70px;'>
+	  <video id="video" controls  preload width="55%" height="55%" style='box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>
+		<source src="data:video/<%= mime %>;base64,<%= v64 %>" type="video/<%= mime %>"> 
+ 	   	Your browser does not support HTML5 video.
+	  </video>
+
+	<br><br><br>
+
+<div id='content-panel' style='position: fixed;margin-top:10px; margin-left:290px;'>
+
+
+<div id='content' id='name'  style='width:98.2%;height:200px;background-color : #fefefe;text-align: left;font-size:14px;padding:6px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);' >
+</div>
+
+
+
+	<p align=center>
+		<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='other'    onClick="loadPrevious();" style='width: 236px; box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Anterior</button>
+		<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="sendContribution()" style='width: 236px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Este é o melhor</button>
+		<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='other'    onClick="loadNext();" style='width: 236px; box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Próximo</button>
+</p>
+	</div>
+
+
+<img onClick='zoom()' src='http://<%= host %>/include?name=ico_zoom&mime=png' style='height:100px;position: fixed;margin-top:10px; margin-left:-430px;'>
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+var type;
+
+var suggestion;
+
+var item;
+
+var items = <%- items %>;
+
+var image = null;
+
+var content = document.getElementById("content");
+
+var pos = 0;
+
+var modal = document.getElementById('modal');
+var span = document.getElementsByClassName("close")[0];
+span.onclick = function() {
+
+showSuggestion();
+    	modal.style.display = "none";
+	showSuggestion();
+}
+
+modal.onclick = function() {
+    	modal.style.display = "none";
+	showSuggestion();
+}
+
+window.onclick = function(event) {
+
+    if (event.target == modal) {
+        modal.style.display = "none";
+	showSuggestion();
+    }
+
+}
+
+
+
+function zoom(){
+	switch(type){
+			case 'text': item = '<center><textarea style="height:180px;width:85%;background-color : #eeeeff;text-align: left;font-size:14px;padding:6px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"  readonly>'+suggestion+'</textarea></center>';
+				break;
+
+			case 'image': item = '<center><img src="'+suggestion+'" style="height: 500px;"></center>';
+				break;
+
+			case 'video': item = '<iframe style="height: 500px;" src="https://www.youtube.com/embed/'+suggestion+'" ></iframe>';
+				break;
+
+			case 'page': item = '<iframe style="height: 500px;" src="https://pt.wikipedia.org/wiki/'+suggestion+'" ></iframe>';
+				break;
+	}
+	modal.innerHTML = item;
+    	modal.style.display = "block";	
+}
+
+showSuggestion();
+
+	function showSuggestion(){
+		type = items[pos].type;
+		suggestion = items[pos].suggestion;
+
+		switch(type){
+			case 'text': item = '<center><textarea style="height:180px;width:85%;background-color : #eeeeff;text-align: left;font-size:14px;padding:6px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"  readonly>'+suggestion+'</textarea></center>';
+				break;
+
+			case 'image': item = '<center><img src="'+suggestion+'" style="height: 200px;"></center>';
+				break;
+
+			case 'video': item = '<iframe style="height: 200px;" src="https://www.youtube.com/embed/'+suggestion+'" ></iframe>';
+				break;
+
+			case 'page': item = '<iframe style="height: 200px;" src="https://pt.wikipedia.org/wiki/'+suggestion+'" ></iframe>';
+				break;
+		}
+
+		content.innerHTML = item;
+	}
+
+
+	function loadPrevious(){
+		if(pos > 0){
+			pos--;
+			showSuggestion();
+		}
+	}
+
+	function loadNext(){
+		if(pos < items.length -1){
+			pos++;
+			showSuggestion();
+		}
+	}
+
+
+
+	video.addEventListener('loadedmetadata', function() {
+   		video.currentTime = <%= instant %> -1;
+	});
+
+
+	function sendContribution(){
+location.reload();
+
+/*
+		var contrib = document.getElementById("contrib");
+
+		if(contrib.value != ''){
+
+			var queryForm = "<form method='post'>";
+			queryForm += "<input type='hidden' id='item_id' name='item_id' value= '<%= item_id %>'>";
+			queryForm += "<input type='hidden' id='fingerprint' name='fingerprint' value='<%= fingerprint %>' >";
+			queryForm += " <input type='hidden' id='task' name='task' value='<%= task %>' >";
+			queryForm += " <input type='hidden' id='video_id' name='video_id' value='<%= video_id %>' >";
+			queryForm += " <input type='hidden' id='point' name='point' value='<%= point %>' >";
+			queryForm += "<input type='hidden' id='instant' name='instant'  value='"+video.currentTime+"' > ";
+
+			if(image == null){
+				queryForm += "<input type='hidden' id='suggestion' name='suggestion'  value='"+contrib.value+"' > ";
+			}else{
+				queryForm += "<input type='hidden' id='suggestion' name='suggestion'  value='"+image+"' > ";
+			}
+			queryForm += "</form>";
+
+			$.ajax({
+				type: 'POST',
+				url: $(queryForm).attr("action"),
+				data: $(queryForm).serialize(), 
+				success: function(response) {location.reload();}
+			});
+		}else{
+			alert("Você esqueceu de digitar o que identificou.\nSua contribuição é importante para nós !!!");
+		}
+*/
+	}
+
+</script>
+</center>
+</div>
+</body>
+

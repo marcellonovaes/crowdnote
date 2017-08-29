@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Uma página para anotação de vídeo.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title>CrowdNote</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" />
+<link rel="stylesheet"  href='http://<%= host %>/include?name=client.min&mime=css' >
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src='http://<%= host %>/include?name=client.min&mime=js'></script>
+
+<style>
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>
+
+</head>
+
+<div id="modal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+  </div>
+
+</div>
+
+<body align='center'>
+
+	<span id="content"></span>
+
+	<span id="click" style="opacity:1;position: absolute;left: 115px;top: 125px;z-index: 4; background: none;color: #ffffff;font-size:20px;padding:11px;box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);-moz-box-shadow:  0px 0px 81px 0px rgba(0,0,0,0.05);-webkit-box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);"></span>
+
+
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">
+		<b>CrowdNote:</b><i> clique nos items para visualizar o conteúdo extra.</i>	
+	</span>
+
+      </div>
+    </header>
+  </div>
+
+
+
+
+
+<div id='instructions-panel' style='position: fixed;margin-top:150px; margin-left:10px;'>
+
+
+<textarea id='instructions' style='width:180%;height:111px;background-color : #eeeeff;text-align: left;font-size:14px;padding:6px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'  readonly>
+1. Clique nos items para dar zoom e visualiza-los.
+
+2. Utilize os botões para navegar entre os pontos de interesse.
+
+</textarea>
+
+</div>
+
+<div style='padding: 70px;'>
+	  <video id="video" controls  preload width="55%" height="55%" style='box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>
+		<source src="data:video/<%= mime %>;base64,<%= v64 %>" type="video/<%= mime %>"> 
+ 	   	Your browser does not support HTML5 video.
+	  </video>
+
+	<br><br><br>
+
+
+
+
+
+	<p align=center>
+		<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"     onClick="showPoint(-1)" style='width: 236px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Ponto Anterior</button>
+
+		<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"    onClick="playpause()" style='width: 236px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);' id='playPause'>Play</button>
+
+		<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"     onClick="showPoint(1)" style='width: 236px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Próximo Ponto</button>
+</p>
+	</div>
+
+
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+var timeout=0;
+
+var type;
+
+var suggestion;
+
+var items = <%- items %>;
+
+var pos = 0;
+
+var x = 500;
+
+var y = 100;
+
+var item = items[0];
+
+var playPause = document.getElementById("playPause");
+
+var content = document.getElementById("content");
+var click = document.getElementById("click");
+
+var modal = document.getElementById('modal');
+var span = document.getElementsByClassName("close")[0];
+span.onclick = function() {
+    	modal.style.display = "none";
+	content.style.display = "block";
+     		video.play(); 
+		playPause.innerHTML = "Pause";
+		video.currentTime -= 1;
+
+}
+modal.onclick = function() {
+    	modal.style.display = "none";
+	content.style.display = "block";
+     		video.play(); 
+		playPause.innerHTML = "Pause";
+		video.currentTime -= 1;
+
+}
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+	content.style.display = "block";
+     		video.play(); 
+		playPause.innerHTML = "Pause";
+		video.currentTime -= 1;
+
+    }
+}
+content.onclick = function() {
+	content.style.display = "none";
+ 	video.pause(); 
+	playPause.innerHTML = "Play";
+    	zoom();
+}
+
+function showPoint(p){
+	if((p==1 && (pos+p < items.length))||(p==-1 && (pos+p >= 0))){
+		pos += p;
+		item = items[pos];
+		video.currentTime = item.instant;
+ 		video.pause(); 
+		playPause.innerHTML = "Play";
+		showExtra();
+	}
+}
+
+
+
+function playpause(){
+    	if (video.paused){ 
+     		video.play(); 
+		playPause.innerHTML = "Pause";
+		video.currentTime -= 1;
+	}else{
+ 		video.pause(); 
+		playPause.innerHTML = "Play";
+	}	
+}
+
+function syncVideo(){
+if(!video.paused){
+	timeout++;
+	var p = Math.ceil(video.currentTime);
+	var flag = false;
+	for(var i=0; i < items.length; i++){
+		if(p == Math.ceil(parseFloat(items[i].instant))){
+			item = items[i];
+			video.currentTime = item.instant;
+			showExtra();
+			break;
+		}
+	}
+	if(timeout > 1){
+		content.style = 'left:0px;top:0px;';
+		content.innerHTML = '';
+	}
+}
+}
+
+
+setInterval(function() {
+
+	syncVideo();
+	
+}, 1000);
+
+
+
+
+function zoom(){
+	var zoomContent;
+	switch(item.type){
+			case 'text': zoomContent = '<center><textarea style="height:180px;width:85%;background-color : #eeeeff;text-align: left;font-size:14px;padding:6px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"  readonly>'+item.suggestion+'</textarea></center>';
+				break;
+
+			case 'image': zoomContent = '<center><p>'+item.point+'</p><img src="'+item.suggestion+'" style="height: 500px;"></center>';
+				break;
+
+			case 'video': zoomContent = '<iframe style="height: 500px;" src="https://www.youtube.com/embed/'+item.suggestion+'" ></iframe>';
+				break;
+
+			case 'page': zoomContent = '<iframe style="height: 500px;" src="https://pt.wikipedia.org/wiki/'+item.suggestion+'" ></iframe>';
+				break;
+	}
+	modal.innerHTML = zoomContent;
+    	modal.style.display = "block";	
+}
+
+
+
+function showExtra(){
+	timeout = 0;
+	var px = parseFloat(item.x)+x;
+	var py = parseFloat(item.y)+y;
+	content.style = "opacity:1;position: absolute;left: "+px+"px;top: "+py+"px;z-index: 3; background: none;color: #ffffff;font-size:20px;padding:11px;box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);-moz-box-shadow:  0px 0px 81px 0px rgba(0,0,0,0.05);-webkit-box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);background-image: linear-gradient(45deg, transparent, blue);";
+						
+	content.style.borderRadius = '1em';
+
+	switch(item.type){
+		case 'page':
+		case 'video':
+			content.innerHTML = item.point;
+			break;
+
+		case 'text':
+			content.innerHTML = item.point+'<br> = <br>'+item.suggestion;
+			break;
+
+		case 'image':
+			content.innerHTML = '<img style="height:100px;" src='+item.suggestion+'>';
+			break;
+
+	}
+
+
+
+}
+
+
+</script>
+</center>
+</div>
+</body>
+

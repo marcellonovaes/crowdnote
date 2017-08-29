@@ -1,0 +1,233 @@
+
+
+<!DOCTYPE html>
+
+<html lang="pt-br">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Uma página para anotação de vídeo.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title>CrowdNote</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
+<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" />
+<link rel="stylesheet"  href='http://<%= host %>/include?name=client.min&mime=css' >
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src='http://<%= host %>/include?name=client.min&mime=js'></script>
+</head>
+
+
+
+<body align='center'>
+
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    <header class="mdl-layout__header">
+      <div class="mdl-layout__header-row">
+        <span class="mdl-layout-title">
+		<b>CrowdNote:</b><i> sugira conteúdo extra relacionado com </i><b><big><u>'<%= point %>'</u><big></b>.	
+	</span>
+
+      </div>
+    </header>
+  </div>
+
+<div id='instructions-panel' style='position: fixed;margin-top:100px; margin-left:10px;'>
+
+
+<textarea id='instructions' style='width:180%;height:330px;background-color : #eeeeff;text-align: left;font-size:14px;padding:6px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'  readonly>
+1. Selecione o tipo de conteúdo que deseja sugerir.
+
+2. Se for um texto, escreva-o na caixa de texto.
+
+3. Se for uma imagem, clique no botão e a selecione.
+
+4. Se for um vídeo do Youtube, copie o cole o endereço.
+
+5. Se for uma página da Wikipedia, copie o cole o endereço.
+
+6. Clique em 'Enviar'.
+
+Caso não saiba o que sugerir, clique em 'Nada nesta parte'.
+</textarea>
+
+</div>
+
+<div style='padding: 70px;'>
+	  <video id="video" controls  preload width="55%" height="55%" style='box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>
+		<source src="data:video/<%= mime %>;base64,<%= v64 %>" type="video/<%= mime %>"> 
+ 	   	Your browser does not support HTML5 video.
+	  </video>
+
+	<br><br><br>
+
+
+
+	<p align=center>
+		<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="sendContribution()" style='width: 200px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Enviar</button>
+		<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='other'    onClick="location.reload();" style='width: 200px; box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Nada nesta parte</button>
+</p>
+	</div>
+
+
+<div id='panel' >
+<p align=center>
+
+
+<div id='content-panel' style='position: fixed;margin-top:-510px; margin-left:1105px;'>
+
+
+
+		<p align= "left"><input onChange="getOption(1)" checked class="option"  type="radio" id="type" name="type" value="text"> Um texto explicativo</input></p>
+		<p align= "left"><input onChange="getOption(2)" class="option"  type="radio"  id="type" name="type" value="image"> Uma imagem</input></p>
+		<p align= "left"><input onChange="getOption(3)" class="option"  type="radio"  id="type" name="type" value="youtube"> Um vídeo do Youtube</input></p>
+		<p align= "left"><input onChange="getOption(4)" class="option"  type="radio"  id="type" name="type" value="wikipedia"> Uma página da Wikipedia</input></p>
+		<p align=center id='contribPanel'><textarea align="center" class="answer"  id='contrib' name='contrib' placeholder="Escreva um texto explicativo aqui." ></textarea></p>
+
+		<img style='position: fixed; margin-top: -60px ;margin-left: -150px;' id='Image'>	
+		
+
+	</div>
+
+</p>
+</div>
+
+	<script>
+
+var image = null;
+getOption(1);
+
+function readURL(input,output) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            	output.attr('src', e.target.result);
+		image = e.target.result;
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function getOption(op){
+
+	var contribPanel = document.getElementById('contribPanel');
+	var contrib = document.getElementById('contrib');
+
+	var lbImage =  document.getElementById('lbImage');
+	if(lbImage)lbImage.remove();
+
+	$('#Image').attr("height","0");
+
+
+	contrib.remove();
+
+	switch(op){
+		case 1:
+			contrib = document.createElement("textarea");
+			contrib.setAttribute("name","contrib");
+			contrib.setAttribute("id","contrib");
+ 			contrib.setAttribute("placeholder","Escreva um texto explicativo aqui.");
+			break; 
+
+		case 2:
+
+
+
+			lbImage = document.createElement("label");
+			lbImage.setAttribute("id","lbImage");
+			lbImage.setAttribute("for","contrib");
+			lbImage.innerHTML = "Escolher Imagem";
+			contribPanel.appendChild(lbImage);
+
+			contrib = document.createElement("input");
+			contrib.setAttribute("name","contrib");
+			contrib.setAttribute("id","contrib");
+			contrib.setAttribute("type","file");
+			contrib.setAttribute("class","contrib");
+			contrib.setAttribute("label","Escolha a imagem");
+			contrib.setAttribute("accept","image/*");
+			contrib.setAttribute("value","Escolha a Imagem");
+
+			contrib.addEventListener('change', function(){
+				$('#Image').attr("height","110");
+				var str = this.value;
+				readURL(this,$('#Image'));
+				if(str) lbImage.innerHTML = 'Trocar a Imagem';
+			});
+	
+
+
+
+			break; 
+
+		case 3:
+			contrib = document.createElement("textarea");
+			contrib.setAttribute("name","contrib");
+			contrib.setAttribute("id","contrib");
+ 			contrib.setAttribute("placeholder","Cole aqui o link do youtube.\nEx:\nhttps://www.youtube.com/watch?v=...");
+
+			break; 
+
+		case 4:
+			contrib = document.createElement("textarea");
+			contrib.setAttribute("name","contrib");
+			contrib.setAttribute("id","contrib");
+ 			contrib.setAttribute("placeholder","Cole aqui o link da Wikipedia.\nEx:\nhttps://pt.wikipedia.org/wiki/...");
+			break; 
+
+	}
+
+	contrib.style.width = document.getElementById("bt").style.width;
+	contrib.style.height = '75px';
+	contribPanel.appendChild(contrib);
+
+
+}
+
+
+
+		video.addEventListener('loadedmetadata', function() {
+    			video.currentTime = <%= instant %> -1;
+		});
+
+
+	function sendContribution(){
+
+		var contrib = document.getElementById("contrib");
+
+		if(contrib.value != ''){
+
+			var queryForm = "<form method='post'>";
+			queryForm += "<input type='hidden' id='item_id' name='item_id' value= '<%= item_id %>'>";
+			queryForm += "<input type='hidden' id='fingerprint' name='fingerprint' value='<%= fingerprint %>' >";
+			queryForm += " <input type='hidden' id='task' name='task' value='<%= task %>' >";
+			queryForm += " <input type='hidden' id='video_id' name='video_id' value='<%= video_id %>' >";
+			queryForm += " <input type='hidden' id='point' name='point' value='<%= point %>' >";
+			queryForm += "<input type='hidden' id='instant' name='instant'  value='"+video.currentTime+"' > ";
+
+			if(image == null){
+				queryForm += "<input type='hidden' id='suggestion' name='suggestion'  value='"+contrib.value+"' > ";
+			}else{
+				queryForm += "<input type='hidden' id='suggestion' name='suggestion'  value='"+image+"' > ";
+			}
+			queryForm += "</form>";
+
+			$.ajax({
+				type: 'POST',
+				url: $(queryForm).attr("action"),
+				data: $(queryForm).serialize(), 
+				success: function(response) {location.reload();}
+			});
+		}else{
+			alert("Você esqueceu de digitar o que identificou.\nSua contribuição é importante para nós !!!");
+		}
+	}
+
+</script>
+</center>
+</div>
+</body>
+

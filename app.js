@@ -78,7 +78,7 @@ function init(){
 
 
 app.get('/', function(req, res) {
-	res.render('task_'+activeTask, null);
+	res.render('ejs/task_'+activeTask, null);
 });
 
 app.get('/job', function(req, res) {
@@ -96,10 +96,10 @@ app.get('/job', function(req, res) {
 });
 
 app.post('/store', function(req, res) {
-        
 	var data = req.body;
-  	console.log(data);
-
+	var c = new Output(data);
+	c.save(function (err, m0) {if (err) return console.error(err);});
+	res.end()
 });
 
 

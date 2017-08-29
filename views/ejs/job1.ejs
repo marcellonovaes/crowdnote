@@ -1,0 +1,220 @@
+<head>
+	<title>CrowdNote</title>
+	<link rel="stylesheet"  href='http://<%= host %>/scripts?name=w3&mime=css' >
+	<link rel="stylesheet"  href='http://<%= host %>/scripts?name=style&mime=css' >
+	<script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+	<script src='http://<%= host %>/scripts?name=jquery&mime=js'></script>
+</head>
+<body>
+<center>
+<div class="w3-card-4 w3-margin w3-white" style="padding:1px;">
+<p>
+<textarea align="center" id="banner" class="instructions" readonly>
+Ajude a explicar o ponto de interesse: "<%= point %>".
+
+Você pode escrever um texto explicativo, enviar uma imagem, sugerir um vídeo do Youtube ou ainda uma página da Wikipedia.
+
+</textarea>
+</p>
+
+<div id='panel' >
+<p align=center>
+	<div class="player" id="player" >
+	  <video id="video" controls  preload style='box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>
+		<source src="data:video/<%= mime %>;base64,<%= v64 %>" type="video/<%= mime %>"> 
+		<!-- source src="http://<%= host %>/dataset?job=<%= job %>&name=<%= name %>&mime=<%= mime %>" type="video/<%= mime %>" --> 
+ 	   	Your browser does not support HTML5 video.
+	  </video>
+	</div>
+
+ 	<div id="contributionPanel" class="player">
+
+
+		<p align= "left"><input onChange="getOption(1)" checked class="option"  type="radio" id="type" name="type" value="text"> Um texto explicativo</input></p>
+		<p align= "left"><input onChange="getOption(2)" class="option"  type="radio"  id="type" name="type" value="image"> Uma imagem</input></p>
+		<p align= "left"><input onChange="getOption(3)" class="option"  type="radio"  id="type" name="type" value="youtube"> Um vídeo do Youtube</input></p>
+		<p align= "left"><input onChange="getOption(4)" class="option"  type="radio"  id="type" name="type" value="wikipedia"> Uma página da Wikipedia</input></p>
+		<p align=center id='contribPanel'><textarea align="center" class="answer"  id='contrib' name='contrib' placeholder="Escreva um texto explicativo aqui." ></textarea></p>
+
+		<img id='Image'>	
+		
+		<p align=center><button class="Button" id='bt'    onClick="sendContribution()">Enviar</button></p>
+		<p align=center><button class="Button" id='other'    onClick="location.reload();">Não sei</button></p>
+	</div>
+
+</p>
+</div>
+
+	<script>
+
+
+
+function readURL(input,output) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            	output.attr('src', e.target.result);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function getOption(op){
+
+	var contribPanel = document.getElementById('contribPanel');
+	var contrib = document.getElementById('contrib');
+
+	var lbImage =  document.getElementById('lbImage');
+	if(lbImage)lbImage.remove();
+
+	$('#Image').attr("height","0");
+
+
+	contrib.remove();
+
+	switch(op){
+		case 1:
+			contrib = document.createElement("textarea");
+			contrib.setAttribute("name","contrib");
+			contrib.setAttribute("id","contrib");
+ 			contrib.setAttribute("placeholder","Escreva um texto explicativo aqui.");
+			break; 
+
+		case 2:
+
+
+			$('#Image').attr("height","58");
+
+			lbImage = document.createElement("label");
+			lbImage.setAttribute("id","lbImage");
+			lbImage.setAttribute("for","contrib");
+			lbImage.innerHTML = "Escolher Imagem";
+			contribPanel.appendChild(lbImage);
+
+			contrib = document.createElement("input");
+			contrib.setAttribute("name","contrib");
+			contrib.setAttribute("id","contrib");
+			contrib.setAttribute("type","file");
+			contrib.setAttribute("class","contrib");
+			contrib.setAttribute("label","Escolha a imagem");
+			contrib.setAttribute("accept","image/*");
+			contrib.setAttribute("value","Escolha a Imagem");
+
+			contrib.addEventListener('change', function(){
+				var str = this.value;
+				readURL(this,$('#Image'));
+				if(str) lbImage.innerHTML = 'Trocar a Imagem';
+			});
+	
+
+
+
+			break; 
+
+		case 3:
+			contrib = document.createElement("textarea");
+			contrib.setAttribute("name","contrib");
+			contrib.setAttribute("id","contrib");
+ 			contrib.setAttribute("placeholder","Cole aqui o link do youtube.\nEx:\nhttps://www.youtube.com/watch?v=...");
+
+			break; 
+
+		case 4:
+			contrib = document.createElement("textarea");
+			contrib.setAttribute("name","contrib");
+			contrib.setAttribute("id","contrib");
+ 			contrib.setAttribute("placeholder","Cole aqui o link da Wikipedia. Ex:\nhttps://pt.wikipedia.org/wiki/...");
+			break; 
+
+	}
+
+	contrib.style.width = document.getElementById("bt").style.width;
+	contrib.style.height = '75px';
+	contribPanel.appendChild(contrib);
+
+
+}
+
+
+
+function isMobile(){
+	
+	var video = document.getElementById('video');
+
+	var userAgent = navigator.userAgent.toLowerCase();
+	if( userAgent.search(/(android|avantgo|blackberry|bolt|boost|cricket|docomo|fone|hiptop|mini|mobi|palm|phone|pie|tablet|up\.browser|up\.link|webos|wos)/i)!= -1 )
+		return true;
+
+	return false;
+}
+		var hvideo =  0.45 * $(window).width();
+		document.getElementById("banner").style = 'width:'+1.5*hvideo+'px;height:'+(18*7 +11)+'px;background-color : #eeeeee;text-align: justify;font-size:18px;padding:11px;';
+		var flag = false;
+		if(parseFloat(document.getElementById("banner").style.width) < 420 || isMobile()==true ){
+			hvideo = parseFloat(document.getElementById("banner").style.width)-30;
+			flag = true;
+		}
+
+		video.width = hvideo;
+		video.height = hvideo/1.778;
+		
+		var x = parseFloat(document.getElementById("banner").style.width) - hvideo - 70; 
+
+		if(flag){
+			document.getElementById("contrib").style = 'height:75;width:'+hvideo+'px;';
+			document.getElementById("bt").style = 'width:'+hvideo+'px;height:40px;background: none;color: #ffffff;font-size:18px;padding:1px;box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);-moz-box-shadow:  0px 0px 81px 0px rgba(0,0,0,0.05);-webkit-box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);background-image: linear-gradient(45deg, black, red);';
+			document.getElementById("other").style = 'width:'+hvideo+'px;height:40px;background: none;color: #ffffff;font-size:18px;padding:1px;box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);-moz-box-shadow:  0px 0px 81px 0px rgba(0,0,0,0.05);-webkit-box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);background-image: linear-gradient(45deg, black, red);';
+		}else{
+			document.getElementById("contrib").style = 'height:75;width:'+x+'px;';
+			document.getElementById("bt").style = 'width:'+x+'px;height:40px;background: none;color: #ffffff;font-size:18px;padding:1px;box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);-moz-box-shadow:  0px 0px 81px 0px rgba(0,0,0,0.05);-webkit-box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);background-image: linear-gradient(45deg, black, red);';
+			document.getElementById("other").style = 'width:'+x+'px;height:40px;background: none;color: #ffffff;font-size:18px;padding:1px;box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);-moz-box-shadow:  0px 0px 81px 0px rgba(0,0,0,0.05);-webkit-box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);background-image: linear-gradient(45deg, black, red);';
+		}
+
+		x =  (parseFloat($(window).width())  - parseFloat(document.getElementById("banner").style.width))/2;
+		document.getElementById("panel").style = 'width:'+document.getElementById("banner").style.width+';position:absolute;left:'+x+'px';
+
+
+
+
+		video.addEventListener('loadedmetadata', function() {
+    			video.currentTime = <%= instant %> -1;
+		});
+
+
+		function sendContribution(){
+
+			var contrib = document.getElementById("contrib");
+			var type = document.getElementById("type");
+
+			if(contrib.value != ''){
+
+				var queryForm = "<form method='post'>";
+				queryForm += "<input type='hidden' id='item' name='item' value= '<%= item_id %>'>";
+				queryForm += "<input type='hidden' id='fingerprint' name='fingerprint' value='<%= fingerprint %>' >";
+				queryForm += " <input type='hidden' id='microtask' name='microtask' value='<%= microtask %>' >";
+				queryForm += "<input type='hidden' id='instant' name='instant'  value='"+video.currentTime+"' > ";
+				queryForm += "<input type='hidden' id='type' name='type'  value='"+type.value+"' > ";
+
+				queryForm += "<input type='hidden' id='image' name='contrib'  value='"+document.getElementById("Image").src+"' > ";
+
+				queryForm += "</form>";
+
+				$.ajax({
+  					type: 'POST',
+  					url: $(queryForm).attr("action"),
+  					data: $(queryForm).serialize(), 
+ 					success: function(response) {location.reload();}
+				});
+			}else{
+				document.getElementById("msg").style.color = "#ff0000";
+			}
+		}
+
+	</script>
+</center>
+</div>
+</body>
+

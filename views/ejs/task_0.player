@@ -14,7 +14,7 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 
 function onYouTubeIframeAPIReady() {
-  $.getJSON('https://novaes.tech/tasks/0/job', function(data){init(data);});
+  $.getJSON('https://novaes.tech/job', function(data){init(data);});
 }
 
 function init(data){
