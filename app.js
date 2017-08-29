@@ -81,6 +81,11 @@ app.get('/', function(req, res) {
 	res.render('ejs/task_'+activeTask, null);
 });
 
+app.get('/thanks', function(req, res) {
+	res.render('ejs/thanks', null);
+});
+
+
 app.get('/job', function(req, res) {
         var obj = input[curInput];
         if(curInput < input.length-1){
@@ -99,7 +104,7 @@ app.post('/store', function(req, res) {
 	var data = req.body;
 	var c = new Output(data);
 	c.save(function (err, m0) {if (err) return console.error(err);});
-	res.end()
+	res.end();
 });
 
 

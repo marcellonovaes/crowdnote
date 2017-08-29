@@ -54,7 +54,7 @@
 	</div>
 
 
-<input type='hiden' id='done' name='done' >
+<input type='hidden' id='done' name='done' >
 
 </div>
 
@@ -144,6 +144,7 @@ function done(){
 	done.value='ok';
 	player.stopVideo();
 	clearTimeout(restartVideoSection);
+	$(location).attr('href', 'thanks');
 }	
 
 
