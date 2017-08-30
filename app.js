@@ -48,6 +48,7 @@ var Timestamp = Schema.Timestamp;
 itemSchema = Schema({
 	qtd: String,
 	item_index: String,
+	item_id: String,
 	job_id: String,
 	fingerprint: String,
         uri: String,
@@ -95,27 +96,71 @@ app.get('/thanks', function(req, res) {
 
 
 app.get('/job', function(req, res) {
-        var obj = input[curInput];
-	obj.item_index = curInput;
-        if(curInput < input.length-1){
-                curInput++;
-        }else{
-                curInput = 0;
-        }
+	var contribs = new Array()
+        job_id = fingerprint(req,true);
+        print = fingerprint(req,false);
 
-	obj.job_id = fingerprint(req,true);
-	obj.fingerprint = fingerprint(req,false);
+        Output.find({fingerprint: print},function (err, C) {
+                if (err) return console.error(err);
+                for(var i=0; i < C.length; i++){
+                        contribs[i] = C[i];
+                }
+	
 
-        res.json(obj);
+		if(contribs.length == input.length){
+			res.redirect('https://novaes.tech/thanks');
+		}else{
+			curInput = findNext(contribs,input,curInput);
+		        var obj = input[curInput];
+			obj.item_index = curInput;
+		        if(curInput < input.length-1){
+       	 	        curInput++;
+		        }else{
+       		         	curInput = 0;
+       		 	}
+
+			obj.job_id = job_id;
+			obj.fingerprint = print;
+
+		        res.json(obj);
+		}
+        }).sort({'item_id' : 1});
+
 });
+
+function findNext(contribs,input,ini){
+	var item;
+	var found=false;
+
+	while(found == false){
+		found = true;
+		item = input[ini];
+		for(var i=0; i<contribs.length; i++){
+			if(new String(item._id).valueOf() == new String(contribs[i].item_id).valueOf()){
+				ini++;
+				if(ini >= input.length){
+					ini = 0;
+				}
+				found = false;
+				break;
+			}
+		}
+	}
+
+	return ini;
+}
+
+
+
+
 
 app.post('/store', function(req, res) {
 	var data = req.body;
 	input[data.item_index].qtd++;
+	data.item_id = input[data.item_index]._id;
 	delete data.item_index;
 	var c = new Output(data);
 	c.save(function (err, m0) {if (err) return console.error(err);});
-	console.log(input);
 	res.end();
 });
 
@@ -124,6 +169,15 @@ app.post('/store', function(req, res) {
 
 // ------------- Functions ------------------------------
 
+app.get('/html', function(req, res) {
+        var name = req.query.name;
+        var mime = req.query.mime;
+        var path = 'views/html/'+name;
+        fs.readFile(path, function (err, data){
+                res.setHeader('content-type', 'text/javascript');
+                res.end(data);
+        });
+});
 
 app.get('/include', function(req, res) {
 	var name = req.query.name;
