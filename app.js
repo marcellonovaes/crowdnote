@@ -3,8 +3,6 @@
 var activeTask = 0;
 var qtd_target = 3;
 
-
-
 var host = 'localhost';
 var http = require('http');
 var https = require('https');
@@ -34,7 +32,7 @@ app.use(function(req, res, next) {
     next();
 });
 
-//Database - MongoDb
+//---------------- Database - MongoDb ---------
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/crowdnote_exp001');
@@ -81,10 +79,7 @@ function init(){
 	}).sort({'_id' : 1});
 }
 
-
 //-----------------------  Endpoints   -------------------------------
-
-
 
 app.get('/', function(req, res) {
 	res.render('ejs/task_'+activeTask, null);
@@ -94,19 +89,15 @@ app.get('/thanks', function(req, res) {
 	res.render('ejs/thanks', null);
 });
 
-
 app.get('/job', function(req, res) {
 	var contribs = new Array()
         job_id = fingerprint(req,true);
         print = fingerprint(req,false);
-
         Output.find({fingerprint: print},function (err, C) {
                 if (err) return console.error(err);
                 for(var i=0; i < C.length; i++){
                         contribs[i] = C[i];
                 }
-	
-
 		if(contribs.length == input.length){
 			res.redirect('https://novaes.tech/thanks');
 		}else{
@@ -125,34 +116,7 @@ app.get('/job', function(req, res) {
 		        res.json(obj);
 		}
         }).sort({'item_id' : 1});
-
 });
-
-function findNext(contribs,input,ini){
-	var item;
-	var found=false;
-
-	while(found == false){
-		found = true;
-		item = input[ini];
-		for(var i=0; i<contribs.length; i++){
-			if(new String(item._id).valueOf() == new String(contribs[i].item_id).valueOf()){
-				ini++;
-				if(ini >= input.length){
-					ini = 0;
-				}
-				found = false;
-				break;
-			}
-		}
-	}
-
-	return ini;
-}
-
-
-
-
 
 app.post('/store', function(req, res) {
 	var data = req.body;
@@ -170,10 +134,54 @@ app.post('/store', function(req, res) {
 	res.end();
 });
 
+//Group by time
+//Aggregate by string similarity
+app.get('/aggregate_t_s', function(req, res) {
+	var cur=-2;
+	var grp=0;
+	var groups = new Array();
+        Output.find({},function (err, C) {
+                if (err) return console.error(err);
+                for(var i=0; i < C.length; i++){
+			if( (parseFloat(C[i].instant)-cur) >= 2 ){
+				grp++;
+				cur = parseFloat(C[i].instant);
+				groups[grp] = new Array();
+			}
+			if(groups[grp]) groups[grp].push(C[i]);
+                }
+
+		for(var i=1; i<groups.length; i++){
+			var group = groups[i];
+			var mode = group[0].point;
+			var qtd = -1; 
+			var instant = parseFloat(group[0].instant);
+			if(group.length > 1){
+				for(var j=0; j<group.length-1; j++){
+					instant += parseFloat(group[j+1].instant);
+					var similars = 0;
+					for(var k=1; k<group.length; k++){
+						if(j == k) continue;
+						var delta = levenshtein(group[j].point,group[k].point);
+						if(delta < 2) similars++;
+					}
+					if(qtd < similars){
+						qtd = similars;
+						mode = group[j].point;
+					}
+				}
+				instant /= group.length;
+			}
+			console.log('Mode:',mode,':Instant:',instant);
+		}
+		
+
+		res.end();
+        }).sort({'instant' : 1});
+});
 
 
-
-// ------------- Functions ------------------------------
+// ------------- Server Functions ------------------------------
 
 app.get('/html', function(req, res) {
         var name = req.query.name;
@@ -205,6 +213,28 @@ app.get('/dataset', function(req, res) {
    	});
 });
 
+// ------------- Functions ------------------------------
+
+function levenshtein(a, b){
+	var tmp;
+	if (a.length === 0) { return b.length; }
+	if (b.length === 0) { return a.length; }
+	if (a.length > b.length) { tmp = a; a = b; b = tmp; }
+
+	var i, j, res, alen = a.length, blen = b.length, row = Array(alen);
+	for (i = 0; i <= alen; i++) { row[i] = i; }
+
+	for (i = 1; i <= blen; i++) {
+		res = i;
+		for (j = 1; j <= alen; j++) {
+			tmp = row[j - 1];
+			row[j - 1] = res;
+			res = b[i - 1] === a[j - 1] ? tmp : Math.min(tmp + 1, Math.min(res + 1, row[j] + 1));
+		}
+	}
+	return res;
+}
+
 function fingerprint(req,mode){
         var fingerprint = require('ip').address();
         fingerprint += req.headers['user-agent'];
@@ -215,9 +245,27 @@ function fingerprint(req,mode){
         return fingerprint;
 }
 
+function findNext(contribs,input,ini){
+	var item;
+	var found=false;
+	while(found == false){
+		found = true;
+		item = input[ini];
+		for(var i=0; i<contribs.length; i++){
+			if(new String(item._id).valueOf() == new String(contribs[i].item_id).valueOf()){
+				ini++;
+				if(ini >= input.length){
+					ini = 0;
+				}
+				found = false;
+				break;
+			}
+		}
+	}
+	return ini;
+}
 
 // ------------- Create Server ------------------------------
-
 
 https.createServer({
   	ca: fs.readFileSync("../../ssl/intermediate.crt"),
