@@ -61,6 +61,7 @@ itemSchema = Schema({
 });
 Input = mongoose.model('items_'+activeTask, itemSchema);
 Output = mongoose.model('contributions_'+activeTask, itemSchema);
+Aggregation = mongoose.model('items_'+(activeTask+1), itemSchema);
 
 var input = new Array();
 var curInput = 0;
@@ -153,7 +154,7 @@ app.get('/aggregate_t_s', function(req, res) {
 
 		for(var i=1; i<groups.length; i++){
 			var group = groups[i];
-			var mode = group[0].point;
+			var mode = group[0];
 			var qtd = -1; 
 			var instant = parseFloat(group[0].instant);
 			if(group.length > 1){
@@ -167,12 +168,15 @@ app.get('/aggregate_t_s', function(req, res) {
 					}
 					if(qtd < similars){
 						qtd = similars;
-						mode = group[j].point;
+						mode = group[j];
 					}
 				}
 				instant /= group.length;
 			}
-			console.log('Mode:',mode,':Instant:',instant);
+
+  			var data ={'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': instant,'point': mode.point}
+        		var a = new Aggregation(data);
+        		a.save(function (err, m0) {if (err) return console.error(err);});
 		}
 		
 
