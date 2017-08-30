@@ -158,7 +158,13 @@ app.post('/store', function(req, res) {
 	var data = req.body;
 	input[data.item_index].qtd++;
 	data.item_id = input[data.item_index]._id;
+
+	if(input[data.item_index].qtd >= qtd_target){
+		input.splice( data.item_index, 1 );
+	}
+
 	delete data.item_index;
+
 	var c = new Output(data);
 	c.save(function (err, m0) {if (err) return console.error(err);});
 	res.end();
