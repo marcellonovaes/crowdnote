@@ -1,6 +1,9 @@
 // ---------------------- Includes and Globals ------------------------
 
 var activeTask = 0;
+var qtd_target = 3;
+
+
 
 var host = 'localhost';
 var http = require('http');
@@ -43,6 +46,10 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 var Timestamp = Schema.Timestamp;
 itemSchema = Schema({
+	qtd: String,
+	item_index: String,
+	job_id: String,
+	fingerprint: String,
         uri: String,
         start: String,
 	end: String,   
@@ -68,6 +75,7 @@ function init(){
 		if (err) return console.error(err);
 		for(var i=0; i < V.length; i++){
 			input[i] = V[i];
+			input[i].qtd = 0;
 		}
 	}).sort({'_id' : 1});
 }
@@ -88,6 +96,7 @@ app.get('/thanks', function(req, res) {
 
 app.get('/job', function(req, res) {
         var obj = input[curInput];
+	obj.item_index = curInput;
         if(curInput < input.length-1){
                 curInput++;
         }else{
@@ -102,8 +111,11 @@ app.get('/job', function(req, res) {
 
 app.post('/store', function(req, res) {
 	var data = req.body;
+	input[data.item_index].qtd++;
+	delete data.item_index;
 	var c = new Output(data);
 	c.save(function (err, m0) {if (err) return console.error(err);});
+	console.log(input);
 	res.end();
 });
 
