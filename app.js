@@ -1,7 +1,7 @@
 // ---------------------- Includes and Globals ------------------------
 
-var activeTask = 0;
-var qtd_target = 3;
+var activeTask = 10;
+var qtd_target = 2;
 
 var host = 'localhost';
 var http = require('http');
@@ -25,7 +25,6 @@ app.use(cors({origin: 'null'}));
 app.use(cors({origin: 'https://youtube.com'}));
 app.use(cors({origin: 'https://ttv.microworkers.com'}));
 
-
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -45,6 +44,16 @@ var ObjectId = Schema.ObjectId;
 var Timestamp = Schema.Timestamp;
 itemSchema = Schema({
 	qtd: String,
+	//--------Sync------
+	v1: String,
+	v2: String,
+	delta: String,
+	start_time: String,
+	stop_time: String,
+	plays_1: String,
+	plays_2: String,
+
+	//----Enrichment----
 	item_index: String,
 	item_id: String,
 	job_id: String,
@@ -69,6 +78,26 @@ var curInput = 0;
 init();
 
 // ---------------------  Init Functions -----------------------------
+
+/*var videos = new Array();
+videos.push("Kqf-DaQcb8o");
+videos.push("uZyc2JXEgMI");
+videos.push("F6Bac-8RwnI");
+videos.push("llc0FBh_rOA");
+videos.push("DBHR4tVHrlg");
+videos.push("qNJxgCP_9Sg");
+videos.push("nRrlrKypetU");
+videos.push("k-jJ4uq8TWk");
+var c,data;
+for(var i=0; i<videos.length; i++){
+	for(var j=i+1; j<videos.length; j++){
+		data = {'v1':videos[i],'v2':videos[j]};
+        	c = new Input(data);
+        	c.save(function (err, m0) {if (err) return console.error(err);});
+	}
+}
+*/
+
 
 function init(){
 	Input.find({},function (err, V) {
@@ -110,10 +139,8 @@ app.get('/job', function(req, res) {
 		        }else{
        		         	curInput = 0;
        		 	}
-
 			obj.job_id = job_id;
 			obj.fingerprint = print;
-
 		        res.json(obj);
 		}
         }).sort({'item_id' : 1});
@@ -123,13 +150,10 @@ app.post('/store', function(req, res) {
 	var data = req.body;
 	input[data.item_index].qtd++;
 	data.item_id = input[data.item_index]._id;
-
 	if(input[data.item_index].qtd >= qtd_target){
 		input.splice( data.item_index, 1 );
 	}
-
 	delete data.item_index;
-
 	var c = new Output(data);
 	c.save(function (err, m0) {if (err) return console.error(err);});
 	res.end();
@@ -151,7 +175,6 @@ app.get('/aggregate_t_s', function(req, res) {
 			}
 			if(groups[grp]) groups[grp].push(C[i]);
                 }
-
 		for(var i=1; i<groups.length; i++){
 			var group = groups[i];
 			var mode = group[0];
@@ -173,13 +196,10 @@ app.get('/aggregate_t_s', function(req, res) {
 				}
 				instant /= group.length;
 			}
-
   			var data ={'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': instant,'point': mode.point}
         		var a = new Aggregation(data);
         		a.save(function (err, m0) {if (err) return console.error(err);});
 		}
-		
-
 		res.end();
         }).sort({'instant' : 1});
 });

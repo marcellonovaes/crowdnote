@@ -1,0 +1,315 @@
+<meta charset="utf-8">
+<title></title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+<style type="text/css">.button {
+  font: bold 16px Arial;
+  text-decoration: none;
+  background-color: #EEEEEE;
+  color: #333333;
+  padding: 2px 6px 2px 6px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+}
+  .list-numbered {
+    list-style: none;
+    margin-left: 1em;
+    counter-reset: line;
+  }
+  .list-numbered > li {
+    position: relative;
+    margin-bottom: 1.5em;
+  }
+  .list-numbered > li:before {
+    position: absolute;
+    left: -2.25em;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    margin-right: 0.5em;
+    background-color: #B53C2C;
+    border-radius: 50%;
+    color: #fff;
+    text-align:center;
+    line-height: 1.25em;
+    counter-increment: line;
+    content: counter(line);
+  }
+</style>
+<!-- Instru&ccedil;&otilde;es de uso da ferramenta -->
+<div id="intro-info">In this Job you are asked to synchronize two vídeos. You are not required to watch them completelly, but you must make their presentation as synchronous as you can.
+</div>
+<!-- Instru&ccedil;&otilde;es e informa&ccedil;&otilde;es da Task -->
+<div id="instructions">
+  <ol class="list-numbered" type="1">
+    <li>Press the <b>START TASK</b> button;</li>
+    <li>Both videos will start;</li>
+    <li>You can use the <b>STOP/START</b> buttons and the navigation to synchronize the videos;</li>
+    <li>Each player has its own button: <b>STOP/START(1)</b> for the first video, <b>STOP/START(2)</b> for the second;</li>
+    <li>By using these buttons you can stop a video, and wait to play it when the other video achieves a synchronous point;</li>
+    <li>Keep doing it until both are synchronous. If necessary backward videos;</li>
+    <li>When both videos are playing synchronously, press the <b>DONE</b> button and fill the form with the generated code;</li>
+    <li>If the videos were not synchronized and pressed the <b>DONE</b> button, you can correct your contribution by pressiing the <b>EDIT ANSWER</b> button;</li>
+  </ol>
+</div>
+<!-- Instru&ccedil;&otilde;es de uso da ferramenta -->
+<div id="sync-info">To synchronize videos, use the buttons bellow the players and the navigation bar in the video player. Play and pause the vídeos so they are presented synchronized and press <b>DONE</b>.
+</div>
+<!-- Mensagens auxiliars -->
+<p id="msg_field">STATUS: Selecting Videos ...
+</p>
+<div align="center"><!-- <button id='b_start'>Start Task</button>--><a align="center" class="button" id="b_start">Start Task</a>
+</div>
+<div align="center" id="video_area"><!-- Bot&otilde;es e seletores de v&iacute;deo -->
+  <table border="0">
+    <tbody>
+      <tr>
+        <td>
+          <div align="right" id="video1">
+            <div id="video1area"> 
+            </div>
+            <!-- <button id='b_p1'>PAUSE 1</button>--><a class="button" id="b_p1">PAUSE VIDEO 1</a>
+          </div>
+        </td>
+        <td>
+          <div align="left" id="video2">
+            <div id="video2area"> 
+            </div>
+            <!-- <button id='b_p2'>PAUSE 2</button> --><a class="button" id="b_p2">PAUSE VIDEO 2</a>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div align="center" id="div_done">
+  <p>After you have synchronized the videos, press the following DONE button.
+  </p>
+  <div align="center"><!-- <button id='b_done'>DONE</button> --><a class="button" id="b_done">DONE</a>
+  </div>
+</div>
+<div id="microworker">
+  <input id="fingerprint" name="fingerprint" type="hidden" />
+  <input id="job_id" name="job_id" type="hidden" />
+  <input id="v1" name="v1" type="hidden" />
+  <input id="v2" name="v2" type="hidden" />
+  <input id="delta" name="delta" type="hidden" />
+  <input id="start_time" name="start_time" type="hidden" />
+  <input id="end_time" name="end_time" type="hidden" />
+  <input id="plays_1" name="plays_1" type="hidden" />
+  <input id="plays_2" name="plays_2" type="hidden" />
+</div>
+<!-- API YouTube --><script src="https://www.youtube.com/iframe_api"></script><!-- Sync --><script>
+window.onload = getPair;    //Inicializa a APP;
+var video1 = null;       //Infos do primeiro video;
+var player1;             //Referencia para o primeiro Player;
+var video2 = null;       //Infos do Segundo Video;
+var player2;             //Referencia para o segundo Player;
+var status = "loading";  //Status da applica&ccedil;&atilde;o: "loading":carregando as informa&ccedil;&otilde;es do servidor, "sync":sincronizando os v&iacute;deos;
+var flagSyncProc = false;//flag para indicar se parou por causa do processo de SYNC ou outro motivo;
+var msg = "";            //Mensagem para identificar o que esta ocorrendo
+var com = false;                 //Se j&aacute; recebeu do servidor a task;
+var task = null;
+var start = null;
+var stop = null;
+var plays_1 = 0;
+var plays_2 = 0
+var fingerprint = null;
+var item_index = null;
+var job_id = nulll
+function getPair(){
+  $.getJSON('https://novaes.tech/job', function(data){init(data);});
+}
+function init(data){
+
+
+  job_id = data.job_id;
+  item_index = data.item_index;
+  fingerprint =  data.fingerprint;
+  document.getElementById('b_start').style.display = "none";
+  document.getElementById('div_done').style.display = "none";
+  document.getElementById('b_p1').style.display = "none";
+  document.getElementById('b_p2').style.display = "none";
+  document.getElementById('video_area').style.display = "none";
+  document.getElementById('b_p1').addEventListener('click',function(){
+    plays_1++;
+    if(player1.getPlayerState() == 1){
+      player1.pauseVideo();
+      document.getElementById('b_p1').innerHTML = "PLAY VIDEO 1";
+    }else{
+      player1.playVideo();
+      document.getElementById('b_p1').innerHTML = "PAUSE VIDEO 1";
+    }
+  });
+  document.getElementById('b_p2').addEventListener('click',function(){
+    plays_2++;
+    if(player2.getPlayerState() == 1){
+      player2.pauseVideo();
+      document.getElementById('b_p2').innerHTML = "PLAY VIDEO 2";
+    }else{
+      player2.playVideo();
+      document.getElementById('b_p2').innerHTML = "PAUSE VIDEO 2";
+    }
+  });
+  document.getElementById('b_start').addEventListener('click',function(){
+    start = new Date().getTime();
+    plays_1 = 0;
+    plays_2 = 0;
+    if(status == "ready" && com == true){
+      status = "sync";
+      player1.playVideo();
+      player2.playVideo();
+      document.getElementById('b_p1').style.display = "inline";
+      document.getElementById('b_p2').style.display = "inline";
+      document.getElementById('div_done').style.display = "inline";
+      document.getElementById('b_start').style.display = "none";
+      document.getElementById('video_area').style.display = "inline";
+    }
+  });
+  document.getElementById('b_done').addEventListener('click',function(){
+    player1.pauseVideo();
+    player2.pauseVideo();
+    document.getElementById('div_done').style.display = "none";
+    document.getElementById('video_area').style.display = "none";
+    outSync();
+    document.getElementById('b_start').innerHTML = "EDIT ANSWER";
+    document.getElementById('b_start').style.display = "inline";
+    status = "ready";
+  });
+  //Envia a solicita&ccedil;&atilde;o da task;
+  askTask(taskListener,data);
+}
+//Fun&ccedil;&atilde;o chamada quando recebe a task;
+//function taskListener(t){
+function taskListener(v1,v2){
+  //if(!t){return ;}
+  if(!v1 || !v2){return ;}
+//  obj = JSON.parse(t);
+  //Se &eacute; um objeto contendo os dados de apresenta&ccedil;&atilde;o {act:"presentation",relations:{uri:"",dur:number,delta:number}}
+  video1 = v1;//obj.v1;
+  video2 = v2;//obj.v2;
+  displayVideos();
+  /*
+                                        2do: libera a sincroniza&ccedil;&atilde;o;
+                        */
+}
+//Inicializa os dois v&iacute;deos
+function displayVideos(){
+  if (video1 != null){
+    var newDiv = document.createElement('div');
+    newDiv.id = "player1";
+    document.getElementById("video1area").appendChild(newDiv);
+    //player1 = loadVideo(video1.url, newDiv.id, player1);
+    player1 = loadVideo(video1, newDiv.id, player1);
+    player1.addEventListener("onStateChange",videoListener);
+  }
+  if (video2 != null){
+    var newDiv = document.createElement('div');
+    newDiv.id = "player2";
+    document.getElementById("video2area").appendChild(newDiv);
+    //player2 = loadVideo(video2.url, newDiv.id, player2);
+    player2 = loadVideo(video2, newDiv.id, player2);
+    player2.addEventListener("onStateChange",videoListener);
+  }
+}
+//Carrega um v&iacute;deo do YouTube
+function loadVideo(vid,playerid,player){
+  player = new YT.Player(playerid, {
+    height: '300',
+    width: '400',
+    videoId: vid,       // Id do v&iacute;deo passado pelo par&acirc;metro.
+    playerVars: {
+      'rel': '0',
+      'autoplay':'1',     // Liga o autoplay.
+      'controls':'1',     // Mostra os controles.
+      'enablejsapi':'1',  // Usa a API javascript.
+      'showinfo':'0',     // Esconde as informa&ccedil;&otilde;es de cabe&ccedil;alho do v&iacute;deo.
+      'autohide':'1',      // Esconde os controles automaticamente durante a execu&ccedil;&atilde;o (se 'controls' for '1' ).
+      'suggestedQuality': 'medium'
+    },
+  });
+  return player;
+}
+function videoListener(event){
+  //Se pausou ou esta armazenando buffer;
+  if (event.data == 2 || event.data == 3){
+    //se come&ccedil;ou a reproduzir;
+  }else if(event.data == 1){
+    //Se os dois players est&atilde;o tocando:
+    if(status == "loading"){
+      player1.pauseVideo();
+      player2.pauseVideo();
+      status = "ready";
+    }
+    /*if(player1.getPlayerState() == 1 && player2.getPlayerState() == 1){
+                                    if(flagSyncProc == false){
+                                                sync();
+                                        }else{
+                                                flagSyncProc = false;
+                                        }
+                                }
+                                */
+  }
+}
+//Envia a contribui&ccedil;&atilde;o e encerra a task
+function outSync(){
+  var diff = player1.getCurrentTime() - player2.getCurrentTime();
+  var obj = {id:1, ts: 1234, act:'addContribution',
+             ec1:video1.url,
+             ec2:video2.url,
+             delta: diff}
+  //sendContribution(JSON.stringify(obj));
+  sendContribution(video1,video2,diff);
+  /*
+                                        2do: Parar e esconder os v&iacute;deos e op&ccedil;&otilde;es de sync.
+                                */
+}
+function askTask(callback,data){
+  //var task = '{"v1":{"label":"'+data.from.label+'","url":"'+data.from.uri+'"}, "v2":{ "label":"'+data.to.label+'", "url":"'+data.to.uri+'" } }';
+  //  setTimeout(function (){
+ // callback(task);
+  callback(data.v1,data.v2);
+  com = true;
+  showMsg("msg_field", "STATUS: READY");
+  document.getElementById('b_start').style.display = "inline";
+  document.getElementById('video_area').style.display = "inline";
+  //  }, 1000)
+}
+function showMsg(id,msg){
+  document.getElementById(id).innerHTML = msg;
+}
+function sendContribution(v1,v2,delta){
+  end = new Date().getTime();
+  queryForm = "<form method='post' action='https://novaes.tech/store'>";
+  queryForm += "<input type='hidden' id='fingerprint' name='fingerprint' value= '"+fingerprint+"'>";
+  queryForm += "<input type='hidden' id='job_id' name='job_id' value= '"+job_id+"'>";
+  queryForm += "<input type='hidden' id='item_index' name='item_index' value= '"+item_index+"'>";
+  queryForm += "<input type='hidden' id='v1' name='v1' value= '"+v1+"'>";
+  queryForm += "<input type='hidden' id='v2' name='v2' value= '"+v2+"'>";
+  queryForm += "<input type='hidden' id='delta' name='delta' value= '"+delta+"'>";
+  queryForm += "<input type='hidden' id='start_time' name='start_time' value= '"+start+"'>";
+  queryForm += "<input type='hidden' id='end_time' name='end_time' value= '"+end+"'>";
+  queryForm += "<input type='hidden' id='plays_1' name='plays_1' value= '"+plays_1+"'>";
+  queryForm += "<input type='hidden' id='plays_2' name='plays_2' value= '"+plays_2+"'>";
+  queryForm += "";
+  document.getElementById('fingerprint').value = fingerprint;
+  document.getElementById('job_id').value = job_id;
+  document.getElementById('v1').value = v1;
+  document.getElementById('v2').value = v2;
+  document.getElementById('delta').value = delta;
+  document.getElementById('start_time').value = start;
+  document.getElementById('end_time').value = end;
+  document.getElementById('plays_1').value = plays_1;
+  document.getElementById('plays_2').value = plays_2;
+  $.ajax({
+    type: 'POST',
+    url: $(queryForm).attr("action"),
+    data: $(queryForm).serialize(),
+    success: function(response) {console.log('SUCCESS');},
+    error: function(response) {console.log('ERROR');}
+  });
+}
+</script>
+
