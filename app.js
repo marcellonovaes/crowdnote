@@ -1,7 +1,7 @@
 // ---------------------- Includes and Globals ------------------------
 
-var activeTask = 10;
-var qtd_target = 1000;
+var activeTask = 0;
+var qtd_target = 3;
 
 var host = 'localhost';
 var http = require('http');
@@ -78,26 +78,6 @@ var curInput = 0;
 init();
 
 // ---------------------  Init Functions -----------------------------
-
-/*var videos = new Array();
-videos.push("Kqf-DaQcb8o");
-videos.push("uZyc2JXEgMI");
-videos.push("F6Bac-8RwnI");
-videos.push("llc0FBh_rOA");
-videos.push("DBHR4tVHrlg");
-videos.push("qNJxgCP_9Sg");
-videos.push("nRrlrKypetU");
-videos.push("k-jJ4uq8TWk");
-var c,data;
-for(var i=0; i<videos.length; i++){
-	for(var j=i+1; j<videos.length; j++){
-		data = {'v1':videos[i],'v2':videos[j]};
-        	c = new Input(data);
-        	c.save(function (err, m0) {if (err) return console.error(err);});
-	}
-}
-*/
-
 
 function init(){
 	Input.find({},function (err, V) {
@@ -299,6 +279,9 @@ https.createServer({
 
 
 //http.createServer().listen(80);
+
+
+
 
 
 

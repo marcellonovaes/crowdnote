@@ -24,6 +24,10 @@
       <div class="mdl-layout__header-row" >
         <span class="mdl-layout-title" style='text-align:left;font-size:16px;position: fixed;margin-top:60px; margin-left:10px;'> 
 
+<center>
+<table>
+<tr>
+<td width='500' >
 <p style="font-size:18px">1. Identifique no vídeo algo que achou interessante.</p>
 
 <p style="font-size:18px">2. Pause o vídeo no momento em que ele aparece.</p>
@@ -31,7 +35,20 @@
 <p style="font-size:18px">3. Escreva o que identificou.</p>
 
 <p style="font-size:18px">4. Clique em 'Enviar'.</p>
+</td>
 
+<td>
+    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+      <input class="mdl-textfield__input" type="text" id='point' name='point' autofocus >
+      <label class="mdl-textfield__label" for="point" style='color:white;text-align:center;'>Escreva a aqui o que identificou</label>
+    </div>
+
+		<p align=center>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="sendContribution()" style='width: 200px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Enviar</button>
+</p>
+</td>
+</tr>
+</table>
 	</span>
 
       </div>
@@ -41,16 +58,8 @@
 
 	  <div id="player" style='box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'></div>
 	  
-<br><br><br>
 
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input class="mdl-textfield__input" type="text" id='point' name='point' autofocus >
-      <label class="mdl-textfield__label" for="point">Escreva a aqui o que identificou</label>
-    </div>
 
-		<p align=center>
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="sendContribution()" style='width: 200px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Enviar</button>
-</p>
 	</div>
 
 
@@ -73,6 +82,18 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 function onYouTubeIframeAPIReady() {
   $.getJSON('https://novaes.tech/job', function(data){init(data);});
+/*  init({
+    "_id": "59a59b2070092a3e7fbcea38",
+    "start": "28",
+    "end": "40",
+    "uri": "UTg6fdKi9TI",
+    "job_id": "UTg6fdKi9TI",
+    "fingerprint": "UTg6fdKi9TI",
+    "instant": "28.789830000000002",
+    "point": "Caô",
+    "item_index": 0
+});*/
+
 }
 
 function init(data){
@@ -153,6 +174,7 @@ function done(){
 
 
 </script>
+
 
 
 

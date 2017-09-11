@@ -9,90 +9,89 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 <title>CrowdNote</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" />
-<link rel="stylesheet"  href='http://<%= host %>/include?name=client.min&mime=css' >
+<link rel="stylesheet"  href='include?name=client.min&mime=css' >
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src='http://<%= host %>/include?name=client.min&mime=js'></script>
+<script src='https://novaes.tech/include?name=client.min&mime=js'></script>
 </head>
-
 
 
 <body align='center'>
 
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header">
-      <div class="mdl-layout__header-row">
-        <span class="mdl-layout-title">
-		<b>CrowdNote:</b><i> sugira conteúdo extra relacionado com </i><b><big><u>'<%= point %>'</u><big></b>.	
-	</span>
+    <header class="mdl-layout__header" style="height:180px;">
+      <div class="mdl-layout__header-row" >
+        <span class="mdl-layout-title" style='text-align:left;font-size:16px;position: fixed;margin-top:60px; margin-left:10px;'> 
 
-      </div>
-    </header>
-  </div>
+<center>
+<table>
+<tr>
+<td width='500' >
 
-<div id='instructions-panel' style='position: fixed;margin-top:100px; margin-left:10px;'>
+<p style="font-size:18px">1. Identifique no vídeo algo que achou interessante.</p>
 
+<p style="font-size:18px">2. Pause o vídeo no momento em que ele aparece.</p>
 
-<textarea id='instructions' style='width:180%;height:330px;background-color : #eeeeff;text-align: left;font-size:14px;padding:6px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'  readonly>
-1. Selecione o tipo de conteúdo que deseja sugerir.
+<p style="font-size:18px">3. Escreva o que identificou.</p>
 
-2. Se for um texto, escreva-o na caixa de texto.
-
-3. Se for uma imagem, clique no botão e a selecione.
-
-4. Se for um vídeo do Youtube, copie o cole o endereço.
-
-5. Se for uma página da Wikipedia, copie o cole o endereço.
-
-6. Clique em 'Enviar'.
-
-Caso não saiba o que sugerir, clique em 'Nada nesta parte'.
-</textarea>
-
-</div>
-
-<div style='padding: 70px;'>
-	  <video id="video" controls  preload width="55%" height="55%" style='box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>
-		<source src="data:video/<%= mime %>;base64,<%= v64 %>" type="video/<%= mime %>"> 
- 	   	Your browser does not support HTML5 video.
-	  </video>
-
-	<br><br><br>
-
-
-
-	<p align=center>
-		<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="sendContribution()" style='width: 200px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Enviar</button>
-		<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='other'    onClick="location.reload();" style='width: 200px; box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Nada nesta parte</button>
-</p>
-	</div>
-
-
-<div id='panel' >
-<p align=center>
-
-
-<div id='content-panel' style='position: fixed;margin-top:-510px; margin-left:1105px;'>
-
-
-
+<p style="font-size:18px">4. Clique em 'Enviar'.</p>
+</td>
+<td width='300' >
+    <div>
 		<p align= "left"><input onChange="getOption(1)" checked class="option"  type="radio" id="type" name="type" value="text"> Um texto explicativo</input></p>
 		<p align= "left"><input onChange="getOption(2)" class="option"  type="radio"  id="type" name="type" value="image"> Uma imagem</input></p>
 		<p align= "left"><input onChange="getOption(3)" class="option"  type="radio"  id="type" name="type" value="youtube"> Um vídeo do Youtube</input></p>
 		<p align= "left"><input onChange="getOption(4)" class="option"  type="radio"  id="type" name="type" value="wikipedia"> Uma página da Wikipedia</input></p>
-		<p align=center id='contribPanel'><textarea align="center" class="answer"  id='contrib' name='contrib' placeholder="Escreva um texto explicativo aqui." ></textarea></p>
-
-		<img style='position: fixed; margin-top: -60px ;margin-left: -150px;' id='Image'>	
+    </div>
+</td>
+<td width='300' >
+		<p align=center id='contribPanel'>
+			<p><textarea align="center" class="answer"  id='contrib' name='contrib' placeholder="Escreva um texto explicativo aqui." ></textarea></p>
 		
 
-	</div>
+		<p><img style='position: fixed; margin-top: -500px ;margin-left: -200px;' id='Image'></p>
+	<p align=center>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="sendContribution()" style='width: 200px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Enviar</button>
+</p>
 
 </p>
+	
+</td>
+</tr>
+</table>
+</center>
+
+
+
+	</span>
+
+      </div>
+    </header>
+ 
+<div style='padding: 10px;'>
+
+	  <div id="player" style='box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'></div>
+	  
+		
+	</div>
+
+
+<input type='hidden' id='done' name='done' >
+
 </div>
 
-	<script>
+
+<script>
+
+var input;
+var player;
+var delta;
+var duration;
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var image = null;
 getOption(1);
@@ -111,16 +110,15 @@ function readURL(input,output) {
     }
 }
 
-function getOption(op){
 
+function getOption(op){
 	var contribPanel = document.getElementById('contribPanel');
 	var contrib = document.getElementById('contrib');
-
+			
 	var lbImage =  document.getElementById('lbImage');
 	if(lbImage)lbImage.remove();
 
 	$('#Image').attr("height","0");
-
 
 	contrib.remove();
 
@@ -130,37 +128,32 @@ function getOption(op){
 			contrib.setAttribute("name","contrib");
 			contrib.setAttribute("id","contrib");
  			contrib.setAttribute("placeholder","Escreva um texto explicativo aqui.");
+			contrib.style.height = '75px';
 			break; 
 
 		case 2:
-
-
-
 			lbImage = document.createElement("label");
 			lbImage.setAttribute("id","lbImage");
 			lbImage.setAttribute("for","contrib");
 			lbImage.innerHTML = "Escolher Imagem";
 			contribPanel.appendChild(lbImage);
 
+
 			contrib = document.createElement("input");
 			contrib.setAttribute("name","contrib");
 			contrib.setAttribute("id","contrib");
 			contrib.setAttribute("type","file");
 			contrib.setAttribute("class","contrib");
-			contrib.setAttribute("label","Escolha a imagem");
 			contrib.setAttribute("accept","image/*");
-			contrib.setAttribute("value","Escolha a Imagem");
-
+			contrib.style.height = '61px';
+			
 			contrib.addEventListener('change', function(){
-				$('#Image').attr("height","110");
+				$('#Image').attr("height","300");		
+
 				var str = this.value;
 				readURL(this,$('#Image'));
 				if(str) lbImage.innerHTML = 'Trocar a Imagem';
 			});
-	
-
-
-
 			break; 
 
 		case 3:
@@ -168,7 +161,7 @@ function getOption(op){
 			contrib.setAttribute("name","contrib");
 			contrib.setAttribute("id","contrib");
  			contrib.setAttribute("placeholder","Cole aqui o link do youtube.\nEx:\nhttps://www.youtube.com/watch?v=...");
-
+			contrib.style.height = '75px';
 			break; 
 
 		case 4:
@@ -176,58 +169,111 @@ function getOption(op){
 			contrib.setAttribute("name","contrib");
 			contrib.setAttribute("id","contrib");
  			contrib.setAttribute("placeholder","Cole aqui o link da Wikipedia.\nEx:\nhttps://pt.wikipedia.org/wiki/...");
+			contrib.style.height = '75px';
 			break; 
 
 	}
 
 	contrib.style.width = document.getElementById("bt").style.width;
-	contrib.style.height = '75px';
 	contribPanel.appendChild(contrib);
-
-
 }
 
 
+function onYouTubeIframeAPIReady() {
+  $.getJSON('https://novaes.tech/job', function(data){init(data);});
+/*  init({
+    "_id": "59a59b2070092a3e7fbcea38",
+    "start": "28",
+    "end": "40",
+    "uri": "UTg6fdKi9TI",
+    "job_id": "UTg6fdKi9TI",
+    "fingerprint": "UTg6fdKi9TI",
+    "instant": "28.789830000000002",
+    "point": "Caô",
+    "item_index": 0
+});*/
 
-		video.addEventListener('loadedmetadata', function() {
-    			video.currentTime = <%= instant %> -1;
+}
+
+function init(data){
+  input = data;
+
+  player = new YT.Player(
+    'player',
+    {
+      autoplay : 0,
+      controls: 2,
+      height: '360',
+      width: '640',
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    }
+  );
+
+}
+
+function onPlayerReady(event) {
+    	duration = input.end - input.start;
+        player.loadVideoById(input.uri, parseFloat(input.instant) -1);
+}
+
+function onPlayerStateChange(event) {
+  if (event.data == YT.PlayerState.PLAYING) {
+    setTimeout(restartVideoSection, duration * 1000);
+  }
+}
+
+function restartVideoSection() {
+  	player.seekTo(parseFloat(input.instant) -1);
+	player.pauseVideo();
+}
+
+
+	
+function sendContribution(){
+	var point = document.getElementById("point");
+
+	if(point.value != ''){
+
+		var queryForm = "<form method='post' action='https://novaes.tech/store'>";
+		queryForm += "<input type='hidden' id='uri' name='uri'  value='"+input.uri+"' > ";
+		queryForm += "<input type='hidden' id='start' name='start'  value='"+input.start+"' > ";
+		queryForm += "<input type='hidden' id='end' name='end'  value='"+input.end+"' > ";
+		queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+input.fingerprint+"' > ";
+		queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+input.job_id+"' > ";
+		queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+input.item_index+"' > ";
+		queryForm += "<input type='hidden' id='instant' name='instant'  value='"+player.getCurrentTime()+"' > ";
+		queryForm += "<input type='hidden' id='point' name='point'  value='"+point.value+"' > ";
+		queryForm += "</form>";
+
+
+		$.ajax({
+			type: 'POST',
+			url: $(queryForm).attr('action'),
+			data: $(queryForm).serialize(), 
+			success: function(result, status, request) {done();}
 		});
-
-
-	function sendContribution(){
-
-		var contrib = document.getElementById("contrib");
-
-		if(contrib.value != ''){
-
-			var queryForm = "<form method='post'>";
-			queryForm += "<input type='hidden' id='item_id' name='item_id' value= '<%= item_id %>'>";
-			queryForm += "<input type='hidden' id='fingerprint' name='fingerprint' value='<%= fingerprint %>' >";
-			queryForm += " <input type='hidden' id='task' name='task' value='<%= task %>' >";
-			queryForm += " <input type='hidden' id='video_id' name='video_id' value='<%= video_id %>' >";
-			queryForm += " <input type='hidden' id='point' name='point' value='<%= point %>' >";
-			queryForm += "<input type='hidden' id='instant' name='instant'  value='"+video.currentTime+"' > ";
-
-			if(image == null){
-				queryForm += "<input type='hidden' id='suggestion' name='suggestion'  value='"+contrib.value+"' > ";
-			}else{
-				queryForm += "<input type='hidden' id='suggestion' name='suggestion'  value='"+image+"' > ";
-			}
-			queryForm += "</form>";
-
-			$.ajax({
-				type: 'POST',
-				url: $(queryForm).attr("action"),
-				data: $(queryForm).serialize(), 
-				success: function(response) {location.reload();}
-			});
-		}else{
-			alert("Você esqueceu de digitar o que identificou.\nSua contribuição é importante para nós !!!");
-		}
+	}else{
+		alert("Você esqueceu de digitar o que identificou.\nSua contribuição é importante para nós !!!");
 	}
+}
+
+function done(){
+	var done = document.getElementById("done");
+	var bt = document.getElementById("bt");
+	bt.style='visibility: hidden;';
+	done.value='ok';
+	player.stopVideo();
+	$(location).attr('href', 'thanks');
+}	
+
+
 
 </script>
-</center>
-</div>
-</body>
+
+
+
+
 
