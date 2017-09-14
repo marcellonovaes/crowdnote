@@ -1,6 +1,6 @@
 // ---------------------- Includes and Globals ------------------------
 
-var activeTask = 0;
+var activeTask = 1;
 var qtd_target = 3;
 
 var host = 'localhost';

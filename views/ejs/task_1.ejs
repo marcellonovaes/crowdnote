@@ -20,29 +20,28 @@
 <body align='center'>
 
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header" style="height:180px;">
+    <header class="mdl-layout__header" style="height:240px;">
       <div class="mdl-layout__header-row" >
-        <span class="mdl-layout-title" style='text-align:left;font-size:16px;position: fixed;margin-top:60px; margin-left:10px;'> 
+        <span class="mdl-layout-title" style='text-align:left;font-size:16px;position: fixed;margin-top:90px; margin-left:10px;'> 
 
 <center>
 <table>
 <tr>
 <td width='500' >
 
-<p style="font-size:18px">1. Identifique no vídeo algo que achou interessante.</p>
+<p style="font-size:16px">Based on the video, suggest content to explain or illustrate:</p>
+<p style="font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;" id="tx_point"></p>
+<p style="font-size:16px">1. Select the type of content to send.</p>
+<p style="font-size:16px">2. Type, paste or choose the content.</p>
+<p style="font-size:16px">3. Click the 'SUBMIT' button.</p>
 
-<p style="font-size:18px">2. Pause o vídeo no momento em que ele aparece.</p>
-
-<p style="font-size:18px">3. Escreva o que identificou.</p>
-
-<p style="font-size:18px">4. Clique em 'Enviar'.</p>
 </td>
 <td width='300' >
     <div>
-		<p align= "left"><input onChange="getOption(1)" checked class="option"  type="radio" id="type" name="type" value="text"> Um texto explicativo</input></p>
-		<p align= "left"><input onChange="getOption(2)" class="option"  type="radio"  id="type" name="type" value="image"> Uma imagem</input></p>
-		<p align= "left"><input onChange="getOption(3)" class="option"  type="radio"  id="type" name="type" value="youtube"> Um vídeo do Youtube</input></p>
-		<p align= "left"><input onChange="getOption(4)" class="option"  type="radio"  id="type" name="type" value="wikipedia"> Uma página da Wikipedia</input></p>
+		<p align= "left"><input onChange="getOption(1)" checked class="option"  type="radio" id="type" name="type" value="text"> An explanatory text</input></p>
+		<p align= "left"><input onChange="getOption(2)" class="option"  type="radio"  id="type" name="type" value="image"> An image</input></p>
+		<p align= "left"><input onChange="getOption(3)" class="option"  type="radio"  id="type" name="type" value="youtube"> A Youtube video</input></p>
+		<p align= "left"><input onChange="getOption(4)" class="option"  type="radio"  id="type" name="type" value="wikipedia"> A Wikipedia page</input></p>
     </div>
 </td>
 <td width='300' >
@@ -52,7 +51,7 @@
 
 		<p><img style='position: fixed; margin-top: -500px ;margin-left: -200px;' id='Image'></p>
 	<p align=center>
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="sendContribution()" style='width: 200px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Enviar</button>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="sendContribution()" style='width: 200px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>SUBMIT</button>
 </p>
 
 </p>
@@ -127,17 +126,17 @@ function getOption(op){
 			contrib = document.createElement("textarea");
 			contrib.setAttribute("name","contrib");
 			contrib.setAttribute("id","contrib");
- 			contrib.setAttribute("placeholder","Escreva um texto explicativo aqui.");
+ 			contrib.setAttribute("placeholder","Write an explanatory text here.");
 			contrib.style.height = '75px';
 			break; 
 
 		case 2:
-			lbImage = document.createElement("label");
+		/*	lbImage = document.createElement("label");
 			lbImage.setAttribute("id","lbImage");
 			lbImage.setAttribute("for","contrib");
-			lbImage.innerHTML = "Escolher Imagem";
+			lbImage.innerHTML = "Choose Image";
 			contribPanel.appendChild(lbImage);
-
+*/
 
 			contrib = document.createElement("input");
 			contrib.setAttribute("name","contrib");
@@ -145,14 +144,14 @@ function getOption(op){
 			contrib.setAttribute("type","file");
 			contrib.setAttribute("class","contrib");
 			contrib.setAttribute("accept","image/*");
-			contrib.style.height = '61px';
+			contrib.style.height = '84px';
 			
 			contrib.addEventListener('change', function(){
 				$('#Image').attr("height","300");		
 
 				var str = this.value;
 				readURL(this,$('#Image'));
-				if(str) lbImage.innerHTML = 'Trocar a Imagem';
+				if(str) lbImage.innerHTML = 'Change Image';
 			});
 			break; 
 
@@ -160,7 +159,7 @@ function getOption(op){
 			contrib = document.createElement("textarea");
 			contrib.setAttribute("name","contrib");
 			contrib.setAttribute("id","contrib");
- 			contrib.setAttribute("placeholder","Cole aqui o link do youtube.\nEx:\nhttps://www.youtube.com/watch?v=...");
+ 			contrib.setAttribute("placeholder","Paste a link to a Youtube video here.\nEx:\nhttps://www.youtube.com/watch?v=...");
 			contrib.style.height = '75px';
 			break; 
 
@@ -168,7 +167,7 @@ function getOption(op){
 			contrib = document.createElement("textarea");
 			contrib.setAttribute("name","contrib");
 			contrib.setAttribute("id","contrib");
- 			contrib.setAttribute("placeholder","Cole aqui o link da Wikipedia.\nEx:\nhttps://pt.wikipedia.org/wiki/...");
+ 			contrib.setAttribute("placeholder","Paste a link to a Wikipedia page here.\nEx:\nhttps://pt.wikipedia.org/wiki/...");
 			contrib.style.height = '75px';
 			break; 
 
@@ -197,6 +196,7 @@ function onYouTubeIframeAPIReady() {
 
 function init(data){
   input = data;
+  document.getElementById("tx_point").innerHTML = input.point;
 
   player = new YT.Player(
     'player',
