@@ -2,7 +2,7 @@
 
 var activeTask = 2;
 var group = true;
-var qtd_target = 3;
+var qtd_target = 10;
 
 var host = 'localhost';
 var http = require('http');
@@ -127,7 +127,7 @@ app.get('/job', function(req, res) {
 	var contribs = new Array()
         job_id = fingerprint(req,true);
         print = fingerprint(req,false);
-        Output.find({fingerprint: print},function (err, C) {
+/*        Output.find({fingerprint: print},function (err, C) {
                 if (err) return console.error(err);
                 for(var i=0; i < C.length; i++){
                         contribs[i] = C[i];
@@ -135,19 +135,39 @@ app.get('/job', function(req, res) {
 		if(contribs.length == input.length){
 			res.redirect('https://novaes.tech/thanks');
 		}else{
-			curInput = findNext(contribs,input,curInput);
-		        var obj = input[curInput];
-			obj.item_index = curInput;
-		        if(curInput < input.length-1){
-       	 	        curInput++;
-		        }else{
-       		         	curInput = 0;
-       		 	}
-			obj.job_id = job_id;
-			obj.fingerprint = print;
+*/			curInput = findNext(contribs,input,curInput);
+			if(group){
+				var inp = input[curInput];
+                                if(curInput < input.length-1){
+                                curInput++;
+                                }else{
+                                        curInput = 0;
+                                }
+				var qtd = inp.qtd;
+				delete inp.qtd;
+				var more = new Object();
+                                more.item_index = curInput;
+				more.qtd = qtd;
+				more.job_id = job_id;
+				more.fingerprint = print;
+				var obj = new Object();
+				obj.data = inp;
+				obj.info = more;
+			}else{
+			        var obj = input[curInput];
+				obj.item_index = curInput;
+			        if(curInput < input.length-1){
+       	 		        curInput++;
+			        }else{
+       			         	curInput = 0;
+       			 	}
+				obj.job_id = job_id;
+				obj.fingerprint = print;
+			}
 		        res.json(obj);
-		}
+/*		}
         }).sort({'item_id' : 1});
+*/
 });
 
 app.post('/store', function(req, res) {
