@@ -26,38 +26,22 @@
 
 <center>
 <table>
-<tr>
 <td width='500' >
-
 <p style="font-size:16px">Based on the video, suggest content to explain or illustrate:</p>
 <p style="font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;" id="tx_point"></p>
 <p style="font-size:16px">1. Select the type of content to send.</p>
 <p style="font-size:16px">2. Type, paste or choose the content.</p>
 <p style="font-size:16px">3. Click the 'SUBMIT' button.</p>
-
 </td>
-<td width='300' >
-    <div>
-		<p align= "left"><input onChange="getOption(1)" checked class="option"  type="radio" id="type" name="type" value="text"> An explanatory text</input></p>
-		<p align= "left"><input onChange="getOption(2)" class="option"  type="radio"  id="type" name="type" value="image"> An image</input></p>
-		<p align= "left"><input onChange="getOption(3)" class="option"  type="radio"  id="type" name="type" value="youtube"> A Youtube video</input></p>
-		<p align= "left"><input onChange="getOption(4)" class="option"  type="radio"  id="type" name="type" value="wikipedia"> A Wikipedia page</input></p>
-    </div>
-</td>
-<td width='300' >
-		<p align=center id='contribPanel'>
-			<p><textarea align="center" class="answer"  id='contrib' name='contrib' placeholder="Escreva um texto explicativo aqui." ></textarea></p>
-		
 
-		<p><img style='position: fixed; margin-top: -500px ;margin-left: -200px;' id='Image'></p>
-	<p align=center>
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="sendContribution()" style='width: 200px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>SUBMIT</button>
+<td width='600' align='center'>
+<p id='content_view' name='content_view'  style='word-wrap: break-word;font-size:16px;height:180px;width: 407px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>
 </p>
-
-</p>
-	
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_previous'    onClick="navigate(-1)" style='font-size:12px;height:30px;width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>previous</button>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_vote'    onClick="sendContribution()" style='font-size:12px;height:30px;width: 200px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>VOTE !!!</button>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_next'    onClick="navigate(1)" style='font-size:12px;height:30px;width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>next</button>
 </td>
-</tr>
+
 </table>
 </center>
 
@@ -84,16 +68,39 @@
 <script>
 
 var input;
+var item;
+var cur = 0;
 var player;
 var delta;
 var duration;
+var content_type;
+var content_view;
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-var image = null;
-getOption(1);
+function displayContent(idx){
+	content_type = input[idx].content_type;
+	var content = input[idx].content;
+
+	switch(content_type){
+		case 'image':
+				content = "<img src="+content+" style='height:180px; max-width:407px;'>";
+			break;
+
+	}
+
+	content_view.innerHTML = content;
+}
+
+function navigate(step){
+	if( (cur+step < input.length) && (cur+step >= 0) ){
+		cur += step;
+		displayContent(cur);
+	}
+}
+
 
 function readURL(input,output) {
 
@@ -110,93 +117,17 @@ function readURL(input,output) {
 }
 
 
-function getOption(op){
-	var contribPanel = document.getElementById('contribPanel');
-	var contrib = document.getElementById('contrib');
-			
-	var lbImage =  document.getElementById('lbImage');
-	if(lbImage)lbImage.remove();
-
-	$('#Image').attr("height","0");
-
-	contrib.remove();
-
-	switch(op){
-		case 1:
-			contrib = document.createElement("textarea");
-			contrib.setAttribute("name","contrib");
-			contrib.setAttribute("id","contrib");
- 			contrib.setAttribute("placeholder","Write an explanatory text here.");
-			contrib.style.height = '75px';
-			break; 
-
-		case 2:
-		/*	lbImage = document.createElement("label");
-			lbImage.setAttribute("id","lbImage");
-			lbImage.setAttribute("for","contrib");
-			lbImage.innerHTML = "Choose Image";
-			contribPanel.appendChild(lbImage);
-*/
-
-			contrib = document.createElement("input");
-			contrib.setAttribute("name","contrib");
-			contrib.setAttribute("id","contrib");
-			contrib.setAttribute("type","file");
-			contrib.setAttribute("class","contrib");
-			contrib.setAttribute("accept","image/*");
-			contrib.style.height = '84px';
-			
-			contrib.addEventListener('change', function(){
-				$('#Image').attr("height","300");		
-
-				var str = this.value;
-				readURL(this,$('#Image'));
-				if(str) lbImage.innerHTML = 'Change Image';
-			});
-			break; 
-
-		case 3:
-			contrib = document.createElement("textarea");
-			contrib.setAttribute("name","contrib");
-			contrib.setAttribute("id","contrib");
- 			contrib.setAttribute("placeholder","Paste a link to a Youtube video here.\nEx:\nhttps://www.youtube.com/watch?v=...");
-			contrib.style.height = '75px';
-			break; 
-
-		case 4:
-			contrib = document.createElement("textarea");
-			contrib.setAttribute("name","contrib");
-			contrib.setAttribute("id","contrib");
- 			contrib.setAttribute("placeholder","Paste a link to a Wikipedia page here.\nEx:\nhttps://pt.wikipedia.org/wiki/...");
-			contrib.style.height = '75px';
-			break; 
-
-	}
-
-	contrib.style.width = document.getElementById("bt").style.width;
-	contribPanel.appendChild(contrib);
-}
-
-
 function onYouTubeIframeAPIReady() {
-//  $.getJSON('https://novaes.tech/job', function(data){init(data);});
-  init({
-    "_id": "59a59b2070092a3e7fbcea38",
-    "start": "28",
-    "end": "40",
-    "uri": "UTg6fdKi9TI",
-    "job_id": "UTg6fdKi9TI",
-    "fingerprint": "UTg6fdKi9TI",
-    "instant": "28.789830000000002",
-    "point": "Caô",
-    "item_index": 0
-});
-
+  $.getJSON('https://novaes.tech/job', function(data){init(data);});
 }
 
 function init(data){
   input = data;
-  document.getElementById("tx_point").innerHTML = input.point;
+  item = input[0];
+  document.getElementById("tx_point").innerHTML = item.point;
+
+  content_view = document.getElementById("content_view");
+  displayContent(0);
 
   player = new YT.Player(
     'player',
@@ -215,8 +146,8 @@ function init(data){
 }
 
 function onPlayerReady(event) {
-    	duration = input.end - input.start;
-        player.loadVideoById(input.uri, parseFloat(input.instant) -1);
+    	duration = item.end - item.start;
+        player.loadVideoById(item.uri, parseFloat(item.instant) -1);
 }
 
 function onPlayerStateChange(event) {
@@ -226,28 +157,36 @@ function onPlayerStateChange(event) {
 }
 
 function restartVideoSection() {
-  	player.seekTo(parseFloat(input.instant) -1);
+  	player.seekTo(parseFloat(item.instant) -1);
 	player.pauseVideo();
 }
 
 
 	
 function sendContribution(){
-	var point = document.getElementById("point");
 
-	if(point.value != ''){
+	if(contrib.value != ''){
+
+		item = input[cur];
 
 		var queryForm = "<form method='post' action='https://novaes.tech/store'>";
-		queryForm += "<input type='hidden' id='uri' name='uri'  value='"+input.uri+"' > ";
-		queryForm += "<input type='hidden' id='start' name='start'  value='"+input.start+"' > ";
-		queryForm += "<input type='hidden' id='end' name='end'  value='"+input.end+"' > ";
-		queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+input.fingerprint+"' > ";
-		queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+input.job_id+"' > ";
-		queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+input.item_index+"' > ";
-		queryForm += "<input type='hidden' id='instant' name='instant'  value='"+player.getCurrentTime()+"' > ";
-		queryForm += "<input type='hidden' id='point' name='point'  value='"+point.value+"' > ";
+		queryForm += "<input type='hidden' id='uri' name='uri'  value='"+item.uri+"' > ";
+		queryForm += "<input type='hidden' id='start' name='start'  value='"+item.start+"' > ";
+		queryForm += "<input type='hidden' id='end' name='end'  value='"+item.end+"' > ";
+		queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+item.fingerprint+"' > ";
+		queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+item.job_id+"' > ";
+		queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+item.item_index+"' > ";
+		queryForm += "<input type='hidden' id='instant' name='instant'  value='"+item.instant+"' > ";
+		queryForm += "<input type='hidden' id='point' name='point'  value='"+item.point+"' > ";
+	
+		queryForm += "<input type='hidden' id='content_type' name='content_type'  value='"+item.content_type+"' > ";
+
+		queryForm += "<input type='hidden' id='content' name='content'  value='"+item.content+"' > ";
+
+
 		queryForm += "</form>";
 
+		
 
 		$.ajax({
 			type: 'POST',
@@ -256,14 +195,12 @@ function sendContribution(){
 			success: function(result, status, request) {done();}
 		});
 	}else{
-		alert("Você esqueceu de digitar o que identificou.\nSua contribuição é importante para nós !!!");
+                alert("You forgot to suggest some content.\nYour contribution is important to us!!!");
 	}
 }
 
 function done(){
 	var done = document.getElementById("done");
-	var bt = document.getElementById("bt");
-	bt.style='visibility: hidden;';
 	done.value='ok';
 	player.stopVideo();
 	$(location).attr('href', 'thanks');

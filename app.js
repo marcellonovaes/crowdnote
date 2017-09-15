@@ -1,6 +1,7 @@
 // ---------------------- Includes and Globals ------------------------
 
-var activeTask = 1;
+var activeTask = 2;
+var group = true;
 var qtd_target = 3;
 
 var host = 'localhost';
@@ -82,11 +83,34 @@ init();
 function init(){
 	Input.find({},function (err, V) {
 		if (err) return console.error(err);
+		if(group){
+			V = groupInput(V);
+		}
 		for(var i=0; i < V.length; i++){
 			input[i] = V[i];
 			input[i].qtd = 0;
 		}
 	}).sort({'_id' : 1});
+}
+
+function groupInput(items){
+	var groups = new Array();
+	var indexes = new Array();
+        for(var i=0; i < items.length; i++){
+
+		if(!groups[items[i].item_id]){
+			groups[items[i].item_id] = new Array();
+			indexes.push(items[i].item_id);
+		}
+
+		groups[items[i].item_id].push(items[i]);
+
+	}
+	V = new Array();
+	for(var i=0; i < indexes.length; i++){
+		V.push(groups[indexes[i]]);
+	}
+	return V;
 }
 
 //-----------------------  Endpoints   -------------------------------
