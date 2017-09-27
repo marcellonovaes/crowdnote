@@ -1,8 +1,8 @@
 // ---------------------- Includes and Globals ------------------------
 
-var activeTask = 0;
+var activeTask = 1;
 var group = false;
-var qtd_target = 5;
+var qtd_target = 2;
 
 var host = 'localhost';
 var http = require('http');
@@ -35,7 +35,7 @@ app.use(function(req, res, next) {
 //---------------- Database - MongoDb ---------
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/crowdnote_exp001');
+mongoose.connect('mongodb://localhost/crowdnote_exp002');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('openUri', function() {});
@@ -124,50 +124,46 @@ app.get('/thanks', function(req, res) {
 });
 
 app.get('/job', function(req, res) {
+	if(input.length < 1){
+		res.render('ejs/thanks', null);
+	}
+
+	if(!input[curInput]){
+		curInput--;
+	}
+
 	var contribs = new Array()
         job_id = fingerprint(req,true);
         print = fingerprint(req,false);
-/*        Output.find({fingerprint: print},function (err, C) {
-                if (err) return console.error(err);
-                for(var i=0; i < C.length; i++){
-                        contribs[i] = C[i];
+	if(group){
+		var inp = input[curInput];
+                if(curInput < input.length-1){
+                	curInput++;
+                }else{
+                        curInput = 0;
                 }
-		if(contribs.length == input.length){
-			res.redirect('https://novaes.tech/thanks');
-		}else{
-*/			curInput = findNext(contribs,input,curInput);
-			if(group){
-				var inp = input[curInput];
-                                if(curInput < input.length-1){
-                                curInput++;
-                                }else{
-                                        curInput = 0;
-                                }
-				var qtd = inp.qtd;
-				delete inp.qtd;
-				var more = new Object();
-                                more.item_index = curInput;
-				more.qtd = qtd;
-				more.job_id = job_id;
-				more.fingerprint = print;
-				var obj = new Object();
-				obj.data = inp;
-				obj.info = more;
-			}else{
-			        var obj = input[curInput];
-				obj.item_index = curInput;
-			        if(curInput < input.length-1){
-       	 		        curInput++;
-			        }else{
-       			         	curInput = 0;
-       			 	}
-				obj.job_id = job_id;
-				obj.fingerprint = print;
-			}
-		        res.json(obj);
-/*		}
-        }).sort({'item_id' : 1});
-*/
+		var qtd = inp.qtd;
+		delete inp.qtd;
+		var more = new Object();
+                more.item_index = curInput;
+		more.qtd = qtd;
+		more.job_id = job_id;
+		more.fingerprint = print;
+		var obj = new Object();
+		obj.data = inp;
+		obj.info = more;
+	}else{
+	        var obj = input[curInput];
+		obj.item_index = curInput;
+	        if(curInput < input.length-1){
+	        	curInput++;
+	        }else{
+	         	curInput = 0;
+	 	}
+		obj.job_id = job_id;
+		obj.fingerprint = print;
+	}
+        res.json(obj);
 });
 
 app.post('/store', function(req, res) {
@@ -182,6 +178,52 @@ app.post('/store', function(req, res) {
 	c.save(function (err, m0) {if (err) return console.error(err);});
 	res.end();
 });
+
+//Group by duplicated
+app.get('/aggregate_d', function(req, res) {
+	var cur= '';
+	var grp=0;
+	var groups = new Array();
+        Output.find({},function (err, C) {
+                if (err) return console.error(err);
+                for(var i=0; i < C.length; i++){
+			if( levenshtein(C[i].point,cur) >= 2 ){
+				grp++;
+				cur = C[i].point;
+				groups[grp] = new Array();
+			}
+			if(groups[grp]) groups[grp].push(C[i]);
+                }
+		for(var i=1; i<groups.length; i++){
+			var group = groups[i];
+			var mode = group[0];
+			var qtd = -1; 
+			var instant = parseFloat(group[0].instant);
+			if(group.length > 1){
+				for(var j=0; j<group.length-1; j++){
+					instant += parseFloat(group[j+1].instant);
+					var similars = 0;
+					for(var k=1; k<group.length; k++){
+						if(j == k) continue;
+						var delta = levenshtein(group[j].point,group[k].point);
+						if(delta < 2) similars++;
+					}
+					if(qtd < similars){
+						qtd = similars;
+						mode = group[j];
+					}
+				}
+				instant /= group.length;
+			}
+  			var data ={'item_id':mode.item_id, 'point':mode.point, 'content_type':mode.content_type, 'content':mode.content,'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': instant,'point': mode.point}
+        		var a = new Aggregation(data);
+        		a.save(function (err, m0) {if (err) return console.error(err);});
+		}
+		res.end();
+        }).sort({'point' : 1});
+});
+
+
 
 //Group by time
 //Aggregate by string similarity
@@ -291,26 +333,6 @@ function fingerprint(req,mode){
 	}
         fingerprint = require('crypto').createHash('md5').update(fingerprint).digest("hex");
         return fingerprint;
-}
-
-function findNext(contribs,input,ini){
-	var item;
-	var found=false;
-	while(found == false){
-		found = true;
-		item = input[ini];
-		for(var i=0; i<contribs.length; i++){
-			if(new String(item._id).valueOf() == new String(contribs[i].item_id).valueOf()){
-				ini++;
-				if(ini >= input.length){
-					ini = 0;
-				}
-				found = false;
-				break;
-			}
-		}
-	}
-	return ini;
 }
 
 // ------------- Create Server ------------------------------
