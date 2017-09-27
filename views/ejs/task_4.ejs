@@ -9,294 +9,306 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 <title>CrowdNote</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,400,500,700" type="text/css">
 <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" />
-<link rel="stylesheet"  href='http://<%= host %>/include?name=client.min&mime=css' >
+<link rel="stylesheet"  href='include?name=client.min&mime=css' >
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src='http://<%= host %>/include?name=client.min&mime=js'></script>
+<script src='https://novaes.tech/include?name=client.min&mime=js'></script>
 
-<style>
-/* The Modal (background) */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
 
-/* Modal Content */
-.modal-content {
-    background-color: #fefefe;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-}
 
-/* The Close Button */
-.close {
-    color: #aaaaaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-}
-</style>
 
 </head>
 
-<div id="modal" class="modal">
 
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-  </div>
-
-</div>
-
-<body align='center'>
-
-	<span id="content"></span>
-
-	<span id="click" style="opacity:1;position: absolute;left: 115px;top: 125px;z-index: 4; background: none;color: #ffffff;font-size:20px;padding:11px;box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);-moz-box-shadow:  0px 0px 81px 0px rgba(0,0,0,0.05);-webkit-box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);"></span>
+<body align='center' ondrop="drop(event)" ondragover="allowDrop(event)">
+    <header class="mdl-layout__header" style="height:180px;">
+      <div class="mdl-layout__header-row"  >
+        <span class="mdl-layout-title" style='text-align:left;font-size:16px;position: fixed;margin-top:30px; margin-left:10px;'> 
 
 
-  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header">
-      <div class="mdl-layout__header-row">
-        <span class="mdl-layout-title">
-		<b>CrowdNote:</b><i> clique nos items para visualizar o conteúdo extra.</i>	
+<div draggable='true' ondragstart="drag(event)" style="position: absolute;top:10px;left:550px;padding:6px;word-wrap: break-word;box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);-moz-box-shadow:  0px 0px 81px 0px rgba(0,0,0,0.05);-webkit-box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);background-image: linear-gradient(45deg, transparent, blue);border-radius: 50px/50px;opacity:1;font-size:22px;text-align:center;vertical-align: middle; color: rgb(255,255,255);font-style: italic;" id="tx_point"></div>
+
+<table>
+<td width=500>
+<p style="align:center;font-size:20px">CrowdNote Player: watch enriched interactive videos</p>
+<p style="font-size:16px">You can use the buttons to navigate through points of interest.</p>
+</td>
+<td>
+<p align=center>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="sendContribution()" style='width: 200px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>PREVIOUS</button>
+</p>
+</td>
+<td>
+<p align=center>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="sendContribution()" style='width: 200px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>NEXT</button>
+</p>
+</td>
+
+</table>
+
+<div draggable='true' ondragstart="drag(event)" style="position: absolute;top:10px;left:550px;padding:6px;word-wrap: break-word;box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);-moz-box-shadow:  0px 0px 81px 0px rgba(0,0,0,0.05);-webkit-box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);background-image:white;border-radius: 50px/50px;opacity:1;font-size:28px;text-align:center;vertical-align: middle; color: rgb(255,255,255);font-style: italic;top:100px;left:360px;" id="tx_point_tx"></div>
+
 	</span>
 
       </div>
     </header>
-  </div>
+ 
+<div style='padding: 10px;'>
 
-
-
-
-
-<div id='instructions-panel' style='position: fixed;margin-top:150px; margin-left:10px;'>
-
-
-<textarea id='instructions' style='width:180%;height:111px;background-color : #eeeeff;text-align: left;font-size:14px;padding:6px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'  readonly>
-1. Clique nos items para dar zoom e visualiza-los.
-
-2. Utilize os botões para navegar entre os pontos de interesse.
-
-</textarea>
-
-</div>
-
-<div style='padding: 70px;'>
-	  <video id="video" controls  preload width="55%" height="55%" style='box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>
-		<source src="data:video/<%= mime %>;base64,<%= v64 %>" type="video/<%= mime %>"> 
- 	   	Your browser does not support HTML5 video.
-	  </video>
-
-	<br><br><br>
-
-
-
-
-
-	<p align=center>
-		<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"     onClick="showPoint(-1)" style='width: 236px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Ponto Anterior</button>
-
-		<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"    onClick="playpause()" style='width: 236px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);' id='playPause'>Play</button>
-
-		<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"     onClick="showPoint(1)" style='width: 236px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Próximo Ponto</button>
-</p>
+	  <div id="player" style='box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'></div>
+	  
+		
 	</div>
 
 
-
-
+<input type='hidden' id='done' name='done' >
 
 </div>
-
-
-
 
 
 <script>
 
-var timeout=0;
+var input;
+var player;
+var delta;
+var duration;
+var content_type;
+var tx_point;
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-var type;
+var image = null;
 
-var suggestion;
-
-var items = <%- items %>;
-
-var pos = 0;
-
-var x = 500;
-
-var y = 100;
-
-var item = items[0];
-
-var playPause = document.getElementById("playPause");
-
-var content = document.getElementById("content");
-var click = document.getElementById("click");
-
-var modal = document.getElementById('modal');
-var span = document.getElementsByClassName("close")[0];
-span.onclick = function() {
-    	modal.style.display = "none";
-	content.style.display = "block";
-     		video.play(); 
-		playPause.innerHTML = "Pause";
-		video.currentTime -= 1;
-
+function allowDrop(ev) {
+   ev.preventDefault();
 }
-modal.onclick = function() {
-    	modal.style.display = "none";
-	content.style.display = "block";
-     		video.play(); 
-		playPause.innerHTML = "Pause";
-		video.currentTime -= 1;
 
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
 }
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-	content.style.display = "block";
-     		video.play(); 
-		playPause.innerHTML = "Pause";
-		video.currentTime -= 1;
 
+function drop(ev) {
+    ev.preventDefault();
+    tx_point.style.left = event.clientX+'px';
+    tx_point.style.top = event.clientY+'px';
+}
+
+
+
+function readURL(input,output) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            	output.attr('src', e.target.result);
+		image = e.target.result;
+        }
+
+        reader.readAsDataURL(input.files[0]);
     }
 }
-content.onclick = function() {
-	content.style.display = "none";
- 	video.pause(); 
-	playPause.innerHTML = "Play";
-    	zoom();
-}
 
-function showPoint(p){
-	if((p==1 && (pos+p < items.length))||(p==-1 && (pos+p >= 0))){
-		pos += p;
-		item = items[pos];
-		video.currentTime = item.instant;
- 		video.pause(); 
-		playPause.innerHTML = "Play";
-		showExtra();
+
+function getOption(op){
+	var contribPanel = document.getElementById('contribPanel');
+	var contrib = document.getElementById('contrib');
+			
+	var lbImage =  document.getElementById('lbImage');
+	if(lbImage)lbImage.remove();
+
+	$('#Image').attr("height","0");
+
+	contrib.remove();
+
+	switch(op){
+		case 1:
+			content_type = 'text';
+
+			contrib = document.createElement("textarea");
+			contrib.setAttribute("name","contrib");
+			contrib.setAttribute("id","contrib");
+ 			contrib.setAttribute("placeholder","Write an explanatory text here.");
+			contrib.style.height = '75px';
+			break; 
+
+		case 2:
+			content_type = 'image';
+
+		/*	lbImage = document.createElement("label");
+			lbImage.setAttribute("id","lbImage");
+			lbImage.setAttribute("for","contrib");
+			lbImage.innerHTML = "Choose Image";
+			contribPanel.appendChild(lbImage);
+*/
+
+			contrib = document.createElement("input");
+			contrib.setAttribute("name","contrib");
+			contrib.setAttribute("id","contrib");
+			contrib.setAttribute("type","file");
+			contrib.setAttribute("class","contrib");
+			contrib.setAttribute("accept","image/*");
+			contrib.style.height = '84px';
+			
+			contrib.addEventListener('change', function(){
+				$('#Image').attr("height","300");		
+
+				var str = this.value;
+				readURL(this,$('#Image'));
+				if(str) lbImage.innerHTML = 'Change Image';
+			});
+			break; 
+
+		case 3:
+			content_type = 'youtube';
+
+			contrib = document.createElement("textarea");
+			contrib.setAttribute("name","contrib");
+			contrib.setAttribute("id","contrib");
+ 			contrib.setAttribute("placeholder","Paste a link to a Youtube video here.\nEx:\nhttps://www.youtube.com/watch?v=...");
+			contrib.style.height = '75px';
+			break; 
+
+		case 4:
+			content_type = 'wikipedia';
+
+			contrib = document.createElement("textarea");
+			contrib.setAttribute("name","contrib");
+			contrib.setAttribute("id","contrib");
+ 			contrib.setAttribute("placeholder","Paste a link to a Wikipedia page here.\nEx:\nhttps://pt.wikipedia.org/wiki/...");
+			contrib.style.height = '75px';
+			break; 
+
 	}
+
+	contrib.style.width = document.getElementById("bt").style.width;
+	contribPanel.appendChild(contrib);
 }
 
 
+function onYouTubeIframeAPIReady() {
+  $.getJSON('https://novaes.tech/job', function(data){init(data);});
+/*  init({
+    "_id": "59a59b2070092a3e7fbcea38",
+    "start": "28",
+    "end": "40",
+    "uri": "UTg6fdKi9TI",
+    "job_id": "UTg6fdKi9TI",
+    "fingerprint": "UTg6fdKi9TI",
+    "instant": "28.789830000000002",
+    "point": "Caô",
+    "item_index": 0
+});*/
 
-function playpause(){
-    	if (video.paused){ 
-     		video.play(); 
-		playPause.innerHTML = "Pause";
-		video.currentTime -= 1;
-	}else{
- 		video.pause(); 
-		playPause.innerHTML = "Play";
-	}	
 }
 
-function syncVideo(){
-if(!video.paused){
-	timeout++;
-	var p = Math.ceil(video.currentTime);
-	var flag = false;
-	for(var i=0; i < items.length; i++){
-		if(p == Math.ceil(parseFloat(items[i].instant))){
-			item = items[i];
-			video.currentTime = item.instant;
-			showExtra();
-			break;
-		}
-	}
-	if(timeout > 1){
-		content.style = 'left:0px;top:0px;';
-		content.innerHTML = '';
-	}
+function init(data){
+  input = data;
+
+
+document.getElementById("tx_point_tx").innerHTML = input.point;
+
+
+  tx_point = document.getElementById("tx_point");
+
+
+  tx_point.innerHTML = "<img width=200 height=100  src='"+input.content+"'>";
+  var tx_size = 200;//input.point.length * 18;
+  //if(tx_size > 150) tx_size=150;
+  tx_point.style.width = tx_size+'px';
+
+    tx_point.style.left = 400+'px';
+    tx_point.style.top = 360+'px';
+
+  player = new YT.Player(
+    'player',
+    {
+      autoplay : 0,
+      controls: 2,
+      height: '360',
+      width: '640',
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange
+      }
+    }
+  );
+
 }
+
+function onPlayerReady(event) {
+    	duration = input.end - input.start;
+        player.loadVideoById(input.uri, parseFloat(input.instant) -1);
+}
+
+function onPlayerStateChange(event) {
+  if (event.data == YT.PlayerState.PLAYING) {
+    setTimeout(restartVideoSection, duration * 1000);
+  }
+}
+
+function restartVideoSection() {
+  	player.seekTo(parseFloat(input.instant) -1);
+	player.pauseVideo();
 }
 
 
-setInterval(function() {
-
-	syncVideo();
 	
-}, 1000);
+function sendContribution(){
+
+	if(contrib.value != ''){
+
+		var queryForm = "<form method='post' action='https://novaes.tech/store'>";
+		queryForm += "<input type='hidden' id='uri' name='uri'  value='"+input.uri+"' > ";
+		queryForm += "<input type='hidden' id='start' name='start'  value='"+input.start+"' > ";
+		queryForm += "<input type='hidden' id='end' name='end'  value='"+input.end+"' > ";
+		queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+input.fingerprint+"' > ";
+		queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+input.job_id+"' > ";
+		queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+input.item_index+"' > ";
+		queryForm += "<input type='hidden' id='instant' name='instant'  value='"+input.instant+"' > ";
+		queryForm += "<input type='hidden' id='point' name='point'  value='"+input.point+"' > ";
+	
+		queryForm += "<input type='hidden' id='content_type' name='content_type'  value='"+content_type+"' > ";
+
+		if(image == null){
+			queryForm += "<input type='hidden' id='content' name='content'  value='"+contrib.value+"' > ";
+		}else{
+			queryForm += "<input type='hidden' id='content' name='content'  value='"+image+"' > ";
+		}
 
 
+		queryForm += "</form>";
 
+		
 
-function zoom(){
-	var zoomContent;
-	switch(item.type){
-			case 'text': zoomContent = '<center><textarea style="height:180px;width:85%;background-color : #eeeeff;text-align: left;font-size:14px;padding:6px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"  readonly>'+item.suggestion+'</textarea></center>';
-				break;
-
-			case 'image': zoomContent = '<center><p>'+item.point+'</p><img src="'+item.suggestion+'" style="height: 500px;"></center>';
-				break;
-
-			case 'video': zoomContent = '<iframe style="height: 500px;" src="https://www.youtube.com/embed/'+item.suggestion+'" ></iframe>';
-				break;
-
-			case 'page': zoomContent = '<iframe style="height: 500px;" src="https://pt.wikipedia.org/wiki/'+item.suggestion+'" ></iframe>';
-				break;
+		$.ajax({
+			type: 'POST',
+			url: $(queryForm).attr('action'),
+			data: $(queryForm).serialize(), 
+			success: function(result, status, request) {done();}
+		});
+	}else{
+                alert("You forgot to suggest some content.\nYour contribution is important to us!!!");
 	}
-	modal.innerHTML = zoomContent;
-    	modal.style.display = "block";	
 }
 
+function done(){
+	var done = document.getElementById("done");
+	var bt = document.getElementById("bt");
+	bt.style='visibility: hidden;';
+	done.value='ok';
+	player.stopVideo();
+	$(location).attr('href', 'thanks');
+}	
 
-
-function showExtra(){
-	timeout = 0;
-	var px = parseFloat(item.x)+x;
-	var py = parseFloat(item.y)+y;
-	content.style = "opacity:1;position: absolute;left: "+px+"px;top: "+py+"px;z-index: 3; background: none;color: #ffffff;font-size:20px;padding:11px;box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);-moz-box-shadow:  0px 0px 81px 0px rgba(0,0,0,0.05);-webkit-box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);background-image: linear-gradient(45deg, transparent, blue);";
-						
-	content.style.borderRadius = '1em';
-
-	switch(item.type){
-		case 'page':
-		case 'video':
-			content.innerHTML = item.point;
-			break;
-
-		case 'text':
-			content.innerHTML = item.point+'<br> = <br>'+item.suggestion;
-			break;
-
-		case 'image':
-			content.innerHTML = '<img style="height:100px;" src='+item.suggestion+'>';
-			break;
-
-	}
-
-
-
-}
 
 
 </script>
-</center>
-</div>
-</body>
+
+
+
+
 

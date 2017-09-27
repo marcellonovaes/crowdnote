@@ -1,8 +1,8 @@
 // ---------------------- Includes and Globals ------------------------
 
-var activeTask = 1;
+var activeTask = 0;
 var group = false;
-var qtd_target = 10;
+var qtd_target = 5;
 
 var host = 'localhost';
 var http = require('http');
