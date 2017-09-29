@@ -196,28 +196,47 @@ app.get('/aggregate_d', function(req, res) {
                 }
 		for(var i=1; i<groups.length; i++){
 			var group = groups[i];
-			var mode = group[0];
-			var qtd = -1; 
-			var instant = parseFloat(group[0].instant);
-			if(group.length > 1){
-				for(var j=0; j<group.length-1; j++){
-					instant += parseFloat(group[j+1].instant);
-					var similars = 0;
-					for(var k=1; k<group.length; k++){
-						if(j == k) continue;
-						var delta = levenshtein(group[j].point,group[k].point);
-						if(delta < 2) similars++;
-					}
-					if(qtd < similars){
-						qtd = similars;
-						mode = group[j];
+			group.sort(function(a, b){ return levenshtein(a.content_type,b.content_type); });
+			var types = new Array();
+			var cur_type = '';
+			var type_grp = 0;
+	                for(var j=0; j < group.length; j++){
+				var l = levenshtein(group[j].content_type,cur_type);
+       	                	if( l >= 2 || l <= -2){
+                                	type_grp++;
+                                	cur_type = group[j].content_type;
+                                	types[type_grp] = new Array();
+                        	}
+                        	if(types[type_grp]) types[type_grp].push(group[j]);
+                	} 
+	                for(var j=0; j < types.length; j++){
+				var type = types[j];
+				if(type){ 
+					if(type[0].content_type!='image'){
+						type.sort(function(a, b){ return levenshtein(a.content,b.content) });
+						var cur_content = '';
+						for(k=0; k < type.length; k++){
+							var duplicated = true;
+							var l = levenshtein(cur_content,type[k].content);
+							if(l >= 2 ||l <= -2 ){
+								duplicated = false;
+								cur_content = type[k].content;
+								var mode = type[k];
+                        					var data ={'item_id':mode.item_id, 'point':mode.point, 'content_type':mode.content_type, 'content':mode.content,'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': mode.instant,'point': mode.point}
+                        					var a = new Aggregation(data);
+                        					a.save(function (err, m0) {if (err) return console.error(err);});
+							}
+						}
+					}else{
+						for(k=0; k < type.length; k++){
+							var mode = type[k];
+                        				var data ={'item_id':mode.item_id, 'point':mode.point, 'content_type':mode.content_type, 'content':mode.content,'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': mode.instant,'point': mode.point}
+                        				var a = new Aggregation(data);
+                        				a.save(function (err, m0) {if (err) return console.error(err);});
+						}
 					}
 				}
-				instant /= group.length;
 			}
-  			var data ={'item_id':mode.item_id, 'point':mode.point, 'content_type':mode.content_type, 'content':mode.content,'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': instant,'point': mode.point}
-        		var a = new Aggregation(data);
-        		a.save(function (err, m0) {if (err) return console.error(err);});
 		}
 		res.end();
         }).sort({'point' : 1});
