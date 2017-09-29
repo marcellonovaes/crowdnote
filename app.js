@@ -1,7 +1,7 @@
 // ---------------------- Includes and Globals ------------------------
 
-var activeTask = 1;
-var group = false;
+var activeTask = 2;
+var group = true;
 var qtd_target = 2;
 
 var host = 'localhost';
@@ -169,7 +169,11 @@ app.get('/job', function(req, res) {
 app.post('/store', function(req, res) {
 	var data = req.body;
 	input[data.item_index].qtd++;
-	data.item_id = input[data.item_index]._id;
+	if(!group){
+		data.item_id = input[data.item_index]._id;
+	}else{
+		data.item_id = input[data.item_index][0]._id;
+	}
 	if(input[data.item_index].qtd >= qtd_target){
 		input.splice( data.item_index, 1 );
 	}
