@@ -102,6 +102,7 @@ function init(data){
   player = new YT.Player(
     'player',
     {
+      playerVars: {rel: 0},
       autoplay : 0,
       controls: 2,
       height: '360',

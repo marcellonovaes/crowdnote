@@ -1,7 +1,7 @@
 // ---------------------- Includes and Globals ------------------------
 
-var activeTask = 2;
-var group = true;
+var activeTask = 3;
+var group = false;
 var qtd_target = 4;
 
 var host = 'localhost';
