@@ -232,12 +232,14 @@ function onYouTubeIframeAPIReady() {
 }
 
 function init(data){
-
  input = data.data;
 
  info = data.info;
 
   item = input[0];
+
+console.log(item);
+
   document.getElementById("tx_point").innerHTML = item.point;
 
   content_view = document.getElementById("content_view");
@@ -282,10 +284,12 @@ function sendContribution(){
 
 	if (confirm('Are you sure?')) {
 
+console.log(item);
 		item = input[cur];
 console.log(item);
                 var queryForm = "<form method='post' action='https://novaes.tech/store'>";
                 queryForm += "<input type='hidden' id='uri' name='uri'  value='"+item.uri+"' > ";
+                queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+item._id+"' > ";
                 queryForm += "<input type='hidden' id='start' name='start'  value='"+item.start+"' > ";
                 queryForm += "<input type='hidden' id='end' name='end'  value='"+item.end+"' > ";
                 queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+info.fingerprint+"' > ";

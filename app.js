@@ -2,7 +2,7 @@
 
 var activeTask = 2;
 var group = true;
-var qtd_target = 2;
+var qtd_target = 4;
 
 var host = 'localhost';
 var http = require('http');
@@ -120,7 +120,8 @@ app.get('/', function(req, res) {
 });
 
 app.get('/thanks', function(req, res) {
-	res.render('ejs/thanks', null);
+	res.render('ejs/task_'+activeTask, null);
+	//res.render('ejs/thanks', null);
 });
 
 app.get('/job', function(req, res) {
@@ -169,11 +170,6 @@ app.get('/job', function(req, res) {
 app.post('/store', function(req, res) {
 	var data = req.body;
 	input[data.item_index].qtd++;
-	if(!group){
-		data.item_id = input[data.item_index]._id;
-	}else{
-		data.item_id = input[data.item_index][0]._id;
-	}
 	if(input[data.item_index].qtd >= qtd_target){
 		input.splice( data.item_index, 1 );
 	}
@@ -257,7 +253,7 @@ app.get('/aggregate_t_s', function(req, res) {
         Output.find({},function (err, C) {
                 if (err) return console.error(err);
                 for(var i=0; i < C.length; i++){
-			if( (parseFloat(C[i].instant)-cur) >= 2 ){
+			if( (parseFloat(C[i].instant)-cur) >= 1 ){
 				grp++;
 				cur = parseFloat(C[i].instant);
 				groups[grp] = new Array();
@@ -285,7 +281,7 @@ app.get('/aggregate_t_s', function(req, res) {
 				}
 				instant /= group.length;
 			}
-  			var data ={'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': instant,'point': mode.point}
+  			var data ={'item_id':mode.item_id, 'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': instant,'point': mode.point}
         		var a = new Aggregation(data);
         		a.save(function (err, m0) {if (err) return console.error(err);});
 		}
