@@ -238,7 +238,6 @@ function init(data){
 
   item = input[0];
 
-console.log(item);
 
   document.getElementById("tx_point").innerHTML = item.point;
 
@@ -284,9 +283,7 @@ function sendContribution(){
 
 	if (confirm('Are you sure?')) {
 
-console.log(item);
 		item = input[cur];
-console.log(item);
                 var queryForm = "<form method='post' action='https://novaes.tech/store'>";
                 queryForm += "<input type='hidden' id='uri' name='uri'  value='"+item.uri+"' > ";
                 queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+item._id+"' > ";
