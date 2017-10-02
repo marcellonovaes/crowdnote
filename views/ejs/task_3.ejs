@@ -61,6 +61,8 @@
 
 <script>
 
+var iniX = 0;
+var iniY = 0;
 var x = 550;
 var y = 0;
 var input;
@@ -84,13 +86,15 @@ function allowDrop(ev) {
 
 function drag(ev) {
     ev.dataTransfer.setData("text", ev.target.id);
+    iniX = ev.clientX;
+    iniY = ev.clientY;
 }
 
 function drop(ev) {
-    x = ev.clientX - parseInt(tx_point.style.width);
-    y = ev.clientY;
-    tx_point.style.left = x+'px';
-    tx_point.style.top = y+'px';
+    x = ev.clientX - iniX;
+    y = ev.clientY - iniY;
+    tx_point.style.left = (parseFloat(tx_point.style.left)+parseFloat(x))+'px';
+    tx_point.style.top = (parseFloat(tx_point.style.top)+parseFloat(y))+'px';
 }
 
 
