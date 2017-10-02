@@ -248,61 +248,43 @@ app.get('/aggregate_p_d', function(req, res) {
 //Aggregate by ranking
 app.get('/aggregate_p_r', function(req, res) {
 	var cur= '';
-	var grp=0;
-	var groups = new Array();
+	var pt=0;
+	var points = new Array();
         Output.find({},function (err, C) {
                 if (err) return console.error(err);
                 for(var i=0; i < C.length; i++){
 			if( levenshtein(C[i].point,cur) >= 2 ){
-				grp++;
+				pt++;
 				cur = C[i].point;
-				groups[grp] = new Array();
+				points[pt] = new Array();
 			}
-			if(groups[grp]) groups[grp].push(C[i]);
+			if(points[pt]) points[pt].push(C[i]);
                 }
-		for(var i=1; i<groups.length; i++){
-			var group = groups[i];
-			group.sort(function(a, b){ return levenshtein(a.content_type,b.content_type); });
-			var types = new Array();
-			var cur_type = '';
-			var type_grp = 0;
-	                for(var j=0; j < group.length; j++){
-				var l = levenshtein(group[j].content_type,cur_type);
-       	                	if( l >= 2 || l <= -2){
-                                	type_grp++;
-                                	cur_type = group[j].content_type;
-                                	types[type_grp] = new Array();
-                        	}
-                        	if(types[type_grp]) types[type_grp].push(group[j]);
-                	} 
-	                for(var j=0; j < types.length; j++){
-				var type = types[j];
-				if(type){ 
-					if(type[0].content_type!='image'){
-						type.sort(function(a, b){ return levenshtein(a.content,b.content) });
-						var cur_content = '';
-						for(k=0; k < type.length; k++){
-							var duplicated = true;
-							var l = levenshtein(cur_content,type[k].content);
-							if(l >= 2 ||l <= -2 ){
-								duplicated = false;
-								cur_content = type[k].content;
-								var mode = type[k];
-                        					var data ={'item_id':mode.item_id, 'point':mode.point, 'content_type':mode.content_type, 'content':mode.content,'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': mode.instant,'point': mode.point}
-                        					var a = new Aggregation(data);
-                        					a.save(function (err, m0) {if (err) return console.error(err);});
-							}
-						}
-					}else{
-						for(k=0; k < type.length; k++){
-							var mode = type[k];
-                        				var data ={'item_id':mode.item_id, 'point':mode.point, 'content_type':mode.content_type, 'content':mode.content,'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': mode.instant,'point': mode.point}
-                        				var a = new Aggregation(data);
-                        				a.save(function (err, m0) {if (err) return console.error(err);});
-						}
-					}
+		for(var i=1; i<points.length; i++){
+			var point = points[i];
+			var contents = new Array();
+			var cur_content = -1;
+			var content = '';
+                        point.sort(function(a, b){ return levenshtein(a.item_id,b.item_id) });
+			for(j=0; j<point.length; j++){
+				if(levenshtein(content,point[j].item_id) < 1){
+					contents[cur_content].qtd++;
+				}else{
+					content = point[j].item_id;
+					cur_content++;
+					contents.push({'id':content,'qtd':1,'index':j});
+				}
+			}	
+			var mode = 0;
+			for(j=0; j<contents.length; j++){
+				if(mode < contents[j].qtd){
+					mode = j;
 				}
 			}
+			mode = point[contents[mode].index];
+                        var data ={'item_id':mode.item_id, 'point':mode.point, 'content_type':mode.content_type, 'content':mode.content,'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': mode.instant,'point': mode.point}
+             		var a = new Aggregation(data);
+             		a.save(function (err, m0) {if (err) return console.error(err);});
 		}
 		res.end();
         }).sort({'point' : 1});
