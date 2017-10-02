@@ -77,6 +77,8 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var image = null;
 
 function allowDrop(ev) {
+    event.dataTransfer.effectAllowed  = "all";
+    event.dataTransfer.dropEffect     = "copy";
    ev.preventDefault();
 }
 
@@ -85,8 +87,8 @@ function drag(ev) {
 }
 
 function drop(ev) {
-	x = event.clientX - 150;
-	y = event.clientY - 20;
+    x = ev.clientX - parseInt(tx_point.style.width);
+    y = ev.clientY;
     tx_point.style.left = x+'px';
     tx_point.style.top = y+'px';
 }
@@ -252,12 +254,11 @@ function restartVideoSection() {
 
 	
 function sendContribution(){
-
-	if(contrib.value != ''){
+	if(x != '' && y != ''){
 
 		var queryForm = "<form method='post' action='https://novaes.tech/store'>";
 		queryForm += "<input type='hidden' id='uri' name='uri'  value='"+input.uri+"' > ";
-                queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+item._id+"' > ";
+                queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+input._id+"' > ";
 		queryForm += "<input type='hidden' id='start' name='start'  value='"+input.start+"' > ";
 		queryForm += "<input type='hidden' id='end' name='end'  value='"+input.end+"' > ";
 		queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+input.fingerprint+"' > ";
@@ -265,14 +266,13 @@ function sendContribution(){
 		queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+input.item_index+"' > ";
 		queryForm += "<input type='hidden' id='instant' name='instant'  value='"+input.instant+"' > ";
 		queryForm += "<input type='hidden' id='point' name='point'  value='"+input.point+"' > ";
+		queryForm += "<input type='hidden' id='x' name='x'  value='"+x+"' > ";
+		queryForm += "<input type='hidden' id='y' name='y'  value='"+y+"' > ";
 	
-		queryForm += "<input type='hidden' id='content_type' name='content_type'  value='"+content_type+"' > ";
+		queryForm += "<input type='hidden' id='content_type' name='content_type'  value='"+input.content_type+"' > ";
 
-		if(image == null){
-			queryForm += "<input type='hidden' id='content' name='content'  value='"+contrib.value+"' > ";
-		}else{
-			queryForm += "<input type='hidden' id='content' name='content'  value='"+image+"' > ";
-		}
+		queryForm += "<input type='hidden' id='content' name='content'  value='"+input.content+"' > ";
+		
 
 
 		queryForm += "</form>";
