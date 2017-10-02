@@ -277,7 +277,7 @@ app.get('/aggregate_p_r', function(req, res) {
 			}	
 			var mode = 0;
 			for(j=0; j<contents.length; j++){
-				if(mode < contents[j].qtd){
+				if(contents[mode].qtd < contents[j].qtd){
 					mode = j;
 				}
 			}
