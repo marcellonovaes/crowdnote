@@ -27,16 +27,16 @@
 <p style="font-size:16px">Place this item in the best place of the video.</p>
 
 
-
-<div draggable='true' ondragstart="drag(event)" style="position: absolute;top:10px;left:550px;padding:6px;word-wrap: break-word;box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);-moz-box-shadow:  0px 0px 81px 0px rgba(0,0,0,0.05);-webkit-box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);background-image: linear-gradient(45deg, transparent, blue);border-radius: 50px/50px;opacity:1;font-size:22px;text-align:center;vertical-align: middle; color: rgb(255,255,255);font-style: italic;" id="tx_point"></div>
-
-
 <p style="font-size:16px">1. Drag the item by the video and put it in the best position.</p>
 <p style="font-size:16px">2. When you have decided on the best position, click the 'SUBMIT' button.</p>
 
 <p align=center>
 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="sendContribution()" style='width: 200px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>SUBMIT</button>
 </p>
+
+
+
+<div draggable='true' ondragstart="drag(event)" style="position: absolute;top:10px;left:550px;padding:6px;word-wrap: break-word;box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);-moz-box-shadow:  0px 0px 81px 0px rgba(0,0,0,0.05);-webkit-box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);background-image: linear-gradient(45deg, transparent, blue);border-radius: 50px/50px;opacity:1;font-size:22px;text-align:center;vertical-align: middle; color: rgb(255,255,255);font-style: italic;max-width:240px;" id="tx_point"></div>
 
 
 
@@ -152,7 +152,7 @@ function init(data){
 
 
 
-  var tx_size = 200;
+  var tx_size = 240;
   tx_point.style.width = tx_size+'px';
 
     tx_point.style.left = x+'px';

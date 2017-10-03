@@ -1,6 +1,6 @@
 // ---------------------- Includes and Globals ------------------------
 
-var activeTask = 4;
+var activeTask = 3;
 var group = false;
 var qtd_target = 4;
 
