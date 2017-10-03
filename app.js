@@ -1,6 +1,6 @@
 // ---------------------- Includes and Globals ------------------------
 
-var activeTask = 3;
+var activeTask = 4;
 var group = false;
 var qtd_target = 4;
 
@@ -90,7 +90,7 @@ function init(){
 			input[i] = V[i];
 			input[i].qtd = 0;
 		}
-	}).sort({'_id' : 1});
+	}).sort({'instant' : 1});
 }
 
 function groupInput(items){
@@ -123,6 +123,22 @@ app.get('/thanks', function(req, res) {
 	res.render('ejs/task_'+activeTask, null);
 	//res.render('ejs/thanks', null);
 });
+
+app.get('/player', function(req, res) {
+	var contents = new Array()
+        job_id = fingerprint(req,true);
+        print = fingerprint(req,false);
+	for(var i=0; i < input.length; i++){
+		var obj = input[i];
+		obj.job_id = job_id;
+		obj.fingerprint = print;
+		contents.push(obj);
+	}
+        res.json(contents);
+});
+
+
+
 
 app.get('/job', function(req, res) {
 	if(input.length < 1){
