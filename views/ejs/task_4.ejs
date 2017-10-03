@@ -71,18 +71,29 @@
       <div class="mdl-layout__header-row"  >
         <span class="mdl-layout-title" style='text-align:left;font-size:16px;position: fixed;margin-top:70px; margin-left:10px;'> 
 
+<center>
+<table>
+<td width='500' >
+<p style="font-size:16px">Based on the video, browse through the suggestions and choose the best content to explain or illustrate:</p>
+<p style="font-size:16px">1. Use 'Use the "PREVIOUS" and "NEXT" buttons to navigate through the different content suggestions.</p>
+<p style="font-size:16px">2. You can use the 'ZOOM' button to better visualize each content.</p>
+<p style="font-size:16px">3. Click the 'VOTE !!!' button. button. button to choose the content you liked best.</p>
+</td>
 
+<td width='600' align='center'>
+<p style="font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;" id="tx_point"></p>
+</p>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_previous'    onClick="navigate(-1)" style='font-size:12px;height:30px;width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>previous</button>
 
-<p style="font-size:16px">Place this item in the best place of the video.</p>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_zoom'    onClick='displayContent(cur,true)' style='font-size:12px;height:30px;width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>zoom</button>
 
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_next'    onClick="navigate(1)" style='font-size:12px;height:30px;width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>next</button>
+</td>
 
+</table>
+</center>
 
-<div  onClick='displayContent(cur,true)'  style="position: absolute;top:10px;left:550px;padding:6px;word-wrap: break-word;box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);-moz-box-shadow:  0px 0px 81px 0px rgba(0,0,0,0.05);-webkit-box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);background-image: linear-gradient(45deg, transparent, blue);border-radius: 50px/50px;opacity:1;font-size:22px;text-align:center;vertical-align: middle; color: rgb(255,255,255);font-style: italic;" id="tx_point"></div>
-
-
-<p style="font-size:16px">1. Drag the item by the video and put it in the best position.</p>
-<p style="font-size:16px">2. When you have decided on the best position, click the 'SUBMIT' button.</p>
-
+<div  onClick='displayContent(cur,true)'  style="position: absolute;top:10px;left:550px;padding:6px;word-wrap: break-word;box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);-moz-box-shadow:  0px 0px 81px 0px rgba(0,0,0,0.05);-webkit-box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);background-image: linear-gradient(45deg, transparent, blue);border-radius: 50px/50px;opacity:1;font-size:22px;text-align:center;vertical-align: middle; color: rgb(255,255,255);font-style: italic;" id="tx_content"></div>
 
 
 	</span>
@@ -111,18 +122,22 @@
 <script>
 
 var item = null;
-var cur = 0;
+var max = 0;
+var cur = -1;
 var iniX = 0;
 var iniY = 0;
 var x = 550;
 var y = 0;
 var input;
+var contents;
 var player;
 var uri;
 var delta;
 var duration;
 var content_type;
 var tx_point;
+var tx_content;
+var end;
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -149,14 +164,21 @@ function displayContent(idx,zoom){
 
         content_type = input[idx].content_type;
         content = input[idx].content;
+        point = input[idx].point;
 
         if(zoom){
+		player.pauseVideo();
                 height = 500;
-        }
+        }else{
+                player.playVideo();
+	}
 
         switch(content_type){
+                case 'text':
+                        content = point+":<br><br><i>"+content+"</i>";
+                        break;
                 case 'image':
-                        content = "<img src="+content+" style='height:"+height+"px; max-width:407px;'>";
+                        content = point+"<br><br><img src="+content+" style='height:"+height+"px; max-width:407px;'>";
                         break;
                         
                 case 'youtube':
@@ -209,26 +231,24 @@ function onYouTubeIframeAPIReady() {
 
 function init(data){
   input = data;
-  tx_point = document.getElementById("tx_point");
-  uri = input[0].uri;
-/*
-  switch(input.content_type){
-	case 'image' :
-  		tx_point.innerHTML = "<img width=200 height=100  src='"+input.content+"'>";
-		break;
-	case 'text' : 	
-  		tx_point.innerHTML = input.content;
-		break;
-	default:
-		tx_point.innerHTML = input.point;
+  max = input.length;
+  end = input[input.length-1].end;
+
+  contents = new Array();
+  for(var i=0; i < end; i++){
+	contents.push(-1);
   }
-  var tx_size = 200;
-  tx_point.style.width = tx_size+'px';
 
-    tx_point.style.left = x+'px';
-    tx_point.style.top = y+'px';
-*/
+  for(var i=0; i < max; i++){
+	var t = Math.floor(input[i].instant);
+	contents[t] = i;
+	contents[t+1] = i;
+  }
 
+  tx_point = document.getElementById("tx_point");
+  tx_content = document.getElementById("tx_content");
+  tx_content.style.display = 'none';
+  uri = input[0].uri;
   player = new YT.Player(
     'player',
     {
@@ -241,12 +261,55 @@ function init(data){
       }
     }
   );
-
-
 }
 
 function onPlayerReady(event) {
         player.loadVideoById(uri);
+	setInterval(function() {
+		displayPoint();
+	}, 1000);
+}
+
+function navigate(step){
+	player.pauseVideo();
+	if(cur+step < max && cur+step >= 0){
+		cur += step;
+	}
+  	player.seekTo(parseFloat(input[cur].instant));
+	displayPoint(cur);
+}
+
+function displayPoint(){
+  var t = Math.floor(player.getCurrentTime()); 
+  var idx = contents[t];
+  if(idx == -1){
+	tx_content.style.display = 'none';
+	tx_content.innerHTML = '';
+	tx_point.innerHTML = '';
+	return;
+  }
+  var item = input[idx];
+  cur = idx;
+  tx_content.style.display = 'block';
+  tx_point.innerHTML = item.point;
+  switch(item.content_type){
+        case 'image' :
+                tx_content.innerHTML = "<img src='https://novaes.tech/images?name=ico_zoom&mime=png' width=40 height=40><img width=200 height=100  src='"+item.content+"'>";
+                break;
+        case 'wikipedia' :   
+                tx_content.innerHTML = "<img src='https://novaes.tech/images?name=wikipedia&mime=jpg' width=40 height=40>"+item.point;
+                break;
+        case 'youtube' :   
+                tx_content.innerHTML = "<img src='https://novaes.tech/images?name=youtube&mime=ico' width=40 height=40>"+item.point;
+                break;
+        case 'text' :   
+                tx_content.innerHTML = "<img src='https://novaes.tech/images?name=ico_zoom&mime=png' width=40 height=40>"+item.content;
+                break;
+        default:
+                tx_content.innerHTML = item.point;
+  }
+  tx_content.style.left = item.x;
+  tx_content.style.top = item.y;
 }
 
 </script>

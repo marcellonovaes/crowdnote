@@ -405,10 +405,10 @@ app.get('/include', function(req, res) {
    	});
 });
 
-app.get('/dataset', function(req, res) {
+app.get('/images', function(req, res) {
 	var name = req.query.name;
 	var mime = req.query.mime;
-	var path = 'dataset/'+name+'.'+mime;
+	var path = 'views/img/'+name+'.'+mime;
 	fs.readFile(path, function (err, data){
 		res.writeHead(200, {"Content-Type":"video/"+mime});
        		res.end(data);
