@@ -134,15 +134,24 @@ function init(data){
   tx_point = document.getElementById("tx_point");
 
   switch(input.content_type){
-	case 'image' :
-  		tx_point.innerHTML = "<img width=200 height=100  src='"+input.content+"'>";
-		break;
-	case 'text' : 	
-  		tx_point.innerHTML = input.content;
-		break;
-	default:
-		tx_point.innerHTML = input.point;
+        case 'image' :
+                tx_point.innerHTML = "<img src='https://novaes.tech/images?name=ico_zoom&mime=png' width=40 height=40><img width=200 height=100  src='"+input.content+"'>";
+                break;
+        case 'wikipedia' :   
+                tx_point.innerHTML = "<img src='https://novaes.tech/images?name=wikipedia&mime=jpg' width=40 height=40>"+input.point;
+                break;
+        case 'youtube' :   
+                tx_point.innerHTML = "<img src='https://novaes.tech/images?name=youtube&mime=ico' width=40 height=40>"+input.point;
+                break;
+        case 'text' :   
+                tx_point.innerHTML = "<img src='https://novaes.tech/images?name=ico_zoom&mime=png' width=40 height=40>"+input.content;
+                break;
+        default:
+                tx_point.innerHTML = input.point;
   }
+
+
+
   var tx_size = 200;
   tx_point.style.width = tx_size+'px';
 
