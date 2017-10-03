@@ -14,10 +14,59 @@
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src='https://novaes.tech/include?name=client.min&mime=js'></script>
+
+
+
+<style>
+.modal {
+    display: none;
+    font-size:30px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color: white;
+    position: fixed;
+    z-index: 100;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.75); 
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+</style>
+
+
+
+
+
 </head>
 
 
-<body align='center' ondrop="drop(event)" ondragover="allowDrop(event)">
+<body align='center'>
     <header class="mdl-layout__header" style="height:200px;">
       <div class="mdl-layout__header-row"  >
         <span class="mdl-layout-title" style='text-align:left;font-size:16px;position: fixed;margin-top:70px; margin-left:10px;'> 
@@ -28,16 +77,11 @@
 
 
 
-<div draggable='true' ondragstart="drag(event)" style="position: absolute;top:10px;left:550px;padding:6px;word-wrap: break-word;box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);-moz-box-shadow:  0px 0px 81px 0px rgba(0,0,0,0.05);-webkit-box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);background-image: linear-gradient(45deg, transparent, blue);border-radius: 50px/50px;opacity:1;font-size:22px;text-align:center;vertical-align: middle; color: rgb(255,255,255);font-style: italic;" id="tx_point"></div>
+<div  onClick='displayContent(cur,true)'  style="position: absolute;top:10px;left:550px;padding:6px;word-wrap: break-word;box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);-moz-box-shadow:  0px 0px 81px 0px rgba(0,0,0,0.05);-webkit-box-shadow: 0px 0px 81px 0px rgba(0,0,0,0.05);background-image: linear-gradient(45deg, transparent, blue);border-radius: 50px/50px;opacity:1;font-size:22px;text-align:center;vertical-align: middle; color: rgb(255,255,255);font-style: italic;" id="tx_point"></div>
 
 
 <p style="font-size:16px">1. Drag the item by the video and put it in the best position.</p>
 <p style="font-size:16px">2. When you have decided on the best position, click the 'SUBMIT' button.</p>
-
-<p align=center>
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="sendContribution()" style='width: 200px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>SUBMIT</button>
-</p>
-
 
 
 
@@ -48,7 +92,7 @@
  
 <div style='padding: 10px;'>
 
-	  <div id="player" style='pointer-events: none;visible;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'></div>
+	  <div id="player" style='visible;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'></div>
 	  
 		
 	</div>
@@ -58,15 +102,23 @@
 
 </div>
 
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+  </div>
+</div>
 
 <script>
 
+var item = null;
+var cur = 0;
 var iniX = 0;
 var iniY = 0;
 var x = 550;
 var y = 0;
 var input;
 var player;
+var uri;
 var delta;
 var duration;
 var content_type;
@@ -78,26 +130,64 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var image = null;
 
-function allowDrop(ev) {
-    event.dataTransfer.effectAllowed  = "all";
-    event.dataTransfer.dropEffect     = "copy";
-   ev.preventDefault();
+modal.onclick = function() {
+        modal.style.display = "none";
+                displayContent(cur,false);
 }
 
-function drag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
-    iniX = ev.clientX;
-    iniY = ev.clientY;
+window.onclick = function(event) {
+
+    if (event.target == modal) {
+        modal.style.display = "none";
+                displayContent(cur,false);
+    }
+
 }
 
-function drop(ev) {
-    x = ev.clientX - iniX;
-    y = ev.clientY - iniY;
-    tx_point.style.left = (parseFloat(tx_point.style.left)+parseFloat(x))+'px';
-    tx_point.style.top = (parseFloat(tx_point.style.top)+parseFloat(y))+'px';
+function displayContent(idx,zoom){
+        var height = 250;
+
+        content_type = input[idx].content_type;
+        content = input[idx].content;
+
+        if(zoom){
+                height = 500;
+        }
+
+        switch(content_type){
+                case 'image':
+                        content = "<img src="+content+" style='height:"+height+"px; max-width:407px;'>";
+                        break;
+                        
+                case 'youtube':
+                        content = content.split('=');
+                        content = content[1]; 
+                        content = '<iframe style="height: '+height+'px;" src="https://www.youtube.com/embed/'+content+'" ></iframe>';
+                        break;
+
+
+                case 'wikipedia':
+                        var parts = content.split('wikipedia.org');
+                        var pre = parts[0];
+                        var post = parts[1];
+
+                        pre = pre.split('.');
+                        var url = pre[0];
+                        url += '.m.wikipedia.org';
+
+                        url += post;
+
+                        content = '<iframe src="'+url+'" style="height:'+height+'px;width:407; -moz-transform:scale(0.15, 0.15)"  seamless scrolling="yes"></iframe>';
+                        break;
+        }
+
+        if(zoom){
+                modal.innerHTML = content;
+                modal.style.display = "block";
+        }else{
+                content_view.innerHTML = content;
+        }
 }
-
-
 
 function readURL(input,output) {
 
@@ -113,91 +203,15 @@ function readURL(input,output) {
     }
 }
 
-
-function getOption(op){
-	var contribPanel = document.getElementById('contribPanel');
-	var contrib = document.getElementById('contrib');
-			
-	var lbImage =  document.getElementById('lbImage');
-	if(lbImage)lbImage.remove();
-
-	$('#Image').attr("height","0");
-
-	contrib.remove();
-
-	switch(op){
-		case 1:
-			content_type = 'text';
-
-			contrib = document.createElement("textarea");
-			contrib.setAttribute("name","contrib");
-			contrib.setAttribute("id","contrib");
- 			contrib.setAttribute("placeholder","Write an explanatory text here.");
-			contrib.style.height = '75px';
-			break; 
-
-		case 2:
-			content_type = 'image';
-
-		/*	lbImage = document.createElement("label");
-			lbImage.setAttribute("id","lbImage");
-			lbImage.setAttribute("for","contrib");
-			lbImage.innerHTML = "Choose Image";
-			contribPanel.appendChild(lbImage);
-*/
-
-			contrib = document.createElement("input");
-			contrib.setAttribute("name","contrib");
-			contrib.setAttribute("id","contrib");
-			contrib.setAttribute("type","file");
-			contrib.setAttribute("class","contrib");
-			contrib.setAttribute("accept","image/*");
-			contrib.style.height = '84px';
-			
-			contrib.addEventListener('change', function(){
-				$('#Image').attr("height","300");		
-
-				var str = this.value;
-				readURL(this,$('#Image'));
-				if(str) lbImage.innerHTML = 'Change Image';
-			});
-			break; 
-
-		case 3:
-			content_type = 'youtube';
-
-			contrib = document.createElement("textarea");
-			contrib.setAttribute("name","contrib");
-			contrib.setAttribute("id","contrib");
- 			contrib.setAttribute("placeholder","Paste a link to a Youtube video here.\nEx:\nhttps://www.youtube.com/watch?v=...");
-			contrib.style.height = '75px';
-			break; 
-
-		case 4:
-			content_type = 'wikipedia';
-
-			contrib = document.createElement("textarea");
-			contrib.setAttribute("name","contrib");
-			contrib.setAttribute("id","contrib");
- 			contrib.setAttribute("placeholder","Paste a link to a Wikipedia page here.\nEx:\nhttps://pt.wikipedia.org/wiki/...");
-			contrib.style.height = '75px';
-			break; 
-
-	}
-
-	contrib.style.width = document.getElementById("bt").style.width;
-	contribPanel.appendChild(contrib);
-}
-
-
 function onYouTubeIframeAPIReady() {
   $.getJSON('https://novaes.tech/player', function(data){init(data);});
 }
 
 function init(data){
-  input = data[0];
+  input = data;
   tx_point = document.getElementById("tx_point");
-
+  uri = input[0].uri;
+/*
   switch(input.content_type){
 	case 'image' :
   		tx_point.innerHTML = "<img width=200 height=100  src='"+input.content+"'>";
@@ -213,88 +227,27 @@ function init(data){
 
     tx_point.style.left = x+'px';
     tx_point.style.top = y+'px';
+*/
 
   player = new YT.Player(
     'player',
     {
-      playerVars: {rel: 0, controls: 0, disablekb: 1},
+      playerVars: {rel: 0, controls: 2, disablekb: 0},
       autoplay : 0,
       height: '360',
       width: '640',
       events: {
-        'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
+        'onReady': onPlayerReady
       }
     }
   );
 
+
 }
 
 function onPlayerReady(event) {
-    	duration = 0;
-        player.loadVideoById(input.uri, parseFloat(input.instant) -1);
+        player.loadVideoById(uri);
 }
-
-function onPlayerStateChange(event) {
-  if (event.data == YT.PlayerState.PLAYING) {
-    setTimeout(restartVideoSection, duration * 1000);
-  }
-}
-
-function restartVideoSection() {
-  	player.seekTo(parseFloat(input.instant));
-	player.pauseVideo();
-}
-
-
-	
-function sendContribution(){
-	if(x != '' && y != ''){
-
-		var queryForm = "<form method='post' action='https://novaes.tech/store'>";
-		queryForm += "<input type='hidden' id='uri' name='uri'  value='"+input.uri+"' > ";
-                queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+input._id+"' > ";
-		queryForm += "<input type='hidden' id='start' name='start'  value='"+input.start+"' > ";
-		queryForm += "<input type='hidden' id='end' name='end'  value='"+input.end+"' > ";
-		queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+input.fingerprint+"' > ";
-		queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+input.job_id+"' > ";
-		queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+input.item_index+"' > ";
-		queryForm += "<input type='hidden' id='instant' name='instant'  value='"+input.instant+"' > ";
-		queryForm += "<input type='hidden' id='point' name='point'  value='"+input.point+"' > ";
-		queryForm += "<input type='hidden' id='x' name='x'  value='"+tx_point.style.left+"' > ";
-		queryForm += "<input type='hidden' id='y' name='y'  value='"+tx_point.style.top+"' > ";
-	
-		queryForm += "<input type='hidden' id='content_type' name='content_type'  value='"+input.content_type+"' > ";
-
-		queryForm += "<input type='hidden' id='content' name='content'  value='"+input.content+"' > ";
-		
-
-
-		queryForm += "</form>";
-
-		
-
-		$.ajax({
-			type: 'POST',
-			url: $(queryForm).attr('action'),
-			data: $(queryForm).serialize(), 
-			success: function(result, status, request) {done();}
-		});
-	}else{
-                alert("You forgot to suggest some content.\nYour contribution is important to us!!!");
-	}
-}
-
-function done(){
-	var done = document.getElementById("done");
-	var bt = document.getElementById("bt");
-	bt.style='visibility: hidden;';
-	done.value='ok';
-	player.stopVideo();
-	$(location).attr('href', 'thanks');
-}	
-
-
 
 </script>
 

@@ -44,30 +44,27 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 var Timestamp = Schema.Timestamp;
 itemSchema = Schema({
-	qtd: String,
-	//--------Sync------
-	v1: String,
-	v2: String,
-	delta: String,
-	start_time: String,
-	stop_time: String,
-	plays_1: String,
-	plays_2: String,
-
-	//----Enrichment----
-	item_index: String,
+	// Global
 	item_id: String,
-	job_id: String,
-	fingerprint: String,
         uri: String,
         start: String,
 	end: String,   
 	instant: String,
+
+	// Tasks 1, 2 and 3
 	point: String,
+
+	// Tasks 2 and 3
 	content: String,
 	content_type: String,
+
+	// Task 3
 	x: String,
-	y: String
+	y: String,
+
+	// User Identification for contributions
+	job_id: String,
+	fingerprint: String
 });
 Input = mongoose.model('items_'+activeTask, itemSchema);
 Output = mongoose.model('contributions_'+activeTask, itemSchema);
@@ -195,45 +192,54 @@ app.post('/store', function(req, res) {
 	res.end();
 });
 
-//Group by item ID
-//Aggregate by coordinate
-app.get('/aggregate_i_c', function(req, res) {
-	var cur= '';
-	var it=-1;
-	var items = new Array();
+//Group by time
+//Aggregate by string similarity
+app.get('/aggregate_0', function(req, res) {
+	var cur=-2;
+	var grp=0;
+	var groups = new Array();
         Output.find({},function (err, C) {
                 if (err) return console.error(err);
                 for(var i=0; i < C.length; i++){
-			if( levenshtein(C[i].item_id,cur) != 0 ){
-				it++;
-				cur = C[i].item_id;
-				items[it] = new Array();
+			if( (parseFloat(C[i].instant)-cur) >= 1 ){
+				grp++;
+				cur = parseFloat(C[i].instant);
+				groups[grp] = new Array();
 			}
-			if(items[it]) items[it].push(C[i]);
+			if(groups[grp]) groups[grp].push(C[i]);
                 }
-		for(var i=0; i<items.length; i++){
-			var item = items[i];
-			var x = 0;
-			var y = 0;
-			for(var j=0; j<item.length; j++){
-				x += parseFloat(item[j].x);
-				y += parseFloat(item[j].y);
+		for(var i=1; i<groups.length; i++){
+			var group = groups[i];
+			var mode = group[0];
+			var qtd = -1; 
+			var instant = parseFloat(group[0].instant);
+			if(group.length > 1){
+				for(var j=0; j<group.length-1; j++){
+					instant += parseFloat(group[j+1].instant);
+					var similars = 0;
+					for(var k=1; k<group.length; k++){
+						if(j == k) continue;
+						var delta = levenshtein(group[j].point,group[k].point);
+						if(delta < 2) similars++;
+					}
+					if(qtd < similars){
+						qtd = similars;
+						mode = group[j];
+					}
+				}
+				instant /= group.length;
 			}
-			x /= item.length;
-			y /= item.length;
-                        var mode = item[0];
-                        var data ={'x':x+'px', 'y':y+'px', 'item_id':mode.item_id, 'point':mode.point, 'content_type':mode.content_type, 'content':mode.content,'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': mode.instant,'point': mode.point}
-                        var a = new Aggregation(data);
-                        a.save(function (err, m0) {if (err) return console.error(err);});
+  			var data ={'item_id':mode.item_id, 'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': instant,'point': mode.point}
+        		var a = new Aggregation(data);
+        		a.save(function (err, m0) {if (err) return console.error(err);});
 		}
-		
 		res.end();
-        }).sort({'item_id' : 1});
+        }).sort({'instant' : 1});
 });
 
 //Group by point
 //Aggregate Duplicated
-app.get('/aggregate_p_d', function(req, res) {
+app.get('/aggregate_1', function(req, res) {
 	var cur= '';
 	var grp=0;
 	var groups = new Array();
@@ -295,10 +301,9 @@ app.get('/aggregate_p_d', function(req, res) {
         }).sort({'point' : 1});
 });
 
-
 //Group by item Point
 //Aggregate by ranking
-app.get('/aggregate_p_r', function(req, res) {
+app.get('/aggregate_2', function(req, res) {
 	var cur= '';
 	var pt=0;
 	var points = new Array();
@@ -342,53 +347,41 @@ app.get('/aggregate_p_r', function(req, res) {
         }).sort({'point' : 1});
 });
 
-
-
-//Group by time
-//Aggregate by string similarity
-app.get('/aggregate_t_s', function(req, res) {
-	var cur=-2;
-	var grp=0;
-	var groups = new Array();
+//Group by item ID
+//Aggregate by coordinate
+app.get('/aggregate_3', function(req, res) {
+	var cur= '';
+	var it=-1;
+	var items = new Array();
         Output.find({},function (err, C) {
                 if (err) return console.error(err);
                 for(var i=0; i < C.length; i++){
-			if( (parseFloat(C[i].instant)-cur) >= 1 ){
-				grp++;
-				cur = parseFloat(C[i].instant);
-				groups[grp] = new Array();
+			if( levenshtein(C[i].item_id,cur) != 0 ){
+				it++;
+				cur = C[i].item_id;
+				items[it] = new Array();
 			}
-			if(groups[grp]) groups[grp].push(C[i]);
+			if(items[it]) items[it].push(C[i]);
                 }
-		for(var i=1; i<groups.length; i++){
-			var group = groups[i];
-			var mode = group[0];
-			var qtd = -1; 
-			var instant = parseFloat(group[0].instant);
-			if(group.length > 1){
-				for(var j=0; j<group.length-1; j++){
-					instant += parseFloat(group[j+1].instant);
-					var similars = 0;
-					for(var k=1; k<group.length; k++){
-						if(j == k) continue;
-						var delta = levenshtein(group[j].point,group[k].point);
-						if(delta < 2) similars++;
-					}
-					if(qtd < similars){
-						qtd = similars;
-						mode = group[j];
-					}
-				}
-				instant /= group.length;
+		for(var i=0; i<items.length; i++){
+			var item = items[i];
+			var x = 0;
+			var y = 0;
+			for(var j=0; j<item.length; j++){
+				x += parseFloat(item[j].x);
+				y += parseFloat(item[j].y);
 			}
-  			var data ={'item_id':mode.item_id, 'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': instant,'point': mode.point}
-        		var a = new Aggregation(data);
-        		a.save(function (err, m0) {if (err) return console.error(err);});
+			x /= item.length;
+			y /= item.length;
+                        var mode = item[0];
+                        var data ={'x':x+'px', 'y':y+'px', 'item_id':mode.item_id, 'point':mode.point, 'content_type':mode.content_type, 'content':mode.content,'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': mode.instant,'point': mode.point}
+                        var a = new Aggregation(data);
+                        a.save(function (err, m0) {if (err) return console.error(err);});
 		}
+		
 		res.end();
-        }).sort({'instant' : 1});
+        }).sort({'item_id' : 1});
 });
-
 
 // ------------- Server Functions ------------------------------
 
