@@ -67,25 +67,28 @@
 
 
 <body align='center'>
-    <header class="mdl-layout__header" style="display:flex;height:160px;"  >
-        <span class="mdl-layout-title" style='align-self:center;text-align:left;font-size:16px;position: fixed;margin-top:0px; margin-left:10px;'> 
+    <header class="mdl-layout__header" style="height:200px;">
+      <div class="mdl-layout__header-row"  >
+        <span class="mdl-layout-title" style='text-align:left;font-size:16px;position: fixed;margin-top:70px; margin-left:10px;'> 
 
 <center>
 <table>
-<td id='instructions' style='display:block;max-width:500px;padding:10px;' >
-<p style="font-size:16px;text-align:justify;">This is a multimedia interactive player:</p>
-<p style="font-size:16px;text-align:justify;">1. You can use the "PREVIOUS" and "NEXT" buttons to navigate through the different points of interest.</p>
-<p style="font-size:16px;text-align:justify;">2. You can use the 'ZOOM' button to better visualize each content.</p>
+<td width='500' >
+<p style="font-size:16px">This is a multimedia interactive player:</p>
+<p style="font-size:16px">1. You can use the "PREVIOUS" and "NEXT" buttons to navigate through the different points of interest.</p>
+<p style="font-size:16px">2. You can use the 'ZOOM' button to better visualize each content.</p>
 </td>
-<td style='padding:10px;'>
-<p style="font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;" id="tx_point"></p>
+
+<td width='600' align='center'>
+<p style="font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:300px;" id="tx_point"></p>
 </p>
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_previous'    onClick="navigate(-1)" style='font-size:12px;height:30px;width: 93px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>previous</button>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_previous'    onClick="navigate(-1)" style='font-size:12px;height:30px;width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>previous</button>
 
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_zoom'    onClick='displayContent(cur,true)' style='font-size:12px;height:30px;width: 93px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>zoom</button>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_zoom'    onClick='displayContent(cur,true)' style='font-size:12px;height:30px;width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>zoom</button>
 
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_next'    onClick="navigate(1)" style='font-size:12px;height:30px;width: 93px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>next</button>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_next'    onClick="navigate(1)" style='font-size:12px;height:30px;width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>next</button>
 </td>
+
 </table>
 </center>
 
@@ -94,6 +97,7 @@
 
 	</span>
 
+      </div>
     </header>
  
 <div style='padding: 10px;'>
@@ -133,7 +137,6 @@ var content_type;
 var tx_point;
 var tx_content;
 var end;
-var instructions;
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -142,7 +145,6 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 var image = null;
 
 modal.onclick = function() {
-        modal.innerHTML = '';
         modal.style.display = "none";
                 displayContent(cur,false);
 }
@@ -150,7 +152,6 @@ modal.onclick = function() {
 window.onclick = function(event) {
 
     if (event.target == modal) {
-        modal.innerHTML = '';
         modal.style.display = "none";
                 displayContent(cur,false);
     }
@@ -242,10 +243,6 @@ function init(data){
 	contents[t] = i;
 	contents[t+1] = i;
   }
-
-  instructions = document.getElementById("instructions");
-  if(window.innerWidth < 875) instructions.style.display = 'none';
-
 
   tx_point = document.getElementById("tx_point");
   tx_content = document.getElementById("tx_content");

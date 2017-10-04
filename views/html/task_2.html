@@ -68,13 +68,13 @@
 
 
   <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header" style="display:flex;height:320px;">
+    <header class="mdl-layout__header" style="height:320px;">
       <div class="mdl-layout__header-row" >
         <span class="mdl-layout-title" style='text-align:left;font-size:16px;position: fixed;margin-top:135px; margin-left:10px;'> 
 
 <center>
 <table>
-<td width='500' style='display:block;' >
+<td width='500' >
 <p style="font-size:16px">Based on the video, browse through the suggestions and choose the best content to explain or illustrate:</p>
 <p style="font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;" id="tx_point"></p>
 <p style="font-size:16px">1. Use 'Use the "PREVIOUS" and "NEXT" buttons to navigate through the different content suggestions.</p>
@@ -144,7 +144,6 @@ var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 modal.onclick = function() {
-        modal.innerHTML = '';
     	modal.style.display = "none";
 		displayContent(cur,false);
 }
@@ -152,7 +151,6 @@ modal.onclick = function() {
 window.onclick = function(event) {
 
     if (event.target == modal) {
-        modal.innerHTML = '';
         modal.style.display = "none";
 		displayContent(cur,false);
     }

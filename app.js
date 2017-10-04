@@ -3,7 +3,7 @@
 var qtd_target = 4;
 var activeTask = 4;
 var kind = 'player';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
-var group = false;//Tasks 1, 2, 4: false; Task 3: true;
+var group = false;//Tasks 1, 3, 4: false; Task 2: true;
 
 if(kind == 'job'){
 	var aggregation_method = require('./aggregation/task_'+activeTask+'.js');
