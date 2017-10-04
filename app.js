@@ -1,8 +1,8 @@
 // ---------------------- Requires, Includes and Globals ------------------------
 
 var qtd_target = 4;
-var activeTask = 4;
-var kind = 'player';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
+var activeTask = 3;
+var kind = 'job';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
 var group = false;//Tasks 1, 3, 4: false; Task 2: true;
 
 if(kind == 'job'){
@@ -58,6 +58,9 @@ itemSchema = Schema({
         start: String,
 	end: String,   
 	instant: String,
+
+	// at Runtime
+	item_index: String,
 
 	// Tasks 1, 2 and 3
 	point: String,
