@@ -78,7 +78,7 @@
 <p style="font-size:16px;text-align:justify;">2. You can use the 'ZOOM' button to better visualize each content.</p>
 </td>
 <td style='padding:10px;'>
-<p style="font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;" id="tx_point"></p>
+<p style="font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;" onClick='displayContent(cur,true)'   id="tx_point"></p>
 </p>
 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_previous'    onClick="navigate(-1)" style='font-size:12px;height:30px;width: 93px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>previous</button>
 
@@ -136,6 +136,12 @@ var end;
 var instructions;
 var hpad = 0;
 var vpad = 0;
+var item_width;
+var item_height;
+var ico_width = 40;
+var ico_height = 40;
+var video_width;
+var video_height;
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -185,7 +191,7 @@ function displayContent(idx,zoom){
                         content = content.split('=');
                         content = content[1]; 
                         content = '<iframe style="height: '+height+'px;" src="https://www.youtube.com/embed/'+content+'" ></iframe>';
-                        break;
+			break;
 
 
                 case 'wikipedia':
@@ -319,28 +325,45 @@ function displayPoint(){
   tx_content.style.display = 'block';
   if(!item) return;
   tx_point.innerHTML = item.point;
+
+
+if(window.innerWidth >= 600){
   switch(item.content_type){
         case 'image' :
+		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image:url("https://novaes.tech/images?name=ico_zoom&mime=png");background-size: 50px 50px;background-align:center;background-padding:0px;';
                 tx_content.innerHTML = "<img src='https://novaes.tech/images?name=ico_zoom&mime=png' width=40 height=40><img width=200 height=100  src='"+item.content+"'>";
                 break;
         case 'wikipedia' :   
+		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image:url("https://novaes.tech/images?name=wikipedia&mime=jpg");background-size: 50px 50px;background-align:center;background-padding:0px;';
                 tx_content.innerHTML = "<img src='https://novaes.tech/images?name=wikipedia&mime=jpg' width=40 height=40>"+item.point;
                 break;
         case 'youtube' :   
+		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image:url("https://novaes.tech/images?name=youtube&mime=ico");background-size: 50px 50px;background-align:center;background-padding:0px;';
                 tx_content.innerHTML = "<img src='https://novaes.tech/images?name=youtube&mime=ico' width=40 height=40>"+item.point;
                 break;
         case 'text' :   
+		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image:url("https://novaes.tech/images?name=ico_zoom&mime=png");background-size: 50px 50px;background-align:center;background-padding:0px;';
                 tx_content.innerHTML = "<img src='https://novaes.tech/images?name=ico_zoom&mime=png' width=40 height=40>"+item.content;
                 break;
         default:
                 tx_content.innerHTML = item.point;
   }
+    item_height = document.getElementById('tx_content').offsetHeight;
+    item_width = document.getElementById('tx_content').offsetWidth;
+    video_height = document.getElementById('player').offsetHeight;
+    video_width = document.getElementById('player').offsetWidth;
 
-  var x = parseFloat(item.x) + hpad;
-  tx_content.style.left = x+'px';
+    var x = parseFloat(item.x) + hpad;
+    var y = parseFloat(item.y) + vpad;
 
-  var y = parseFloat(item.y) + vpad;
-  tx_content.style.top = y+'px';
+    if((x+item_width) > (video_width+hpad)){
+        x = video_width + hpad - item_width;
+    }
+
+    tx_content.style.left = x+'px';
+    tx_content.style.top = y+'px';
+}
+
 }
 
 </script>
