@@ -1,10 +1,14 @@
 // ---------------------- Requires, Includes and Globals ------------------------
 
-var activeTask = 3;
-var group = true;//Tasks 1, 2, 4: false; Task 3: true;
 var qtd_target = 4;
+var activeTask = 4;
+var kind = 'player';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
+var group = false;//Tasks 1, 2, 4: false; Task 3: true;
 
-var aggregation_method = require('./aggregation/task_'+activeTask+'.js');
+if(kind == 'job'){
+	var aggregation_method = require('./aggregation/task_'+activeTask+'.js');
+}	
+
 var Functions = require('./utils/functions.js');
 Functions = new Functions.functions();
 
