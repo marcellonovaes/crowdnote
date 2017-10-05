@@ -1,12 +1,13 @@
 // ---------------------- Requires, Includes and Globals ------------------------
 
+var project = 'exp002';
 var qtd_target = 4;
 var activeTask = 4;
 var kind = 'player';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
 var group = false;//Tasks 1, 3, 4: false; Task 2: true;
 
 if(kind == 'job'){
-	var aggregation_method = require('./aggregation/task_'+activeTask+'.js');
+	var aggregation_method = require('./aggregation/'+project+'/task_'+activeTask+'.js');
 }	
 
 var Functions = require('./utils/functions.js');
@@ -43,7 +44,7 @@ app.use(function(req, res, next) {
 //---------------- Database - MongoDb ---------
 var mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/crowdnote_exp002');
+mongoose.connect('mongodb://localhost/crowdnote_'+project);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('openUri', function() {});
@@ -124,11 +125,11 @@ function groupInput(items){
 //-----------------------  Endpoints   -------------------------------
 
 app.get('/', function(req, res) {
-	res.render('ejs/task_'+activeTask, null);
+	res.render('ejs/'+project+'/task_'+activeTask, null);
 });
 
 app.get('/thanks', function(req, res) {
-	res.render('ejs/task_'+activeTask, null);
+	res.render('ejs/'+project+'/task_'+activeTask, null);
 	//res.render('ejs/thanks', null);
 });
 

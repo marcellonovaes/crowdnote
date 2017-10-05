@@ -72,7 +72,7 @@
 
 <center>
 <table>
-<td id='instructions' style='display:block;max-width:500px;padding:10px;' >
+<td id='instructions' style='display:none;max-width:500px;padding:10px;' >
 <p style="font-size:16px;text-align:justify;">This is a multimedia interactive player:</p>
 <p style="font-size:16px;text-align:justify;">1. You can use the "PREVIOUS" and "NEXT" buttons to navigate through the different points of interest.</p>
 <p style="font-size:16px;text-align:justify;">2. You can use the 'ZOOM' button to better visualize each content.</p>
@@ -252,8 +252,8 @@ function init(data){
   }
 
   instructions = document.getElementById("instructions");
-  if(window.innerWidth < 875){
-	instructions.style.display = 'none';
+  if(window.innerWidth >= 875){
+	instructions.style.display = 'block';
   }
 
   if(window.innerWidth < 660){
@@ -333,19 +333,19 @@ function displayPoint(){
 var w = window.innerWidth;
   switch(item.content_type){
         case 'image' :
-		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image:url("https://novaes.tech/images?name=ico_zoom&mime=png");background-size: 50px 50px;background-align:center;background-padding:0px;';
+		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.5) 100%),url("https://novaes.tech/images?name=ico_zoom&mime=png");background-size: 50px 50px;background-align:center;background-padding:0px;';
                 if(w >= 600) tx_content.innerHTML = "<img src='https://novaes.tech/images?name=ico_zoom&mime=png' width=40 height=40><img width=200 height=100  src='"+item.content+"'>";
                 break;
         case 'wikipedia' :   
-		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image:url("https://novaes.tech/images?name=wikipedia&mime=jpg");background-size: 50px 50px;background-align:center;background-padding:0px;';
+		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image:linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.5) 100%),url("https://novaes.tech/images?name=wikipedia&mime=jpg");background-size: 50px 50px;background-align:center;background-padding:0px;';
                 if(w >= 600) tx_content.innerHTML = "<img src='https://novaes.tech/images?name=wikipedia&mime=jpg' width=40 height=40>"+item.point;
                 break;
         case 'youtube' :   
-		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image:url("https://novaes.tech/images?name=youtube&mime=ico");background-size: 50px 50px;background-align:center;background-padding:0px;';
+		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image:linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.5) 100%),url("https://novaes.tech/images?name=youtube&mime=ico");background-size: 50px 50px;background-align:center;background-padding:0px;';
                 if(w >= 600) tx_content.innerHTML = "<img src='https://novaes.tech/images?name=youtube&mime=ico' width=40 height=40>"+item.point;
                 break;
         case 'text' :   
-		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image:url("https://novaes.tech/images?name=ico_zoom&mime=png");background-size: 50px 50px;background-align:center;background-padding:0px;';
+		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image:linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.5) 100%),url("https://novaes.tech/images?name=ico_zoom&mime=png");background-size: 50px 50px;background-align:center;background-padding:0px;';
                 if(w >= 600) tx_content.innerHTML = "<img src='https://novaes.tech/images?name=ico_zoom&mime=png' width=40 height=40>"+item.content;
                 break;
         default:
