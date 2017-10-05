@@ -1,9 +1,9 @@
 // ---------------------- Requires, Includes and Globals ------------------------
 
-var project = 'exp002';
-var qtd_target = 4;
-var activeTask = 4;
-var kind = 'player';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
+var project = 'exp003';
+var qtd_target = 10;
+var activeTask = 0;
+var kind = 'job';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
 var group = false;//Tasks 1, 3, 4: false; Task 2: true;
 
 if(kind == 'job'){
