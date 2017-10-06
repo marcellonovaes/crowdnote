@@ -14,34 +14,122 @@
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src='https://novaes.tech/include?name=client.min&mime=js'></script>
+
+<style>
+.modal {
+    display: none;
+    font-size:30px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    color: white;
+    position: fixed;
+    z-index: 100;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.75);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+</style>
+
+
+
+
 </head>
 
 
 <body align='center'>
 
-  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header" style="display:flex;height:165px;">
+  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header" style="min-width:0px;" >
+    <header class="mdl-layout__header" style="min-width:0px;display:flex;height:165px;">
         <span class="mdl-layout-title" style='text-align:left;font-size:16px;position: fixed;margin-top:0px; margin-left:0px;align-self:center;'> 
 
 <center>
 <table>
-<td id='instructions' style='display:block;max-width:600px;padding:10px;' >
-<p style="text-align:justify;font-size:16px">1. Encontre no vídeo o instante inicial de algum gesto que você identificar.</p>
+<td id='instructions' style='display:none;max-width:600px;padding:10px;' >
+<p style="text-align:justify;font-size:16px">1. Encontre no vídeo o instante inicial do gesto que você identificar.</p>
 
 <p style="text-align:justify;font-size:16px">3. Use o botão PLAY / PAUSE para encontrar o instante inicial.</p>
 
-<p style="text-align:justify;font-size:16px">2. Utilize os botões [+1 seg] e [-1 seg] para localizar o instante exato.</p>
+<p style="text-align:justify;font-size:16px">2. Utilize os botões [+0.1 S] e [-0.1 S] para localizar o instante exato.</p>
 
 <p style="text-align:justify;font-size:16px">4. Clique no botão ENVIAR.</p>
 </td>
 <td style='padding:10px;'>
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_play_pause'    onClick="playPause()" style='width: 80px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Play</button>
+<table>
+<td>
 
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="tiltTime(-0.1)" style='width: 80px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>- 0.1 seg</button>
+<tr>
+<td>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="sendContribution()" style='width: 120px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Enviar</button>
+</td>
+</tr>
 
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="tiltTime(0.1)" style='width: 80px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>+ 0.1 seg</button>
+<tr>
+<td>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="resetVideo()" style='width: 120px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Início</button>
+</td>
+</tr>
 
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="sendContribution()" style='width: 80px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Enviar</button>
+<tr>
+<td>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_play_pause'    onClick="playPause()" style='width: 120px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Play</button>
+</td>
+</tr>
+
+</td>
+</table>
+</td>
+
+<td style='padding:10px;'>
+<table>
+<td>
+
+<tr>
+<td>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_instr'    onClick="showInstructions()" style='width: 120px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Instruções</button>
+</td>
+</tr>
+
+<tr>
+<td>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="tiltTime(0.1)" style='width: 120px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>+ 0.1 s</button>
+</td>
+</tr>
+<tr>
+<td>
+<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="tiltTime(-0.1)" style='width: 120px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>- 0.1 s</button>
+</td>
+</tr>
+
+</td>
+</table>
+
+
 </td>
 </table>
 	</span>
@@ -61,6 +149,15 @@
 
 </div>
 
+<input type='hidden' id='done' name='done' >
+
+</div>
+
+<div id="modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+  </div>
+</div>
 
 <script>
 
@@ -72,6 +169,20 @@ var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+modal.onclick = function() {
+        modal.innerHTML = '';
+        modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+
+    if (event.target == modal) {
+        modal.innerHTML = '';
+        modal.style.display = "none";
+    }
+
+}
 
 
 function onYouTubeIframeAPIReady() {
@@ -93,8 +204,20 @@ function init(data){
     }
   );
 
+  instructions = document.getElementById("instructions");
+  if(window.innerWidth >= 875){
+        instructions.style.display = 'block';
+  }
+
   var bt_play_pause =  document.getElementById("bt_play_pause"); 
 }
+
+function resetVideo(){
+                player.seekTo(parseFloat(input.start) + parseFloat(delta));
+                player.pauseVideo();
+                bt_play_pause.innerHTML = 'play';
+}
+
 
 function playPause(){
 	if(player.getPlayerState() == 1){
@@ -130,6 +253,13 @@ function tiltTime(delta){
 	bt_play_pause.innerHTML = 'play';
 	player.seekTo(player.getCurrentTime() + delta);
 }
+
+
+function showInstructions(){
+        modal.innerHTML ='<p style="text-align:justify;font-size:20px;padding:20px;">1. Encontre no vídeo o instante inicial do gesto que você identificar.</p><p style="text-align:justify;font-size:20px;padding:20px;">3. Use o botão PLAY / PAUSE para encontrar o instante inicial.</p><p style="text-align:justify;font-size:20px;padding:20px;">2. Utilize os botões [+0.1 S] e [-0.1 S] para localizar o instante exato.</p><p style="text-align:justify;font-size:20px;padding:20px;">4. Clique no botão ENVIAR.</p></span>' ;
+        modal.style.display = "block";
+}
+
 	
 function sendContribution(){
         if (confirm('Esta certo de que o instante está correto?')) {
