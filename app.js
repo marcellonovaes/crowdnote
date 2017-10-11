@@ -1,7 +1,7 @@
 // ---------------------- Requires, Includes and Globals ------------------------
 
-var project = 'exp003';
-var qtd_target = 10;
+var project = 'exp005';
+var qtd_target = 100;
 var activeTask = 0;
 var kind = 'job';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
 var group = false;//Tasks 1, 3, 4: false; Task 2: true;
@@ -99,7 +99,7 @@ function init(){
 			input[i] = V[i];
 			input[i].qtd = 0;
 		}
-	}).sort({'instant' : 1});
+	}).sort({'_id' : 1});
 }
 
 function groupInput(items){
