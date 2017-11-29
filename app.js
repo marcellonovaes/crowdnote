@@ -1,6 +1,6 @@
 // ---------------------- Requires, Includes and Globals ------------------------
 
-var project = 'exp005';
+var project = 'mmsys_2018';
 var qtd_target = 100;
 var activeTask = 0;
 var kind = 'job';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
