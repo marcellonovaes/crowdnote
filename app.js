@@ -2,7 +2,7 @@
 
 var project = 'mmsys_2018';
 var qtd_target = 100;
-var activeTask = 0;
+var activeTask = 3;
 var kind = 'job';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
 var group = false;//Tasks 1, 3, 4: false; Task 2: true;
 
@@ -65,6 +65,8 @@ itemSchema = Schema({
 
 	// Tasks 1, 2 and 3
 	point: String,
+	type: String,
+	image: String,
 
 	// Tasks 2 and 3
 	content: String,
@@ -129,8 +131,8 @@ app.get('/', function(req, res) {
 });
 
 app.get('/thanks', function(req, res) {
-	res.render('ejs/'+project+'/task_'+activeTask, null);
-	//res.render('ejs/thanks', null);
+	//res.render('ejs/'+project+'/task_'+activeTask, null);
+	res.render('ejs/thanks', null);
 });
 
 app.get('/player', function(req, res) {
