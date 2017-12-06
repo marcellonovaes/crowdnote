@@ -12,7 +12,7 @@ function aggregation(req, res, Output, Aggretation, Functions) {
 	        Output.find({},function (err, C) {
         	        if (err) return console.error(err);
                 	for(var i=0; i < C.length; i++){
-	                        if( (parseFloat(C[i].instant)-cur) >= 1 ){
+	                        if( (parseFloat(C[i].instant)-cur) >= 2 ){
         	                        grp++;
                 	                cur = parseFloat(C[i].instant);
                         	        groups[grp] = new Array();
@@ -30,7 +30,7 @@ function aggregation(req, res, Output, Aggretation, Functions) {
                                 	        var similars = 0;
                                         	for(var k=1; k<group.length; k++){
 	                                                if(j == k) continue;
-        	                                        var delta = Functions.levenshtein(group[j].point,group[k].point);
+        	                                        var delta = Functions.levenshtein(group[j].point.toLowerCase(),group[k].point.toLowerCase());
                 	                                if(delta < 2) similars++;
                         	                }
 	                                        if(qtd < similars){
@@ -40,10 +40,12 @@ function aggregation(req, res, Output, Aggretation, Functions) {
         	                        }
                 	                instant /= group.length;
                         	}
+if(qtd > 0){
 	                        var data ={'item_id':mode.item_id, 'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': instant,'point': mode.point}
         	                var a = new Aggregation(data);
                 	        a.save(function (err, m0) {if (err) return console.error(err);});
-	                }
+}    
+	            }
         	        res.end();
 	        }).sort({'instant' : 1});
 	}

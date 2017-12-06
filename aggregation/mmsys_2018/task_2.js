@@ -41,10 +41,27 @@ function aggregation(req, res, Output, Aggretation, Functions) {
 	                                }
         	                }
                 	        mode = point[contents[mode].index];
-                        	var data ={'item_id':mode.item_id, 'point':mode.point, 'content_type':mode.content_type, 'content':mode.content,'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': mode.instant,'point': mode.point}
-	                        var a = new Aggregation(data);
+				var image = '';
+				switch(mode.content_type){	
+					case 'youtube':  
+							var content = mode.content.split('https://www.youtube.com/watch?v=');
+							image ='http://i1.ytimg.com/vi/'+content[1]+'/hqdefault.jpg';
+							break;
+
+					case 'wikipedia':  
+    							image = 'https://novaes.tech/wiki_image?url='+mode.content; 
+							break;
+
+
+					default:
+		                        
+				}
+				var data ={'item_id':mode.item_id, 'point':mode.point, 'content_type':mode.content_type, 'content':mode.content,'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': mode.instant,'image': image}
+	        		var a = new Aggregation(data);
         	                a.save(function (err, m0) {if (err) return console.error(err);});
-                	}
+ 
+
+               	}
 	                res.end();
         	}).sort({'point' : 1});
         }

@@ -2,9 +2,9 @@
 
 var project = 'mmsys_2018';
 var qtd_target = 100;
-var activeTask = 3;
+var activeTask = 2;
 var kind = 'job';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
-var group = false;//Tasks 1, 3, 4: false; Task 2: true;
+var group = true;//Tasks 1, 3, 4: false; Task 2: true;
 
 if(kind == 'job'){
 	var aggregation_method = require('./aggregation/'+project+'/task_'+activeTask+'.js');
@@ -130,9 +130,40 @@ app.get('/', function(req, res) {
 	res.render('ejs/'+project+'/task_'+activeTask, null);
 });
 
-app.get('/thanks', function(req, res) {
+app.get('/wiki_image', function(req, res) {
 	//res.render('ejs/'+project+'/task_'+activeTask, null);
-	res.render('ejs/thanks', null);
+	//res.render('ejs/thanks', null);
+var url = req.query.url;
+var parts = url.split('/');
+var id =parts[parts.length -1];
+
+
+const request = require('request');
+
+request('https://en.wikipedia.org/w/api.php?action=query&titles='+id+'&prop=pageimages&pithumbsize=600&format=json', { json: true }, (err, res2, body) => {
+
+  if (err) { return console.log(err); }
+
+
+for(var k in body.query.pages) {
+	if(body.query.pages[k].thumbnail != null){
+
+		var path = body.query.pages[k].thumbnail.source;
+request.get(path, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        data = "data:" + response.headers["content-type"] + ";base64," + new Buffer(body).toString('base64');
+        res.end(data);
+    }
+});
+	}else{
+		res.send('');
+	}
+	break;
+}
+	
+
+});
+	
 });
 
 app.get('/player', function(req, res) {
@@ -190,6 +221,8 @@ app.get('/job', function(req, res) {
 	}
         res.json(obj);
 });
+
+
 
 app.post('/store', function(req, res) {
 	var data = req.body;
