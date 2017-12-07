@@ -2,9 +2,9 @@
 
 var project = 'mmsys_2018';
 var qtd_target = 100;
-var activeTask = 2;
-var kind = 'job';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
-var group = true;//Tasks 1, 3, 4: false; Task 2: true;
+var activeTask = 4;
+var kind = 'player';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
+var group = false;//Tasks 1, 3, 4: false; Task 2: true;
 
 if(kind == 'job'){
 	var aggregation_method = require('./aggregation/'+project+'/task_'+activeTask+'.js');
@@ -130,9 +130,12 @@ app.get('/', function(req, res) {
 	res.render('ejs/'+project+'/task_'+activeTask, null);
 });
 
+app.get('/thanks', function(req, res) {
+        //res.render('ejs/'+project+'/task_'+activeTask, null);
+        res.render('ejs/thanks', null);
+});
+
 app.get('/wiki_image', function(req, res) {
-	//res.render('ejs/'+project+'/task_'+activeTask, null);
-	//res.render('ejs/thanks', null);
 var url = req.query.url;
 var parts = url.split('/');
 var id =parts[parts.length -1];

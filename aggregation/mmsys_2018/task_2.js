@@ -52,11 +52,10 @@ function aggregation(req, res, Output, Aggretation, Functions) {
     							image = 'https://novaes.tech/wiki_image?url='+mode.content; 
 							break;
 
-
 					default:
 		                        
 				}
-				var data ={'item_id':mode.item_id, 'point':mode.point, 'content_type':mode.content_type, 'content':mode.content,'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': mode.instant,'image': image}
+				var data ={'item_id':mode.item_id, 'point':mode.point,'type':mode.type,  'content_type':mode.content_type, 'content':mode.content,'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': mode.instant,'image': image}
 	        		var a = new Aggregation(data);
         	                a.save(function (err, m0) {if (err) return console.error(err);});
  

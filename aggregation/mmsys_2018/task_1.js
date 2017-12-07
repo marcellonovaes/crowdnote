@@ -47,7 +47,7 @@ function aggregation(req, res, Output, Aggretation, Functions) {
                                                 	                duplicated = false;
                                                         	        cur_content = type[k].content;
                                                                 	var mode = type[k];
-	                                                                var data ={'item_id':mode.item_id, 'point':mode.point, 'content_type':mode.content_type, 'content':mode.content,'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': mode.instant,'point': mode.point}
+	                                                                var data ={'item_id':mode.item_id, 'point':mode.point,'type':mode.type, 'content_type':mode.content_type, 'content':mode.content,'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': mode.instant,'point': mode.point}
         	                                                        var a = new Aggregation(data);
                 	                                                a.save(function (err, m0) {if (err) return console.error(err);});
                         	                                }
@@ -55,7 +55,7 @@ function aggregation(req, res, Output, Aggretation, Functions) {
                                         	}else{
 	                                                for(k=0; k < type.length; k++){
         	                                                var mode = type[k];
-                	                                        var data ={'item_id':mode.item_id, 'point':mode.point, 'content_type':mode.content_type, 'content':mode.content,'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': mode.instant,'point': mode.point}
+                	                                        var data ={'item_id':mode.item_id, 'point':mode.point,'type':mode.type, 'content_type':mode.content_type, 'content':mode.content,'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': mode.instant,'point': mode.point}
                         	                                var a = new Aggregation(data);
                                 	                        a.save(function (err, m0) {if (err) return console.error(err);});
 	                                                }

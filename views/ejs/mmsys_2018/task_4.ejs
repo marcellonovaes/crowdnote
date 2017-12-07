@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 
 <html lang="pt-br">
@@ -10,7 +9,6 @@
 <title>CrowdNote</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
 <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" />
-<link rel="stylesheet"  href='include?name=client.min&mime=css' >
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src='https://novaes.tech/include?name=client.min&mime=js'></script>
@@ -115,7 +113,7 @@
 </div>
 
 <script>
-
+var timeout = 2;
 var item = null;
 var max = 0;
 var cur = -1;
@@ -237,6 +235,10 @@ function onYouTubeIframeAPIReady() {
 
 function init(data){
   input = data;
+
+
+  input.sort(function(a, b){ if(b.instant < a.instant) return 1; return -1 });
+
   max = input.length;
   end = input[input.length-1].end;
 
@@ -249,7 +251,9 @@ function init(data){
 	var t = Math.floor(input[i].instant);
 	contents[t] = i;
 	contents[t+1] = i;
+	contents[t+2] = i;
   }
+
 
   instructions = document.getElementById("instructions");
   if(window.innerWidth >= 875){

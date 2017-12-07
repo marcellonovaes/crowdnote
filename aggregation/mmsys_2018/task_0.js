@@ -41,7 +41,7 @@ function aggregation(req, res, Output, Aggretation, Functions) {
                 	                instant /= group.length;
                         	}
 if(qtd > 0){
-	                        var data ={'item_id':mode.item_id, 'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': instant,'point': mode.point}
+	                        var data ={'item_id':mode.item_id, 'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': instant,'point': mode.point,'type':mode.type}
         	                var a = new Aggregation(data);
                 	        a.save(function (err, m0) {if (err) return console.error(err);});
 }    

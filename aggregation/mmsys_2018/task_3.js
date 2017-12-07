@@ -30,7 +30,7 @@ function aggregation(req, res, Output, Aggretation, Functions) {
 	                        x /= item.length;
         	                y /= item.length;
                 	        var mode = item[0];
-                        	var data ={'x':x+'px', 'y':y+'px', 'item_id':mode.item_id, 'point':mode.point, 'content_type':mode.content_type, 'content':mode.content,'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': mode.instant,'point': mode.point}
+                        	var data ={'x':x+'px', 'y':y+'px', 'item_id':mode.item_id, 'type':mode.type, 'point':mode.point, 'content_type':mode.content_type, 'content':mode.content,'uri': mode.uri,'start': mode.start,'end': mode.end,'instant': mode.instant,'image': mode.image}
 	                        var a = new Aggregation(data);
         	                a.save(function (err, m0) {if (err) return console.error(err);});
                 	}
