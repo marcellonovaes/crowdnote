@@ -1,0 +1,161 @@
+%Special Track: Special Session on Human-centric Internet and Multimedia Systems
+%Topic: User-centric algorithms in multimedia systems covering
+%Deadline: 15/12/2017
+
+
+\documentclass[sigconf]{acmart}
+
+\usepackage{booktabs} % For formal tables
+
+
+% Copyright
+%\setcopyright{none}
+%\setcopyright{acmcopyright}
+%\setcopyright{acmlicensed}
+%\setcopyright{rightsretained}
+%\setcopyright{usgov}
+%\setcopyright{usgovmixed}
+%\setcopyright{cagov}
+%\setcopyright{cagovmixed}
+
+
+% DOI
+%\acmDOI{10.475/123_4}
+
+% ISBN
+%\acmISBN{123-4567-24-567/08/06}
+
+%Conference
+%\acmConference[MMSys'2018]{ACM Woodstock conference}{July 1997}{El
+ % Paso, Texas USA} 
+%\acmYear{1997}
+%\copyrightyear{2016}
+
+
+%\acmArticle{4}
+%\acmPrice{15.00}
+
+% These commands are optional
+%\acmBooktitle{Transactions of the ACM Woodstock conference}
+%\editor{Jennifer B. Sartor}
+%\editor{Theo D'Hondt}
+%\editor{Wolfgang De Meuter}
+
+
+\begin{document}
+\title{CrowdNote: Turning Wisdom and Effort of Crowds into Complex Media  Annotation}
+
+\author{Marcello N. de Amorim}
+\affiliation{%
+  \institution{Federal University of Esp\'irito Santo}
+}
+\email{novaes@inf.ufes.br}
+
+\author{F\'abio R. de A. Neto}
+\affiliation{%
+  \institution{Federal University of Esp\'irito Santo}
+}
+\email{fabio.ribeiro.neto@gmail.com}
+
+\author{Celso A. S. Santos}
+\affiliation{%
+  \institution{Federal University of Esp\'irito Santo}
+}
+\email{saibel@inf.ufes.br}
+
+
+% The default list of authors is too long for headers.
+\renewcommand{\shortauthors}{Marcello N. de Amorim et. al.}
+
+
+\begin{abstract}
+	\input{abstract}
+\end{abstract}
+
+\begin{CCSXML}
+<ccs2012>
+<concept>
+<concept_id>10002951.10003260.10003282.10003296</concept_id>
+<concept_desc>Information systems~Crowdsourcing</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+<concept>
+<concept_id>10003120.10003130.10003131.10003570</concept_id>
+<concept_desc>Human-centered computing~Computer supported cooperative work</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+<concept>
+<concept_id>10010405.10010497.10010510.10010513</concept_id>
+<concept_desc>Applied computing~Annotation</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+<concept>
+<concept_id>10002951.10003227.10003251</concept_id>
+<concept_desc>Information systems~Multimedia information systems</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+<concept>
+<concept_id>10003120.10003121.10003124.10010868</concept_id>
+<concept_desc>Human-centered computing~Web-based interaction</concept_desc>
+<concept_significance>500</concept_significance>
+</concept>
+</ccs2012>
+\end{CCSXML}
+
+\ccsdesc[500]{Information systems~Multimedia information systems}
+\ccsdesc[500]{Human-centered computing~Web-based interaction}
+\ccsdesc[500]{Information systems~Crowdsourcing}
+\ccsdesc[500]{Human-centered computing~Computer supported cooperative work}
+\ccsdesc[500]{Applied computing~Annotation}
+
+
+\keywords{Crowdsourcing, Media Annotation, Video Annotation, Human Computation, Microtasks, Multimedia Systems, Video Enrichment}
+
+
+\maketitle
+
+\pagebreak
+\section{Introduction}
+	\input{introduction}
+
+\section{Related Concepts}
+	\input{human}
+
+	\subsection{Human Computation}
+	\input{human-computation}
+
+%	\subsection{Microtasks}
+%	\input{microtasks}
+
+	\subsection{Crowdsourcing}
+	\input{crowdsourcing}
+
+	\subsection{The Wisdom of Crowds}
+	\input{woc}
+	
+\section{Related Work}
+	\input{related}
+
+\section{CrowdNote}
+
+\subsection{Method} 
+	\input{method}
+
+\subsection{Framework}
+	\input{framework}
+
+\section{Case Study}
+	\input{experiment}
+
+\section{Final Remarks}
+	\input{conclusion}
+
+\begin{acks}
+	\input{acknowledgement}
+\end{acks}
+
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{references} 
+
+\end{document}

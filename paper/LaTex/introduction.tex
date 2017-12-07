@@ -1,0 +1,55 @@
+Media annotation consists of supplementing media objects, such as videos, images and audios, by adding metadata about their content and context,  also to describing media characteristics such as quality, encoding, among other features \cite{Wang:2009:BDM:1652990.1653002}. This supplementary information can be used to make easier the work of users and systems that can handle annotated items \cite{172450}. It allows highlighting key points as well as add information to content presented\cite{Cunha:2015:MVA:2820426.2820449}, facilitating the creation of media applications for content-based distribution \cite{Zhang:2012:KIE:2339530.2339620}, indexing \cite{Zhang:2007:PRS:1290082.1290126}, summarization \cite{Fiao:2016:AGS:3001773.3001802}, navigation \cite{Goldman:2008}, composition \cite{Wilk:2015:VCC:2713168.2713178}, among many others, by both automatic and manual means \cite{Wang:2011:ALM:1899412.1899414,Mihalcea:2007:WLD:1321440.1321475}. 
+
+In this paper, media annotations are categorized as simple and complex ones, considering that simple annotations are those that can be acquired with a simple interaction of the workers in a microtask. Complementarily, a complex annotation is one that requires the worker execute a more tedious, hard or time-consuming task, in which he needs to perform multiple interactions. 
+
+Automatic methods for media annotations often present satisfactory efficiency and interesting results, though, they generally apply techniques that require well-structured media objects and extensive examples database, such as deep learning\cite{lecun2015deep}. Unfortunately, many scenarios cannot provide these requirements, making it impossible to use automatic methods for video annotation \cite{murthy2015automatic}. 
+
+In another way, manual media annotation is suitable for these scenarios because it uses human intelligence to handle the tasks. However, manual video annotation can be high-costly because of the potentially high-density of annotation points in the video, as well as the complex nature of some annotation tasks. 
+
+An alternative to achieving a media annotation in a general scenario is to employ collaborative or cooperative approaches, which are differentiated in this paper. In a collaborative approach, the contributors work together to solve the main problem. Otherwise, in a cooperative approach, each contributor solves a part of the main problem to produce a final result \cite{misanchuk2001building}.
+
+Taking cooperative approaches to a higher level, crowdsourcing media annotation has emerged as a proposal to annotate media objects using a large number of contributors efficiently \cite{VonAhn:2005:HC:1168246}. Following the crowdsourcing principles, the tasks distributed to the workers are modeled to be done independently, maximizing the parallelism \citep{Howe2006}. Moreover, each task can be sent to many contributors, making possible to compare, check and to aggregate the contributions also reducing the chance of producing a biased result \cite{GALTON1907}.
+
+A frequent problem of using a crowdsourcing approach to media annotation is to balance the relationship between task complexity and cost. Simple annotation tasks, such as clicking an object on a video, can be done in a few seconds for anyone. Otherwise, more complex tasks such as providing complementary content and positioning it in the right position on a video, require some expertise of contributors and are more costly to them. In a crowdsourcing context, microtask is a ubiquitous designation for simple tasks that can be performed for any contributor quick and easily \cite{Difallah:2015:DMC:2736277.2741685}.
+
+The method presented in this paper aims to achieve a complex media annotation without requiring trained workers or experts, employing a set of simple annotation tools rather than complex and expensive annotation systems. In this way, a complex annotation process is divided into a set of simple annotation microtasks, and based on them is defined a workflow to generating the outcome. This aims to provide ways to get around some problems faced in achieving a complex media annotation:
+
+\begin{itemize}
+
+\item By using manual annotations, no example bases or restricted conditions are required as in automatic methods.
+
+\item By using a microtask-based crowdsourcing process is not required experts nor trained workers. Also, it makes the contribution process simple and quick, avoiding time-consuming and tedious tasks to workers.
+
+\item By using microtasks in which only a simple annotation is collected is not required sophisticated annotation tools.
+\end{itemize}
+
+
+%This paper presents an updated version of CrowdNote, with improvements that made it more flexible and useful by overcoming some important limitations detected in the previous version. The main limitations addressed were:
+%\begin{itemize}
+
+%\item Only videos was annotated.
+
+%\item Only supported linear workflows was supported.
+
+%\item The output from each microtask process was designed specifically to use as input to the next microtask.
+
+%\item Only automatic aggregation methods was supported.
+%\end{itemize}
+
+Following this method, each simple annotation microtask is modeled here as a process composed by two step: Collection and Aggregation. In the Collection step the contributions are received from the crowd, and in the Aggregation step these  contributions are processed in order to generate its output. 
+
+Also, each microtask is treated as a human computation function, producing an output that can be used as input to the next one in the workflow. In this way, the complex annotation production workflow is treated as a human computation algorithm. This point of view allows to design some features such as generate multiply outputs from a microtask to create simple outcomes from each partial result. These outcomes can be datasets, sumaries, marks and more, so a complex annotation process can generate multiple output artifacts.
+
+A previous version of the method, called CrowdNote, was introduced with some limitation \citep{172450}. This updated version of CrowdNote has incorporated the human computation algorithm concept, which allows to create more flexible production workflows and to produce multiple outputs for each microtask. The scope of the method has also been expanded, including annotations for various media types instead of just videos.
+
+This version also supports automatic, manual and supervised aggregation methods, instead, only automatic ones. Supervised methods are specially useful when is not possible specify rules or algorithms to generate an output from the contributions, this usually involves subjectivity, emotions and other human abilities.
+
+To demonstrate the operation of the method was developed a video enrichment system that was built over a flexible architecture that can handle contributions from internal groups, public groups, and platforms such as Amazon Mechanical Turk, Crowdflower, and Microworkers. Then, an experiment was conducted in which the crowd was responsible for:
+\begin{itemize}
+\item Identify the points of interest.
+\item Suggest extra content.
+\item Select the best content for each point of interest.
+\item Position them in the scenes. 
+\end{itemize}
+
+The rest of this paper is structured as follows. Section 2 presents the concepts used and how they are employed in the proposed approach. Section 3 presents related works. Section 4 presents the extended CrowdNote method and framework. Section 5 presents the conducted experiment. Finally, section 5 concludes the paper presenting final considerations and future prospects.

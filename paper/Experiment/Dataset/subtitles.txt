@@ -1,0 +1,29 @@
+
+Ada Lovelace was a brilliant woman that helped to develop the basis of all modern computing.
+
+She had studied mathematics and was included in the scientific circles of the 19th century.
+
+In special, she had contact with the work of Babbage and became fascinated by his machine.
+
+At a certain point Ada asked Babbage to be her tutor, but he declined it.
+
+However, Babbage recommended other great figure, Augustus DeMorgan.
+
+DeMorgan accepted to advise her, and had influenced her with his theories about logical relations
+and properties.
+
+DeMorgan taught her some formalism and opened her mind to other points of view.
+
+Based on that, Ada wrote her Notes about the Babbage Analytics Engine, and these Notes 
+were published in 1843. 
+
+In this work she described the main logical structures still used nowadays in computers programming.
+
+Few years later George Boole created his binary algebra system. 
+
+In 1937, Turing published a work describing his universal computer and Claude Shannon 
+described how circuits of switches can perform Boolean tasks.
+
+At this point all theory was developed and the scientists were ready to design the first computers.
+
+

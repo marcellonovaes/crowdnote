@@ -1,0 +1,28 @@
+In order to achieve complex media annotation CrowdNote uses a process workflow composed by a set of simple media annotation tasks. Each simple media annotation task is modeled as a microtask, following some requirements to make the process compatible with an unspecialized crowd and simple annotation tools. 
+
+Microtasks are widely used in crowdsourcing projects and this kind of task is supported by well-established commercial platforms such as Amazon Mechanical Turk, CrowdFlower and Microworks.  According to these requirements microtasks should be:
+\begin{itemize}
+	\item{Small:} a worker must complete a task by means of few interactions, preferably by a single interaction.
+	
+	\item{Quick:} it should be possible to complete a task in a very short time, preferably within a few minutes.
+
+	\item{Easy:} the easier the task, the less skilled the workers should be. Preferably, a task must be modeled so that it can be performed by any worker, just read the instructions and have the technical requirements for the task, such as minimal screen resolution, audio devices, or minimal Internet connection speed.
+\end{itemize}
+
+\pagebreak
+In CrowdNote each microtask is modeled as a process composed by two steps: collection and aggregation. The collection step uses annotation tools to gather contributions from the crowd, and the aggregation step processes the collected data in order to generate the output. Actually, the updated version of CrowdNote supports both multiple outputs per microtask and three classes of aggregation methods.
+
+Multiply outputs per task allow product at the same task different artifacts. It is possible at the same time generate a partial output to be used to feed the next task in the production workflow, even it is possible to generate an simple outcome such as datasets, sumaries, tag lists and more. The three classes of aggregation method are: automatic, manual and supervised.
+ 
+\begin{itemize}
+
+ 
+\item{Automatic methods} are rule-based and uses automatic filters, statistic techniques and convergence metrics to merge the contributions into an output.
+ 
+\item{Manual methods} are used when is not possible to explicit a set of rules to generate the desired output. This kind of aggregation allows to use human intelligence to generate results which is very interesting in cases at the contributions involve emotions, subjectivity or creativity. 
+
+\item{Supervised methods} are based on automatic method, although they combine human work to validate or adjust the aggregated result.
+\end{itemize} 
+
+
+In addition, simple media annotation tasks that follow CrowdNote requirements can be accomplished by very simple annotation tools, which can usually be simple Web forms. The CrowdNote Framework provides a library of aggregation methods and simple media annotation tools that can be used to create new projects, extended, even used as templates.
