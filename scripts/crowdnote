@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# copy in /etc/init.d
+# update-rc.d crowdnote defaults
+
+cd /var/www/crowdnote
+
+start(){
+nohup mongod --dbpath ./db > /tmp/db.log &
+sleep 1
+nohup forever ./node_modules/mongo-express/app.js > /tmp/db_ui.log &
+nohup forever ./app.js > /tmp/crowdnote.log &
+nohup forever ./mmsys.js > /tmp/crowdnote_mmsys.log &
+}
+
+stop(){
+killall forever
+killall node
+killall nodejs
+killall mongod
+}
+
+case "$1" in
+start)
+start
+;;
+stop)
+stop
+;;
+*)
+echo "Usage: $0 {start|stop}"
+exit 1
+;;
+esac
+exit 0
+
+
