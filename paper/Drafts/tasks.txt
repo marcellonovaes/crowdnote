@@ -1,0 +1,21 @@
+Task 0: 
+
+Objective: identify a Point of Interest in a video segment.
+
+Input: the worker receives a video segment with length between 4.5s and 7s.
+
+Output:
+
+Instructions: 
+
+Annotation Tool:
+
+Aggregation: para esta task foi escolhido um método de agregação supervisionado no qual a interação humana ocorre no final do processo. 
+
+Os ponto de interesse são agrupados por intervalos de 2 segundos. 
+
+Em cada grupo é feita uma analise de similaridade, e a ocorrência mais frequente é selecionada.
+
+Finalmente o supervisor humano edita o rótulo selecionado para que o texto fique visualmente agradável.
+
+

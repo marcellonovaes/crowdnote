@@ -1,107 +1,93 @@
--- 	WFA Webmedia 2017 \cite{175831}
+Figure~\ref{architecture} shows the framework designed to support our method. This framework offers specific tools that help the design and aggregation of tasks, which are essential activities to put our proposed method in practice.
 
+%\begin{figure*}[ht!]
+%	\centerline{\includegraphics[scale=0.5] {figure/system}}
+%	\caption{Framework Architecture}
+%	\label{architecture}
+%\end{figure*}
 
-%CrowdNote was developed as a classic Web system. To facilitate the sharing of all produced software, only technologies that do not require complex infrastructure were adopted. The Server was fully developed in NodeJS for easy deployment, the Client was developed in HTML 5 to improve compatibility, and the Database uses MongoDB as No-SQL database for flexible persistence.
-
-CrowdNote was developed as a classic Web system. To facilitate the sharing of all produced software, only technologies that do not require complex infrastructure were adopted. The Server was fully developed in NodeJS for easy deployment, the Client was developed in HTML 5 to improve compatibility, and the Database uses MongoDB as No-SQL database for flexible persistence.
-
-The architecture of the CrowdNote is illustrated in Figure~\ref{architecture} in which is possible to observe the 3 main components: Server, Database, and Clients.
-
-
-%The architecture of the CrowdNote is illustrated in Figure~\ref{architecture} in which is possible observe the 3 main components: Server, Database, and Clients.
-
-\begin{figure}[h!]
-	\centerline{\includegraphics[scale=0.3] {figure/Architecture}}
-	\caption{CrowdNote Architecture}
-	\label{architecture}
-\end{figure}
-
-\subsection{The Server Component}
-%The server system, illustrated in Figure~\ref{workflow}, is composed of 3 modules: Collector, Aggregator and Player Provider.
-
-The server system, illustrated in Figure~\ref{workflow}, is composed of 3 modules: Collector, Aggregator and Player Provider.
-
-
-
-%The server system is composed of 3 modules: Collector, Aggregator and Player Provider.
+\subsection{Database}
+%The database module contains the persistence component that is the point of communication between the modules of the structure. In this way, the modules can be decoupled, increasing the flexibility of the system and the possibilities of integration with external environments in a service-oriented architecture. 
+%The communication interfaces between the persistence component and the others can be seen in Figure~\ref{persistence}.
 
 %\begin{figure}[h!]
-%	\centerline{\includegraphics[scale=0.4] {figure/server}}
-%	\caption{Server Component}
-%	\label{server}
-%\end{figure}
-
-\begin{itemize}
-
-\item \textbf{Collector: }The Collector sends the jobs to the workers, receives the annotations from them, and stores the annotations into the Database. Information is exchanged between the Collector and the Client as JSON messages through HTTP requests for cross-platform compatibility.
-
-\item \textbf{Aggregator: }The Aggregator verifies, filters, groups, and processes the collected annotations of the crowd according to the rules defined for each task, and then stores the result in the Database.
-
-\item \textbf{Player Provider: }The Player Provider sends to the client the annotations, the extra content, and the original video. Thus, the player on the client can play the enriched video synchronously.
-
-
-\end{itemize}
-
-\subsection{The Database Component}
-%The persistence was addressed using MongoDB, which delivers a very attractive solution to build No-SQL databases with some characteristics that meet the crowdsourcing requirements such as high write load, high availability in an unreliable environment,  easy scaling and partition, heterogeneous data into the same collection.
-
-The persistence was addressed using MongoDB, which delivers a very attractive solution to build No-SQL databases with some characteristics that meet the crowdsourcing requirements such as high write load, high availability in an unreliable environment, easy scaling and partition, heterogeneous data into the same collection.
-
-In this model, JSON document collections are used instead of tables, and the documents in each collection may have a different structure to store different attributes. This feature allowed the modeling of a very simple database structure, composed of 3 collections of documents. It was possible because documents in the Input and Output collections can contain different fields according to the task that consumes or generates the entries.
-
-%In this model, JSON document collections are used instead of tables, and the documents in each collection may have a different structure to store different attributes. This feature allowed the modeling of a very simple database structure, composed of 3 collections of documents. It was possible because documents in the Input and Output collections can contain different fields according to the task that consumes or generates the entries.
-
-%In this model, JSON document collections are used instead of tables, and the documents in each collection may have a different structure to store different attributes. This feature allowed the modeling of a very simple database structure, composed of 3 collections of documents, as can be seen in Figure~\ref{persistence}. It was possible because documents in the Input and Output collections can contain different fields according to the task that consumes or generates the entries.
-
-%The Video collection stores entries related to the video segments dataset, the Input collection stores the input entries to the tasks, and the Output collection stores the contributions collected from the crowd. The result of the aggregation for each task is stored in the Input collection to be used by the next task, supporting the cascading tasks approach.
-
-The Video collection stores entries related to the video segments dataset, the Input collection stores the input entries to the tasks, and the Output collection stores the contributions collected from the crowd. The result of the aggregation for each task is stored in the Input collection to be used by the next task, supporting the cascading tasks approach.
-
-%\begin{figure}[h]
-%	\centerline{\includegraphics[scale=0.3] {figure/Persistence}}
-%	\caption{No-SQL Database - JSON Documents Collections}
+%	\centerline{\includegraphics[scale=0.25] {figure/persistence}}
+%	\caption{Persistence component}
 %	\label{persistence}
 %\end{figure}
 
 
+The persistence component sends to the server module the information required to render in the client both, the job requests to workers and the content needed to present the result to the users. Once the persistence component communicates with its own database.
+%, there is no need for the crowdsourcing platform, if used, to have access to the dataset.
 
-\subsection{The Client Component}
-%The client consists of simple forms-based annotation tools and a player capable of playing video content and content synchronously. The client has been fully developed in HTML5, in the simplest way possible. For each task, a simple annotation tool was created to collect contributions.
+Likewise, contributions provided by workers are sent directly from the collector to the persistence component, so that they are stored directly in the database without having to go through the external crowdsourcing environment in no time
 
-The client consists of simple forms-based annotation tools and a player capable of playing video and extra content synchronously. The client has been fully developed in HTML5, in the simplest way possible. For each task, a simple annotation tool was created to collect contributions.
+The aggregation component also communicates directly with persistence. The aggregator requests each run the collected contributions to a task and, after the aggregation process, sends the result to be stored from the database to be used as input to the next task, again maintaining data privacy because it does not need to be stored in any external environment.
 
-The Client communicates with the Server through JSON messages and HTTP requests so that they can be deployed on different systems and sites or even on crowdsourcing platforms such as Amazon Mechanical Turk, Crowdflower and Microworkers \cite{Difallah:2015:DMC:2736277.2741685}, as long as the JSON structure is respected. By using these platforms, the search and reward of workers are delegated to them, however, there is a financial cost involved in doing so.
-
-
-
-%The Client communicates with the Server through JSON messages and HTTP requests so that they can be deployed on own systems and sites or even on crowdsourcing platforms such as Amazon Mechanical Turk, Crowdflower and Microworkers \cite{Difallah:2015:DMC:2736277.2741685}, as long as the JSON structure is respected. By using these platforms, the search and reward of workers are delegated to them, however, there is a financial cost involved in doing so.
-
-
-
-\subsection{Workflow}
-%The 3 main components of CrowdNote communicate through data flows from \textbf{A} to \textbf{G}, as can be seen in the workflow in Figure~\ref{workflow}.
-
-The 3 main components of CrowdNote communicate through data flows from \textbf{A} to \textbf{G}, as can be seen in the workflow in Figure~\ref{workflow}.
-
-
-\begin{figure}[h]
-	\centerline{\includegraphics[scale=0.33] {figure/Workflow}}
-	\caption{CrowdNote Workflow}
-	\label{workflow}
-\end{figure}
+\subsection{Server}
+The server module is responsible for distributing the jobs, managing contributions, and controlling the active task in order to execute the process workflow. This module is composed of three components: Collector, Aggregator, and Player. 
 
 \begin{itemize}
-\item \textbf{A:} To generate each job to be sent to a worker, the Collector receives an entry from the Input Collection and the corresponding entry from the Videos Collection.
+\item \textbf{Collector: } The collector feeds an annotation tool with the information about the item to be annotated, so it renders the job's interface used by the worker to perform the task. Completely, this component is also responsible for gathering the information provided by the worker in the execution of the task and sends them to the persistence so that they are stored.
 
-\item \textbf{B:} The Collector sends a job to an instance of the Client, to be executed by a worker.
+\item \textbf{Aggregator: }The aggregator verifies, filters, groups, and processes the collected annotations of the crowd according to the rules defined for each task. In this update version, the aggregation process can be fully automatic, supervised or manual. Manual aggregation is useful when is desired to evaluate each contribution as in authoring tasks. Supervise aggregation can be a good option when is possible to apply automatic methods but is required human verification of the result. Automatic aggregation is the default choice, this class of methods includes grouping, comparing, counting, calculating and other operations.
 
-\item \textbf{C:} The Client sends to the Collector the annotation made by the worker for the job received.
-
-\item \textbf{D:} The Collector stores in the Output collection the annotation collected from a worker.
-
-\item \textbf{E:} The Aggregator receives from the Output collection all annotations collected for a given task.
-
-\item \textbf{F:} The Aggregator stores the resulting entries from the aggregation process in the Input collection so that they are supplied as input to the next task.
-
-\item \textbf{G:} The outcome of the cascade of microtasks is sent by the Player Provider to the client so that it can play the video synchronously with the extra content.
+\item \textbf{Player: } The player component works in a  similar way to the collector, although it renders the content to users and its communication with the persistence is unidirectional. It feeds the client player tool with the metadata, the extra content, and the original video. Thus, the player tool on the client can play the enriched video synchronously.
 \end{itemize}
+
+
+\subsection{Client}
+The client module manages the communication interfaces with workers and users. The approach used is to use templates that are fed with the descriptive data of the visualization to be generated.
+
+In this way, it is possible to keep the entire control part on the server, accessible through the collector and player components, and therefore templates can be stored anywhere if it is accessible on the internet. This allows contributions to be collected from crowdsourcing platforms and web pages published on different hosts. In fact, this strategy allows to collect entries from different sources at the same time.
+
+Both the container collection view and the final content view display work in a similar fashion. According to the desired visualization, a model is selected and the server module is queried to obtain the necessary data to render the desired interface. 
+
+%This process is illustrated in Figure~\ref{rendering}.
+
+
+
+%\begin{figure}[h!]
+%	\centerline{\includegraphics[scale=0.28] {figure/rendering}}
+%	\caption{Job rendering}
+%	\label{rendering}
+%\end{figure}
+
+\subsection{Component Interfaces}
+
+The interaction between the system modules through the interfaces are described as follow:
+\begin{itemize}
+\item \textbf{Provide Media Input:} To generate each job to be sent to a worker, the Collector receives an entry from the Persistence component.
+
+\item \textbf{Send Job:} The Collector sends a job to a Worker who sees the task through the Client and executes it.
+
+\item \textbf{Send Job Result:} The Client sends to the Collector the annotation made by the Worker for the job received.
+
+\item \textbf{Store Media Input:} The Collector sends the collected contribution to the Persistence that stores it in the Database.
+
+\item \textbf{Provide Output Media:} The Persistence send to the Aggregator all the collected contributions for a task.
+
+\item \textbf{Store Outcome:} The Aggregator stores the resulting entries from the aggregation process in the Input collection so that they are supplied as input to the next task.
+
+\item \textbf{Provide Outcome:} The Aggregator sends the outcome to Persistence to store it.
+
+\item \textbf{Show Outcome:} The Player displays to a User the outcome generated by the cascading microtasks process.
+
+\end{itemize}
+
+The next section describes how we used this framework to apply our method in a video enrichment case study.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

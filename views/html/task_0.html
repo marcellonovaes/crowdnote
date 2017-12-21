@@ -1,182 +1,207 @@
 
 
-<!DOCTYPE html>
-
-<html lang="pt-br">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="Uma página para anotação de vídeo.">
+<meta name="description" content="Uma p&aacute;gina para anota&ccedil;&atilde;o de v&iacute;deo.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-<title>CrowdNote</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" />
-<link rel="stylesheet"  href='include?name=client.min&mime=css' >
-<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src='https://novaes.tech/include?name=client.min&mime=js'></script>
-</head>
-
-
-<body align='center'>
-
-  <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-    <header class="mdl-layout__header" style="height:180px;">
-      <div class="mdl-layout__header-row" >
-        <span class="mdl-layout-title" style='text-align:left;font-size:16px;position: fixed;margin-top:60px; margin-left:10px;'> 
-
-<center>
-<table>
-<tr>
-<td width='500' >
-<p style="font-size:18px">1. Identify in the video something that you found interesting.</p>
-
-<p style="font-size:18px">2. Pause the video the moment it appears.</p>
-
-<p style="font-size:18px">3. Write what you have identified.</p>
-
-<p style="font-size:18px">4. Click the 'SUBMIT' button.</p>
-</td>
-
-<td>
-    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-      <input class="mdl-textfield__input" type="text" id='point' name='point' autofocus >
-      <label class="mdl-textfield__label" for="point" style='color:white;text-align:center;'>Write here what you have identified</label>
-    </div>
-
-		<p align=center>
-<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt'    onClick="sendContribution()" style='width: 200px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>Submit</button>
-</p>
-</td>
-</tr>
-</table>
-	</span>
-
-      </div>
-    </header>
- 
-<div style='padding: 10px;'>
-
-	  <div id="player" style='box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'></div>
-	  
-
-
-	</div>
-
-
-<input type='hidden' id='done' name='done' >
-
-</div>
-
-
-<script>
-
-var input;
-var player;
-var delta;
-var duration;
-var tag = document.createElement('script');
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName('script')[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-
-function onYouTubeIframeAPIReady() {
-  $.getJSON('https://novaes.tech/job', function(data){init(data);});
-/*  init({
-    "_id": "59a59b2070092a3e7fbcea38",
-    "start": "28",
-    "end": "40",
-    "uri": "UTg6fdKi9TI",
-    "job_id": "UTg6fdKi9TI",
-    "fingerprint": "UTg6fdKi9TI",
-    "instant": "28.789830000000002",
-    "point": "Caô",
-    "item_index": 0
-});*/
-
+<title></title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" rel="stylesheet" />
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+<script src="https://novaes.tech/include?name=client.min&amp;mime=js">
+</script>
+<style type="text/css">.modal {
+  display: none;
+  font-size:30px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
+  position: fixed;
+  z-index: 100;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.75);
 }
-
-function init(data){
-  input = data;
-
-  player = new YT.Player(
-    'player',
-    {
-      playerVars: {rel: 0},
-      autoplay : 0,
-      controls: 2,
-      height: '360',
-      width: '640',
-      events: {
-        'onReady': onPlayerReady,
-        'onStateChange': onPlayerStateChange
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+</style>
+<div style='background:#3F51B5;'>
+<center>
+  <table>
+    <tbody>
+      <tr>
+        <td id="instructions" style="display:none;max-width:500px;padding:10px;">
+          <p style="font-size:18px;color:white;">1. Identify in the video something that you found interesting.
+          </p>
+          <p style="font-size:18px;color:white;">2. Pause the video the moment it appears.
+          </p>
+          <p style="font-size:18px;color:white;">3. Use the buttons [-0.1s] and [+0.1s] to locate the instant.
+          </p>
+          <p style="font-size:18px;color:white;">4. Select its type: Person, Technology or Event.
+          </p>
+          <p style="font-size:18px;color:white;">5. Write what you have identified.
+          </p>
+          <p style="font-size:18px;color:white;">6. Click the SEND button.
+          </p>
+        </td>
+        <td>
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="sendContribution()" style="width: 200px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Send</a> 
+          </p>
+          <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin-top:-15px;width:100% ; border:5px; border-color:white;font-size:18px;">
+            <input autofocus="" class="mdl-textfield__input" id="point" name="point" style="border:5px; margin-top:15px; font-size:18px;color:#4489FB" type="text" /><label class="mdl-textfield__label" for="point" style="height:70px;margin-top:10px;color:#DADADA;text-align:center;">Write here what you have identified</label> 
+          </div>
+          <p align="center">
+            <select autofocus="" class="mdl-textfield__input" id="type" name="type" style="margin-top:10px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;" type="select"><option value="person">Person</option><option value="tech">Technology</option><option value="event">Event</option>
+            </select>
+          </p>
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_instr" onclick="showInstructions()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Instructions</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(-0.1)" style="width: 60px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">- 0.1s</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(0.1)" style="width: 60px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">+ 0.1s</a> 
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</center>
+</div>
+<div style="padding: 10px;">
+  <div id="player" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"> 
+  </div>
+</div>
+<input id="done" name="done" type="hidden" />
+<div class="modal" id="modal">
+  <div class="modal-content"><span class="close">×</span>
+  </div>
+</div>
+<script>
+  var input;
+  var player;
+  var duration;
+  var instructions;
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  modal.onclick = function() {
+    modal.innerHTML = '';
+    modal.style.display = "none";
+    displayContent(cur,false);
+  }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.innerHTML = '';
+      modal.style.display = "none";
+      displayContent(cur,false);
+    }
+  }
+  function tiltTime(delta){
+    player.pauseVideo();
+    player.seekTo(player.getCurrentTime() + delta);
+  }
+  function showInstructions(){
+    modal.innerHTML ='<div style="margin-top:0px; margin-left:50px;"><p style="text-align:left;font-size:20px">1. Identify in the video something that you found interesting.<p style="text-align:left;font-size:20px">2. Pause the video the moment it appears.<p style="text-align:left;font-size:20px">3. Use the buttons [-0.1s] and [+0.1s] to locate the instant.<p style="text-align:left;font-size:20px">4. Select its type: Person, Technology or Event.<p style="text-align:left;font-size:20px">5. Write what you have identified.<p style="text-align:left;font-size:20px">6. Click the SEND button.';
+    modal.style.display = "block";
+  }
+  function onYouTubeIframeAPIReady() {
+    $.getJSON('https://novaes.tech/job', function(data){init(data);});
+  }
+  function init(data){
+    instructions = document.getElementById("instructions");
+    if(window.innerWidth >= 866){
+      instructions.style.display = 'block';
+    }
+    input = data;
+    player = new YT.Player(
+      'player',
+      {
+        playerVars: {cc_lang_pref:'en', cc_load_policy: 1, autoplay:0 ,rel: 0, controls: 2, disablekb: 1},
+        height: '360',
+        width: '640',
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      }
+    );
+  }
+  function onPlayerReady(event) {
+    duration = (input.end - input.start) + 0.5;
+    player.loadVideoById(input.uri, parseFloat(input.start));
+  }
+  function onPlayerStateChange(event) {
+    if(player.getCurrentTime() > input.end || player.getCurrentTime() < input.start){
+      player.seekTo(parseFloat(input.start));
+      player.pauseVideo();
+    }else{
+      if (event.data == YT.PlayerState.PLAYING) {
+        setTimeout(restartVideoSection, duration * 1000);
       }
     }
-  );
-
-}
-
-function onPlayerReady(event) {
-    	duration = input.end - input.start;
-  	delta = Math.random() * duration -3;
-        player.loadVideoById(input.uri, parseFloat(input.start)+parseFloat(delta));
-}
-
-function onPlayerStateChange(event) {
-  if (event.data == YT.PlayerState.PLAYING) {
-    setTimeout(restartVideoSection, duration * 1000);
   }
-}
-
-function restartVideoSection() {
-  	player.seekTo(parseFloat(input.start) + parseFloat(delta));
-	player.pauseVideo();
-}
-
-
-	
-function sendContribution(){
-	var point = document.getElementById("point");
-
-	if(point.value != ''){
-		var queryForm = "<form method='post' action='https://novaes.tech/store'>";
-		queryForm += "<input type='hidden' id='uri' name='uri'  value='"+input.uri+"' > ";
-		queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+input._id+"' > ";
-		queryForm += "<input type='hidden' id='start' name='start'  value='"+input.start+"' > ";
-		queryForm += "<input type='hidden' id='end' name='end'  value='"+input.end+"' > ";
-		queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+input.fingerprint+"' > ";
-		queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+input.job_id+"' > ";
-		queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+input.item_index+"' > ";
-		queryForm += "<input type='hidden' id='instant' name='instant'  value='"+player.getCurrentTime()+"' > ";
-		queryForm += "<input type='hidden' id='point' name='point'  value='"+point.value+"' > ";
-		queryForm += "</form>";
-
-
-		$.ajax({
-			type: 'POST',
-			url: $(queryForm).attr('action'),
-			data: $(queryForm).serialize(), 
-			success: function(result, status, request) {done();}
-		});
-	}else{
-		alert("You forgot to enter what you identified.\nYour contribution is important to us!!!");
-	}
-}
-
-function done(){
-	var done = document.getElementById("done");
-	var bt = document.getElementById("bt");
-	bt.style='visibility: hidden;';
-	done.value='ok';
-	player.stopVideo();
-	$(location).attr('href', 'thanks');
-}	
-
-
-
+  function restartVideoSection() {
+    if(player.getCurrentTime() > input.end){
+      player.seekTo(parseFloat(input.start));
+      player.pauseVideo();
+    }
+  }
+  function sendContribution(){
+    var point = document.getElementById("point");
+    var type = document.getElementById("type");
+    if(point.value != ''){
+      var queryForm = "<form method='post' action='https://novaes.tech/store'>";
+      queryForm += "<input type='hidden' id='uri' name='uri'  value='"+input.uri+"' > ";
+      queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+input._id+"' > ";
+      queryForm += "<input type='hidden' id='start' name='start'  value='"+input.start+"' > ";
+      queryForm += "<input type='hidden' id='end' name='end'  value='"+input.end+"' > ";
+      queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+input.fingerprint+"' > ";
+      queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+input.job_id+"' > ";
+      queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+input.item_index+"' > ";
+      queryForm += "<input type='hidden' id='instant' name='instant'  value='"+player.getCurrentTime()+"' > ";
+      queryForm += "<input type='hidden' id='type' name='type'  value='"+type.value+"' > ";
+      queryForm += "<input type='hidden' id='point' name='point'  value='"+point.value+"' > ";
+      queryForm += "";
+      $.ajax({
+        type: 'POST',
+        url: $(queryForm).attr('action'),
+        data: $(queryForm).serialize(), 
+        success: function(result, status, request) {done();}
+      });
+    }else{
+      alert("You forgot to enter what you identified.\nYour contribution is important to us!!!");
+    }
+  }
+  function done(){
+    var done = document.getElementById("done");
+    var bt = document.getElementById("bt");
+    bt.style='visibility: hidden;';
+    done.value='ok';
+    player.stopVideo();
+    alert("Thanks, now you can click the FINISH button.");
+    //$(location).attr('href', 'https://novaes.tech/thanks');
+  }       
 </script>
-
-
 
 
 

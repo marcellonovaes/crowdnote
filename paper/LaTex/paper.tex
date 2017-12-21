@@ -6,7 +6,10 @@
 \documentclass[sigconf]{acmart}
 
 \usepackage{booktabs} % For formal tables
-
+\usepackage{scalefnt}
+\usepackage{float}
+\usepackage{dblfloatfix}
+\usepackage{fixltx2e}
 
 % Copyright
 %\setcopyright{none}
@@ -43,29 +46,30 @@
 
 
 \begin{document}
-\title{CrowdNote: Turning Wisdom and Effort of Crowds into Complex Media  Annotation}
+\title{Turning Wisdom and Effort of Crowds into Complex Media  Annotation}
 
-\author{Marcello N. de Amorim}
-\affiliation{%
-  \institution{Federal University of Esp\'irito Santo}
-}
-\email{novaes@inf.ufes.br}
 
-\author{F\'abio R. de A. Neto}
-\affiliation{%
-  \institution{Federal University of Esp\'irito Santo}
-}
-\email{fabio.ribeiro.neto@gmail.com}
+%\author{Marcello N. de Amorim}
+%\affiliation{%
+ % \institution{Federal University of Esp\'irito Santo}
+%}
+%\email{novaes@inf.ufes.br}
 
-\author{Celso A. S. Santos}
-\affiliation{%
-  \institution{Federal University of Esp\'irito Santo}
-}
-\email{saibel@inf.ufes.br}
+%\author{F\'abio R. de A. Neto}
+%\affiliation{%
+%  \institution{Federal University of Esp\'irito Santo}
+%}
+%\email{fabio.ribeiro.neto@gmail.com}
+
+%\author{Celso A. S. Santos}
+%\affiliation{%
+ % \institution{Federal University of Esp\'irito Santo}
+%}
+%\email{saibel@inf.ufes.br}
 
 
 % The default list of authors is too long for headers.
-\renewcommand{\shortauthors}{Marcello N. de Amorim et. al.}
+%\renewcommand{\shortauthors}{Marcello N. de Amorim et. al.}
 
 
 \begin{abstract}
@@ -114,7 +118,6 @@
 
 \maketitle
 
-\pagebreak
 \section{Introduction}
 	\input{introduction}
 
@@ -124,36 +127,50 @@
 	\subsection{Human Computation}
 	\input{human-computation}
 
-%	\subsection{Microtasks}
-%	\input{microtasks}
-
 	\subsection{Crowdsourcing}
 	\input{crowdsourcing}
 
 	\subsection{The Wisdom of Crowds}
 	\input{woc}
 	
+	
+\begin{figure*}[!th]
+	\centerline{\includegraphics[scale=0.36] {figure/method}}
+	\caption{Process workflow. T (Task);  AG (Aggregation).}
+	\label{method}
+\end{figure*}
+
+
 \section{Related Work}
 	\input{related}
 
-\section{CrowdNote}
 
-\subsection{Method} 
+
+
+\section{The Proposed Method} 
 	\input{method}
 
-\subsection{Framework}
-	\input{framework}
+%\section{Framework}
+%	\input{framework}
+\begin{figure*}[ht]
+	\centerline{\includegraphics[scale=0.44] {figure/case}}
+	\caption{Video Enrichment Workflow. T (Task); AG (Aggregation); IA (Incentive Application).}
+	\label{workflow}
+\end{figure*}
+
 
 \section{Case Study}
 	\input{experiment}
 
-\section{Final Remarks}
+\pagebreak
+
+
+\section{Conclusion}
 	\input{conclusion}
 
 \begin{acks}
 	\input{acknowledgement}
 \end{acks}
-
 
 \bibliographystyle{ACM-Reference-Format}
 \bibliography{references} 
