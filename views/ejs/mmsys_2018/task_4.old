@@ -78,7 +78,6 @@
 <td style='padding:10px;'>
 <p style="font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;" onClick='displayContent(cur,true)'   id="tx_point"></p>
 </p>
-<p><select id='list' onchange='syncPoint()' style='width:285px;'></select></p>
 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_previous'    onClick="navigate(-1)" style='font-size:12px;height:30px;width: 93px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>previous</button>
 
 <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_zoom'    onClick='displayContent(cur,true)' style='font-size:12px;height:30px;width: 93px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'>zoom</button>
@@ -112,9 +111,6 @@
     <span class="close">&times;</span>
   </div>
 </div>
-
-
-
 
 <script>
 var timeout = 2;
@@ -151,8 +147,6 @@ var firstScriptTag = document.getElementsByTagName('script')[0];
 firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 var image = null;
-
-var list;
 
 modal.onclick = function() {
         modal.innerHTML = '';
@@ -246,12 +240,6 @@ function init(data){
 
   input.sort(function(a, b){ if(b.instant < a.instant) return 1; return -1 });
 
-//////////////
-	loadList(input);
-/////////////
-
-
-
   max = input.length;
   end = input[input.length-1].end;
 
@@ -331,18 +319,10 @@ function navigate(step){
 	displayPoint(cur);
 }
 
-function displayPoint(x,index,inst){
-
-if(index == null){
+function displayPoint(x){
 
   var t = Math.floor(player.getCurrentTime()); 
   var idx = contents[t];
-
-}else{
-	idx = 3*index;
-	player.seekTo(inst);
-}
-
   if(idx == -1){
 	blank = 1;
 	cur++;
@@ -365,10 +345,8 @@ if(cur == idx && blank == 0) return;
   tx_content.style.display = 'block';
   tx_point.innerHTML = item.point;
 
-	list.selectedIndex = cur/3;
 
-	var w = window.innerWidth;
-
+var w = window.innerWidth;
   switch(item.content_type){
         case 'image' :
 		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.5) 100%),url("https://novaes.tech/images?name=ico_zoom&mime=png");background-size: 50px 50px;background-align:center;background-padding:0px;';
@@ -414,25 +392,7 @@ if(w >= 600){
 }
 
 
-
-function loadList(input){	
-	list = document.getElementById('list');
-	for(var i=0; i<input.length; i+=3){		
-		list.add(new Option(input[i].point, input[i].instant));	
-	}	
-	//list.size = input.length/3;
-}
-
-function syncPoint(){
-	displayPoint(0,list.selectedIndex,list.value);
-			player.pauseVideo();
-
-}
-
-
 </script>
-
-
 
 
 
