@@ -1,9 +1,9 @@
 // ---------------------- Requires, Includes and Globals ------------------------
 
-var project = 'mmsys_2018';
+var project = 'qomex_2018';
 var qtd_target = 100;
-var activeTask = 4;
-var kind = 'player';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
+var activeTask = 0;
+var kind = 'job';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
 var group = false;//Tasks 1, 3, 4: false; Task 2: true;
 
 if(kind == 'job'){
@@ -59,6 +59,9 @@ itemSchema = Schema({
         start: String,
 	end: String,   
 	instant: String,
+
+	// for segmentation tasks
+	marks: String,
 
 	// at Runtime
 	item_index: String,
@@ -229,6 +232,8 @@ app.get('/job', function(req, res) {
 
 app.post('/store', function(req, res) {
 	var data = req.body;
+
+
 	input[data.item_index].qtd++;
 	if(input[data.item_index].qtd >= qtd_target){
 		input.splice( data.item_index, 1 );
