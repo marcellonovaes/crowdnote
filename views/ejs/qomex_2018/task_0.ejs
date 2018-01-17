@@ -82,32 +82,34 @@
   <table>
     <tbody>
       <tr>
+        <td id="presentation" style="display:none;max-width:800px;padding:1px;">
+          <p style="font-size:18px;color:white;text-align: justify;">Imagine that you are immersed in the environment of the movie. Taking it into account, you are going to point out exact points in time that you think there is a lack of wind or vibration effects. </p>
+	</td>
+	</tr>     
+</tbody>
+</table>
+  <table>
+    <tbody>
+      <tr>
         <td id="instructions" style="display:none;max-width:500px;padding:10px;">
-          <p style="font-size:18px;color:white;">1. Identify in the video something that you found interesting.
-          </p>
-          <p style="font-size:18px;color:white;">2. Pause the video the moment it appears.
-          </p>
-          <p style="font-size:18px;color:white;">3. Use the buttons [-0.1s] and [+0.1s] to locate the instant.
-          </p>
-          <p style="font-size:18px;color:white;">4. Select its type: Person, Technology or Theory.
-          </p>
-          <p style="font-size:18px;color:white;">5. Write what you have identified.
-          </p>
-          <p style="font-size:18px;color:white;">6. Click the SEND button.
-          </p>
+          <p style="font-size:18px;color:white;">1. Find a calm moment.</p>  
+	<p style="font-size:18px;color:white;">2. Please pause the video at the beginning of this moment.<br><i>(use - and + buttons to adjust)</i></p>
+	<p style="font-size:18px;color:white;">3. Click on 'ADD MARK' button to add the mark.<br><i>(If you made a mistake, click on 'DEL MARK' to delete it)</i></p>
+	<p style="font-size:18px;color:white;">4. Do the steps 1, 2 and 3 until the end of the movie.</p>
+	<p style="font-size:18px;color:white;">5. Click the SEND CONTRIBUTIONS button.</p>
         </td>
         <td>
-          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="sendContribution()" style="width: 200px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Send</a> 
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="sendContribution()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Send Contributions</a> 
           </p>
-          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="addMark()" style="width: 200px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Add Mark</a> 
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="addMark()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Add Mark</a> 
           </p>
-          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="delMark()" style="width: 200px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Del Mark</a> 
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="delMark()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Del Mark</a> 
           </p>
           <p align="center">
             <select autofocus="" class="mdl-textfield__input" id="list_marks" name="list_marks" onchange="syncMark()" style="margin-top:10px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;" type="select">
             </select>
           </p>
-          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_instr" onclick="showInstructions()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Instructions</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(-0.1)" style="width: 60px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">- 0.1s</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(0.1)" style="width: 60px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">+ 0.1s</a> 
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_instr" onclick="showInstructions()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Instructions</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(-0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">- 0.1s</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">+ 0.1s</a> 
           </p>
         </td>
       </tr>
@@ -135,6 +137,7 @@
   var player;
   var duration;
   var instructions;
+  var presentation;
   var tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
   var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -156,8 +159,10 @@
     player.seekTo(player.getCurrentTime() + delta);
   }
   function showInstructions(){
-    modal.innerHTML ='<div style="margin-top:0px; margin-left:50px;"><p style="text-align:left;font-size:20px">1. Identify in the video something that you found interesting.<p style="text-align:left;font-size:20px">2. Pause the video the moment it appears.<p style="text-align:left;font-size:20px">3. Use the buttons [-0.1s] and [+0.1s] to locate the instant.<p style="text-align:left;font-size:20px">4. Select its type: Person, Technology or Event.<p style="text-align:left;font-size:20px">5. Write what you have identified.<p style="text-align:left;font-size:20px">6. Click the SEND button.';
-    modal.style.display = "block";
+   
+    modal.innerHTML ='<div style="margin-top:0px; margin-left:50px;"><p style="text-align:justified;font-size:20px">Imagine that you are immersed in the environment of the movie.<br>Taking it into account, you are going to point out exact points in time that you think there is a lack of wind or vibration.</p><p style="text-align:left;font-size:20px">1. Find a calm moment.</p><p style="text-align:left;font-size:20px">2. Please pause the video at the beginning of this moment.<br><i>(use - and + buttons to adjust)</i></p><p style="text-align:left;font-size:20px">3. Click on ADD MARK button to add the mark.<br><i>(If you made a mistake, click on DEL MARK to delete it)</i></p><p style="text-align:left;font-size:20px">4. Do the steps 1, 2 and 3 until the end of the movie.</p><p style="text-align:left;font-size:20px">5. Click the SEND CONTRIBUTIONS button.</p>';
+
+ modal.style.display = "block";
   }
   function onYouTubeIframeAPIReady() {
     $.getJSON('https://novaes.tech/job', function(data){init(data);});
@@ -166,8 +171,10 @@
     list_marks = document.getElementById("list_marks");
     mark_bar = document.getElementById("mark_bar");
 
+    presentation = document.getElementById("presentation");
     instructions = document.getElementById("instructions");
     if(window.innerWidth >= 866){
+      presentation.style.display = 'block';
       instructions.style.display = 'block';
     }
     input = data;
@@ -234,14 +241,26 @@
     
 
 	//var h = parseFloat($("#player").css("heigth")) +40 +60;
-	h = 594;
+	h = 672;
 
 	if(window.innerWidth < 866){
-		h -= 9;
+		h -= 83;
 	}
 
    var mark = document.createElement("MARK");
-	mark.style = 'pointer-events: none; float:left;top:'+h+'px; left:'+position+'px; position:absolute; background:blue; width:10px; height:5px;';
+	mark.value = instant;
+	mark.onclick = function(){
+				for(var index=0; index<list_marks.options.length; index++){
+					if(list_marks.options[index].value == instant){
+						list_marks.selectedIndex = index;
+						break;
+					}
+				}
+        			player.seekTo(instant);
+        			player.pauseVideo();
+			}        
+	//mark.style = 'pointer-events: none; float:left;top:'+h+'px; left:'+position+'px; position:absolute; background:blue; width:10px; height:5px;';
+	mark.style = 'float:left;top:'+h+'px; left:'+position+'px; position:absolute; background:blue; width:10px; height:5px;';
 	mark_bar.append(mark);
 
 
