@@ -118,10 +118,7 @@
 <div style="padding: 10px;">
   <div id="player" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"> 
 </div>
-<div class="w3-light-grey"> 
- <div id="timeline" class='w3-red' style="height:30px; box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"></div>
-</div>
-<div id='mark_bar' >
+<div id='mark_bar'  class="w3-light-grey"> 
 </div>
 </div>
 <input id="done" name="done" type="hidden" />
@@ -132,7 +129,6 @@
 <script>
   var video_width = 640;
   var mark_bar;
-  var timeline;
   var marks = new Array();
   var list_marks;
   var input;
@@ -169,7 +165,6 @@
   function init(data){
     list_marks = document.getElementById("list_marks");
     mark_bar = document.getElementById("mark_bar");
-    timeline = document.getElementById("timeline");
 
     instructions = document.getElementById("instructions");
     if(window.innerWidth >= 866){
@@ -182,6 +177,7 @@
         playerVars: {cc_lang_pref:'en', cc_load_policy: 0, autoplay:0 ,rel: 0, controls: 2, disablekb: 1},
         height: '360',
         width: '640',
+	autohide: '0',
         events: {
           'onReady': onPlayerReady,
           'onStateChange': onPlayerStateChange
@@ -193,14 +189,7 @@
     duration = (input.end - input.start) + 0.5;
     player.loadVideoById(input.uri, parseFloat(input.start));
    
-  setInterval(function() {syncTimeline();}, 10);
  } 
-
-  function syncTimeline(){
-	var progress = 100 * player.getCurrentTime() / input.end;
-	timeline.style.width =	progress + '%';
-  }
-
   function onPlayerStateChange(event) {
     if(player.getCurrentTime() > input.end || player.getCurrentTime() < input.start){
       player.seekTo(parseFloat(input.start));
@@ -224,6 +213,10 @@
 		var mark = list_marks.selectedIndex;
 		list_marks.selectedIndex = mark - 1;
 		list_marks.remove(mark);
+
+
+		var m = document.getElementsByTagName("MARK")[mark];
+		m.remove(m);
 	}
   }
   function addMark(){
@@ -239,8 +232,16 @@
 	var e = input.end;
 	var position = 10 + ( w * t / e);
     
-   var mark = document.createElement("DIV");
-	mark.style = 'float:left;left:'+position+'px; position:absolute; background:blue; width:10px; height:40px;';
+
+	//var h = parseFloat($("#player").css("heigth")) +40 +60;
+	h = 594;
+
+	if(window.innerWidth < 866){
+		h -= 9;
+	}
+
+   var mark = document.createElement("MARK");
+	mark.style = 'pointer-events: none; float:left;top:'+h+'px; left:'+position+'px; position:absolute; background:blue; width:10px; height:5px;';
 	mark_bar.append(mark);
 
 
