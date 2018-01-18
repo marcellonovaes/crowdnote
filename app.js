@@ -2,7 +2,7 @@
 
 var project = 'qomex_2018';
 var qtd_target = 100;
-var activeTask = 0;
+var activeTask = 1;
 var kind = 'job';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
 var group = false;//Tasks 1, 3, 4: false; Task 2: true;
 

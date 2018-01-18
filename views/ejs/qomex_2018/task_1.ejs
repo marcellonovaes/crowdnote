@@ -5,14 +5,20 @@
 <meta name="description" content="Uma p&aacute;gina para anota&ccedil;&atilde;o de v&iacute;deo.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 <title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 <link href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" rel="stylesheet" />
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js">
 </script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 </script>
 <script src="https://novaes.tech/include?name=client.min&amp;mime=js">
 </script>
+
 <style type="text/css">.modal {
   display: none;
   font-size:30px;
@@ -48,96 +54,105 @@
     text-decoration: none;
     cursor: pointer;
   }
+
+#circle {
+	float:left;
+	width: 40px;
+	height: 40px;
+	background: blue;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+
+
+#retangle-space {
+        float:left;
+        height: 40px;
+        width:  1px;
+        background: light-grey;
+}
+
+#retangle-mark {
+        float:left;
+        height: 40px;
+        width:  1px;
+        background: orange;
+}
+
+
+.ui-draggable, .ui-droppable {
+	background-position: top;
+}
+
+.ui-widget-header{background-image:none;background-color: orange;}
+.ui-widget-content { background: light-grey; }
+
 </style>
-<div style="background:#3F51B5;">
-  <center>
-    <table>
-      <tbody>
-        <tr>
-          <td id="instructions" style="display:block;max-width:500px;padding:10px;">
-          
-          
-          
-              <p style="font-size:18px;color:white;">Based on the video, suggest content about this <span id='point_type'>person</span>:
-              </p>
-              <p id="tx_point" style="font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;"> 
-              </p>
-              <p style="font-size:18px;color:white;">1. Select the type of content to send.
-              </p>
-              
-              <span style='text-align:center;'>
-              <p style="font-size:18px;color:rgb(68,138,255);">You can upload an image, write a short text,</p>
-              <p style="font-size:18px;color:rgb(68,138,255);">or paste a link to Youtube or Wikipedia.</p>
-			  </span>
-              
-              <p style="font-size:18px;color:white;">2. Type, paste or choose the content.
-              </p>
-              <p style="font-size:18px;color:white;">3. Click the 'SUBMIT' button.
-              </p>
-            
-            
-            
-          </td>
-          <td style='border: 1px solid white; padding:10px;'>
-          
-                <p style="font-size:18px;color:white;">
-                  	<input checked="checked" class="option" id="type" name="type" onchange="getOption(1)" type="radio" value="text" /> An explanatory text
-                </p>
-				<p style="font-size:18px;color:white;">                  
-					<input class="option" id="type" name="type" onchange="getOption(2)" type="radio" value="image" /> An image
-                </p>
-				<p style="font-size:18px;color:white;">                  
-					<input class="option" id="type" name="type" onchange="getOption(3)" type="radio" value="youtube" /> A Youtube video
-                </p>
-				<p style="font-size:18px;color:white;">                  
-					<input class="option" id="type" name="type" onchange="getOption(4)" type="radio" value="wikipedia" /> A Wikipedia page
-                </p>
-                       <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_instr" onclick="showInstructions()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Instructions</a> </p>
-
-            
-          </td>
-          
-          
-         <td style='border: 1px solid white; padding:10px;'>
-
-              <p align="center" id="contribPanel" > </p>
-
-              <p><textarea class="answer" id="contrib" name="contrib"></textarea></p>
-              <p><img id="Image" style="position: fixed; margin-top: -100px ;margin-left: 2px;max-height:80px;width:160px;" />
-              </p>
-              <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="sendContribution()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">SEND</a> 
-              </p>
-    	</td>
-          
-          
-        </tr>
-      </tbody>
-    </table>
-  </center>
+<div style='background:#3F51B5;'>
+<center>
+  <table>
+    <tbody>
+      <tr>
+        <td id="presentation" style="display:none;max-width:800px;padding:1px;">
+          <p style="font-size:18px;color:white;text-align: justify;">Imagine that you are immersed in the environment of the movie. Taking it into account, you are going to point out exact points in time that you think there is a lack of wind or vibration effects. </p>
+	</td>
+	</tr>     
+</tbody>
+</table>
+  <table>
+    <tbody>
+      <tr>
+        <td id="instructions" style="display:none;max-width:500px;padding:10px;">
+	<p style="font-size:18px;color:white;">5. Click the SEND CONTRIBUTIONS button.</p>
+        </td>
+        <td>
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="sendContribution()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Send Contributions</a> 
+          </p>
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_instr" onclick="showInstructions()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Instructions</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(-0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">- 0.1s</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">+ 0.1s</a> 
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</center>
 </div>
 <div style="padding: 10px;">
   <div id="player" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"> 
-  </div>
-</div>
-<input id="done" name="done" type="hidden" />
-<div class="modal" id="modal">
-  <div class="modal-content"><span class="close">×</span>
-  </div>
 </div>
 
+<div class="w3-light-grey"> 
+	<div id="timeline" class='w3-red' style="height:30px; box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"></div>
+</div>
+
+
+
+</div>
+<p>Wind</p>
+<div id="slider-wind"></div>
+<p>Vibration</p>
+<div id="slider-vibration"></div>
+<!-- p>	<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;"></p -->
+
+
+
+<input id="done" name="done" type="hidden" />
+<div class="modal" id="modal">
+  <div class="modal-content"><span class="close">X</span>
+  </div>
+</div>
 <script>
+  var video_width = 640;
+  var timeline;
   var input;
   var player;
-  var delta;
   var duration;
-  var content_type;
+  var instructions;
+  var presentation;
   var tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
   var firstScriptTag = document.getElementsByTagName('script')[0];
   firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-  var image = null;
-  getOption(1);
-  
   modal.onclick = function() {
     modal.innerHTML = '';
     modal.style.display = "none";
@@ -150,125 +165,72 @@
       displayContent(cur,false);
     }
   }
-  
-  
-
-
- function showInstructions(){
-    var msg = 'person';
-    switch(input.type){
-    	case 'tech': msg = 'technology'; break;
-    	case 'theory': msg = 'theory'; break;
-
-    }
-    modal.innerHTML = '<div style="margin-top:0px; margin-left:50px; "><p style="font-size:18px;color:white;">Based on the video, suggest content about this '+msg+':</p><p  style="font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;">'+ input.point +'</p><p style="font-size:18px;color:white;">1. Select the type of content to send.</p><p style="font-size:18px;color:rgb(68,138,255);">You can upload an image, write a short text,</p><p style="font-size:18px;color:rgb(68,138,255);">or paste a link to Youtube or Wikipedia.</p></span><p style="font-size:18px;color:white;">2. Type, paste or choose the content.</p><p style="font-size:18px;color:white;">3. Click the SEND button.</p>';
-    modal.style.display = "block";
+  function tiltTime(delta){
+    player.pauseVideo();
+    player.seekTo(player.getCurrentTime() + delta);
   }
-  
+  function showInstructions(){
+   
+    modal.innerHTML ='<div style="margin-top:0px; margin-left:50px;"><p style="text-align:justified;font-size:20px">Imagine that you are immersed in the environment of the movie.<br>Taking it into account, you are going to point out exact points in time that you think there is a lack of wind or vibration.</p><p style="text-align:left;font-size:20px">1. Find a calm moment.</p><p style="text-align:left;font-size:20px">2. Please pause the video at the beginning of this moment.<br><i>(use - and + buttons to adjust)</i></p><p style="text-align:left;font-size:20px">3. Click on ADD MARK button to add the mark.<br><i>(If you made a mistake, click on DEL MARK to delete it)</i></p><p style="text-align:left;font-size:20px">4. Do the steps 1, 2 and 3 until the end of the movie.</p><p style="text-align:left;font-size:20px">5. Click the SEND CONTRIBUTIONS button.</p>';
 
-              
-
-  
-  function readURL(input,output) {
-    if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function (e) {
-        output.attr('src', e.target.result);
-        image = e.target.result;
-      }
-      reader.readAsDataURL(input.files[0]);
-    }
+ modal.style.display = "block";
   }
-  
-  
-  function getOption(op){
-    var contribPanel = document.getElementById('contribPanel');
-    var contrib = document.getElementById('contrib');
-    var lbImage =  document.getElementById('lbImage');
-    if(lbImage)lbImage.remove();
-    $('#Image').attr("height","0");
-    contrib.remove();
-    switch(op){
-      case 1:
-        content_type = 'text';
-        contrib = document.createElement("textarea");
-        contrib.setAttribute("name","contrib");
-        contrib.setAttribute("id","contrib");
-        contrib.setAttribute("placeholder","Write an explanatory text here.");
-contrib.style.height = '136px';        break; 
-      case 2:
-        content_type = 'image';
-        /*      lbImage = document.createElement("label");
-                        lbImage.setAttribute("id","lbImage");
-                        lbImage.setAttribute("for","contrib");
-                        lbImage.innerHTML = "Choose Image";
-                        contribPanel.appendChild(lbImage);
-*/
-        contrib = document.createElement("input");
-        contrib.setAttribute("name","contrib");
-        contrib.setAttribute("id","contrib");
-        contrib.setAttribute("type","file");
-        contrib.setAttribute("class","contrib");
-        contrib.setAttribute("accept","image/*");
-        contrib.style.height = '84px';
-        contrib.addEventListener('change', function(){
-          $('#Image').attr("height","300");               
-          var str = this.value;
-          readURL(this,$('#Image'));
-          if(str) lbImage.innerHTML = 'Change Image';
-        });
-contrib.style.height = '140px';        break; 
-      case 3:
-        content_type = 'youtube';
-        contrib = document.createElement("textarea");
-        contrib.setAttribute("name","contrib");
-        contrib.setAttribute("id","contrib");
-        contrib.setAttribute("placeholder","Paste a link to a Youtube video here.\nEx:\nhttps://www.youtube.com/watch?v=...");
-contrib.style.height = '136px';        break; 
-      case 4:
-        content_type = 'wikipedia';
-        contrib = document.createElement("textarea");
-        contrib.setAttribute("name","contrib");
-        contrib.setAttribute("id","contrib");
-        contrib.setAttribute("placeholder","Paste a link to a Wikipedia page here.\nEx:\nhttps://pt.wikipedia.org/wiki/...");
-contrib.style.height = '136px';        break; 
-    }
-    contrib.style.width = '160px';//document.getElementById("bt").style.width;
-    
-    contribPanel.appendChild(contrib);
-  }
-  
-  
   function onYouTubeIframeAPIReady() {
     $.getJSON('https://novaes.tech/job', function(data){init(data);});
   }
-  
-  
-  
-  function init(data){    
-    
+  function init(data){
+    timeline = document.getElementById("timeline");
+    presentation = document.getElementById("presentation");
     instructions = document.getElementById("instructions");
-    if(window.innerWidth < 800){
-      instructions.style.display = 'none';
+    if(window.innerWidth >= 866){
+      presentation.style.display = 'block';
+      instructions.style.display = 'block';
     }
     input = data;
-    
-    var point_type =  document.getElementById('point_type');
-      switch(input.type){    	
-      case 'person': point_type.innerHTML = 'person'; break;
-    	case 'tech': point_type.innerHTML = 'technology'; break;
-    	case 'theory': point_type.innerHTML = 'theory'; break;
 
-    }
-    
-    document.getElementById("tx_point").innerHTML = input.point;
 
-player = new YT.Player(
+	$( function() {
+		var start = parseFloat(input.start);
+		var end = parseFloat(input.end);
+		$( "#slider-vibration" ).slider({
+			range: true,
+			step: 0.01,
+			min: start,
+			max: end,
+			values: [ start+1, end-1 ],
+			slide: function( event, ui ) {
+			//	$( "#amount" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+			}
+		});
+		//$( "#amount" ).val( $( "#slider-vibration" ).slider( "values", 0 ) + " - " + $( "#slider-vibration" ).slider( "values", 1 ) );
+	} );
+
+
+
+	$( function() {
+		var start = parseFloat(input.start);
+		var end = parseFloat(input.end);
+		$( "#slider-wind" ).slider({
+			range: true,
+			step: 0.01,
+			min: start,
+			max: end,
+			values: [ start+1, end-1 ],
+			slide: function( event, ui ) {
+			//	$( "#amount" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+			}
+		});
+		//$( "#amount" ).val( $( "#slider-wind" ).slider( "values", 0 ) + " - " + $( "#slider-wind" ).slider( "values", 1 ) );
+	} );
+
+
+    player = new YT.Player(
       'player',
       {
-        playerVars: {cc_lang_pref:'en', cc_load_policy: 1, autoplay:0 ,rel: 0, controls: 2, disablekb: 1},
+        playerVars: {cc_lang_pref:'en', cc_load_policy: 0, autoplay:0 ,rel: 0, controls: 0, disablekb: 1},
         height: '360',
         width: '640',
+	autohide: '1',
         events: {
           'onReady': onPlayerReady,
           'onStateChange': onPlayerStateChange
@@ -276,11 +238,17 @@ player = new YT.Player(
       }
     );
   }
-
   function onPlayerReady(event) {
     duration = (input.end - input.start) + 0.5;
     player.loadVideoById(input.uri, parseFloat(input.start));
-  }
+    setInterval(function() {syncTimeline();}, 100);
+ }
+
+ function syncTimeline(){
+ 	var progress = 100 * (player.getCurrentTime() - input.start) / (input.end -input.start );
+ 	timeline.style.width =	progress + '%';
+   }
+ 
   function onPlayerStateChange(event) {
     if(player.getCurrentTime() > input.end || player.getCurrentTime() < input.start){
       player.seekTo(parseFloat(input.start));
@@ -297,16 +265,13 @@ player = new YT.Player(
       player.pauseVideo();
     }
   }
-
   function sendContribution(){
 
-if(contrib.value == 'https://youtu.be/gOQPS_ILrEo'){
+var r = confirm('Are you done?');
+if(r == true){
 
-      alert("Why are you trying to paste the link to our own video ???.\nPlease, do serios work, your contribution is important to us!!!");
 
-}else{
 
-    if(contrib.value != ''){
       var queryForm = "<form method='post' action='https://novaes.tech/store'>";
       queryForm += "<input type='hidden' id='uri' name='uri'  value='"+input.uri+"' > ";
       queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+input._id+"' > ";
@@ -314,25 +279,16 @@ if(contrib.value == 'https://youtu.be/gOQPS_ILrEo'){
       queryForm += "<input type='hidden' id='end' name='end'  value='"+input.end+"' > ";
       queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+input.fingerprint+"' > ";
       queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+input.job_id+"' > ";
-      queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+input.item_index+"' > ";
-      queryForm += "<input type='hidden' id='instant' name='instant'  value='"+input.instant+"' > ";
-      queryForm += "<input type='hidden' id='point' name='point'  value='"+input.point+"' > ";
-      queryForm += "<input type='hidden' id='content_type' name='content_type'  value='"+content_type+"' > ";
-      if(image == null){
-        queryForm += "<input type='hidden' id='content' name='content'  value='"+contrib.value+"' > ";
-      }else{
-        queryForm += "<input type='hidden' id='content' name='content'  value='"+image+"' > ";
-      }
+       queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+input.item_index+"' > ";  
       queryForm += "";
+
       $.ajax({
         type: 'POST',
         url: $(queryForm).attr('action'),
-        data: $(queryForm).serialize(),
+        data: $(queryForm).serialize(), 
         success: function(result, status, request) {done();}
       });
-    }else{
-      alert("You forgot to suggest some content.\nYour contribution is important to us!!!");
-    }
+
 }
   }
   function done(){
@@ -342,10 +298,9 @@ if(contrib.value == 'https://youtu.be/gOQPS_ILrEo'){
     done.value='ok';
     player.stopVideo();
     alert("Thanks, now you can click the FINISH button.");
-    //$(location).attr('href', 'thanks');
-  }
+    //$(location).attr('href', 'https://novaes.tech/thanks');
+  }       
 </script>
-
 
 
 
