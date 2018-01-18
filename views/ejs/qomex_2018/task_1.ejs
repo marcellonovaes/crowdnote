@@ -19,7 +19,8 @@
 <script src="https://novaes.tech/include?name=client.min&amp;mime=js">
 </script>
 
-<style type="text/css">.modal {
+<style type="text/css">
+.modal {
   display: none;
   font-size:30px;
   text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
@@ -88,6 +89,42 @@
 .ui-widget-header{background-image:none;background-color: orange;}
 .ui-widget-content { background: light-grey; }
 
+
+$bg: #332f35;
+$fg: lighten($bg,20%);
+$borderWidth: 3px;
+
+input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+
+label {
+  color: lighten($bg,40%);
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 5px 20px;
+}
+
+input[type=radio]:checked + label{
+  color: lighten($bg,60%);
+  background: $fg;
+}
+
+label + input[type=radio] + label {
+  border-left: solid $borderWidth $fg;
+}
+.radio-group {
+  border: solid $borderWidth $fg;
+  display: inline-block;
+  margin: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+
 </style>
 <div style='background:#3F51B5;'>
 <center>
@@ -109,7 +146,27 @@
         <td>
           <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="sendContribution()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Send Contributions</a> 
           </p>
-          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_instr" onclick="showInstructions()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Instructions</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(-0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">- 0.1s</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">+ 0.1s</a> 
+          <!--p align="center">
+<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_instr" onclick="showInstructions()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Instructions</a> 
+</p-->
+
+
+          <p align="center">
+<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="addRange()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Add Range</a>
+<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="delRange()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Del Range</a>
+          <p align="center">
+            <select autofocus="" class="mdl-textfield__input" id="list_ranges" name="list_ranges" onchange="syncRange()" style="margin-top:10px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;" type="select">
+            </select>
+          </p>
+
+
+
+
+<p align='center'>
+                <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_play_pause" onclick="playPause()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Play</a>
+<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(-0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">- 0.1s</a> 
+
+<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">+ 0.1s</a> 
           </p>
         </td>
       </tr>
@@ -118,21 +175,22 @@
 </center>
 </div>
 <div style="padding: 10px;">
-  <div id="player" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"> 
+  <div id="player" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"> 
 </div>
 
 <div class="w3-light-grey"> 
 	<div id="timeline" class='w3-red' style="height:30px; box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"></div>
 </div>
 
-
+ <div class="radio-group">
+<center>
+<input type="radio" id="fx_wind" name="fx_type"><label for="wind">Wind</label>
+<input type="radio" id="fx_vibration" name="fx_type"><label for="vibration">Vibration</label>
+</center>
+</div>
+<div id="slider"></div>
 
 </div>
-<p>Wind</p>
-<div id="slider-wind"></div>
-<p>Vibration</p>
-<div id="slider-vibration"></div>
-<!-- p>	<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;"></p -->
 
 
 
@@ -143,12 +201,16 @@
 </div>
 <script>
   var video_width = 640;
+  var list_ranges;
+  var bt_play_pause;
   var timeline;
   var input;
   var player;
   var duration;
   var instructions;
   var presentation;
+  var fx_wind;
+  var fx_vibration;
   var tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
   var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -165,9 +227,21 @@
       displayContent(cur,false);
     }
   }
+
+  function playPause(){
+        if(player.getPlayerState() == 1){
+                player.pauseVideo();
+                bt_play_pause.text = 'Play';
+        }else{
+                player.playVideo();
+                bt_play_pause.text = 'Pause';
+        }
+  }
+
   function tiltTime(delta){
     player.pauseVideo();
-    player.seekTo(player.getCurrentTime() + delta);
+bt_play_pause.text = 'Play';  
+  player.seekTo(player.getCurrentTime() + delta);
   }
   function showInstructions(){
    
@@ -179,6 +253,9 @@
     $.getJSON('https://novaes.tech/job', function(data){init(data);});
   }
   function init(data){
+    list_ranges = document.getElementById("list_ranges");
+    fx_wind = document.getElementById("fx_wind");
+    fx_vibration = document.getElementById("fx_vibration");
     timeline = document.getElementById("timeline");
     presentation = document.getElementById("presentation");
     instructions = document.getElementById("instructions");
@@ -192,25 +269,7 @@
 	$( function() {
 		var start = parseFloat(input.start);
 		var end = parseFloat(input.end);
-		$( "#slider-vibration" ).slider({
-			range: true,
-			step: 0.01,
-			min: start,
-			max: end,
-			values: [ start+1, end-1 ],
-			slide: function( event, ui ) {
-			//	$( "#amount" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
-			}
-		});
-		//$( "#amount" ).val( $( "#slider-vibration" ).slider( "values", 0 ) + " - " + $( "#slider-vibration" ).slider( "values", 1 ) );
-	} );
-
-
-
-	$( function() {
-		var start = parseFloat(input.start);
-		var end = parseFloat(input.end);
-		$( "#slider-wind" ).slider({
+		$( "#slider" ).slider({
 			range: true,
 			step: 0.01,
 			min: start,
@@ -222,6 +281,9 @@
 		});
 		//$( "#amount" ).val( $( "#slider-wind" ).slider( "values", 0 ) + " - " + $( "#slider-wind" ).slider( "values", 1 ) );
 	} );
+
+
+
 
 
     player = new YT.Player(
@@ -253,6 +315,8 @@
     if(player.getCurrentTime() > input.end || player.getCurrentTime() < input.start){
       player.seekTo(parseFloat(input.start));
       player.pauseVideo();
+        bt_play_pause.text = 'Play';
+
     }else{
       if (event.data == YT.PlayerState.PLAYING) {
         setTimeout(restartVideoSection, duration * 1000);
@@ -263,8 +327,55 @@
     if(player.getCurrentTime() > input.end){
       player.seekTo(parseFloat(input.start));
       player.pauseVideo();
+        bt_play_pause.text = 'Play';
     }
   }
+
+  function syncRange(){
+  	var index = list_ranges.selectedIndex;
+	var range = (list_ranges.options[index].value).split(':');
+	if(range[0] == "WIND"){
+		document.getElementById("fx_wind").checked = true;
+		document.getElementById("fx_vibration").checked = false;
+	}else{
+		document.getElementById("fx_wind").checked = false;
+		document.getElementById("fx_vibration").checked = true;
+	}
+	$( "#slider" ).slider( "values", [range[1],range[2]] );
+  }
+
+  function delRange(){        
+        var r = confirm('Are you sure that want remove this range?');
+        if(r == true){
+                var range = list_ranges.selectedIndex;
+                list_ranges.selectedIndex = range - 1;
+                list_ranges.remove(range);
+      }
+  }
+
+  function addRange(){
+		var fx = null;
+		if( fx_wind.checked ){
+			fx = 'WIND';
+		}else{
+			if( fx_vibration.checked ) fx = 'VIBRATION';
+		}
+		if(fx){
+			var start = $( "#slider" ).slider( "values", 0 ) ;
+			var stop =  $( "#slider" ).slider( "values", 1 ) ;
+        		var Op = document.createElement("OPTION");
+        		Op.text = fx + ": "+start + " - " + stop;
+        		Op.value = fx+":"+start+":"+stop;
+        		list_ranges.options[list_ranges.options.length] = Op;
+        		list_ranges.selectedIndex = list_ranges.options.length -1;
+		}
+  }
+
+
+
+
+
+
   function sendContribution(){
 
 var r = confirm('Are you done?');
