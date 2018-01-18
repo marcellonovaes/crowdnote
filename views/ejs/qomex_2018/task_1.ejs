@@ -231,16 +231,16 @@ label + input[type=radio] + label {
   function playPause(){
         if(player.getPlayerState() == 1){
                 player.pauseVideo();
-                bt_play_pause.text = 'Play';
+		$("#bt_play_pause").text('Play');  
         }else{
                 player.playVideo();
-                bt_play_pause.text = 'Pause';
+		$("#bt_play_pause").text('Pause');  
         }
   }
 
   function tiltTime(delta){
     player.pauseVideo();
-bt_play_pause.text = 'Play';  
+	$("#bt_play_pause").text('Play');  
   player.seekTo(player.getCurrentTime() + delta);
   }
   function showInstructions(){
@@ -315,7 +315,7 @@ bt_play_pause.text = 'Play';
     if(player.getCurrentTime() > input.end || player.getCurrentTime() < input.start){
       player.seekTo(parseFloat(input.start));
       player.pauseVideo();
-        bt_play_pause.text = 'Play';
+		$("#bt_play_pause").text('Play');  
 
     }else{
       if (event.data == YT.PlayerState.PLAYING) {
@@ -327,7 +327,7 @@ bt_play_pause.text = 'Play';
     if(player.getCurrentTime() > input.end){
       player.seekTo(parseFloat(input.start));
       player.pauseVideo();
-        bt_play_pause.text = 'Play';
+		$("#bt_play_pause").text('Play');  
     }
   }
 
