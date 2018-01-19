@@ -63,6 +63,12 @@ itemSchema = Schema({
 	// for segmentation tasks
 	marks: String,
 
+	//for effects
+	ranges: String,
+	fx_type: String,
+	fx_start: String,
+	fx_end: String,
+
 	// at Runtime
 	item_index: String,
 
