@@ -1,6 +1,6 @@
 // ---------------------- Requires, Includes and Globals ------------------------
 
-var project = 'libras';
+var project = 'qomex_2018';
 var qtd_target = 100;
 var activeTask = 0;
 var kind = 'job';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
@@ -59,15 +59,6 @@ itemSchema = Schema({
         start: String,
 	end: String,   
 	instant: String,
-
-	// for segmentation tasks
-	marks: String,
-
-	//for effects
-	ranges: String,
-	fx_type: String,
-	fx_start: String,
-	fx_end: String,
 
 	// at Runtime
 	item_index: String,
@@ -238,8 +229,6 @@ app.get('/job', function(req, res) {
 
 app.post('/store', function(req, res) {
 	var data = req.body;
-
-
 	input[data.item_index].qtd++;
 	if(input[data.item_index].qtd >= qtd_target){
 		input.splice( data.item_index, 1 );
@@ -288,9 +277,11 @@ app.get('/images', function(req, res) {
 
 // ------------- Create Server ------------------------------
 
-https.createServer({
-  	ca: fs.readFileSync("../../ssl/intermediate.crt"),
-	key: fs.readFileSync('../../ssl/novaes.tech.key'),
-	cert: fs.readFileSync('../../ssl/novaes.tech.crt')
-},app).listen(443);
+http.createServer(app).listen(90);
+
+
+//server.listen(process.env.PORT || 83, process.env.IP || "0.0.0.0", function(){
+//  var addr = server.address();
+//});
+
 
