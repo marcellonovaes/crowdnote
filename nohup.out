@@ -1,0 +1,62 @@
+2018-01-30T10:28:43.737+0000 I CONTROL  [initandlisten] MongoDB starting : pid=15809 port=27017 dbpath=./db 64-bit host=crowdsourcing
+2018-01-30T10:28:43.737+0000 I CONTROL  [initandlisten] db version v3.4.10
+2018-01-30T10:28:43.737+0000 I CONTROL  [initandlisten] git version: 078f28920cb24de0dd479b5ea6c66c644f6326e9
+2018-01-30T10:28:43.737+0000 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.2g  1 Mar 2016
+2018-01-30T10:28:43.737+0000 I CONTROL  [initandlisten] allocator: tcmalloc
+2018-01-30T10:28:43.737+0000 I CONTROL  [initandlisten] modules: none
+2018-01-30T10:28:43.737+0000 I CONTROL  [initandlisten] build environment:
+2018-01-30T10:28:43.737+0000 I CONTROL  [initandlisten]     distmod: ubuntu1604
+2018-01-30T10:28:43.737+0000 I CONTROL  [initandlisten]     distarch: x86_64
+2018-01-30T10:28:43.737+0000 I CONTROL  [initandlisten]     target_arch: x86_64
+2018-01-30T10:28:43.737+0000 I CONTROL  [initandlisten] options: { storage: { dbPath: "./db" } }
+2018-01-30T10:28:43.780+0000 I -        [initandlisten] Detected data files in ./db created by the 'wiredTiger' storage engine, so setting the active storage engine to 'wiredTiger'.
+2018-01-30T10:28:43.780+0000 I STORAGE  [initandlisten] 
+2018-01-30T10:28:43.780+0000 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2018-01-30T10:28:43.780+0000 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2018-01-30T10:28:43.780+0000 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=488M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),checkpoint=(wait=60,log_size=2GB),statistics_log=(wait=0),
+2018-01-30T10:28:43.789+0000 E STORAGE  [initandlisten] WiredTiger error (-31802) [1517308123:789826][15809:0x7fe87b948d00], file:WiredTiger.wt, connection: file contains a corrupted live.avail extent list, range 77824-90112 past end-of-file: WT_ERROR: non-specific WiredTiger error
+2018-01-30T10:28:43.789+0000 E STORAGE  [initandlisten] WiredTiger error (-31804) [1517308123:789882][15809:0x7fe87b948d00], file:WiredTiger.wt, connection: the process must exit and restart: WT_PANIC: WiredTiger library panic
+2018-01-30T10:28:43.789+0000 I -        [initandlisten] Fatal Assertion 28558 at src/mongo/db/storage/wiredtiger/wiredtiger_util.cpp 361
+2018-01-30T10:28:43.789+0000 I -        [initandlisten] 
+
+***aborting after fassert() failure
+
+
+2018-01-30T10:28:43.814+0000 F -        [initandlisten] Got signal: 6 (Aborted).
+
+ 0x564f747cd651 0x564f747cc869 0x564f747ccd4d 0x7fe87a54e390 0x7fe87a1a8428 0x7fe87a1aa02a 0x564f73a777b3 0x564f744df016 0x564f73a81a4c 0x564f73a81c71 0x564f73a81ed3 0x564f750d358a 0x564f750d35db 0x564f750cfbcd 0x564f750d47a7 0x564f750ee3d3 0x564f75127a0b 0x564f751b281b 0x564f751b2d5d 0x564f751b301c 0x564f75136131 0x564f751a8b48 0x564f75172b3e 0x564f75172c1b 0x564f75123c4d 0x564f744c3d5f 0x564f744bc5cc 0x564f743af8c0 0x564f73a6390e 0x564f73a83286 0x7fe87a193830 0x564f73ae24e9
+----- BEGIN BACKTRACE -----
+{"backtrace":[{"b":"564F7325C000","o":"1571651","s":"_ZN5mongo15printStackTraceERSo"},{"b":"564F7325C000","o":"1570869"},{"b":"564F7325C000","o":"1570D4D"},{"b":"7FE87A53D000","o":"11390"},{"b":"7FE87A173000","o":"35428","s":"gsignal"},{"b":"7FE87A173000","o":"3702A","s":"abort"},{"b":"564F7325C000","o":"81B7B3","s":"_ZN5mongo32fassertFailedNoTraceWithLocationEiPKcj"},{"b":"564F7325C000","o":"1283016"},{"b":"564F7325C000","o":"825A4C","s":"__wt_eventv"},{"b":"564F7325C000","o":"825C71","s":"__wt_err"},{"b":"564F7325C000","o":"825ED3","s":"__wt_panic"},{"b":"564F7325C000","o":"1E7758A","s":"__wt_block_extlist_read"},{"b":"564F7325C000","o":"1E775DB","s":"__wt_block_extlist_read_avail"},{"b":"564F7325C000","o":"1E73BCD","s":"__wt_block_checkpoint_load"},{"b":"564F7325C000","o":"1E787A7"},{"b":"564F7325C000","o":"1E923D3","s":"__wt_btree_open"},{"b":"564F7325C000","o":"1ECBA0B","s":"__wt_conn_btree_open"},{"b":"564F7325C000","o":"1F5681B","s":"__wt_session_get_btree"},{"b":"564F7325C000","o":"1F56D5D","s":"__wt_session_get_btree"},{"b":"564F7325C000","o":"1F5701C","s":"__wt_session_get_btree_ckpt"},{"b":"564F7325C000","o":"1EDA131","s":"__wt_curfile_open"},{"b":"564F7325C000","o":"1F4CB48"},{"b":"564F7325C000","o":"1F16B3E","s":"__wt_metadata_cursor_open"},{"b":"564F7325C000","o":"1F16C1B","s":"__wt_metadata_cursor"},{"b":"564F7325C000","o":"1EC7C4D","s":"wiredtiger_open"},{"b":"564F7325C000","o":"1267D5F","s":"_ZN5mongo18WiredTigerKVEngineC2ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES8_PNS_11ClockSourceES8_mbbbb"},{"b":"564F7325C000","o":"12605CC"},{"b":"564F7325C000","o":"11538C0","s":"_ZN5mongo20ServiceContextMongoD29initializeGlobalStorageEngineEv"},{"b":"564F7325C000","o":"80790E"},{"b":"564F7325C000","o":"827286","s":"main"},{"b":"7FE87A173000","o":"20830","s":"__libc_start_main"},{"b":"564F7325C000","o":"8864E9","s":"_start"}],"processInfo":{ "mongodbVersion" : "3.4.10", "gitVersion" : "078f28920cb24de0dd479b5ea6c66c644f6326e9", "compiledModules" : [], "uname" : { "sysname" : "Linux", "release" : "4.4.0-112-generic", "version" : "#135-Ubuntu SMP Fri Jan 19 11:48:36 UTC 2018", "machine" : "x86_64" }, "somap" : [ { "b" : "564F7325C000", "elfType" : 3, "buildId" : "953D98B21F3F66FCA98875FCB02884203F3CEDC6" }, { "b" : "7FFE997F6000", "elfType" : 3, "buildId" : "FA97F4849697BBE252BA1F7FB2316979E93E61DE" }, { "b" : "7FE87B4C9000", "path" : "/lib/x86_64-linux-gnu/libssl.so.1.0.0", "elfType" : 3, "buildId" : "DCF10134B91ED2139E3E8C72564668F5CDBA8522" }, { "b" : "7FE87B085000", "path" : "/lib/x86_64-linux-gnu/libcrypto.so.1.0.0", "elfType" : 3, "buildId" : "1649272BE0CA9FA22F082DC86372B6C9959779B0" }, { "b" : "7FE87AE7D000", "path" : "/lib/x86_64-linux-gnu/librt.so.1", "elfType" : 3, "buildId" : "89C34D7A182387D76D5CDA1F7718F5D58824DFB3" }, { "b" : "7FE87AC79000", "path" : "/lib/x86_64-linux-gnu/libdl.so.2", "elfType" : 3, "buildId" : "8CC8D0D119B142D839800BFF71FB71E73AEA7BD4" }, { "b" : "7FE87A970000", "path" : "/lib/x86_64-linux-gnu/libm.so.6", "elfType" : 3, "buildId" : "DFB85DE42DAFFD09640C8FE377D572DE3E168920" }, { "b" : "7FE87A75A000", "path" : "/lib/x86_64-linux-gnu/libgcc_s.so.1", "elfType" : 3, "buildId" : "68220AE2C65D65C1B6AAA12FA6765A6EC2F5F434" }, { "b" : "7FE87A53D000", "path" : "/lib/x86_64-linux-gnu/libpthread.so.0", "elfType" : 3, "buildId" : "CE17E023542265FC11D9BC8F534BB4F070493D30" }, { "b" : "7FE87A173000", "path" : "/lib/x86_64-linux-gnu/libc.so.6", "elfType" : 3, "buildId" : "B5381A457906D279073822A5CEB24C4BFEF94DDB" }, { "b" : "7FE87B732000", "path" : "/lib64/ld-linux-x86-64.so.2", "elfType" : 3, "buildId" : "5D7B6259552275A3C17BD4C3FD05F5A6BF40CAA5" } ] }}
+ mongod(_ZN5mongo15printStackTraceERSo+0x41) [0x564f747cd651]
+ mongod(+0x1570869) [0x564f747cc869]
+ mongod(+0x1570D4D) [0x564f747ccd4d]
+ libpthread.so.0(+0x11390) [0x7fe87a54e390]
+ libc.so.6(gsignal+0x38) [0x7fe87a1a8428]
+ libc.so.6(abort+0x16A) [0x7fe87a1aa02a]
+ mongod(_ZN5mongo32fassertFailedNoTraceWithLocationEiPKcj+0x0) [0x564f73a777b3]
+ mongod(+0x1283016) [0x564f744df016]
+ mongod(__wt_eventv+0x3D7) [0x564f73a81a4c]
+ mongod(__wt_err+0x9D) [0x564f73a81c71]
+ mongod(__wt_panic+0x2E) [0x564f73a81ed3]
+ mongod(__wt_block_extlist_read+0x58A) [0x564f750d358a]
+ mongod(__wt_block_extlist_read_avail+0x2B) [0x564f750d35db]
+ mongod(__wt_block_checkpoint_load+0x26D) [0x564f750cfbcd]
+ mongod(+0x1E787A7) [0x564f750d47a7]
+ mongod(__wt_btree_open+0xB43) [0x564f750ee3d3]
+ mongod(__wt_conn_btree_open+0x19B) [0x564f75127a0b]
+ mongod(__wt_session_get_btree+0xFB) [0x564f751b281b]
+ mongod(__wt_session_get_btree+0x63D) [0x564f751b2d5d]
+ mongod(__wt_session_get_btree_ckpt+0x14C) [0x564f751b301c]
+ mongod(__wt_curfile_open+0x161) [0x564f75136131]
+ mongod(+0x1F4CB48) [0x564f751a8b48]
+ mongod(__wt_metadata_cursor_open+0x6E) [0x564f75172b3e]
+ mongod(__wt_metadata_cursor+0x4B) [0x564f75172c1b]
+ mongod(wiredtiger_open+0x164D) [0x564f75123c4d]
+ mongod(_ZN5mongo18WiredTigerKVEngineC2ERKNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEES8_PNS_11ClockSourceES8_mbbbb+0x70F) [0x564f744c3d5f]
+ mongod(+0x12605CC) [0x564f744bc5cc]
+ mongod(_ZN5mongo20ServiceContextMongoD29initializeGlobalStorageEngineEv+0x6B0) [0x564f743af8c0]
+ mongod(+0x80790E) [0x564f73a6390e]
+ mongod(main+0x966) [0x564f73a83286]
+ libc.so.6(__libc_start_main+0xF0) [0x7fe87a193830]
+ mongod(_start+0x29) [0x564f73ae24e9]
+-----  END BACKTRACE  -----
