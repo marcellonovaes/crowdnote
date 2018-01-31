@@ -1,16 +1,20 @@
 #!/bin/bash
 
-# copy in /etc/init.d
-# update-rc.d crowdnote defaults
-
 cd /var/www/crowdnote
 
 start(){
-nohup mongod --dbpath ./db > /tmp/db.log &
+nohup mongod --dbpath ./db   > /tmp/db.log &
+#nohup mongod --dbpath ./db -u "novaes" -p "Icone&63" --authenticationDatabase "admin"  > /tmp/db.log &
 sleep 1
 nohup forever ./node_modules/mongo-express/app.js > /tmp/db_ui.log &
 nohup forever ./app.js > /tmp/crowdnote.log &
-nohup forever ./mmsys.js > /tmp/crowdnote_mmsys.log &
+nohup forever ./projects/mmsys/task_0.js > /tmp/crowdnote_mmsys_0.log &
+nohup forever ./projects/mmsys/task_1.js > /tmp/crowdnote_mmsys_1.log &
+nohup forever ./projects/mmsys/task_2.js > /tmp/crowdnote_mmsys_2.log &
+nohup forever ./projects/mmsys/task_3.js > /tmp/crowdnote_mmsys_3.log &
+nohup forever ./projects/mmsys/task_4.js > /tmp/crowdnote_mmsys_4.log &
+nohup forever ./projects/qomex/task_0.js > /tmp/crowdnote_qomex_0.log &
+nohup forever ./projects/qomex/task_1.js > /tmp/crowdnote_qomex_1.log &
 }
 
 stop(){

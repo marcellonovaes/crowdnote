@@ -42,13 +42,13 @@ function aggregation(req, res, Output, Aggretation, Functions) {
 				console.log('#'+group_names[i]);
 				var ranges = new Array;
 				var cur_range = -1;
-				var cur_value = -5;
+				var cur_value = -1;
 				var cont = 0;
 				var total = 0;
 				for(var j=0; j < group.length; j++){
-					if(parseFloat(group[j]) > (cur_value + 5)){
-						if(cur_range >= 0 && cont > 3){
-							ranges.push(parseInt(total/cont));
+					if(parseFloat(group[j]) > (cur_value + 1)){
+						if(cur_range >= 0 && cont > 2){
+							ranges.push(parseFloat(total/cont));
 						}
 						cur_range++;
 						cur_value = parseFloat(group[j]);

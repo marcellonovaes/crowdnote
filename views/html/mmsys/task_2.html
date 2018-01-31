@@ -1,0 +1,313 @@
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Uma p&aacute;gina para anota&ccedil;&atilde;o de v&iacute;deo.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title></title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" rel="stylesheet" />
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+<script src="http://novaes.tech:82/include?name=client.min&amp;mime=js">
+</script>
+<style type="text/css">.modal {
+  display: none;
+  font-size:30px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
+  position: fixed;
+  z-index: 100;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.75);
+}
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+</style>
+<div style="background:#3F51B5;">
+  <center>
+    <table>
+      <tbody>
+        <tr>
+          <td id="instructions" style="display:block;max-width:500px;padding:10px;">
+<p style="font-size:18px;color:white;">Based on the video, browse through the suggestions and choose the best content about this <span id="point_type">person</span>:</p>
+<p style="font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;" id="tx_point"></p>
+<p style="font-size:18px;color:white;">1. Use the 'PREVIOUS' and 'NEXT' buttons to navigate through the different content suggestions.</p>
+<p style="font-size:18px;color:white;">2. You can use the 'ZOOM' button to better visualize each content.</p>
+<p style="font-size:18px;color:white;">3. Click the 'VOTE !!!' button to choose the content you liked best.</p>
+          </td>
+          <td >
+<p align='center'>
+<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_vote'    onClick="sendContribution()" style="width: 165px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">VOTE !!!</a>
+<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_instr" onclick="showInstructions()" style="width: 165px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Instructions</a>
+</p>
+
+<p id='content_view' name='content_view'  style='word-wrap: break-word;font-size:16px;height:250px;width: 407px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'></p>
+<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_previous'    onClick="navigate(-1)" style="width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">previous</a>
+
+
+<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_zoom'    onClick='displayContent(cur,true)' style="width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">zoom</a>
+
+<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id='bt_next'    onClick="navigate(1)" style="width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">next</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </center>
+</div>
+<div style="padding: 10px;">
+<div id="player" style='box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);'></div>
+</div>
+<input id="done" name="done" type="hidden" />
+<div class="modal" id="modal">
+  <div class="modal-content"><span class="close">×</span>
+  </div>
+</div>
+<script>
+
+var input;
+var item;
+var info;
+var cur = 0;
+var player;
+var delta;
+var duration;
+var content;
+var content_type;
+var content_view;
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+modal.onclick = function() {
+        modal.innerHTML = '';
+        modal.style.display = "none";
+                displayContent(cur,false);
+}
+
+window.onclick = function(event) {
+
+    if (event.target == modal) {
+        modal.innerHTML = '';
+        modal.style.display = "none";
+                displayContent(cur,false);
+    }
+
+}
+
+  function showInstructions(){
+      var msg = 'person';
+    switch(item.type){
+      case 'tech': msg = 'technology'; break;
+      case 'theory': msg = 'theory'; break;
+    }
+    
+    modal.innerHTML = '<div style="margin-top:0px; margin-left:50px; "><p style="font-size:18px;color:white;">Based on the video, browse through the suggestions and choose the best content about this '+msg+':</p><p style="font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;">'+item.point +'</p><p style="font-size:18px;color:white;">1. Use the "PREVIOUS" and "NEXT" buttons to navigate through the different content suggestions.</p><p style="font-size:18px;color:white;">2. You can use the [ZOOM] button to better visualize each content.</p><p style="font-size:18px;color:white;">3. Click the [VOTE !!!] button to choose the content you liked best.</p></div>';
+
+
+    modal.style.display = "block";
+  }
+  
+function displayContent(idx,zoom){
+        var height = 250;
+
+        content_type = input[idx].content_type;
+        content = input[idx].content;
+
+        if(zoom){
+                height = 500;
+        }
+
+        switch(content_type){
+                case 'image':
+                        content = "<img src="+content+" style='height:"+height+"px; max-width:407px;'>";
+                        break;
+                        
+                case 'youtube':
+                        content = content.split('=');
+                        content = content[1]; 
+                        content = '<iframe style="height: '+height+'px;" src="https://www.youtube.com/embed/'+content+'" ></iframe>';
+                        break;
+
+                case 'wikipedia':
+                        var parts = content.split('wikipedia.org');
+                        var pre = parts[0];
+                        var post = parts[1];
+
+                        pre = pre.split('.');
+                        var url = pre[0];
+                        url += '.m.wikipedia.org';
+
+                        url += post;
+
+                        content = '<iframe src="'+url+'" style="height:'+height+'px;width:407; -moz-transform:scale(0.15, 0.15)"  seamless scrolling="yes"></iframe>';
+                        break;
+        }
+
+        if(zoom){
+                modal.innerHTML = content;
+                modal.style.display = "block";
+        }else{
+                content_view.innerHTML = content;
+        }
+}
+  
+function navigate(step){
+        if( (cur+step < input.length) && (cur+step >= 0) ){
+                cur += step;
+                displayContent(cur,false);
+        }
+}
+
+
+function readURL(input,output) {
+
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+                output.attr('src', e.target.result);
+                image = e.target.result;
+        }
+
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function onYouTubeIframeAPIReady() {
+  $.getJSON('http://novaes.tech:82/job', function(data){init(data);});
+}
+
+function init(data){
+    instructions = document.getElementById("instructions");
+    if(window.innerWidth < 800){
+      instructions.style.display = 'none';
+    }
+
+ input = data.data;
+
+ info = data.info;
+
+  item = input[0];
+
+    var point_type =  document.getElementById('point_type');
+    switch(item.type){    	
+      case 'person': point_type.innerHTML = 'person'; break;
+      case 'tech': point_type.innerHTML = 'technology'; break;
+      case 'theory': point_type.innerHTML = 'theory'; break;
+    }
+    document.getElementById("tx_point").innerHTML = item.point;
+    
+  document.getElementById("tx_point").innerHTML = item.point;
+
+  content_view = document.getElementById("content_view");
+  displayContent(0,false);
+
+player = new YT.Player(
+      'player',
+      {
+        playerVars: {cc_lang_pref:'en', cc_load_policy: 1, autoplay:0 ,rel: 0, controls: 2, disablekb: 1},
+        height: '360',
+        width: '640',
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      }
+    );
+
+}
+
+  function onPlayerReady(event) {
+    duration = (item.end - item.start) + 0.5;
+    player.loadVideoById(item.uri, parseFloat(item.start));
+  }
+  function onPlayerStateChange(event) {
+    if(player.getCurrentTime() > item.end || player.getCurrentTime() < item.start){
+      player.seekTo(parseFloat(item.start));
+      player.pauseVideo();
+    }else{
+      if (event.data == YT.PlayerState.PLAYING) {
+        setTimeout(restartVideoSection, duration * 1000);
+      }
+    }
+  }
+  function restartVideoSection() {
+    if(player.getCurrentTime() > item.end){
+      player.seekTo(parseFloat(item.start));
+      player.pauseVideo();
+    }
+  }
+  
+          
+function sendContribution(){
+
+
+        if (confirm('Are you sure?')) {
+
+                item = input[cur];
+                var queryForm = "<form method='post' action='http://novaes.tech:82/store'>";
+                queryForm += "<input type='hidden' id='uri' name='uri'  value='"+item.uri+"' > ";
+                queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+item._id+"' > ";
+                queryForm += "<input type='hidden' id='start' name='start'  value='"+item.start+"' > ";
+                queryForm += "<input type='hidden' id='end' name='end'  value='"+item.end+"' > ";
+                queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+info.fingerprint+"' > ";
+                queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+info.job_id+"' > ";
+                queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+info.item_index+"' > ";
+                queryForm += "<input type='hidden' id='instant' name='instant'  value='"+item.instant+"' > ";
+                queryForm += "<input type='hidden' id='point' name='point'  value='"+item.point+"' > ";
+                queryForm += "<input type='hidden' id='content_type' name='content_type'  value='"+content_type+"' > ";
+                queryForm += "<input type='hidden' id='content' name='content'  value='"+item.content+"' > ";
+                queryForm += "</form>";
+
+
+                $.ajax({
+                        type: 'POST',
+                        url: $(queryForm).attr('action'),
+                        data: $(queryForm).serialize(), 
+                        success: function(result, status, request) {done();}
+                });
+        }
+} 
+  
+  function done(){
+    var done = document.getElementById("done");
+    var bt = document.getElementById("bt_vote");
+    bt.style='visibility: hidden;';
+    done.value='ok';
+    player.stopVideo();
+    alert("Thanks, now you can click the FINISH button.");
+    //$(location).attr('href', 'thanks');
+  }
+  
+</script>
+
+
+
+
