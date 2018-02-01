@@ -2,7 +2,7 @@
 
 var project = 'libras';
 var qtd_target = 100;
-var activeTask = 0;
+var activeTask = 1;
 var kind = 'job';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
 var group = false;//Tasks 1, 3, 4: false; Task 2: true;
 
@@ -62,6 +62,10 @@ itemSchema = Schema({
 
 	// for segmentation tasks
 	marks: String,
+
+
+	//Gestures
+	text: String,
 
 	//for effects
 	ranges: String,
@@ -178,7 +182,7 @@ request.get(path, function (error, response, body) {
 	
 });
 
-app.get('/player', function(req, res) {
+app.get('/job', function(req, res) {
 	var contents = new Array()
         job_id = Functions.fingerprint(req,true);
         print = Functions.fingerprint(req,false);
@@ -191,6 +195,7 @@ app.get('/player', function(req, res) {
         res.json(contents);
 });
 
+/*
 app.get('/job', function(req, res) {
 	if(input.length < 1){
 		res.render('ejs/thanks', null);
@@ -233,10 +238,11 @@ app.get('/job', function(req, res) {
 	}
         res.json(obj);
 });
-
+*/
 
 
 app.post('/store', function(req, res) {
+
 	var data = req.body;
 
 

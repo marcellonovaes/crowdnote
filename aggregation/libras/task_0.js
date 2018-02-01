@@ -46,8 +46,8 @@ function aggregation(req, res, Output, Aggretation, Functions) {
 				var cont = 0;
 				var total = 0;
 				for(var j=0; j < group.length; j++){
-					if(parseFloat(group[j]) > (cur_value + 1)){
-						if(cur_range >= 0 && cont > 2){
+					if(parseFloat(group[j]) > (cur_value + 0)){
+						if(cur_range >= 0 && cont > 0){
 							ranges.push(parseFloat(total/cont));
 						}
 						cur_range++;
