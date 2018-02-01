@@ -353,12 +353,12 @@ Imagine that you are immersed in the environment of the movie. Taking it into ac
 
     }else{
       if (event.data == YT.PlayerState.PLAYING) {
-        setTimeout(restartVideoSection, duration * 1000);
+        setTimeout(restartVideoSection, duration * 850);
       }
     }
   }
   function restartVideoSection() {
-    if(player.getCurrentTime() > input.end){
+    if(player.getCurrentTime() > (input.end - 0.5)){
       player.seekTo(parseFloat(input.start));
       player.pauseVideo();
 		$("#bt_play_pause").text('Play');  
@@ -368,14 +368,6 @@ Imagine that you are immersed in the environment of the movie. Taking it into ac
   function syncRange(){
   	var index = list_ranges.selectedIndex;
 	var range = (list_ranges.options[index].value).split(':');
-
-
-if(range[2] != cur_video){
-    cur_video = range[2];
-    duration = ( parseFloat(range[1]) - parseFloat(range[0])  ) + 0.5;
-    player.loadVideoById(range[2], parseFloat(range[0]));
-    input.uri = parseFloat(range[2]);
-}
 
                 input.start = parseFloat(range[0]);
                 input.end = parseFloat(range[1]);
@@ -393,6 +385,17 @@ if(range[2] != cur_video){
                         //      $( "#amount" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
                         }
                 });
+
+
+if(range[2] != cur_video){
+    cur_video = range[2];
+    duration = ( parseFloat(range[1]) - parseFloat(range[0])  ) + 0.5;
+    player.loadVideoById(range[2], parseFloat(range[0]));
+    input.uri = parseFloat(range[2]);
+	player.playVideo();
+}
+
+
   }
 
   function delRange(){        
