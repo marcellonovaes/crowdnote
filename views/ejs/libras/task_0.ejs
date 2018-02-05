@@ -101,7 +101,7 @@
 
 <p align='center'>
 
-<input placeholder="Escreva o significado do gesto aqui" autocomplete="off" name="tx_gesture" id="tx_gesture"  style="text-align:center;width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">
+<input placeholder="Escreva o significado do gesto aqui" autocomplete="off" onClick='player.pauseVideo()' name="tx_gesture" id="tx_gesture"  style="text-align:center;width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">
 
 
 </p>
@@ -122,7 +122,7 @@
 <div style="padding: 10px;">
   <div id="player" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"> 
 </div>
-<div id='mark_bar'  class="w3-light-grey"> 
+<div id='mark_bar'  class="w3-light-grey" onClick='syncPoint()'> 
 </div>
 </div>
 <input id="done" name="done" type="hidden" />
@@ -147,13 +147,13 @@
   modal.onclick = function() {
     modal.innerHTML = '';
     modal.style.display = "none";
-    displayContent(cur,false);
+  //  displayContent(cur,false);
   }
   window.onclick = function(event) {
     if (event.target == modal) {
       modal.innerHTML = '';
       modal.style.display = "none";
-      displayContent(cur,false);
+      //displayContent(cur,false);
     }
   }
   function tiltTime(delta){
@@ -198,9 +198,11 @@
   function onPlayerReady(event) {
     duration = (input.end - input.start) + 0.5;
     player.loadVideoById(input.uri, parseFloat(input.start));
-   
+  setInterval(function() {syncPoint();}, 500); 
  } 
   function onPlayerStateChange(event) {
+
+
     if(player.getCurrentTime() > input.end || player.getCurrentTime() < input.start){
       player.seekTo(parseFloat(input.start));
       player.pauseVideo();
@@ -256,14 +258,16 @@
    var mark = document.createElement("MARK");
 	mark.value = instant;
 	mark.onclick = function(){
-				for(var index=0; index<list_marks.options.length; index++){
+				/*for(var index=0; index<list_marks.options.length; index++){
 					if(list_marks.options[index].value == instant){
 						list_marks.selectedIndex = index;
 						break;
 					}
 				}
         			player.seekTo(instant);
-        			player.pauseVideo();
+        			player.pauseVideo();*/
+        			player.seekTo(instant);
+				syncPoint();
 			}        
 	//mark.style = 'pointer-events: none; float:left;top:'+h+'px; left:'+position+'px; position:absolute; background:blue; width:10px; height:5px;';
 	mark.style = 'float:left;top:'+h+'px; left:'+position+'px; position:absolute; background:blue; width:10px; height:5px;';
@@ -271,8 +275,26 @@
 
 
   }
+
+
+  function syncPoint(){
+	var gestures = list_marks.options;
+	var instant = player.getCurrentTime();
+	for(var i=0; i < gestures.length; i++){
+		var t = gestures[i].value.split(':')[0];
+		var delta = Math.abs(parseFloat(t) - parseFloat(instant));
+		if(delta < 0.3){
+			list_marks.selectedIndex = i;
+		}
+	}
+        player.pauseVideo();
+
+
+  }
+
   function syncMark(){
-	player.seekTo(list_marks.value);
+	var values = list_marks.value.split(':');
+	player.seekTo(values[0]);
         player.pauseVideo();
   }
   function sendContribution(){
