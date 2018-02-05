@@ -82,35 +82,36 @@
   <table>
     <tbody>
       <tr>
-        <td id="presentation" style="display:none;max-width:800px;padding:1px;">
-          <p style="font-size:18px;color:white;text-align: justify;">
-This video shows an actor expressing himself in Brazilian sign language. Even if you do not know this language, identify the initial moment of the gestures.
-	</td>
-	</tr>     
-</tbody>
-</table>
-  <table>
-    <tbody>
-      <tr>
-        <td id="instructions" style="display:none;max-width:500px;padding:10px;">
-          <p style="font-size:18px;color:white;">1. Find the initial moment for a gesture.</p>  
-	<p style="font-size:18px;color:white;">2. Please pause the video at the beginning of this moment.<br><i>(use - and + buttons to adjust)</i></p>
-	<p style="font-size:18px;color:white;">3. Click on 'ADD MARK' button to add the mark.<br><i>(If you made a mistake, click on 'DEL MARK' to delete it)</i></p>
-	<p style="font-size:18px;color:white;">4. Do the steps 1, 2 and 3 until the end of the video.</p>
-	<p style="font-size:18px;color:white;">5. Click the SEND CONTRIBUTIONS button.</p>
+        <td id="instructions" style="display:none;max-width:600px;padding:10px;">
+          <p style="font-size:18px;color:white;">1. Encontre o instante inicial do gesto.</p>
+	<p style="font-size:18px;color:white;">2. Pause o video no instante inicial do gesto.<br><i>(use os botoes - e + para ajustar)</i></p>
+	<p style="font-size:18px;color:white;">3. Clique em ADICIONAR GESTO.<br><i>(Se quiser remover algum gesto, clique em REMOVER GESTO)</i></p>
+    <p style="font-size:18px;color:white;">4. Escreva o significado do gesto.</p>
+
+	<p style="font-size:18px;color:white;">5. Repita os passos 1, 2, 3 e 4 até o final do video.</p>
+	<p style="font-size:18px;color:white;">6. Clique no botão ENVIAR CONTRIBUICOES.</p>
         </td>
         <td>
-          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="sendContribution()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Send Contributions</a> 
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="sendContribution()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Enviar Contribuicao</a> 
           </p>
-          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="addMark()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Add Mark</a> 
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="addMark()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Adicionar Gesto</a> 
           </p>
-          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="delMark()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Del Mark</a> 
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="delMark()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Remover Gesto</a> 
           </p>
+
+<p align='center'>
+
+<input placeholder="Escreva o significado do gesto aqui" autocomplete="off" name="tx_gesture" id="tx_gesture"  style="text-align:center;width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">
+
+
+</p>
+
+
           <p align="center">
             <select autofocus="" class="mdl-textfield__input" id="list_marks" name="list_marks" onchange="syncMark()" style="margin-top:10px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;" type="select">
             </select>
           </p>
-          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_instr" onclick="showInstructions()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Instructions</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(-0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">- 0.1s</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">+ 0.1s</a> 
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_instr" onclick="showInstructions()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Instrucoes</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(-0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">- 0.1s</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">+ 0.1s</a> 
           </p>
         </td>
       </tr>
@@ -138,7 +139,7 @@ This video shows an actor expressing himself in Brazilian sign language. Even if
   var player;
   var duration;
   var instructions;
-  var presentation;
+  //var presentation;
   var tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
   var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -160,8 +161,9 @@ This video shows an actor expressing himself in Brazilian sign language. Even if
     player.seekTo(player.getCurrentTime() + delta);
   }
   function showInstructions(){
-   
-    modal.innerHTML ='<div style="margin-top:0px; margin-left:50px;"><p style="text-align:justified;font-size:20px">This video shows an actor expressing himself in Brazilian sign language. Even if you do not know this language, identify the initial moment of the gestures.</p><p style="text-align:left;font-size:20px">1. Find the initial moment for a gesture.</p><p style="text-align:left;font-size:20px">2. Please pause the video at the beginning of this moment.<br><i>(use - and + buttons to adjust)</i></p><p style="text-align:left;font-size:20px">3. Click on ADD MARK button to add the mark.<br><i>(If you made a mistake, click on DEL MARK to delete it)</i></p><p style="text-align:left;font-size:20px">4. Do the steps 1, 2 and 3 until the end of the video.</p><p style="text-align:left;font-size:20px">5. Click the SEND CONTRIBUTIONS button.</p>';
+  
+    modal.innerHTML ='<div style="margin-top:0px; margin-left:50px;"><p style="text-align:justified;font-size:20px">Ajude a identificar os gestos nos videos.</p><p style="text-align:left;font-size:20px">1. Encontre o instante inicial do gesto.</p><p style="text-align:left;font-size:20px">2. Pause o video no instante inicial do gesto.<br><i>(use os botoes - e + para ajustar)</i></p><p style="text-align:left;font-size:20px">3. Clique em ADICIONAR GESTO.<br><i>(Se quiser remover algum gesto, clique em REMOVER GESTO)</i></p><p style="text-align:left;font-size:20px">4. Escreva o significado do gesto.</p><p style="text-align:left;font-size:20px">5. Repita os passos 1, 2, 3 e 4 até o final do video.</p><p style="text-align:left;font-size:20px">6. Clique no botão ENVIAR CONTRIBUICOES.</p>'; 
+//    modal.innerHTML ='<div style="margin-top:0px; margin-left:50px;"><p style="text-align:justified;font-size:20px">This video shows an actor expressing himself in Brazilian sign language. Even if you do not know this language, identify the initial moment of the gestures.</p><p style="text-align:left;font-size:20px">1. Find the initial moment for a gesture.</p><p style="text-align:left;font-size:20px">2. Please pause the video at the beginning of this moment.<br><i>(use - and + buttons to adjust)</i></p><p style="text-align:left;font-size:20px">3. Click on ADD MARK button to add the mark.<br><i>(If you made a mistake, click on DEL MARK to delete it)</i></p><p style="text-align:left;font-size:20px">4. Do the steps 1, 2 and 3 until the end of the video.</p><p style="text-align:left;font-size:20px">5. Click the SEND CONTRIBUTIONS button.</p>';
 
  modal.style.display = "block";
   }
@@ -172,10 +174,10 @@ This video shows an actor expressing himself in Brazilian sign language. Even if
     list_marks = document.getElementById("list_marks");
     mark_bar = document.getElementById("mark_bar");
 
-    presentation = document.getElementById("presentation");
+    //presentation = document.getElementById("presentation");
     instructions = document.getElementById("instructions");
     if(window.innerWidth >= 866){
-      presentation.style.display = 'block';
+      //presentation.style.display = 'block';
       instructions.style.display = 'block';
     }
     input = data;
@@ -216,7 +218,7 @@ This video shows an actor expressing himself in Brazilian sign language. Even if
   }
   function delMark(){
 
-	var r = confirm('Are you sure that want remove this mark?');
+	var r = confirm('Realmente deseja remover este gesto?');
 	if(r == true){
 		var mark = list_marks.selectedIndex;
 		list_marks.selectedIndex = mark - 1;
@@ -228,10 +230,13 @@ This video shows an actor expressing himself in Brazilian sign language. Even if
 	}
   }
   function addMark(){
+	var tx_gesture = document.getElementById("tx_gesture");
+	var text = tx_gesture.value;
+	tx_gesture.value = "";
 	var instant = player.getCurrentTime();
 	var Op = document.createElement("OPTION");
-	Op.text = instant;
-	Op.value = instant;
+	Op.text = text;
+	Op.value = instant+":"+text;
 	list_marks.options[list_marks.options.length] = Op;
 	list_marks.selectedIndex = list_marks.options.length -1;
 
@@ -272,7 +277,10 @@ This video shows an actor expressing himself in Brazilian sign language. Even if
   }
   function sendContribution(){
 
-var r = confirm('Are you done?');
+
+
+
+var r = confirm('Ja ideitificou todos os gestos?');
 if(r == true){
     if(list_marks.options.length > 1){
 
@@ -300,19 +308,21 @@ if(r == true){
       });
 
     }else{
-      alert("You forgot to identified the markers.\nYour contribution is important to us!!!");
+      alert("Voce esqueceu de identificar os gestos?");
     }
 }
   }
   function done(){
-/*    var done = document.getElementById("done");
+    var done = document.getElementById("done");
     var bt = document.getElementById("bt");
     bt.style='visibility: hidden;';
     done.value='ok';
     player.stopVideo();
-    alert("Thanks, now you can click the FINISH button.");
-*/    //$(location).attr('href', 'https://novaes.tech/thanks');
-    alert("Thanks");
+  //  alert("Thanks, now you can click the FINISH button.");
+
+	$(location).attr('href', 'https://novaes.tech/thanks');
+
+    alert("Obrigado!!!");
   }       
 </script>
 
