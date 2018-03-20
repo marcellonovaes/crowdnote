@@ -83,10 +83,10 @@
     <tbody>
       <tr>
         <td id="instructions" style="display:none;max-width:600px;padding:10px;">
-          <p style="font-size:18px;color:white;">1. Encontre o instante inicial do gesto.</p>
-	<p style="font-size:18px;color:white;">2. Pause o video no instante inicial do gesto.<br><i>(use os botoes - e + para ajustar)</i></p>
-    <p style="font-size:18px;color:white;">3. Escreva o significado do gesto.</p>
-	<p style="font-size:18px;color:white;">4. Clique em ADICIONAR GESTO.<br><i>(Se quiser remover algum gesto, clique em REMOVER GESTO)</i></p>
+          <p style="font-size:18px;color:white;">1. Encontre o instante inicial do sinal.</p>
+	<p style="font-size:18px;color:white;">2. Pause o video no instante inicial do sinal.<br><i>(use os botoes - e + para ajustar)</i></p>
+    <p style="font-size:18px;color:white;">3. Escreva o significado do sinal.</p>
+	<p style="font-size:18px;color:white;">4. Clique em ADICIONAR SINAL.<br><i>(Se quiser remover algum gesto, clique em REMOVER SINAL)</i></p>
 
 	<p style="font-size:18px;color:white;">5. Repita os passos 1, 2, 3 e 4 até o final do video.</p>
 	<p style="font-size:18px;color:white;">6. Clique no botão ENVIAR CONTRIBUICOES.</p>
@@ -94,14 +94,14 @@
         <td>
           <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="sendContribution()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Enviar Contribuicao</a> 
           </p>
-          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="addMark()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Adicionar Gesto</a> 
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="addMark()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Adicionar Sinal</a> 
           </p>
-          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="delMark()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Remover Gesto</a> 
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="delMark()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Remover Sinal</a> 
           </p>
 
 <p align='center'>
 
-<input placeholder="Escreva o significado do gesto aqui" autocomplete="off" onClick='player.pauseVideo()' name="tx_gesture" id="tx_gesture"  style="text-align:center;width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">
+<input placeholder="Escreva o significado do sinal aqui" autocomplete="off" onClick='player.pauseVideo()' name="tx_gesture" id="tx_gesture"  style="text-align:center;width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">
 
 
 </p>
@@ -161,7 +161,7 @@
     player.seekTo(player.getCurrentTime() + delta);
   }
   function showInstructions(){
-     modal.innerHTML ='<div style="margin-top:0px; margin-left:50px;"><p style="text-align:justified;font-size:20px">Ajude a identificar os gestos nos videos.</p><p style="text-align:left;font-size:20px">1. Encontre o instante inicial do gesto.</p><p style="text-align:left;font-size:20px">2. Pause o video no instante inicial do gesto.<br><i>(use os botoes - e + para ajustar)</i></p><p style="text-align:left;font-size:20px">3. Escreva o significado do gesto.</p><p style="text-align:left;font-size:20px">4. Clique em ADICIONAR GESTO.<br><i>(Se quiser remover algum gesto, clique em REMOVER GESTO)</i></p><p style="text-align:left;font-size:20px">5. Repita os passos 1, 2, 3 e 4 até o final do video.</p><p style="text-align:left;font-size:20px">6. Clique no botão ENVIAR CONTRRRIBUICOES.</p>'; 
+     modal.innerHTML ='<div style="margin-top:0px; margin-left:50px;"><p style="text-align:justified;font-size:20px">Ajude a identificar os sinais nos videos.</p><p style="text-align:left;font-size:20px">1. Encontre o instante inicial do sinal.</p><p style="text-align:left;font-size:20px">2. Pause o video no instante inicial do sinal.<br><i>(use os botoes - e + para ajustar)</i></p><p style="text-align:left;font-size:20px">3. Escreva o significado do sinal.</p><p style="text-align:left;font-size:20px">4. Clique em ADICIONAR SINAL.<br><i>(Se quiser remover algum sinal, clique em REMOVER SINAL)</i></p><p style="text-align:left;font-size:20px">5. Repita os passos 1, 2, 3 e 4 até o final do video.</p><p style="text-align:left;font-size:20px">6. Clique no botão ENVIAR CONTRRRIBUICOES.</p>'; 
  
  //  modal.innerHTML ='<div style="margin-top:0px; margin-left:50px;"><p style="text-align:justified;font-size:20px">Ajude a identificar os gestos nos videos.</p><p style="text-align:left;font-size:20px">1. Encontre o instante inicial do gesto.</p><p style="text-align:left;font-size:20px">2. Pause o video no instante inicial do gesto.<br><i>(use os botoes - e + para ajustar)</i></p><p style="text-align:left;font-size:20px">3. Clique em ADICIONAR GESTO.<br><i>(Se quiser remover algum gesto, clique em REMOVER GESTO)</i></p><p style="text-align:left;font-size:20px">4. Escreva o significado do gesto.</p><p style="text-align:left;font-size:20px">5. Repita os passos 1, 2, 3 e 4 até o final do video.</p><p style="text-align:left;font-size:20px">6. Clique no botão ENVIAR CONTRIBUICOES.</p>'; 
 //    modal.innerHTML ='<div style="margin-top:0px; margin-left:50px;"><p style="text-align:justified;font-size:20px">This video shows an actor expressing himself in Brazilian sign language. Even if you do not know this language, identify the initial moment of the gestures.</p><p style="text-align:left;font-size:20px">1. Find the initial moment for a gesture.</p><p style="text-align:left;font-size:20px">2. Please pause the video at the beginning of this moment.<br><i>(use - and + buttons to adjust)</i></p><p style="text-align:left;font-size:20px">3. Click on ADD MARK button to add the mark.<br><i>(If you made a mistake, click on DEL MARK to delete it)</i></p><p style="text-align:left;font-size:20px">4. Do the steps 1, 2 and 3 until the end of the video.</p><p style="text-align:left;font-size:20px">5. Click the SEND CONTRIBUTIONS button.</p>';
