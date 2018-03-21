@@ -1,9 +1,9 @@
 // ---------------------- Requires, Includes and Globals ------------------------
 
-var project = 'mmsys_2018';
+var project = 'cscw_2018';
 var qtd_target = 100;
-var activeTask = 4;
-var kind = 'player';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
+var activeTask = 1;
+var kind = 'job';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
 var group = false;//Tasks 1, 3, 4: false; Task 2: true;
 
 if(kind == 'job'){
@@ -277,7 +277,7 @@ app.get('/images', function(req, res) {
 
 // ------------- Create Server ------------------------------
 
-http.createServer(app).listen(84);
+http.createServer(app).listen(81);
 
 
 //server.listen(process.env.PORT || 83, process.env.IP || "0.0.0.0", function(){
