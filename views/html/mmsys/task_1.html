@@ -251,8 +251,8 @@ contrib.style.height = '136px';        break;
     if(window.innerWidth < 800){
       instructions.style.display = 'none';
     }
-    input = data;
-    
+    input = data.data[0];
+    info = data.info;
     var point_type =  document.getElementById('point_type');
       switch(input.type){    	
       case 'person': point_type.innerHTML = 'person'; break;
@@ -312,9 +312,9 @@ if(contrib.value == 'https://youtu.be/gOQPS_ILrEo'){
       queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+input._id+"' > ";
       queryForm += "<input type='hidden' id='start' name='start'  value='"+input.start+"' > ";
       queryForm += "<input type='hidden' id='end' name='end'  value='"+input.end+"' > ";
-      queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+input.fingerprint+"' > ";
-      queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+input.job_id+"' > ";
-      queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+input.item_index+"' > ";
+      queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+info.fingerprint+"' > ";
+      queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+info.job_id+"' > ";
+      queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+info.item_index+"' > ";
       queryForm += "<input type='hidden' id='instant' name='instant'  value='"+input.instant+"' > ";
       queryForm += "<input type='hidden' id='point' name='point'  value='"+input.point+"' > ";
       queryForm += "<input type='hidden' id='content_type' name='content_type'  value='"+content_type+"' > ";

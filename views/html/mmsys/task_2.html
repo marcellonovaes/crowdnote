@@ -11,7 +11,7 @@
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 </script>
-<script src="http://novaes.tech:82/include?name=client.min&amp;mime=js">
+<script src="http://novaes.tech:81/include?name=client.min&amp;mime=js">
 </script>
 <style type="text/css">.modal {
   display: none;
@@ -201,7 +201,7 @@ function readURL(input,output) {
 }
 
 function onYouTubeIframeAPIReady() {
-  $.getJSON('http://novaes.tech:82/job', function(data){init(data);});
+  $.getJSON('http://novaes.tech:81/job', function(data){init(data);});
 }
 
 function init(data){
@@ -272,7 +272,7 @@ function sendContribution(){
         if (confirm('Are you sure?')) {
 
                 item = input[cur];
-                var queryForm = "<form method='post' action='http://novaes.tech:82/store'>";
+                var queryForm = "<form method='post' action='http://novaes.tech:81/store'>";
                 queryForm += "<input type='hidden' id='uri' name='uri'  value='"+item.uri+"' > ";
                 queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+item._id+"' > ";
                 queryForm += "<input type='hidden' id='start' name='start'  value='"+item.start+"' > ";

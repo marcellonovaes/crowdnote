@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" />
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src='http://novaes.tech:84/include?name=client.min&mime=js'></script>
+<script src='http://novaes.tech:81/include?name=client.min&mime=js'></script>
 
 
 
@@ -173,9 +173,9 @@ window.onclick = function(event) {
 function displayContent(idx,zoom){
         var height = 250;
 
-        content_type = input[idx].content_type;
-        content = input[idx].content;
-        point = input[idx].point;
+        content_type = input[idx][0].content_type;
+        content = input[idx][0].content;
+        point = input[idx][0].point;
 
         if(zoom){
 		player.pauseVideo();
@@ -217,9 +217,10 @@ function displayContent(idx,zoom){
         if(zoom){
                 modal.innerHTML = content;
                 modal.style.display = "block";
-        }else{
-                content_view.innerHTML = content;
         }
+//else{
+//                tx_content.innerHTML = content;
+//        }
 }
 
 function readURL(input,output) {
@@ -237,13 +238,16 @@ function readURL(input,output) {
 }
 
 function onYouTubeIframeAPIReady() {
-  $.getJSON('http://novaes.tech:84/player', function(data){init(data);});
+  $.getJSON('http://novaes.tech:81/player', function(data){init(data);});
 }
 
 function init(data){
   input = data;
 
-  input.sort(function(a, b){ if(b.instant < a.instant) return 1; return -1 });
+
+
+
+  input.sort(function(a, b){ if(b[0].instant < a[0].instant) return 1; return -1 });
 
 //////////////
 	loadList(input);
@@ -260,7 +264,7 @@ function init(data){
   }
 
   for(var i=0; i < max; i++){
-	var t = Math.floor(input[i].instant);
+	var t = Math.floor(input[i][0].instant);
 	contents[t] = i;
 	contents[t+1] = i;
 	contents[t+2] = i;
@@ -284,7 +288,7 @@ function init(data){
   tx_point = document.getElementById("tx_point");
   tx_content = document.getElementById("tx_content");
   tx_content.style.display = 'none';
-  uri = input[0].uri;
+  uri = input[0][0].uri;
   player = new YT.Player(
     'player',
     {
@@ -319,14 +323,14 @@ function getOffset( el ) {
 }
 
 function navigate(step){
-	step = 3*step;
+	//step = 3*step;
 
 	var x = cur;
 	player.pauseVideo();
 	if(cur+step < max && cur+step >= 0){
 		cur += step;
 	}
-  	player.seekTo(parseFloat(input[cur].instant));
+  	player.seekTo(parseFloat(input[cur][0].instant));
 	displayPoint(cur);
 }
 
@@ -351,7 +355,11 @@ if(index == null){
 	tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;';
 	return;
   }
-  var item = input[idx];
+
+if(input[idx]){
+  var item = input[idx][0];
+}
+
   if(!item){
 	if(cur >= input.length) cur = 0;
 	return;
@@ -364,32 +372,32 @@ if(cur == idx && blank == 0) return;
   tx_content.style.display = 'block';
   tx_point.innerHTML = item.point;
 
-	list.selectedIndex = cur/3;
+	list.selectedIndex = cur;///3;
 
 	var w = window.innerWidth;
 
   switch(item.content_type){
         case 'image' :
-		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.5) 100%),url("http://novaes.tech:84/images?name=ico_zoom&mime=png");background-size: 50px 50px;background-align:center;background-padding:0px;';
-                if(w >= 600) tx_content.innerHTML = "<img src='http://novaes.tech:84/images?name=ico_zoom&mime=png' width=40 height=40><img width=200 height=100  src='"+item.content+"'>";
+		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.5) 100%),url("http://novaes.tech:81/images?name=ico_zoom&mime=png");background-size: 50px 50px;background-align:center;background-padding:0px;';
+                if(w >= 600) tx_content.innerHTML = "<img src='http://novaes.tech:81/images?name=ico_zoom&mime=png' width=40 height=40><img width=200 height=100  src='"+item.content+"'>";
                 break;
         case 'wikipedia' :   
-		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image:linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.5) 100%),url("http://novaes.tech:84/images?name=wikipedia&mime=jpg");background-size: 50px 50px;background-align:center;background-padding:0px;';
+		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image:linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.5) 100%),url("http://novaes.tech:81/images?name=wikipedia&mime=jpg");background-size: 50px 50px;background-align:center;background-padding:0px;';
                 if(w >= 600){
 			if(item.type == 'person' || item.type == 'tech'){
-			 tx_content.innerHTML = "<img src='http://novaes.tech:84/images?name=wikipedia&mime=jpg' width=40 height=40><img src='"+item.image+"' width=100>";
+			 tx_content.innerHTML = "<img src='http://novaes.tech:81/images?name=wikipedia&mime=jpg' width=40 height=40><img src='"+item.image+"' width=100>";
                 	}else{
-                         tx_content.innerHTML = "<img src='http://novaes.tech:84/images?name=wikipedia&mime=jpg' width=40 height=40>"+item.point;
+                         tx_content.innerHTML = "<img src='http://novaes.tech:81/images?name=wikipedia&mime=jpg' width=40 height=40>"+item.point;
 			}
 		}
 		break;
         case 'youtube' :   
-		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image:linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.5) 100%),url("http://novaes.tech:84/images?name=youtube&mime=ico");background-size: 50px 50px;background-align:center;background-padding:0px;';
-                if(w >= 600) tx_content.innerHTML = "<img src='http://novaes.tech:84/images?name=youtube&mime=ico' width=40 height=40><img src='"+item.image+"' width=100>";
+		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image:linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.5) 100%),url("http://novaes.tech:81/images?name=youtube&mime=ico");background-size: 50px 50px;background-align:center;background-padding:0px;';
+                if(w >= 600) tx_content.innerHTML = "<img src='http://novaes.tech:81/images?name=youtube&mime=ico' width=40 height=40><img src='"+item.image+"' width=100>";
                 break;
         case 'text' :   
-		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image:linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.5) 100%),url("http://novaes.tech:84/images?name=ico_zoom&mime=png");background-size: 50px 50px;background-align:center;background-padding:0px;';
-                if(w >= 600) tx_content.innerHTML = "<img src='http://novaes.tech:84/images?name=ico_zoom&mime=png' width=40 height=40>"+item.content;
+		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image:linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.5) 100%),url("http://novaes.tech:81/images?name=ico_zoom&mime=png");background-size: 50px 50px;background-align:center;background-padding:0px;';
+                if(w >= 600) tx_content.innerHTML = "<img src='http://novaes.tech:81/images?name=ico_zoom&mime=png' width=40 height=40>"+item.content;
                 break;
         default:
                 tx_content.innerHTML = item.point;
@@ -415,12 +423,13 @@ if(w >= 600){
 
 
 function loadList(input){	
+
+
 	list = document.getElementById('list');
 
-console.log(input);
-	for(var i=0; i<input.length; i+=3){		
-		var op = new Option(input[i].point, input[i].instant);
-console.log(op);
+	//for(var i=0; i<input.length; i+=3){		
+	for(var i=0; i<input.length; i++){		
+		var op = new Option(input[i][0].point, input[i][0].instant);
 		list.add(op);	
 	}	
 	//list.size = input.length/3;

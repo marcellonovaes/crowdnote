@@ -11,7 +11,7 @@
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 </script>
-<script src="http://novaes.tech:85/include?name=client.min&amp;mime=js">
+<script src="http://novaes.tech:81/include?name=client.min&amp;mime=js">
 </script>
 <style type="text/css">.modal {
   display: none;
@@ -96,6 +96,8 @@
   </div>
 </div>
 <script>
+  var data;
+  var info;
   var input;
   var player;
   var duration;
@@ -125,14 +127,22 @@
     modal.style.display = "block";
   }
   function onYouTubeIframeAPIReady() { //gOQPS_ILrEo
-    $.getJSON('http://novaes.tech:85/job', function(data){init(data);});
+    $.getJSON('http://novaes.tech:81/job', function(data){init(data);});
   }
+
+
+
   function init(data){
+
     instructions = document.getElementById("instructions");
     if(window.innerWidth >= 866){
       instructions.style.display = 'block';
     }
-    input = data;
+    input = data.data[0];
+ 
+    info = data.info;
+
+
     player = new YT.Player(
       'player',
       {
@@ -170,14 +180,14 @@
     var point = document.getElementById("point");
     var type = document.getElementById("type");
     if(point.value != ''){
-      var queryForm = "<form method='post' action='http://novaes.tech:85/store'>";
+      var queryForm = "<form method='post' action='http://novaes.tech:81/store'>";
       queryForm += "<input type='hidden' id='uri' name='uri'  value='"+input.uri+"' > ";
       queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+input._id+"' > ";
       queryForm += "<input type='hidden' id='start' name='start'  value='"+input.start+"' > ";
       queryForm += "<input type='hidden' id='end' name='end'  value='"+input.end+"' > ";
-      queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+input.fingerprint+"' > ";
-      queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+input.job_id+"' > ";
-      queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+input.item_index+"' > ";
+      queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+info.fingerprint+"' > ";
+      queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+info.job_id+"' > ";
+      queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+info.item_index+"' > ";
       queryForm += "<input type='hidden' id='instant' name='instant'  value='"+player.getCurrentTime()+"' > ";
       queryForm += "<input type='hidden' id='type' name='type'  value='"+type.value+"' > ";
       queryForm += "<input type='hidden' id='point' name='point'  value='"+point.value+"' > ";
@@ -199,7 +209,7 @@
     done.value='ok';
     player.stopVideo();
     alert("Thanks, now you can click the FINISH button.");
-    //$(location).attr('href', 'http://novaes.tech:85/thanks');
+    //$(location).attr('href', 'http://novaes.tech:81/thanks');
   }       
 </script>
 
