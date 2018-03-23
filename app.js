@@ -123,7 +123,8 @@ function init(pars){
 		activeTask = pars.task;
 		kind = pars.kind;//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
 		group = pars.group;//Tasks 1, 3, 4: false; Task 2: true;
-	}else{
+	}
+	else{
 
         	for(i=0; i<Task.length; i++){
                 	if(Task[i].state == 2){
@@ -242,8 +243,16 @@ app.get('/changeActiveTask', function(req, res) {
 		V2 = V;
 		V.state = '2';
         	var c = new Tasks(V);
-        	c.save(function (err, m0) {if (err) return console.error(err);});
+        	c.save(function (err, m0) {
+				activeTask = req.query.task_b;
+				init();
+				if (err) return console.error(err);
+			});
+
         });
+
+
+
 
 
 
