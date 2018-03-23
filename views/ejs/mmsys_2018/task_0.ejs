@@ -96,6 +96,8 @@
   </div>
 </div>
 <script>
+  var data;
+  var info;
   var input;
   var player;
   var duration;
@@ -124,15 +126,23 @@
     modal.innerHTML ='<div style="margin-top:0px; margin-left:50px;"><p style="text-align:left;font-size:20px">1. Identify in the video something that you found interesting.<p style="text-align:left;font-size:20px">2. Pause the video the moment it appears.<p style="text-align:left;font-size:20px">3. Use the buttons [-0.1s] and [+0.1s] to locate the instant.<p style="text-align:left;font-size:20px">4. Select its type: Person, Technology or Event.<p style="text-align:left;font-size:20px">5. Write what you have identified.<p style="text-align:left;font-size:20px">6. Click the SEND button.';
     modal.style.display = "block";
   }
-  function onYouTubeIframeAPIReady() {
+  function onYouTubeIframeAPIReady() { //gOQPS_ILrEo
     $.getJSON('https://novaes.tech/job', function(data){init(data);});
   }
+
+
+
   function init(data){
+
     instructions = document.getElementById("instructions");
     if(window.innerWidth >= 866){
       instructions.style.display = 'block';
     }
-    input = data;
+    input = data.data[0];
+ 
+    info = data.info;
+
+
     player = new YT.Player(
       'player',
       {
@@ -175,9 +185,9 @@
       queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+input._id+"' > ";
       queryForm += "<input type='hidden' id='start' name='start'  value='"+input.start+"' > ";
       queryForm += "<input type='hidden' id='end' name='end'  value='"+input.end+"' > ";
-      queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+input.fingerprint+"' > ";
-      queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+input.job_id+"' > ";
-      queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+input.item_index+"' > ";
+      queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+info.fingerprint+"' > ";
+      queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+info.job_id+"' > ";
+      queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+info.item_index+"' > ";
       queryForm += "<input type='hidden' id='instant' name='instant'  value='"+player.getCurrentTime()+"' > ";
       queryForm += "<input type='hidden' id='type' name='type'  value='"+type.value+"' > ";
       queryForm += "<input type='hidden' id='point' name='point'  value='"+point.value+"' > ";

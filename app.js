@@ -1,14 +1,13 @@
 // ---------------------- Requires, Includes and Globals ------------------------
 
-var project = 'libras';
-var qtd_target = 100;
-var activeTask = 0;
-var kind = 'job';//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
-var group = false;//Tasks 1, 3, 4: false; Task 2: true;
+var project = 'cscw_2018';
+var qtd_target = 0;
+var min_convergence = 0;
+var activeTask = 4;
+var kind = 'player';
+var group = 'false';
 
-if(kind == 'job'){
-	var aggregation_method = require('./aggregation/'+project+'/task_'+activeTask+'.js');
-}	
+var Task;
 
 var Functions = require('./utils/functions.js');
 Functions = new Functions.functions();
@@ -60,19 +59,6 @@ itemSchema = Schema({
 	end: String,   
 	instant: String,
 
-	// for segmentation tasks
-	marks: String,
-
-
-	//Gestures
-	text: String,
-
-	//for effects
-	ranges: String,
-	fx_type: String,
-	fx_start: String,
-	fx_end: String,
-
 	// at Runtime
 	item_index: String,
 
@@ -91,11 +77,19 @@ itemSchema = Schema({
 
 	// User Identification for contributions
 	job_id: String,
-	fingerprint: String
+	fingerprint: String,
+
+	//Admin
+    	task_id: String,
+    	qtd_target: String,
+    	kind: String,
+    	group: String,
+    	min_convergence: String,
+    	state: String
+	
+
 });
-Input = mongoose.model('items_'+activeTask, itemSchema);
-Output = mongoose.model('contributions_'+activeTask, itemSchema);
-Aggregation = mongoose.model('items_'+(activeTask+1), itemSchema);
+
 
 var input = new Array();
 var curInput = 0;
@@ -104,7 +98,33 @@ init();
 
 // ---------------------  Init Functions -----------------------------
 
-function init(){
+function init(pars){
+
+	if(pars){
+		qtd_target = pars.qtd_target;
+		min_convergence = pars.min_convergence;
+		activeTask = pars.task;
+		kind = pars.kind;//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
+		group = pars.group;//Tasks 1, 3, 4: false; Task 2: true;
+	}
+
+	Tasks = mongoose.model('items_100', itemSchema);
+
+	Input = mongoose.model('items_'+activeTask, itemSchema);
+	Output = mongoose.model('contributions_'+activeTask, itemSchema);
+	Aggregation = mongoose.model('items_'+(activeTask+1), itemSchema);
+
+	input = new Array();
+	curInput = 0;
+
+	if(kind == 'job'){
+		var aggregation_method = require('./aggregation/'+project+'/task_'+activeTask+'.js');
+	}	
+
+
+
+
+
 	Input.find({},function (err, V) {
 		if (err) return console.error(err);
 		if(group){
@@ -115,6 +135,14 @@ function init(){
 			input[i].qtd = 0;
 		}
 	}).sort({'_id' : 1});
+
+        Tasks.find({},function (err, V) {
+                if (err) return console.error(err);
+
+		Task = V;
+
+        }).sort({'_id' : 1});
+
 }
 
 function groupInput(items){
@@ -138,6 +166,32 @@ function groupInput(items){
 }
 
 //-----------------------  Endpoints   -------------------------------
+
+app.post('/init', function(req, res) {
+	init(req.body);
+        res.render('ejs/'+project+'/task_100', null);
+});
+
+app.get('/init', function(req, res) {
+	init(req.query);
+	res.end();
+});
+
+
+app.get('/current', function(req, res) {
+	for(i=0; i<Task.length; i++){
+		if(Task[i].task_id == activeTask){
+			res.json(Task[i]);
+			break;
+		}
+	}
+});
+
+
+
+app.get('/admin', function(req, res) {
+        res.render('ejs/'+project+'/task_100', null);
+});
 
 app.get('/', function(req, res) {
 	res.render('ejs/'+project+'/task_'+activeTask, null);
@@ -182,7 +236,7 @@ request.get(path, function (error, response, body) {
 	
 });
 
-/*app.get('/job', function(req, res) {
+app.get('/player', function(req, res) {
 	var contents = new Array()
         job_id = Functions.fingerprint(req,true);
         print = Functions.fingerprint(req,false);
@@ -194,7 +248,6 @@ request.get(path, function (error, response, body) {
 	}
         res.json(contents);
 });
-*/
 
 app.get('/job', function(req, res) {
 	if(input.length < 1){
@@ -242,10 +295,7 @@ app.get('/job', function(req, res) {
 
 
 app.post('/store', function(req, res) {
-
 	var data = req.body;
-
-
 	input[data.item_index].qtd++;
 	if(input[data.item_index].qtd >= qtd_target){
 		input.splice( data.item_index, 1 );
@@ -294,9 +344,13 @@ app.get('/images', function(req, res) {
 
 // ------------- Create Server ------------------------------
 
+//http.createServer(app).listen(81);
+
 https.createServer({
   	ca: fs.readFileSync("../../ssl/intermediate.crt"),
 	key: fs.readFileSync('../../ssl/novaes.tech.key'),
 	cert: fs.readFileSync('../../ssl/novaes.tech.crt')
 },app).listen(443);
+
+
 
