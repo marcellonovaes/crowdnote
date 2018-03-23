@@ -113,7 +113,7 @@
   }
 
   function updateState(data){
-
+	if(current != data.task_id){
 
 		var a = current;
 		if(current < 100){
@@ -132,7 +132,7 @@
 		}	
 		$.getJSON('https://novaes.tech/changeActiveTask?task_a='+a+'&task_b='+b, function(data){updateState(data);});
 	
- 
+ 	}
 
  }
 
