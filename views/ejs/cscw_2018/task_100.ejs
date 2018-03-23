@@ -115,19 +115,24 @@
   function updateState(data){
 
 
-	if(current < 100){
 		var a = current;
-		tasks[current].state = 1;
-		states[current].style.background = 'RED';
+		if(current < 100){
+                        tasks[current].state = 1;
+                        states[current].style.background = 'RED';
+		}else{
+			tasks[5].state = 1;
+		}
 		current = data.task_id;
 		var b = current;
-		tasks[current].state = 2;
-		states[current].style.background = 'GREEN';
-        	$.getJSON('https://novaes.tech/changeActiveTask?task_a='+a+'&task_b='+b, function(data){updateState(data);});
-		console.log(tasks[current]);
-	}
+		if(current < 100){
+			tasks[current].state = 2;
+			states[current].style.background = 'GREEN';
+        	}else{
+			tasks[5].state = 2;
+		}	
+		$.getJSON('https://novaes.tech/changeActiveTask?task_a='+a+'&task_b='+b, function(data){updateState(data);});
+	
  
-	console.log(current);
 
  }
 
