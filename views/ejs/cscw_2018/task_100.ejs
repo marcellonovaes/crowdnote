@@ -55,11 +55,12 @@
     <tbody>
       <tr>
         <td>
-          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(0)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Task 0</a> 
-         </td><td> <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(1)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Task 1</a> 
-         </td><td> <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(2)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Task 2</a> 
-          </td><td><p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(3)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Task 3</a> 
-          </td><td><p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(4)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Player</a> 
+          <p align="center"><a id='t_100' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(100,'player','false',0,0)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Admin</a> 
+          </td><td><p align="center"><a id='t_0' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(0,'job','false',100,60)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Task 0</a> 
+         </td><td> <p align="center"><a id='t_1'  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(1,'job','false',100,60)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Task 1</a> 
+         </td><td> <p align="center"><a id='t_2' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(2,'job','true',100,60)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Task 2</a> 
+          </td><td><p align="center"><a id='t_3'  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(3,'job','false',100,60)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Task 3</a> 
+          </td><td><p align="center"><a id='t_4'  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(4,'player','false',0,0)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Player</a> 
 </td>
           </p>
         </td>
@@ -68,96 +69,77 @@
   </table>
 </center>
 </div>
-<div style="padding: 10px;">
-  <div id="player" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"> 
-  </div>
-</div>
-<input id="done" name="done" type="hidden" />
-<div class="modal" id="modal">
-  <div class="modal-content"><span class="close">x</span>
-  </div>
-</div>
 <script>
-  var data;
-  var info;
-  var input;
-  var player;
-  var duration;
-  var instructions;
-  var tag = document.createElement('script');
-  tag.src = "https://www.youtube.com/iframe_api";
-  var firstScriptTag = document.getElementsByTagName('script')[0];
-  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-  modal.onclick = function() {
-    modal.innerHTML = '';
-    modal.style.display = "none";
-    displayContent(cur,false);
-  }
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.innerHTML = '';
-      modal.style.display = "none";
-      displayContent(cur,false);
-    }
-  }
-  function tiltTime(delta){
-    player.pauseVideo();
-    player.seekTo(player.getCurrentTime() + delta);
-  }
-  function showInstructions(){
-    modal.innerHTML ='<div style="margin-top:0px; margin-left:50px;"><p style="text-align:left;font-size:20px">1. Identify in the video something that you found interesting.<p style="text-align:left;font-size:20px">2. Pause the video the moment it appears.<p style="text-align:left;font-size:20px">3. Use the buttons [-0.1s] and [+0.1s] to locate the instant.<p style="text-align:left;font-size:20px">4. Select its type: Person, Technology or Event.<p style="text-align:left;font-size:20px">5. Write what you have identified.<p style="text-align:left;font-size:20px">6. Click the SEND button.';
-    modal.style.display = "block";
-  }
-  function onYouTubeIframeAPIReady() { //gOQPS_ILrEo
-    $.getJSON('https://novaes.tech/job', function(data){init(data);});
-  }
+
+  var current;
+  var tasks;
+  var states = new Array();
+
+  $.getJSON('https://novaes.tech/tasks', function(data){init(data);});
 
 
 
   function init(data){
+	initStates(data);
+  	updateTask();
+  }
 
-    instructions = document.getElementById("instructions");
-    if(window.innerWidth >= 866){
-      instructions.style.display = 'block';
-    }
-    input = data.data[0];
+
+  function initStates(data){
+	tasks = data;
+	for(i=0; i<data.length; i++){
+		x = data[i].task_id;
+		if(x < 100){
+			states[i] = document.getElementById("t_"+x);
+			switch(data[i].state){
+				case '0':
+					states[i].style = "pointer-events:none; border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"
+					states[i].style.background = 'GRAY';
+					break;
+				case '1':
+					states[i].style.background = 'RED';
+					break;			
+				case '2':
+					states[i].style.background = 'GREEN';
+					current = i;
+					break;
+			}
+		}
+	}
+  }
+
+  function updateTask(){
+	$.getJSON('https://novaes.tech/current', function(data){updateState(data);});
+  }
+
+  function updateState(data){
+
+
+	if(current < 100){
+		var a = current;
+		tasks[current].state = 1;
+		states[current].style.background = 'RED';
+		current = data.task_id;
+		var b = current;
+		tasks[current].state = 2;
+		states[current].style.background = 'GREEN';
+        	$.getJSON('https://novaes.tech/changeActiveTask?task_a='+a+'&task_b='+b, function(data){updateState(data);});
+		console.log(tasks[current]);
+	}
  
-    info = data.info;
+	console.log(current);
+
+ }
 
 
-    player = new YT.Player(
-      'player',
-      {
-        playerVars: {cc_lang_pref:'en', cc_load_policy: 1, autoplay:0 ,rel: 0, controls: 2, disablekb: 1},
-        height: '360',
-        width: '640',
-        events: {
-          'onReady': onPlayerReady,
-          'onStateChange': onPlayerStateChange
-        }
-      }
-    );
+  function setActiveTask(task,kind,group,qtd_target,min_convergence){
+        $.getJSON('https://novaes.tech/init?task='+task+'&kind='+kind+'&group='+group+'&qtd_target='+qtd_target+'&min_convergence='+min_convergence, function(){updateState();});
+
+	updateTask(); 
+
   }
-  function onPlayerReady(event) {
-    duration = (input.end - input.start) + 0.5;
-    player.loadVideoById(input.uri, parseFloat(input.start));
-  }
-  function onPlayerStateChange(event) {
-    if(player.getCurrentTime() > input.end || player.getCurrentTime() < input.start){
-      player.seekTo(parseFloat(input.start));
-      player.pauseVideo();
-    }else{
-      if (event.data == YT.PlayerState.PLAYING) {
-        setTimeout(restartVideoSection, duration * 1000);
-      }
-    }
-  }
-  function restartVideoSection() {
-    if(player.getCurrentTime() > input.end){
-      player.seekTo(parseFloat(input.start));
-      player.pauseVideo();
-    }
-  }
+
+
   function sendContribution(){
     var point = document.getElementById("point");
     var type = document.getElementById("type");
@@ -184,15 +166,7 @@
       alert("You forgot to enter what you identified.\nYour contribution is important to us!!!");
     }
   }
-  function done(){
-    var done = document.getElementById("done");
-    var bt = document.getElementById("bt");
-    bt.style='visibility: hidden;';
-    done.value='ok';
-    player.stopVideo();
-    alert("Thanks, now you can click the FINISH button.");
-    //$(location).attr('href', 'https://novaes.tech/thanks');
-  }       
+
 </script>
 
 

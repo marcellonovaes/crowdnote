@@ -94,6 +94,12 @@ itemSchema = Schema({
 var input = new Array();
 var curInput = 0;
 
+var Tasks;
+var Input;
+var Output;
+var Aggregation;
+
+
 init();
 
 // ---------------------  Init Functions -----------------------------
@@ -109,6 +115,8 @@ function init(pars){
 	}
 
 	Tasks = mongoose.model('items_100', itemSchema);
+
+
 
 	Input = mongoose.model('items_'+activeTask, itemSchema);
 	Output = mongoose.model('contributions_'+activeTask, itemSchema);
@@ -178,6 +186,12 @@ app.get('/init', function(req, res) {
 });
 
 
+app.get('/tasks', function(req, res) {
+	res.json(Task);
+});
+
+
+
 app.get('/current', function(req, res) {
 	for(i=0; i<Task.length; i++){
 		if(Task[i].task_id == activeTask){
@@ -185,6 +199,31 @@ app.get('/current', function(req, res) {
 			break;
 		}
 	}
+});
+
+
+
+app.get('/changeActiveTask', function(req, res) {
+	var V1;
+	var V2;
+
+        Tasks.findOne({task_id: req.query.task_a},function (err, V) {
+                if (err) return console.error(err);
+		V1 = V;
+		V.state = '1';
+        	var c = new Tasks(V);
+        	c.save(function (err, m0) {if (err) return console.error(err);});
+        });
+
+        Tasks.findOne({task_id: req.query.task_b},function (err, V) {
+                if (err) return console.error(err);
+		V2 = V;
+		V.state = '2';
+        	var c = new Tasks(V);
+        	c.save(function (err, m0) {if (err) return console.error(err);});
+        });
+
+	res.json(V2);
 });
 
 
