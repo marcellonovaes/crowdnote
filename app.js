@@ -102,9 +102,20 @@ var Aggregation;
 
 init();
 
+
 // ---------------------  Init Functions -----------------------------
 
 function init(pars){
+
+	Tasks = mongoose.model('items_100', itemSchema);
+
+
+        Tasks.find({},function (err, V) {
+                if (err) return console.error(err);
+
+                Task = V;
+
+
 
 	if(pars){
 		qtd_target = pars.qtd_target;
@@ -112,9 +123,28 @@ function init(pars){
 		activeTask = pars.task;
 		kind = pars.kind;//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
 		group = pars.group;//Tasks 1, 3, 4: false; Task 2: true;
+	}else{
+
+        	for(i=0; i<Task.length; i++){
+                	if(Task[i].state == 2){
+
+
+                		qtd_target = Task[i].qtd_target;
+                		min_convergence = Task[i].min_convergence;
+                		kind = Task[i].kind;//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
+                		group = Task[i].group;//Tasks 1, 3, 4: false; Task 2: true;
+
+                        	activeTask = Task[i].task_id;
+                        	break;
+                	}
+        	}
 	}
 
-	Tasks = mongoose.model('items_100', itemSchema);
+
+        }).sort({'_id' : 1});
+
+
+
 
 
 
@@ -144,13 +174,6 @@ function init(pars){
 		}
 	}).sort({'_id' : 1});
 
-        Tasks.find({},function (err, V) {
-                if (err) return console.error(err);
-
-		Task = V;
-
-        }).sort({'_id' : 1});
-
 }
 
 function groupInput(items){
@@ -172,7 +195,6 @@ function groupInput(items){
 	}
 	return V;
 }
-
 //-----------------------  Endpoints   -------------------------------
 
 app.post('/init', function(req, res) {
@@ -222,6 +244,9 @@ app.get('/changeActiveTask', function(req, res) {
         	var c = new Tasks(V);
         	c.save(function (err, m0) {if (err) return console.error(err);});
         });
+
+
+
 
 	res.json(V2);
 });
