@@ -102,6 +102,7 @@ var Output;
 var Aggregation;
 var Video;
 var Segments;
+var Gold;
 
 init();
 
@@ -113,6 +114,8 @@ function init(pars){
 	Tasks = mongoose.model('items_100', itemSchema);
 
 	Video = mongoose.model('videos', itemSchema);
+
+	Gold = mongoose.model('gold', itemSchema);
 
 	Segments = mongoose.model('items_0', itemSchema);
 
@@ -390,6 +393,27 @@ app.post('/save_video', function(req, res) {
 	var data = req.body;
 	var c = new Video(data);
 	c.save(function (err, m0) {if (err) return console.error(err);});
+	res.end();
+});
+
+
+app.post('/save_gold', function(req, res) {
+	var data = req.body;
+
+
+	var marks = data.marks.split(',');
+
+	for(var i=0; i<marks.length; i++){
+		data.type = marks[i].split(':')[0];
+		data.instant = marks[i].split(':')[1];
+		data.point = marks[i].split(':')[2];
+
+
+
+		var c = new Gold(data);
+		c.save(function (err, m0) {if (err) return console.error(err);});
+	}
+
 	res.end();
 });
 

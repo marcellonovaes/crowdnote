@@ -82,21 +82,32 @@
   <table>
     <tbody>
       <tr>
-        <td id="instructions" style="display:none;max-width:600px;padding:10px;">
-          <p style="font-size:18px;color:white;">1. Encontre o instante inicial do sinal.</p>
-	<p style="font-size:18px;color:white;">2. Pause o video no instante inicial do sinal.<br><i>(use os botoes - e + para ajustar)</i></p>
-    <p style="font-size:18px;color:white;">3. Escreva o significado do sinal.</p>
-	<p style="font-size:18px;color:white;">4. Clique em ADICIONAR SINAL.<br><i>(Se quiser remover algum gesto, clique em REMOVER SINAL)</i></p>
+           <td>
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="sendContribution()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Store Groundtruth</a> 
+          </p>
 
-	<p style="font-size:18px;color:white;">5. Repita os passos 1, 2, 3 e 4 até o final do video.</p>
-	<p style="font-size:18px;color:white;">6. Clique no botão ENVIAR CONTRIBUICOES.</p>
-        </td>
-        <td>
-          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="sendContribution()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Enviar Contribuicao</a> 
+
+          <p align="center">
+            <select autofocus="" class="mdl-textfield__input" id="list_marks" name="list_marks" onchange="syncMark()" style="margin-top:10px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;" type="select">
+            </select>
           </p>
-          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="addMark()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Adicionar Sinal</a> 
+
+
+
+<br><br>
+          <p align="center">
+
+
+<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(-0.1)" style="width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">- 0.1 sec</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(0.1)" style="width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">+ 0.1 sec</a> 
           </p>
-          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="delMark()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Remover Sinal</a> 
+
+</td>
+<td width='30'>
+</td>
+<td>
+          <p align="center">
+            <select autofocus="" class="mdl-textfield__input" id="type" name="type" style="margin-top:10px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;" type="select"><option value="person">Person</option><option value="tech">Technology</option><option value="event">Event</option>
+            </select>
           </p>
 
 <p align='center'>
@@ -106,13 +117,12 @@
 
 </p>
 
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="addMark()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Adicionar</a> 
+          </p>
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="delMark()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Remover</a> 
+          </p>
 
-          <p align="center">
-            <select autofocus="" class="mdl-textfield__input" id="list_marks" name="list_marks" onchange="syncMark()" style="margin-top:10px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;" type="select">
-            </select>
-          </p>
-          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_instr" onclick="showInstructions()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Instrucoes</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(-0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">- 0.1s</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">+ 0.1s</a> 
-          </p>
+
         </td>
       </tr>
     </tbody>
@@ -138,7 +148,6 @@
   var input;
   var player;
   var duration;
-  var instructions;
   //var presentation;
   var tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
@@ -176,10 +185,8 @@
     mark_bar = document.getElementById("mark_bar");
 
     //presentation = document.getElementById("presentation");
-    instructions = document.getElementById("instructions");
     if(window.innerWidth >= 866){
       //presentation.style.display = 'block';
-      instructions.style.display = 'block';
     }
     input = data;
     player = new YT.Player(
@@ -239,7 +246,7 @@
 	var instant = player.getCurrentTime();
 	var Op = document.createElement("OPTION");
 	Op.text = text;
-	Op.value = instant+":"+text;
+	Op.value = type.value+":"+instant+":"+text;
 	list_marks.options[list_marks.options.length] = Op;
 	list_marks.selectedIndex = list_marks.options.length -1;
 
@@ -250,7 +257,7 @@
     
 
 	//var h = parseFloat($("#player").css("heigth")) +40 +60;
-	h = 672;
+	h = 530;
 
 	if(window.innerWidth < 866){
 		h -= 83;
@@ -305,7 +312,7 @@
 
 
 
-var r = confirm('Ja ideitificou todos os gestos?');
+var r = confirm('Have you done?');
 if(r == true){
     if(list_marks.options.length > 1){
 
@@ -314,17 +321,13 @@ if(r == true){
 		marks.push(list_marks.options[i].value);
 	}
 
-      var queryForm = "<form method='post' action='https://novaes.tech/store'>";
+      var queryForm = "<form method='post' action='https://novaes.tech/save_gold'>";
       queryForm += "<input type='hidden' id='uri' name='uri'  value='"+input.uri+"' > ";
       queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+input._id+"' > ";
       queryForm += "<input type='hidden' id='start' name='start'  value='"+input.start+"' > ";
       queryForm += "<input type='hidden' id='end' name='end'  value='"+input.end+"' > ";
-      queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+input.fingerprint+"' > ";
-      queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+input.job_id+"' > ";
-       queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+input.item_index+"' > ";  
      queryForm += "<input type='hidden' id='marks' name='marks'  value='"+marks+"' > ";
       queryForm += "";
-
       $.ajax({
         type: 'POST',
         url: $(queryForm).attr('action'),
@@ -332,8 +335,6 @@ if(r == true){
         success: function(result, status, request) {done();}
       });
 
-    }else{
-      alert("Voce esqueceu de identificar os gestos?");
     }
 }
   }
@@ -345,9 +346,9 @@ if(r == true){
     player.stopVideo();
   //  alert("Thanks, now you can click the FINISH button.");
 
-	$(location).attr('href', 'https://novaes.tech/thanks');
+//	$(location).attr('href', 'https://novaes.tech/thanks');
 
-    alert("Obrigado!!!");
+    alert("Groundtruth Stored");
   }       
 </script>
 
