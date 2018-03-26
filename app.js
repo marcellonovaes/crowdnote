@@ -60,6 +60,7 @@ itemSchema = Schema({
 	instant: String,
 	converged: String,
 
+
 	// at Runtime
 	item_index: String,
 
@@ -100,6 +101,7 @@ var Input;
 var Output;
 var Aggregation;
 var Video;
+var Segments;
 
 init();
 
@@ -111,6 +113,8 @@ function init(pars){
 	Tasks = mongoose.model('items_100', itemSchema);
 
 	Video = mongoose.model('videos', itemSchema);
+
+	Segments = mongoose.model('items_0', itemSchema);
 
 
         Tasks.find({},function (err, V) {
@@ -386,6 +390,32 @@ app.post('/save_video', function(req, res) {
 	var data = req.body;
 	var c = new Video(data);
 	c.save(function (err, m0) {if (err) return console.error(err);});
+	res.end();
+});
+
+
+app.post('/save_segments', function(req, res) {
+	var data = req.body;
+
+
+	var ranges = data.segment.split(',');
+
+	for(var i=0; i<ranges.length; i++){
+		data.start = ranges[i].split(':')[0];
+		data.end = ranges[i].split(':')[1];
+		var c = new Segments(data);
+		c.save(function (err, m0) {if (err) return console.error(err);});
+	}
+
+        Tasks.findOne({task_id: '0'},function (err, V) {
+                if (err) return console.error(err);
+                V1 = V;
+                V.state = '1';
+                var c = new Tasks(V);
+                c.save(function (err, m0) {if (err) return console.error(err);});
+        });
+
+
 	res.end();
 });
 
