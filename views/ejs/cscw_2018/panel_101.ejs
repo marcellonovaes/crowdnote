@@ -134,7 +134,7 @@ Imagine that you are immersed in the environment of the movie. Taking it into ac
   <table>
     <tbody>
       <tr>
-        <td id="instructions" style="display:none;max-width:700px">
+        <!--td id="instructions" style="display:none;max-width:700px">
 <textarea data-role="none" wrap="on" style="resize: none;width:690px; height:180px;border:0;v-align:top;padding-top:0px;overflow-y:scroll;">
 Imagine that you are immersed in the environment of the movie. Taking it into account, you are going to point out exact time intervals that you think there is a wind or vibration effect. You shall provide the maximum time intervals you can and be trustful. If you realize the intensity of the same effect changes in the next time interval, you must add a new range.
 
@@ -151,10 +151,17 @@ Imagine that you are immersed in the environment of the movie. Taking it into ac
 6. Repeat the process until you think there is no more time interval of effects.
 </textarea>
 
-        </td>
+        </td -->
         <td>
 <br>
-          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="sendContribution()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Send Contributions</a> 
+
+<p align="center">
+  <label for="srt"  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"  style="align:center;width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);" />Import SRT File</label>
+</p>
+	
+    <input name="srt" type="file"  id='srt' style="display:none;"  />
+
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="sendContribution()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Store Segments</a> 
           </p>
           <p align="center">
 <!--a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_instr" onclick="showInstructions()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Instructions</a--> 
@@ -162,10 +169,10 @@ Imagine that you are immersed in the environment of the movie. Taking it into ac
 
 
           <p align="center">
-<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="addRange()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Add Range</a>
-<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="delRange()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Del Range</a>
+<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="addRange()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Add</a>
+<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="delRange()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Del</a>
           <p align="center">
-            <select autofocus="" class="mdl-textfield__input" id="list_ranges" name="list_ranges" onchange="syncRange()" style="margin-top:10px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;" type="select">
+            <select autofocus="" class="mdl-textfield__input" id="list_ranges" name="list_ranges" onchange="syncRange()" style="margin-top:10px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;width:260px;" type="select">
             </select>
           </p>
 
@@ -178,8 +185,14 @@ Imagine that you are immersed in the environment of the movie. Taking it into ac
 
 <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">+ 0.1s</a> 
           </p>
+
+
+
         </td>
       </tr>
+
+
+
     </tbody>
   </table>
 </center>
@@ -192,11 +205,6 @@ Imagine that you are immersed in the environment of the movie. Taking it into ac
 	<div id="timeline" class='w3-red' style="height:30px; box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"></div>
 </div>
 
- <div class="radio-group">
-<center>
-<input type="radio" id="fx_wind" name="fx_type"><label for="wind">Wind</label>
-<input type="radio" id="fx_vibration" name="fx_type"><label for="vibration">Vibration</label>
-</center>
 </div>
 <div id="slider"></div>
 
@@ -215,12 +223,11 @@ Imagine that you are immersed in the environment of the movie. Taking it into ac
   var bt_play_pause;
   var timeline;
   var input;
+  var srt;
   var player;
   var duration;
   var instructions;
   //var presentation;
-  var fx_wind;
-  var fx_vibration;
   var tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
   var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -253,29 +260,31 @@ Imagine that you are immersed in the environment of the movie. Taking it into ac
 	$("#bt_play_pause").text('Play');  
   player.seekTo(player.getCurrentTime() + delta);
   }
-  function showInstructions(){
+/*  function showInstructions(){
    
     modal.innerHTML ='<div style="margin-top:0px; margin-left:50px;"><p style="text-align:justified;font-size:20px">Imagine that you are immersed in the environment of the movie.<br>Taking it into account, you are going to point out exact points in time that you think there is a lack of wind or vibration.</p><p style="text-align:left;font-size:20px">1. Find a calm moment.</p><p style="text-align:left;font-size:20px">2. Please pause the video at the beginning of this moment.<br><i>(use - and + buttons to adjust)</i></p><p style="text-align:left;font-size:20px">3. Click on ADD MARK button to add the mark.<br><i>(If you made a mistake, click on DEL MARK to delete it)</i></p><p style="text-align:left;font-size:20px">4. Do the steps 1, 2 and 3 until the end of the movie.</p><p style="text-align:left;font-size:20px">5. Click the SEND CONTRIBUTIONS button.</p>';
 
  modal.style.display = "block";
   }
+*/
   function onYouTubeIframeAPIReady() {
     $.getJSON('https://novaes.tech/video', function(data){init(data);});
   }
   function init(data){
     list_ranges = document.getElementById("list_ranges");
-    fx_wind = document.getElementById("fx_wind");
-    fx_vibration = document.getElementById("fx_vibration");
     timeline = document.getElementById("timeline");
     //presentation = document.getElementById("presentation");
     instructions = document.getElementById("instructions");
     if(window.innerWidth >= 800){
       //presentation.style.display = 'block';
-      instructions.style.display = 'block';
+      //instructions.style.display = 'block';
     }
     input = data;
-
-
+    srt = $("#srt");
+srt.on('change', function(e) {
+  files = e.target.files;
+  loadSRT(files[0]);
+});
 	$( function() {
 		var start = parseFloat(input.start);
 		var end = parseFloat(input.end);
@@ -342,17 +351,12 @@ Imagine that you are immersed in the environment of the movie. Taking it into ac
   }
 
   function syncRange(){
+      player.pauseVideo();
   	var index = list_ranges.selectedIndex;
 	var range = (list_ranges.options[index].value).split(':');
-	if(range[0] == "WIND"){
-		document.getElementById("fx_wind").checked = true;
-		document.getElementById("fx_vibration").checked = false;
-	}else{
-		document.getElementById("fx_wind").checked = false;
-		document.getElementById("fx_vibration").checked = true;
-	}
-	player.seekTo(range[1]);
-	$( "#slider" ).slider( "values", [range[1],range[2]] );
+	player.seekTo(range[0]);
+
+	$( "#slider" ).slider( "values", [range[0],range[1]] );
   }
 
   function delRange(){        
@@ -365,25 +369,84 @@ Imagine that you are immersed in the environment of the movie. Taking it into ac
   }
 
   function addRange(){
-		var fx = null;
-		if( fx_wind.checked ){
-			fx = 'WIND';
-		}else{
-			if( fx_vibration.checked ) fx = 'VIBRATION';
-		}
-		if(fx){
 			var start = $( "#slider" ).slider( "values", 0 ) ;
 			var stop =  $( "#slider" ).slider( "values", 1 ) ;
         		var Op = document.createElement("OPTION");
-        		Op.text = fx + ": "+start + " - " + stop;
-        		Op.value = fx+":"+start+":"+stop;
+        		Op.text = start + " - " + stop;
+        		Op.value = start+":"+stop;
         		list_ranges.options[list_ranges.options.length] = Op;
         		list_ranges.selectedIndex = list_ranges.options.length -1;
-		}
   }
 
+function strip(s) {
+            return s.replace(/^\s+|\s+$/g,"");
+}
+
+ function loadSRT(f){
 
 
+
+    var reader = new FileReader();
+
+    reader.onload = (function(theFile) {
+        return function(e) {
+		r = e.target.result;
+        srt = r.replace(/\r\n|\r|\n/g, '\n');
+        srt = strip(srt);
+        var srt_ = srt.split('\n\n');
+       // alert(srt);
+
+
+        var cont = 0;
+        for(s in srt_) {
+            st = srt_[s].split('\n');
+            if(st.length >=2) {
+              n = st[0];
+              i = strip(st[1].split(' --> ')[0]);
+
+		
+
+              o = strip(st[1].split(' --> ')[1]);
+              t = st[2];
+
+              if(st.length > 2) {
+                for(j=3; j<st.length;j++)
+                  t += '\n'+st[j];
+              }
+
+  
+
+                        var Op = document.createElement("OPTION");
+
+			var Start = i.split(',');
+			var sPartes = Start[0].split(':');
+			var sSec = parseInt(sPartes[0]*3600) + parseInt(sPartes[1]*60) + parseInt(sPartes[2]) ;
+			var is = sSec+'.'+Start[1];
+
+			Start = o.split(',');
+			sPartes = Start[0].split(':');
+			sSec = parseInt(sPartes[0]*3600) + parseInt(sPartes[1]*60) + parseInt(sPartes[2]) ;
+			ie = sSec+'.'+Start[1];
+
+
+                        Op.text = is + " - " + ie;
+                        Op.value = is+":"+ie;
+                        list_ranges.options[list_ranges.options.length] = Op;
+                        list_ranges.selectedIndex = list_ranges.options.length -1;
+
+
+            }
+            cont++;
+        }
+
+
+
+        };
+      })(f);
+
+      reader.readAsText(f);
+
+ }
 
 
 
