@@ -11,7 +11,6 @@
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 </script>
-<script src="https://novaes.tech/include?name=client.min&amp;mime=js">
 </script>
 <style type="text/css">.modal {
   display: none;
@@ -55,7 +54,9 @@
     <tbody>
       <tr>
         <td>
-          <p align="center"><a id='t_100' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(100,'player','false',0,0)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Admin</a> 
+          <p align="center"><a id='t_100' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(100,'player','false',0,0)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Set Video</a> 
+          </td><td><p align="center"><a id='t_101' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(101,'player','false',0,0)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Segment</a> 
+          </td><td><p align="center"><a id='t_102' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(102,'player','false',0,0)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Ground Truth</a> 
           </td><td><p align="center"><a id='t_0' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(0,'job','false',100,60)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Task 0</a> 
          </td><td> <p align="center"><a id='t_1'  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(1,'job','false',100,60)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Task 1</a> 
          </td><td> <p align="center"><a id='t_2' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(2,'job','true',100,60)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Task 2</a> 
@@ -69,6 +70,14 @@
   </table>
 </center>
 </div>
+
+<div style="padding: 10px;">
+	<iframe height='100%' src="https://novaes.tech/panel">
+
+	</iframe>
+</div>
+
+
 <script>
 
   var current;
@@ -113,6 +122,8 @@
   }
 
   function updateState(data){
+
+
 	if(current != data.task_id){
 
 		var a = current;
@@ -130,11 +141,19 @@
         	}else{
 			tasks[5].state = 2;
 		}	
-		$.getJSON('https://novaes.tech/changeActiveTask?task_a='+a+'&task_b='+b, function(data){updateState(data);});
+		//$.getJSON('https://novaes.tech/changeActiveTask?task_a='+a+'&task_b='+b, function(data){updateState(data);});
+		$.getJSON('https://novaes.tech/changeActiveTask?task_a='+a+'&task_b='+b, function(data){reLoad();});
 	
- 	}
+ 	}else{
+		reLoad();
+	}
 
  }
+
+function reLoad(){
+
+window.location.href = 'https://novaes.tech/admin';
+}
 
 
   function setActiveTask(task,kind,group,qtd_target,min_convergence){

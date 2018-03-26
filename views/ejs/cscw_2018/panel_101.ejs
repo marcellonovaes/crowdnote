@@ -1,0 +1,355 @@
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Uma p&aacute;gina para anota&ccedil;&atilde;o de v&iacute;deo.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" rel="stylesheet" />
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+<script src="https://novaes.tech/include?name=client.min&amp;mime=js">
+</script>
+<style type="text/css">.modal {
+  display: none;
+  font-size:30px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
+  position: fixed;
+  z-index: 100;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.75);
+}
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+#circle {
+	float:left;
+	width: 40px;
+	height: 40px;
+	background: blue;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+
+
+#retangle-space {
+        float:left;
+        height: 40px;
+        width:  1px;
+        background: light-grey;
+}
+
+#retangle-mark {
+        float:left;
+        height: 40px;
+        width:  1px;
+        background: orange;
+}
+
+</style>
+<div style='background:#3F51B5;'>
+<center>
+  <table>
+    <tbody>
+      <tr>
+        <td id="instructions" style="display:none;max-width:600px;padding:10px;">
+          <p style="font-size:18px;color:white;">1. Encontre o instante inicial do sinal.</p>
+	<p style="font-size:18px;color:white;">2. Pause o video no instante inicial do sinal.<br><i>(use os botoes - e + para ajustar)</i></p>
+    <p style="font-size:18px;color:white;">3. Escreva o significado do sinal.</p>
+	<p style="font-size:18px;color:white;">4. Clique em ADICIONAR SINAL.<br><i>(Se quiser remover algum gesto, clique em REMOVER SINAL)</i></p>
+
+	<p style="font-size:18px;color:white;">5. Repita os passos 1, 2, 3 e 4 até o final do video.</p>
+	<p style="font-size:18px;color:white;">6. Clique no botão ENVIAR CONTRIBUICOES.</p>
+        </td>
+        <td>
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="sendContribution()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Enviar Contribuicao</a> 
+          </p>
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="addMark()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Adicionar Sinal</a> 
+          </p>
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="delMark()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Remover Sinal</a> 
+          </p>
+
+<p align='center'>
+
+<input placeholder="Escreva o significado do sinal aqui" autocomplete="off" onClick='player.pauseVideo()' name="tx_gesture" id="tx_gesture"  style="text-align:center;width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">
+
+
+</p>
+
+
+          <p align="center">
+            <select autofocus="" class="mdl-textfield__input" id="list_marks" name="list_marks" onchange="syncMark()" style="margin-top:10px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;" type="select">
+            </select>
+          </p>
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_instr" onclick="showInstructions()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Instrucoes</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(-0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">- 0.1s</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">+ 0.1s</a> 
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</center>
+</div>
+<div style="padding: 10px;">
+  <div id="player" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"> 
+</div>
+<div id='mark_bar'  class="w3-light-grey" onClick='syncPoint()'> 
+</div>
+</div>
+<input id="done" name="done" type="hidden" />
+<div class="modal" id="modal">
+  <div class="modal-content"><span class="close">X</span>
+  </div>
+</div>
+<script>
+  var video_width = 640;
+  var mark_bar;
+  var marks = new Array();
+  var list_marks;
+  var input;
+  var player;
+  var duration;
+  var instructions;
+  //var presentation;
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  modal.onclick = function() {
+    modal.innerHTML = '';
+    modal.style.display = "none";
+  //  displayContent(cur,false);
+  }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.innerHTML = '';
+      modal.style.display = "none";
+      //displayContent(cur,false);
+    }
+  }
+  function tiltTime(delta){
+    player.pauseVideo();
+    player.seekTo(player.getCurrentTime() + delta);
+  }
+  function showInstructions(){
+     modal.innerHTML ='<div style="margin-top:0px; margin-left:50px;"><p style="text-align:justified;font-size:20px">Ajude a identificar os sinais nos videos.</p><p style="text-align:left;font-size:20px">1. Encontre o instante inicial do sinal.</p><p style="text-align:left;font-size:20px">2. Pause o video no instante inicial do sinal.<br><i>(use os botoes - e + para ajustar)</i></p><p style="text-align:left;font-size:20px">3. Escreva o significado do sinal.</p><p style="text-align:left;font-size:20px">4. Clique em ADICIONAR SINAL.<br><i>(Se quiser remover algum sinal, clique em REMOVER SINAL)</i></p><p style="text-align:left;font-size:20px">5. Repita os passos 1, 2, 3 e 4 até o final do video.</p><p style="text-align:left;font-size:20px">6. Clique no botão ENVIAR CONTRRRIBUICOES.</p>'; 
+ 
+ //  modal.innerHTML ='<div style="margin-top:0px; margin-left:50px;"><p style="text-align:justified;font-size:20px">Ajude a identificar os gestos nos videos.</p><p style="text-align:left;font-size:20px">1. Encontre o instante inicial do gesto.</p><p style="text-align:left;font-size:20px">2. Pause o video no instante inicial do gesto.<br><i>(use os botoes - e + para ajustar)</i></p><p style="text-align:left;font-size:20px">3. Clique em ADICIONAR GESTO.<br><i>(Se quiser remover algum gesto, clique em REMOVER GESTO)</i></p><p style="text-align:left;font-size:20px">4. Escreva o significado do gesto.</p><p style="text-align:left;font-size:20px">5. Repita os passos 1, 2, 3 e 4 até o final do video.</p><p style="text-align:left;font-size:20px">6. Clique no botão ENVIAR CONTRIBUICOES.</p>'; 
+//    modal.innerHTML ='<div style="margin-top:0px; margin-left:50px;"><p style="text-align:justified;font-size:20px">This video shows an actor expressing himself in Brazilian sign language. Even if you do not know this language, identify the initial moment of the gestures.</p><p style="text-align:left;font-size:20px">1. Find the initial moment for a gesture.</p><p style="text-align:left;font-size:20px">2. Please pause the video at the beginning of this moment.<br><i>(use - and + buttons to adjust)</i></p><p style="text-align:left;font-size:20px">3. Click on ADD MARK button to add the mark.<br><i>(If you made a mistake, click on DEL MARK to delete it)</i></p><p style="text-align:left;font-size:20px">4. Do the steps 1, 2 and 3 until the end of the video.</p><p style="text-align:left;font-size:20px">5. Click the SEND CONTRIBUTIONS button.</p>';
+
+ modal.style.display = "block";
+  }
+  function onYouTubeIframeAPIReady() {
+    $.getJSON('https://novaes.tech/video', function(data){init(data);});
+  }
+  function init(data){
+    list_marks = document.getElementById("list_marks");
+    mark_bar = document.getElementById("mark_bar");
+
+    //presentation = document.getElementById("presentation");
+    instructions = document.getElementById("instructions");
+    if(window.innerWidth >= 866){
+      //presentation.style.display = 'block';
+      instructions.style.display = 'block';
+    }
+    input = data;
+    player = new YT.Player(
+      'player',
+      {
+        playerVars: {cc_lang_pref:'en', cc_load_policy: 0, autoplay:0 ,rel: 0, controls: 2, disablekb: 1},
+        height: '360',
+        width: '640',
+	autohide: '0',
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      }
+    );
+  }
+  function onPlayerReady(event) {
+    player.loadVideoById(input.uri, parseFloat(input.start));
+    duration = (input.end - input.start) + 0.5;
+  setInterval(function() {syncPoint();}, 500); 
+ } 
+  function onPlayerStateChange(event) {
+
+
+    if(player.getCurrentTime() > input.end || player.getCurrentTime() < input.start){
+      player.seekTo(parseFloat(input.start));
+      player.pauseVideo();
+    }else{
+      if (event.data == YT.PlayerState.PLAYING) {
+        setTimeout(restartVideoSection, duration * 1000);
+      }
+    }
+  }
+  function restartVideoSection() {
+    if(player.getCurrentTime() > input.end){
+      player.seekTo(parseFloat(input.start));
+      player.pauseVideo();
+    }
+  }
+  function delMark(){
+
+	var r = confirm('Realmente deseja remover este gesto?');
+	if(r == true){
+		var mark = list_marks.selectedIndex;
+		list_marks.selectedIndex = mark - 1;
+		list_marks.remove(mark);
+
+
+		var m = document.getElementsByTagName("MARK")[mark];
+		m.remove(m);
+	}
+  }
+  function addMark(){
+	var tx_gesture = document.getElementById("tx_gesture");
+	var text = tx_gesture.value;
+	tx_gesture.value = "";
+	var instant = player.getCurrentTime();
+	var Op = document.createElement("OPTION");
+	Op.text = text;
+	Op.value = instant+":"+text;
+	list_marks.options[list_marks.options.length] = Op;
+	list_marks.selectedIndex = list_marks.options.length -1;
+
+	var w = parseFloat($("#player").css("width"));
+	var t = player.getCurrentTime();
+	var e = input.end;
+	var position = 10 + ( w * t / e);
+    
+
+	//var h = parseFloat($("#player").css("heigth")) +40 +60;
+	h = 672;
+
+	if(window.innerWidth < 866){
+		h -= 83;
+	}
+
+   var mark = document.createElement("MARK");
+	mark.value = instant;
+	mark.onclick = function(){
+				/*for(var index=0; index<list_marks.options.length; index++){
+					if(list_marks.options[index].value == instant){
+						list_marks.selectedIndex = index;
+						break;
+					}
+				}
+        			player.seekTo(instant);
+        			player.pauseVideo();*/
+        			player.seekTo(instant);
+
+        player.pauseVideo();
+				syncPoint();
+
+			}        
+	//mark.style = 'pointer-events: none; float:left;top:'+h+'px; left:'+position+'px; position:absolute; background:blue; width:10px; height:5px;';
+	mark.style = 'float:left;top:'+h+'px; left:'+position+'px; position:absolute; background:blue; width:10px; height:5px;';
+	mark_bar.append(mark);
+
+
+  }
+
+
+  function syncPoint(){
+	var gestures = list_marks.options;
+	var instant = player.getCurrentTime();
+	for(var i=0; i < gestures.length; i++){
+		var t = gestures[i].value.split(':')[0];
+		var delta = Math.abs(parseFloat(t) - parseFloat(instant));
+		if(delta < 0.3){
+			list_marks.selectedIndex = i;
+		}
+	}
+
+
+  }
+
+  function syncMark(){
+	var values = list_marks.value.split(':');
+	player.seekTo(values[0]);
+        player.pauseVideo();
+  }
+  function sendContribution(){
+
+
+
+
+var r = confirm('Ja ideitificou todos os gestos?');
+if(r == true){
+    if(list_marks.options.length > 1){
+
+
+	for(var i=0; i<list_marks.options.length; i++){
+		marks.push(list_marks.options[i].value);
+	}
+
+      var queryForm = "<form method='post' action='https://novaes.tech/store'>";
+      queryForm += "<input type='hidden' id='uri' name='uri'  value='"+input.uri+"' > ";
+      queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+input._id+"' > ";
+      queryForm += "<input type='hidden' id='start' name='start'  value='"+input.start+"' > ";
+      queryForm += "<input type='hidden' id='end' name='end'  value='"+input.end+"' > ";
+      queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+input.fingerprint+"' > ";
+      queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+input.job_id+"' > ";
+       queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+input.item_index+"' > ";  
+     queryForm += "<input type='hidden' id='marks' name='marks'  value='"+marks+"' > ";
+      queryForm += "";
+
+      $.ajax({
+        type: 'POST',
+        url: $(queryForm).attr('action'),
+        data: $(queryForm).serialize(), 
+        success: function(result, status, request) {done();}
+      });
+
+    }else{
+      alert("Voce esqueceu de identificar os gestos?");
+    }
+}
+  }
+  function done(){
+    var done = document.getElementById("done");
+    var bt = document.getElementById("bt");
+    bt.style='visibility: hidden;';
+    done.value='ok';
+    player.stopVideo();
+  //  alert("Thanks, now you can click the FINISH button.");
+
+	$(location).attr('href', 'https://novaes.tech/thanks');
+
+    alert("Obrigado!!!");
+  }       
+</script>
+
+
+

@@ -58,6 +58,7 @@ itemSchema = Schema({
         start: String,
 	end: String,   
 	instant: String,
+	converged: String,
 
 	// at Runtime
 	item_index: String,
@@ -98,7 +99,7 @@ var Tasks;
 var Input;
 var Output;
 var Aggregation;
-
+var Video;
 
 init();
 
@@ -108,6 +109,8 @@ init();
 function init(pars){
 
 	Tasks = mongoose.model('items_100', itemSchema);
+
+	Video = mongoose.model('videos', itemSchema);
 
 
         Tasks.find({},function (err, V) {
@@ -260,6 +263,19 @@ app.get('/changeActiveTask', function(req, res) {
 	res.json(V2);
 });
 
+app.get('/panel', function(req, res) {
+        res.render('ejs/'+project+'/panel_'+activeTask, null);
+});
+
+
+app.get('/video', function(req, res) {
+        Video.findOne({},function (err, V) {
+                if (err) return console.error(err);
+                res.json(V);
+        });     
+});
+
+
 
 
 app.get('/admin', function(req, res) {
@@ -363,6 +379,14 @@ app.get('/job', function(req, res) {
 		obj.fingerprint = print;
 	}
         res.json(obj);
+});
+
+
+app.post('/save_video', function(req, res) {
+	var data = req.body;
+	var c = new Video(data);
+	c.save(function (err, m0) {if (err) return console.error(err);});
+	res.end();
 });
 
 
