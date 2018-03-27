@@ -72,7 +72,7 @@
 </div>
 
 <div style="padding: 10px;">
-	<iframe height='100%' src="http://novaes.tech/panel">
+	<iframe height='100%' src="https://novaes.tech/panel">
 
 	</iframe>
 </div>
@@ -84,7 +84,7 @@
   var tasks;
   var states = new Array();
 
-  $.getJSON('http://novaes.tech/tasks', function(data){init(data);});
+  $.getJSON('https://novaes.tech/tasks', function(data){init(data);});
 
 
 
@@ -118,7 +118,7 @@
   }
 
   function updateTask(){
-	$.getJSON('http://novaes.tech/current', function(data){updateState(data);});
+	$.getJSON('https://novaes.tech/current', function(data){updateState(data);});
   }
 
   function updateState(data){
@@ -141,8 +141,8 @@
         	}else{
 			tasks[5].state = 2;
 		}	
-		//$.getJSON('http://novaes.tech/changeActiveTask?task_a='+a+'&task_b='+b, function(data){updateState(data);});
-		$.getJSON('http://novaes.tech/changeActiveTask?task_a='+a+'&task_b='+b, function(data){reLoad();});
+		//$.getJSON('https://novaes.tech/changeActiveTask?task_a='+a+'&task_b='+b, function(data){updateState(data);});
+		$.getJSON('https://novaes.tech/changeActiveTask?task_a='+a+'&task_b='+b, function(data){reLoad();});
 	
  	}else{
 		reLoad();
@@ -152,12 +152,12 @@
 
 function reLoad(){
 
-window.location.href = 'http://novaes.tech/admin';
+window.location.href = 'https://novaes.tech/admin';
 }
 
 
   function setActiveTask(task,kind,group,qtd_target,min_convergence){
-        $.getJSON('http://novaes.tech/init?task='+task+'&kind='+kind+'&group='+group+'&qtd_target='+qtd_target+'&min_convergence='+min_convergence, function(){updateState();});
+        $.getJSON('https://novaes.tech/init?task='+task+'&kind='+kind+'&group='+group+'&qtd_target='+qtd_target+'&min_convergence='+min_convergence, function(){updateState();});
 
 	updateTask(); 
 
@@ -168,7 +168,7 @@ window.location.href = 'http://novaes.tech/admin';
     var point = document.getElementById("point");
     var type = document.getElementById("type");
     if(point.value != ''){
-      var queryForm = "<form method='post' action='http://novaes.tech/store'>";
+      var queryForm = "<form method='post' action='https://novaes.tech/store'>";
       queryForm += "<input type='hidden' id='uri' name='uri'  value='"+input.uri+"' > ";
       queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+input._id+"' > ";
       queryForm += "<input type='hidden' id='start' name='start'  value='"+input.start+"' > ";

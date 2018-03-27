@@ -13,7 +13,7 @@
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
 </script>
-<script src="http://novaes.tech/include?name=client.min&amp;mime=js">
+<script src="https://novaes.tech/include?name=client.min&amp;mime=js">
 </script>
 <style type="text/css">.modal {
   display: none;
@@ -178,7 +178,7 @@
  modal.style.display = "block";
   }
   function onYouTubeIframeAPIReady() {
-    $.getJSON('http://novaes.tech/video', function(data){init(data);});
+    $.getJSON('https://novaes.tech/video', function(data){init(data);});
   }
   function init(data){
     list_marks = document.getElementById("list_marks");
@@ -203,7 +203,7 @@
       }
     );
 
-    $.getJSON('http://novaes.tech/gold', function(data){loadGold(data);});
+    $.getJSON('https://novaes.tech/gold', function(data){loadGold(data);});
 
 
 
@@ -365,7 +365,7 @@ if(r == true){
 		marks.push(list_marks.options[i].value);
 	}
 
-      var queryForm = "<form method='post' action='http://novaes.tech/save_gold'>";
+      var queryForm = "<form method='post' action='https://novaes.tech/save_gold'>";
       queryForm += "<input type='hidden' id='uri' name='uri'  value='"+input.uri+"' > ";
       queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+input._id+"' > ";
       queryForm += "<input type='hidden' id='start' name='start'  value='"+input.start+"' > ";
@@ -390,7 +390,7 @@ if(r == true){
     player.stopVideo();
   //  alert("Thanks, now you can click the FINISH button.");
 
-//	$(location).attr('href', 'http://novaes.tech/thanks');
+//	$(location).attr('href', 'https://novaes.tech/thanks');
 
     alert("Groundtruth Stored");
   }       

@@ -84,7 +84,7 @@
 
 
   function onYouTubeIframeAPIReady() { //gOQPS_ILrEo
-    $.getJSON('http://novaes.tech/video', function(data){init(data);});
+    $.getJSON('https://novaes.tech/video', function(data){init(data);});
   }
 
 
@@ -129,7 +129,7 @@
   }
    
 function saveVideo(){
-      var queryForm = "<form method='post' action='http://novaes.tech/save_video'>";
+      var queryForm = "<form method='post' action='https://novaes.tech/save_video'>";
       queryForm += "<input type='hidden' id='uri' name='uri'  value='"+uri+"' > ";
       queryForm += "<input type='hidden' id='start' name='start'  value='"+0+"' > ";
       queryForm += "<input type='hidden' id='end' name='end'  value='"+player.getDuration()+"' > ";

@@ -511,13 +511,13 @@ app.get('/images', function(req, res) {
 
 // ------------- Create Server ------------------------------
 
-http.createServer(app).listen(80);
-/*
+//http.createServer(app).listen(80);
+
 https.createServer({
   	ca: fs.readFileSync("../../ssl/intermediate.crt"),
 	key: fs.readFileSync('../../ssl/novaes.tech.key'),
 	cert: fs.readFileSync('../../ssl/novaes.tech.crt')
 },app).listen(443);
-*/
+
 
 
