@@ -103,6 +103,7 @@ var Aggregation;
 var Video;
 var Segments;
 var Gold;
+var Contributions;
 
 init();
 
@@ -110,6 +111,8 @@ init();
 // ---------------------  Init Functions -----------------------------
 
 function init(pars){
+
+	Contributions = mongoose.model('contributions_'+activeTask, itemSchema);
 
 	Tasks = mongoose.model('items_100', itemSchema);
 
@@ -289,6 +292,18 @@ app.get('/segments', function(req, res) {
                 res.json(V);
         }).sort({'start' : 1});     
 });
+
+
+
+app.get('/contributions', function(req, res) {
+	Contributions = mongoose.model('contributions_0', itemSchema);
+        Contributions.find({},function (err, V) {
+                if (err) return console.error(err);
+                res.json(V);
+        }).sort({'instant' : 1});     
+});
+
+
 
 
 app.get('/gold', function(req, res) {
