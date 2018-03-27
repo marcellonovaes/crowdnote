@@ -92,6 +92,9 @@
 		for(var i=0; i<segments.length; i++){
 			groups[i] = {'segment':segments[i],'contributions':new Array(),'candidates':new Array(), 'points':new Array()};
 		}
+
+
+
 		for(var i=0; i<contributions.length; i++){
 				addContribution(groups, contributions[i]);
 		}
@@ -126,13 +129,61 @@
 	
 
 		for(var i=0; i<groups.length; i++){
-			console.log(i);
 			for(var j=0; j<groups[i].candidates.length; j++){
-				console.log(j);
 				if(groups[i].candidates[j].length < 2) continue;
+					var tx = '';
+					var grp = new Array();
+					grp[0] = new Array();
+					pos = -1;
+
+				          groups[i].candidates[j].sort(
+				          function(x, y)
+				          {
+				                      if(x.point > y.point)
+								return -1;
+							return 1;
+				          }
+				        );
 					for(var k=0; k<groups[i].candidates[j].length; k++){
-						console.log(groups[i].candidates[j][k].point,groups[i].candidates[j][k].instant);
+
+						if(groups[i].candidates[j][k].point.trim().length < 1) continue;
+
+						var delta = levenshtein(tx.toLowerCase(),groups[i].candidates[j][k].point.toLowerCase());					
+						//console.log(delta,tx,groups[i].candidates[j][k].point);
+						if(delta < 3){//console.log('A')
+							grp[pos].push(groups[i].candidates[j][k]);
+						}else{//console.log('B');
+							pos++;
+							grp[pos] = new Array();
+							tx = groups[i].candidates[j][k].point;
+							grp[pos].push(groups[i].candidates[j][k]);
+						}
+
+
+					
 					}
+
+
+					var m = 0;
+					var total = 0;
+					for(var x=0; x < grp.length; x++){
+						total += grp[x].length;
+						if(grp[x].length > grp[m].length){
+							m = x;
+						}
+					}
+					var converg = grp[m].length / total;
+
+					if(grp[m].length > 1)
+						console.log(grp[m][0].point,converg);
+
+
+
+
+
+
+
+
 			}
 
 		}
@@ -152,6 +203,25 @@
 		}
 	}
 
+        function levenshtein(a, b){
+                var tmp;
+                if (a.length === 0) { return b.length; }
+                if (b.length === 0) { return a.length; }
+                if (a.length > b.length) { tmp = a; a = b; b = tmp; }
+
+                var i, j, res, alen = a.length, blen = b.length, row = Array(alen);
+                for (i = 0; i <= alen; i++) { row[i] = i; }
+
+                for (i = 1; i <= blen; i++) {
+                        res = i;
+                        for (j = 1; j <= alen; j++) {
+                                tmp = row[j - 1];
+                                row[j - 1] = res;
+                                res = b[i - 1] === a[j - 1] ? tmp : Math.min(tmp + 1, Math.min(res + 1, row[j] + 1));
+                        }
+                }
+                return res;
+        }
  
 </script>
 

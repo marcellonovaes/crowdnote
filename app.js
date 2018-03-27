@@ -300,7 +300,7 @@ app.get('/contributions', function(req, res) {
         Contributions.find({},function (err, V) {
                 if (err) return console.error(err);
                 res.json(V);
-        }).sort({'instant' : 1});     
+        }).sort({'instant' : 1, 'point' : 1});     
 });
 
 
