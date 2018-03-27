@@ -115,7 +115,7 @@ function init(pars){
 
 	Video = mongoose.model('videos', itemSchema);
 
-	Gold = mongoose.model('golds', itemSchema);
+	Gold = mongoose.model('gold', itemSchema);
 
 	Segments = mongoose.model('items_0', itemSchema);
 
@@ -280,22 +280,6 @@ app.get('/video', function(req, res) {
                 if (err) return console.error(err);
                 res.json(V);
         });     
-});
-
-
-app.get('/segments', function(req, res) {
-        Segments.find({},function (err, V) {
-                if (err) return console.error(err);
-                res.json(V);
-        }).sort({'start' : 1});     
-});
-
-
-app.get('/gold', function(req, res) {
-        Gold.find({},function (err, V) {
-                if (err) return console.error(err);
-                res.json(V);
-        }).sort({'instant' : 1});     
 });
 
 
@@ -511,13 +495,13 @@ app.get('/images', function(req, res) {
 
 // ------------- Create Server ------------------------------
 
-http.createServer(app).listen(80);
-/*
+//http.createServer(app).listen(81);
+
 https.createServer({
   	ca: fs.readFileSync("../../ssl/intermediate.crt"),
 	key: fs.readFileSync('../../ssl/novaes.tech.key'),
 	cert: fs.readFileSync('../../ssl/novaes.tech.crt')
 },app).listen(443);
-*/
+
 
 
