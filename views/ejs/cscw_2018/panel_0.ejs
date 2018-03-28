@@ -310,13 +310,26 @@ container.innerHTML = table.join("\n");
 		var dones = document.getElementsByName("ck");
 		for(var i=0; i<dones.length; i++){
 			if(dones[i].checked){
+				delete list_points[i].fingerprint;
+				delete list_points[i].job_id;
+				delete list_points[i].candidates;
+				delete list_points[i].contributions;
+				delete list_points[i]._id;
 				convergeds.push(list_points[i]);
 			}
 		}
-		console.log(convergeds);
+
+	      $.ajax({
+	        	type: 'POST',
+      	 	 	url: 'https://novaes.tech/updateConvergence',
+        		data: {'points':convergeds},
+	        	success: function(result, status, request) {done(result);}
+      		});
 	}
 
-
+	function done(result){
+		console.log(result);
+	}
 
  
 </script>

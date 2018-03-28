@@ -238,8 +238,36 @@ app.get('/current', function(req, res) {
 });
 
 
+app.post('/updateConvergence', function(req, res) {
+	var points = req.body.points;
+	update(points,0);
+	res.end();
+});
+
+
+function update(points,count){
+	if(count == 3)//points.length)
+		return 0;
+
+
+	console.log(points[count]);
+
+        Input.findOne({_id: points[count].item_id},function (err, V) {
+                if (err) return console.error(err);
+		V.convergence = points[count].convergence;
+		v = V;
+        	var c = new Input(V);
+        	c.save(function (err, m0) {if (err) return console.error(err); update(points,count+1) });
+        });
+
+	return update(points, count+1);
+}
+
+
 
 app.get('/changeActiveTask', function(req, res) {
+if(req.query.task_a != req.query.task_b){
+
 	var V1;
 	var V2;
 
@@ -264,13 +292,11 @@ app.get('/changeActiveTask', function(req, res) {
 
         });
 
-
-
-
-
-
-
 	res.json(V2);
+}else{
+	res.json({});
+}
+
 });
 
 app.get('/panel', function(req, res) {
@@ -296,7 +322,6 @@ app.get('/segments', function(req, res) {
 
 
 app.get('/contributions', function(req, res) {
-	Contributions = mongoose.model('contributions_0', itemSchema);
         Contributions.find({},function (err, V) {
                 if (err) return console.error(err);
                 res.json(V);
