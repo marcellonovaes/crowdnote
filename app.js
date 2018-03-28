@@ -162,9 +162,9 @@ function init(pars){
 
 
 
-	Input = mongoose.model('items_'+activeTask, itemSchema);
-	Output = mongoose.model('contributions_'+activeTask, itemSchema);
-	Aggregation = mongoose.model('items_'+(activeTask+1), itemSchema);
+	Input = mongoose.model('items_'+parseInt(activeTask), itemSchema);
+	Output = mongoose.model('contributions_'+parseInt(activeTask), itemSchema);
+	Aggregation = mongoose.model('items_'+(parseInt(activeTask)+1), itemSchema);
 
 	input = new Array();
 	curInput = 0;
@@ -238,6 +238,37 @@ app.get('/current', function(req, res) {
 });
 
 
+
+app.post('/aggregate', function(req, res) {
+	var points = req.body.points;
+	aggregate(points,0);
+
+	var next = parseInt(activeTask) + 1;
+
+        Tasks.findOne({task_id: next},function (err, V) {
+                if (err) return console.error(err);
+                V.state = '1';
+                var c = new Tasks(V);
+                c.save(function (err, m0) {if (err) return console.error(err);});
+        });
+
+	res.end();
+});
+
+function aggregate(points,count){  
+
+
+
+        if(count == points.length)
+                return 0;
+
+	delete points[count].convergence;
+
+        var c = new Aggregation(points[count]);
+        c.save(function (err, m0) {if (err) return console.error(err); aggregate(points,count+1) });
+
+}
+
 app.post('/updateConvergence', function(req, res) {
 	var points = req.body.points;
 	update(points,0);
@@ -259,7 +290,7 @@ function update(points,count){
         	c.save(function (err, m0) {if (err) return console.error(err); update(points,count+1) });
         });
 
-	return update(points, count+1);
+	//return update(points, count+1);
 }
 
 
@@ -299,6 +330,8 @@ if(req.query.task_a != req.query.task_b){
 });
 
 app.get('/panel', function(req, res) {
+
+
         res.render('ejs/'+project+'/panel_'+activeTask, null);
 });
 
@@ -321,6 +354,7 @@ app.get('/segments', function(req, res) {
 
 
 app.get('/contributions', function(req, res) {
+	Contributions = mongoose.model('contributions_'+activeTask, itemSchema);
         Contributions.find({},function (err, V) {
                 if (err) return console.error(err);
                 res.json(V);

@@ -310,7 +310,7 @@
 
 function loadGold(data){
 
-        if(data){
+        if(data.length > 0){
 
                 var bts = document.getElementsByName('bt');
                 for(var i=0; i<bts.length; i++){
@@ -372,6 +372,10 @@ if(r == true){
       queryForm += "<input type='hidden' id='end' name='end'  value='"+input.end+"' > ";
      queryForm += "<input type='hidden' id='marks' name='marks'  value='"+marks+"' > ";
       queryForm += "";
+
+
+
+
       $.ajax({
         type: 'POST',
         url: $(queryForm).attr('action'),
