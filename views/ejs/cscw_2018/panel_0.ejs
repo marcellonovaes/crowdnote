@@ -47,21 +47,38 @@
     text-decoration: none;
     cursor: pointer;
   }
+
+table {
+  border: 1px #c0c0c0 solid;
+  width: 100%;
+}
+table th {
+  background-color: #00f;
+  color: #fff;
+}
+table td {
+  background-color: #f0f0f0;
+  color: #0c0c0c;
+}
+
 </style>
 <div style='background:#3F51B5;'>
 <center>
   <table>
     <tbody>
 
-          <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_load_video" onclick="loadVideo()" style="display:block;height:33px;width: 150px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Load Video</a>
+          <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="aggregate()" style="display:block;height:33px;width: 300px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Proceed Aggregation</a>
+<br>
+          <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="updateConvergence()" style="display:block;height:33px;width: 300px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Continue Collecting</a>
 
-	
 
     </tbody>
   </table>
 </center>
 </div>
-<div style="padding: 10px;">
+
+<div id="container"></div>
+
   </div>
 
 
@@ -70,7 +87,7 @@
 </div>
 <script>
 
-
+	var list_points;
 	var segments;
 	var contributions;
 	var groups;
@@ -174,21 +191,80 @@
 					}
 					var converg = grp[m].length / total;
 
-					if(grp[m].length > 1)
-						console.log(grp[m][0].point,converg);
-
-
-
-
-
-
-
+					if(grp[m].length > 1){
+						var point = grp[m][0];
+						var inst = 0;
+						var t = 0;
+						for(var v=0; v<grp[m].length; v++){
+									inst += parseFloat(grp[m][v].instant);
+						}
+						point.instant = parseFloat(inst) / grp[m].length;
+						point.convergence = converg;
+						point.candidates = groups[i].candidates.length;
+						point.contributions = groups[i].contributions.length;
+						groups[i].points.push(point);
+					}
 
 			}
+
 
 		}
 	
 
+		var list = new Array();
+		for(var i=0; i<groups.length; i++){
+			for(var j=0; j<groups.length; j++){
+				var point = groups[i].points[j];
+				if(point){
+					list.push(point);
+				}
+			}
+		}
+
+		createTable(list);
+
+
+	}
+
+
+	function createTable(list){
+
+		list_points = list;
+
+var container = document.getElementById("container");
+table= [
+  '<table>',
+  '<thead>',
+  '<tr>',
+  '<th>Done</th>',
+  '<th>Contributions</th>',
+  '<th>Instant</th>',
+  '<th>Point</th>',
+  '<th>Convergence</th>',
+  '</tr>',
+  '</thead>',
+  '<tbody>'
+];
+
+for(var i=0; i<list.length; i++){
+var point = list[i];
+table.push(
+  '<tr>',
+  '<td align="center"><input type="checkbox" name="ck" checked  ></td>',
+  '<td align="center">'+list[i].contributions+'</td>',
+  '<td>'+list[i].instant+'</td>',
+  '<td>'+list[i].point+'</td>',
+  '<td>'+parseInt(100*point.convergence)+'%'+'</td>',
+  '</tr>'
+);
+}
+
+table.push(
+  '</tbody>',
+  '</table>'
+);
+
+container.innerHTML = table.join("\n");
 
 	}
 
@@ -222,6 +298,26 @@
                 }
                 return res;
         }
+
+
+	function aggregate(){
+		alert('Aggregate');
+
+	}
+
+	function updateConvergence(){
+		var convergeds = new Array();
+		var dones = document.getElementsByName("ck");
+		for(var i=0; i<dones.length; i++){
+			if(dones[i].checked){
+				convergeds.push(list_points[i]);
+			}
+		}
+		console.log(convergeds);
+	}
+
+
+
  
 </script>
 

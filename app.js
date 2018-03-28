@@ -58,7 +58,7 @@ itemSchema = Schema({
         start: String,
 	end: String,   
 	instant: String,
-	converged: String,
+	convergence: String,
 
 
 	// at Runtime
