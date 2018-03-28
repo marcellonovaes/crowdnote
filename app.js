@@ -246,11 +246,10 @@ app.post('/updateConvergence', function(req, res) {
 
 
 function update(points,count){
-	if(count == 3)//points.length)
+	if(count == points.length)
 		return 0;
 
 
-	console.log(points[count]);
 
         Input.findOne({_id: points[count].item_id},function (err, V) {
                 if (err) return console.error(err);
