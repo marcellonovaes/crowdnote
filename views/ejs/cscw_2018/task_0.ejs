@@ -139,6 +139,9 @@
       instructions.style.display = 'block';
     }
     input = data.data[0];
+
+
+console.log(data);
  
     info = data.info;
 
@@ -191,6 +194,7 @@
       queryForm += "<input type='hidden' id='instant' name='instant'  value='"+player.getCurrentTime()+"' > ";
       queryForm += "<input type='hidden' id='type' name='type'  value='"+type.value+"' > ";
       queryForm += "<input type='hidden' id='point' name='point'  value='"+point.value+"' > ";
+      queryForm += "<input type='hidden' id='convergence' name='convergence'  value='"+0+"' > ";
       queryForm += "";
       $.ajax({
         type: 'POST',

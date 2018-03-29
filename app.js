@@ -177,7 +177,7 @@ function init(pars){
 
 
 
-	Input.find({},function (err, V) {
+	Input.find({convergence:0},function (err, V) {
 		if (err) return console.error(err);
 		if(group){
 			V = groupInput(V);
@@ -262,7 +262,7 @@ function aggregate(points,count){
         if(count == points.length)
                 return 0;
 
-	delete points[count].convergence;
+	points[count].convergence = 0;
 
         var c = new Aggregation(points[count]);
         c.save(function (err, m0) {if (err) return console.error(err); aggregate(points,count+1) });
@@ -514,6 +514,7 @@ app.post('/save_segments', function(req, res) {
 	var ranges = data.segment.split(',');
 
 	for(var i=0; i<ranges.length; i++){
+		data.item_id = i;
 		data.start = ranges[i].split(':')[0];
 		data.end = ranges[i].split(':')[1];
 		var c = new Segments(data);

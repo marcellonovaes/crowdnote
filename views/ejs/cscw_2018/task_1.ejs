@@ -60,7 +60,7 @@
           
               <p style="font-size:18px;color:white;">Based on the video, suggest content about this <span id='point_type'>person</span>:
               </p>
-              <p id="tx_point" style="font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;"> 
+              <p id="tx_point" style="font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;"> 
               </p>
               <p style="font-size:18px;color:white;">1. Select the type of content to send.
               </p>
@@ -100,7 +100,7 @@
           
          <td style='border: 1px solid white; padding:10px;'>
 
-              <p align="center" id="contribPanel" > </p>
+              <p align="center" id="contribPanel" > </p>
 
               <p><textarea class="answer" id="contrib" name="contrib"></textarea></p>
               <p><img id="Image" style="position: fixed; margin-top: -100px ;margin-left: 2px;max-height:80px;width:160px;" />
@@ -116,7 +116,7 @@
   </center>
 </div>
 <div style="padding: 10px;">
-  <div id="player" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"> 
+  <div id="player" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"> 
   </div>
 </div>
 <input id="done" name="done" type="hidden" />
@@ -161,7 +161,7 @@
     	case 'theory': msg = 'theory'; break;
 
     }
-    modal.innerHTML = '<div style="margin-top:0px; margin-left:50px; "><p style="font-size:18px;color:white;">Based on the video, suggest content about this '+msg+':</p><p  style="font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;">'+ input.point +'</p><p style="font-size:18px;color:white;">1. Select the type of content to send.</p><p style="font-size:18px;color:rgb(68,138,255);">You can upload an image, write a short text,</p><p style="font-size:18px;color:rgb(68,138,255);">or paste a link to Youtube or Wikipedia.</p></span><p style="font-size:18px;color:white;">2. Type, paste or choose the content.</p><p style="font-size:18px;color:white;">3. Click the SEND button.</p>';
+    modal.innerHTML = '<div style="margin-top:0px; margin-left:50px; "><p style="font-size:18px;color:white;">Based on the video, suggest content about this '+msg+':</p><p  style="font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;">'+ input.point +'</p><p style="font-size:18px;color:white;">1. Select the type of content to send.</p><p style="font-size:18px;color:rgb(68,138,255);">You can upload an image, write a short text,</p><p style="font-size:18px;color:rgb(68,138,255);">or paste a link to Youtube or Wikipedia.</p></span><p style="font-size:18px;color:white;">2. Type, paste or choose the content.</p><p style="font-size:18px;color:white;">3. Click the SEND button.</p>';
     modal.style.display = "block";
   }
   
@@ -322,6 +322,7 @@ if(contrib.value == 'https://youtu.be/gOQPS_ILrEo'){
       queryForm += "<input type='hidden' id='instant' name='instant'  value='"+input.instant+"' > ";
       queryForm += "<input type='hidden' id='point' name='point'  value='"+input.point+"' > ";
       queryForm += "<input type='hidden' id='content_type' name='content_type'  value='"+content_type+"' > ";
+      queryForm += "<input type='hidden' id='convergence' name='convergence'  value='"+0+"' > ";
       if(image == null){
         queryForm += "<input type='hidden' id='content' name='content'  value='"+contrib.value+"' > ";
       }else{
