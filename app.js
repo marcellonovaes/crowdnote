@@ -257,7 +257,7 @@ app.post('/aggregate', function(req, res) {
 
 function aggregate(points,count){  
 
-
+console.log(activeTask);
 
         if(count == points.length)
                 return 0;
