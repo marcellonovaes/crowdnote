@@ -150,7 +150,7 @@ table td {
 
 
 
-		list_points = list;
+		list_points = new Array();// list;
 
 var container = document.getElementById("container");
 table= [
@@ -183,7 +183,7 @@ for(var i=0; i<list.length; i++){
 	}
 
 
-
+	list_points.push(point[mode][0]);
 
 
 table.push(
@@ -212,27 +212,29 @@ container.innerHTML = table.join("\n");
 		for(var i=0; i<dones.length; i++){
 			if(dones[i].checked){
 			
-				for(var j=0; j<list_points[i].length; j++){
-					console.log(list_points[i][j]);
-					delete list_points[i][j].fingerprint;
-					delete list_points[i][j].job_id;
-					delete list_points[i][j].candidates;
-					delete list_points[i][j].contributions;
-					delete list_points[i][j]._id;
-					list_points[i][j].convergence = '1';	
-					convergeds.push(list_points[i][j]);
-				}
+				//for(var j=0; j<list_points[i].length; j++){
+					delete list_points[i].fingerprint;
+					delete list_points[i].job_id;
+					delete list_points[i].candidates;
+					delete list_points[i].contributions;
+					delete list_points[i]._id;
+					list_points[i].convergence = '1';	
+					convergeds.push(list_points[i]);
+				//}
 
 			}
 
 		}
 
+		console.log(convergeds);
+/*
 	      $.ajax({
 	        	type: 'POST',
       	 	 	url: 'https://novaes.tech/updateConvergence',
         		data: {'points':convergeds},
 	        	success: function(result, status, request) {done(result);}
       		});
+*/
 	}
 
         function aggregate(){
@@ -241,27 +243,27 @@ container.innerHTML = table.join("\n");
 		for(var i=0; i<dones.length; i++){
 			if(dones[i].checked){
 			
-				for(var j=0; j<list_points[i].length; j++){
-					delete list_points[i][j].fingerprint;
-					delete list_points[i][j].job_id;
-					delete list_points[i][j].candidates;
-					delete list_points[i][j].contributions;
-					delete list_points[i][j]._id;
-					list_points[i][j].convergence = '0';	
-					convergeds.push(list_points[i][j]);
-				}
+				//for(var j=0; j<list_points[i].length; j++){
+					delete list_points[i].fingerprint;
+					delete list_points[i].job_id;
+					delete list_points[i].candidates;
+					delete list_points[i].contributions;
+					delete list_points[i]._id;
+					list_points[i].convergence = '0';	
+					convergeds.push(list_points[i]);
+				//}
 
 			}
 
 		}
-/*
+//console.log(convergeds);
 	      $.ajax({
 	        	type: 'POST',
       	 	 	url: 'https://novaes.tech/aggregate',
         		data: {'points':convergeds},
 	        	success: function(result, status, request) {done(result);}
       		});
-*/
+
 	}
 
 
