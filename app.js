@@ -270,17 +270,33 @@ function aggregate(points,count){
 
 app.post('/updateConvergence', function(req, res) {
 	var points = req.body.points;
-	update(points,0);
+	if(group){
+		updateGroup(points,0);
+	}else{
+		update(points,0);
+	}
 	res.end();
 });
+
+function updateGroup(points,count){
+	if(count == points.length)
+		return 0;
+        Input.find({instant: points[count].instant},function (err, V) {
+                if (err) return console.error(err);
+		for(var j=0; j<V.length; j++){
+			V[j].convergence = points[count].convergence;
+			v = V[j];
+        		var c = new Input(V[j]);
+        		c.save(function (err, m0) {if (err) return console.error(err); });
+		}
+		updateGroup(points,count+1); 
+        });
+}
 
 
 function update(points,count){
 	if(count == points.length)
 		return 0;
-
-
-
         Input.findOne({_id: points[count].item_id},function (err, V) {
                 if (err) return console.error(err);
 		V.convergence = points[count].convergence;
@@ -288,8 +304,6 @@ function update(points,count){
         	var c = new Input(V);
         	c.save(function (err, m0) {if (err) return console.error(err); update(points,count+1) });
         });
-
-	//return update(points, count+1);
 }
 
 
