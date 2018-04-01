@@ -246,7 +246,6 @@ function init(data){
 
 
 
-
   input.sort(function(a, b){ if(b[0].instant < a[0].instant) return 1; return -1 });
 
 //////////////
@@ -384,11 +383,7 @@ if(cur == idx && blank == 0) return;
         case 'wikipedia' :   
 		tx_point.style = 'font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;width:285px;background-repeat: no-repeat;background-image:linear-gradient(to bottom, rgba(255,255,255,0.5) 0%,rgba(255,255,255,0.5) 100%),url("https://novaes.tech/images?name=wikipedia&mime=jpg");background-size: 50px 50px;background-align:center;background-padding:0px;';
                 if(w >= 600){
-			if(item.type == 'person' || item.type == 'tech'){
 			 tx_content.innerHTML = "<img src='https://novaes.tech/images?name=wikipedia&mime=jpg' width=40 height=40><img src='"+item.image+"' width=100>";
-                	}else{
-                         tx_content.innerHTML = "<img src='https://novaes.tech/images?name=wikipedia&mime=jpg' width=40 height=40>"+item.point;
-			}
 		}
 		break;
         case 'youtube' :   

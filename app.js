@@ -342,6 +342,8 @@ if(req.query.task_a != req.query.task_b){
 
 });
 
+
+
 app.get('/panel', function(req, res) {
 
 
@@ -400,10 +402,28 @@ app.get('/thanks', function(req, res) {
         res.render('ejs/thanks', null);
 });
 
+
+function b64EncodeUnicode(str) {
+    // first we use encodeURIComponent to get percent-encoded UTF-8,
+    // then we convert the percent encodings into raw bytes which
+    // can be fed into btoa.
+	var str = encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+        		function toSolidBytes(match, p1) {
+            			return String.fromCharCode('0x' + p1);
+    			});
+    	return str.toString('base64');
+}
+
+
+
+
 app.get('/wiki_image', function(req, res) {
 var url = req.query.url;
 var parts = url.split('/');
 var id =parts[parts.length -1];
+
+
+
 
 
 const request = require('request');
@@ -413,21 +433,26 @@ request('https://en.wikipedia.org/w/api.php?action=query&titles='+id+'&prop=page
   if (err) { return console.log(err); }
 
 
-for(var k in body.query.pages) {
-	if(body.query.pages[k].thumbnail != null){
+	for(var k in body.query.pages) {
+		if(body.query.pages[k].thumbnail != null){
 
-		var path = body.query.pages[k].thumbnail.source;
+			var path = body.query.pages[k].thumbnail.source;
 request.get(path, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-        data = "data:" + response.headers["content-type"] + ";base64," + new Buffer(body).toString('base64');
-        res.end(data);
+
+		res.send(path);
+//var i2b = require("imageurl-base64");
+ 
+//i2b(path, function(err, d){res.send("data:" + response.headers["content-type"] + ";base64," +d.base64)});
+
+
+
     }
-});
-	}else{
-		res.send('');
+});		}else{
+			res.send('');
+		}
+		break;
 	}
-	break;
-}
 	
 
 });
