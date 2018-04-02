@@ -18,7 +18,8 @@
     "fingerprinting": "^1.0.1",
     "image-downloader": "^3.3.0",
     "mongo-express": "^0.40.0",
-    "morgan": "*"
+    "morgan": "*",
+    "pngjs-image": "^0.11.7"
   },
   "repository": {
     "type": "git",

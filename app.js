@@ -440,7 +440,25 @@ request('https://en.wikipedia.org/w/api.php?action=query&titles='+id+'&prop=page
 request.get(path, function (error, response, body) {
     if (!error && response.statusCode == 200) {
 
-		res.send(path);
+Stream = require('stream').Transform, 
+
+https.request(path, function(response) {                                        
+  var data = new Stream();                                                    
+
+  response.on('data', function(chunk) {                                       
+    data.push(chunk);                                                         
+  });                                                                         
+
+  response.on('end', function() {  
+
+res.writeHead(200, {'Content-Type':  response.headers["content-type"] });
+    res.end(data.read(), 'binary');
+
+
+  });                                                                         
+}).end();
+
+//		res.send(path);
 //var i2b = require("imageurl-base64");
  
 //i2b(path, function(err, d){res.send("data:" + response.headers["content-type"] + ";base64," +d.base64)});
