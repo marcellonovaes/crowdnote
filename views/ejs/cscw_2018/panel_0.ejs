@@ -103,13 +103,11 @@ table td {
 
   	function init(c){
 
-
 		contributions = c;
 		groups = new Array();
 		for(var i=0; i<segments.length; i++){
 			groups[i] = {'segment':segments[i],'contributions':new Array(),'candidates':new Array(), 'points':new Array()};
 		}
-
 
 
 		for(var i=0; i<contributions.length; i++){
@@ -120,7 +118,7 @@ table td {
 
 			var delta = 0;
 			for(var i=0; i<groups[g].contributions.length - 1; i++){
-				delta += Math.abs(parseInt(groups[g].contributions[i+1].instant) - parseInt(groups[g].contributions[i].instant)) ;
+				delta += Math.abs(parseFloat(groups[g].contributions[i+1].instant) - parseFloat(groups[g].contributions[i].instant)) ;
 			}
 			if(delta > 0)
 				delta /= groups[g].contributions.length - 1;
@@ -130,6 +128,7 @@ table td {
 
 			var instant = parseFloat(groups[g].contributions[0].instant);
 			for(var i=0; i< groups[g].contributions.length; i++){
+
 				if( parseFloat(groups[g].contributions[i].instant) -  instant < 4*delta ){
 					cur.push(groups[g].contributions[i]);
 				}else{
@@ -146,7 +145,11 @@ table td {
 	
 
 		for(var i=0; i<groups.length; i++){
+
+
 			for(var j=0; j<groups[i].candidates.length; j++){
+
+
 				if(groups[i].candidates[j].length < 2) continue;
 					var tx = '';
 					var grp = new Array();
@@ -161,6 +164,8 @@ table td {
 							return 1;
 				          }
 				        );
+
+
 					for(var k=0; k<groups[i].candidates[j].length; k++){
 
 						if(groups[i].candidates[j][k].point.trim().length < 1) continue;
@@ -206,7 +211,6 @@ table td {
 					}
 
 			}
-
 
 		}
 	
