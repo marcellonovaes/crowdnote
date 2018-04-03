@@ -129,15 +129,19 @@ table td {
 			var instant = parseFloat(groups[g].contributions[0].instant);
 			for(var i=0; i< groups[g].contributions.length; i++){
 
-				if( parseFloat(groups[g].contributions[i].instant) -  instant < 4*delta ){
+				var limit = 3*delta;
+				if(limit < 1) limit = 1;
+
+				if( parseFloat(groups[g].contributions[i].instant) -  instant < limit ){
 					cur.push(groups[g].contributions[i]);
 				}else{
 					if(cur.length>0)
 						groups[g].candidates.push(cur);
-					instant = parseFloat(groups[g].contributions[i].instant);
+					//instant = parseFloat(groups[g].contributions[i].instant);
 					cur = new Array();
 					cur.push(groups[g].contributions[i]);
 				}	
+					instant = parseFloat(groups[g].contributions[i].instant);
 			}
 			if(cur.length>0)
 				groups[g].candidates.push(cur);
@@ -206,7 +210,7 @@ table td {
 						point.instant = parseFloat(inst) / grp[m].length;
 						point.convergence = converg;
 						point.candidates = groups[i].candidates.length;
-						point.contributions = groups[i].contributions.length;
+						point.contributions = total;//groups[i].contributions.length;
 						groups[i].points.push(point);
 					}
 
@@ -249,9 +253,11 @@ table= [
   '</thead>',
   '<tbody>'
 ];
-
 for(var i=0; i<list.length; i++){
 var point = list[i];
+
+
+
 table.push(
   '<tr>',
   '<td align="center"><input type="checkbox" name="ck" checked  ></td>',
@@ -262,6 +268,7 @@ table.push(
   '</tr>'
 );
 }
+
 
 table.push(
   '</tbody>',
