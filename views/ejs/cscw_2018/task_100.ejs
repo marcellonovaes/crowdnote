@@ -98,7 +98,8 @@
 	tasks = data;
 	for(i=0; i<data.length; i++){
 		x = data[i].task_id;
-		if(x < 100){
+		if(current >= 100) current -= 95;
+		if(x < 5){
 			states[i] = document.getElementById("t_"+x);
 			switch(data[i].state){
 				case '0':
@@ -112,6 +113,18 @@
 					states[i].style.background = 'GREEN';
 					current = i;
 					break;
+			}
+		}else{
+
+                        states[i] = document.getElementById("t_"+x);
+                        switch(data[i].state){
+                                case '1':
+                                        states[i].style.background = 'CornflowerBlue';
+                                        break;                  
+                                case '2':
+                                        states[i].style.background = 'BLUE';
+                                        current = i;
+                                        break;
 			}
 		}
 	}
@@ -127,19 +140,25 @@
 //	if(current != data.task_id){
 
 		var a = current;
-		if(current < 100){
+
+		if(current >= 100) current -= 95;
+
+		if(current < 5){
                         tasks[current].state = 1;
                         states[current].style.background = 'RED';
 		}else{
-			tasks[5].state = 1;
+			tasks[current].state = 1;
+                        states[current].style.background = 'CornflowerBlue';
 		}
 		current = data.task_id;
+		if(current >= 100) current -= 95;
 		var b = current;
-		if(current < 100){
+		if(current < 5){
 			tasks[current].state = 2;
 			states[current].style.background = 'GREEN';
         	}else{
-			tasks[5].state = 2;
+			tasks[current].state = 2;
+                        states[current].style.background = 'BLUE';
 		}	
 
 		//$.getJSON('https://novaes.tech/changeActiveTask?task_a='+a+'&task_b='+b, function(data){updateState(data);});

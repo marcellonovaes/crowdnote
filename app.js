@@ -309,6 +309,12 @@ function update(points,count){
 
 
 app.get('/changeActiveTask', function(req, res) {
+
+
+if(req.query.task_a > 4) req.query.task_a = parseInt(req.query.task_a) + 95;
+if(req.query.task_b > 4) req.query.task_b = parseInt(req.query.task_b) + 95;
+
+
 if(req.query.task_a != req.query.task_b){
 
 	var V1;

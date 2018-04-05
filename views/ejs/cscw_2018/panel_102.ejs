@@ -252,7 +252,7 @@
 	if(m){
 		instant = m.instant;
 		text = m.point;		
-		h = 443;
+		h = 530;//443;
 	}else{
 		h = 530;
 		var tx_gesture = document.getElementById("tx_gesture");
@@ -314,10 +314,10 @@ function loadGold(data){
 
                 var bts = document.getElementsByName('bt');
                 for(var i=0; i<bts.length; i++){
-                        bts[i].style.display = 'none';
+                        //bts[i].style.display = 'none';
                 }
-		document.getElementById('type').style.display = 'none';
-		document.getElementById('tx_gesture').style.display = 'none';
+		//document.getElementById('type').style.display = 'none';
+		//document.getElementById('tx_gesture').style.display = 'none';
 
 
                 for(var i=0; i<data.length; i++){
