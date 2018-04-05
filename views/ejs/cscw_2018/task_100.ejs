@@ -137,7 +137,7 @@
   function updateState(data){
 
 
-//	if(current != data.task_id){
+	if(current != data.task_id){
 
 		var a = current;
 
@@ -164,15 +164,14 @@
 		//$.getJSON('https://novaes.tech/changeActiveTask?task_a='+a+'&task_b='+b, function(data){updateState(data);});
 		$.getJSON('https://novaes.tech/changeActiveTask?task_a='+a+'&task_b='+b, function(data){reLoad();});
 	
- //	}else{
-//		reLoad();
-//	}
+ 	}
+	reLoad();
+	
 
  }
 
 function reLoad(){
-//console.log('OK');
-window.location.href = 'https://novaes.tech/admin';
+	window.location.reload();// = 'https://novaes.tech/admin';
 }
 
 
