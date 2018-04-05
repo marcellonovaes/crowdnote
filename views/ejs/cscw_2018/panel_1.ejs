@@ -57,7 +57,6 @@ table th {
   color: #fff;
 }
 table td {
-  background-color: #f0f0f0;
   color: #0c0c0c;
 }
 
@@ -143,6 +142,24 @@ table= [
 for(var i=0; i<list.length; i++){
 	var point = list[i];
 
+var qtd = list[i].length;
+var color = '#00C060';
+var checked = 'checked';
+if(qtd < 4) color = '#00FA9A';
+if(qtd < 3){
+        color = '#FFD700';
+        checked = null;
+}
+if(qtd < 2) color = '#F4A460';
+if(qtd <= 1) color = '#CD5C5C';
+table.push(
+  '<tr bgcolor="'+color+'">',
+  '<td align="center"><input type="checkbox" name="ck" '+checked+'  ></td>',
+  '<td align="center"><b>'+qtd+'</b></td>',
+  '<td><b>'+list[i][0].point+'</b></td>',
+  '</tr>'
+);
+/*
 table.push(
   '<tr>',
   '<td align="center"><input type="checkbox" name="ck" checked  ></td>',
@@ -150,6 +167,7 @@ table.push(
   '<td>'+list[i][0].point+'</td>',
   '</tr>'
 );
+*/
 }
 
 table.push(

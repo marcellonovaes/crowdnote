@@ -57,7 +57,6 @@ table th {
   color: #fff;
 }
 table td {
-  background-color: #f0f0f0;
   color: #0c0c0c;
 }
 
@@ -185,7 +184,26 @@ for(var i=0; i<list.length; i++){
 
 	list_points.push(point[mode][0]);
 
+var cv = point[mode].length / total;
+var color = '#00C060';
+var checked = 'checked';
+if(cv < 0.75) color = '#00FA9A';
+if(cv < 0.6){
+        color = '#FFD700';
+        checked = null;
+}
+if(cv < 0.5) color = '#F4A460';
+if(cv <= 0.4) color = '#CD5C5C';
+table.push(
+  '<tr bgcolor="'+color+'">',
+  '<td align="center"><input type="checkbox" name="ck" '+checked+'  ></td>',
+  '<td align="center"><b>'+total+'</b></td>',
+  '<td><b>'+point[mode][0].point+'</b></td>',
+  '<td><b>'+parseInt(100*cv)+'%'+'</b></td>',
+  '</tr>'
+);
 
+/*
 table.push(
   '<tr>',
   '<td align="center"><input type="checkbox" name="ck" checked  ></td>',
@@ -194,6 +212,7 @@ table.push(
   '<td>'+parseInt(100 * point[mode].length / total)+'%</td>',
   '</tr>'
 );
+*/
 }
 
 table.push(
