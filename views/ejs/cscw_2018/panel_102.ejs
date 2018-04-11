@@ -112,7 +112,7 @@
 
 <p align='center'>
 
-<input placeholder="Escreva o significado do sinal aqui" autocomplete="off" onClick='player.pauseVideo()' name="tx_gesture" id="tx_gesture"  style="text-align:center;width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">
+<input placeholder="Write here what you have identified" autocomplete="off" onClick='player.pauseVideo()' name="tx_gesture" id="tx_gesture"  style="text-align:center;width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">
 
 
 </p>
@@ -192,7 +192,7 @@
     player = new YT.Player(
       'player',
       {
-        playerVars: {cc_lang_pref:'en', cc_load_policy: 0, autoplay:0 ,rel: 0, controls: 2, disablekb: 1},
+        playerVars: {cc_lang_pref:'en', cc_load_policy: 1, autoplay:0 ,rel: 0, controls: 2, disablekb: 1},
         height: '360',
         width: '640',
 	autohide: '0',
@@ -233,7 +233,7 @@
   }
   function delMark(){
 
-	var r = confirm('Realmente deseja remover este gesto?');
+	var r = confirm('Do you really want to remove this entry?');
 	if(r == true){
 		var mark = list_marks.selectedIndex;
 		list_marks.selectedIndex = mark - 1;

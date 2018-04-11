@@ -162,7 +162,7 @@ table td {
 				          groups[i].candidates[j].sort(
 				          function(x, y)
 				          {
-				                      if(x.point > y.point)
+				                      if(x.point.toLowerCase() > y.point.toLowerCase())
 								return -1;
 							return 1;
 				          }
@@ -252,8 +252,15 @@ table= [
   '</thead>',
   '<tbody>'
 ];
+
+var t = 0;
+
 for(var i=0; i<list.length; i++){
 var point = list[i];
+
+
+t+=list[i].contributions;
+
 
 var color = '#00C060';
 var checked = 'checked';
@@ -274,7 +281,10 @@ table.push(
   '</tr>'
 );
 
+
+
 }
+console.log('Filtered Contributions: ',t);
 
 
 table.push(

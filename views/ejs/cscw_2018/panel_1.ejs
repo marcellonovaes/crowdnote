@@ -113,14 +113,56 @@ table td {
 				list[cur] = new Array();
 				cur_item = c[i].item_id;
 			}
-			
-			list[cur].push(c[i]);
+			var valid=true;
+			var content = c[i].content;
+			switch(c[i].content_type){
+				case 'youtube':
+					var parts = content.split('?');
+                                        var delta = levenshtein('https://www.youtube.com/watch',parts[0]);
+					if(delta < 1){
+						console.log(parts);//https://www.youtube.com/watch
+					}
+					break;
+				case 'wikipedia':
 
+					break;
+				case 'text':
+			}
+
+			if(valid){
+				list[cur].push(c[i]);
+			}
 		}
 
 
 		createTable(list)
 	}
+
+
+
+        function levenshtein(a, b){
+                var tmp;
+                if (a.length === 0) { return b.length; }
+                if (b.length === 0) { return a.length; }
+                if (a.length > b.length) { tmp = a; a = b; b = tmp; }
+
+                var i, j, res, alen = a.length, blen = b.length, row = Array(alen);
+                for (i = 0; i <= alen; i++) { row[i] = i; }
+
+                for (i = 1; i <= blen; i++) {
+                        res = i;
+                        for (j = 1; j <= alen; j++) {
+                                tmp = row[j - 1];
+                                row[j - 1] = res;
+                                res = b[i - 1] === a[j - 1] ? tmp : Math.min(tmp + 1, Math.min(res + 1, row[j] + 1));
+                        }
+                }
+                return res;
+        }
+
+
+
+
 
 	function createTable(list){
 
@@ -133,16 +175,33 @@ table= [
   '<tr>',
   '<th>Done</th>',
   '<th>Contributions</th>',
+  '<th>Suggestions</th>',
   '<th>Point</th>',
   '</tr>',
   '</thead>',
   '<tbody>'
 ];
 
+
+var t = 0;
 for(var i=0; i<list.length; i++){
 	var point = list[i];
 
+
 var qtd = list[i].length;
+t+=qtd;
+
+var s=0;
+/*var cur='';
+for(var j=0; j<point.length; j++){
+	if(){
+
+	}
+
+}
+*/
+
+
 var color = '#00C060';
 var checked = 'checked';
 if(qtd < 4) color = '#00FA9A';
@@ -156,6 +215,7 @@ table.push(
   '<tr bgcolor="'+color+'">',
   '<td align="center"><input type="checkbox" name="ck" '+checked+'  ></td>',
   '<td align="center"><b>'+qtd+'</b></td>',
+  '<td align="center"><b>'+s+'</b></td>',
   '<td><b>'+list[i][0].point+'</b></td>',
   '</tr>'
 );
@@ -170,6 +230,7 @@ table.push(
 */
 }
 
+console.log('Valid Contributions: '+t);
 table.push(
   '</tbody>',
   '</table>'

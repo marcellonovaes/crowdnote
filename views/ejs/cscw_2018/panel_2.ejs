@@ -133,8 +133,10 @@ table td {
 				 points[cur_index][c2] = new Array();
 				cur_item = c[i].item_id;
 			}
-			
-			points[cur_index][c2].push(c[i]);
+
+			if(points[cur_index][c2]){
+				points[cur_index][c2].push(c[i]);
+			}
 
 
 

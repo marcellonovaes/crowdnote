@@ -269,8 +269,9 @@ function aggregate(points,count){
 }
 
 app.post('/updateConvergence', function(req, res) {
+	Input = mongoose.model('items_'+parseInt(activeTask), itemSchema);
 	var points = req.body.points;
-	if(group){
+	if(group == true){
 		updateGroup(points,0);
 	}else{
 		update(points,0);
@@ -302,8 +303,9 @@ function update(points,count){
 		V.convergence = points[count].convergence;
 		v = V;
         	var c = new Input(V);
-        	c.save(function (err, m0) {if (err) return console.error(err); update(points,count+1) });
+        	c.save(function (err, m0) {if (err) return console.error(err);  });
         });
+	update(points,count+1);
 }
 
 
