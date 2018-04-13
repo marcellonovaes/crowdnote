@@ -86,6 +86,7 @@ table td {
 </div>
 <script>
 
+	var valid;
 	var list_points;
 	var segments;
 	var contributions;
@@ -101,7 +102,7 @@ table td {
 //	}
 
 	function init(c){
-
+		valid = new Array();
 		var list = new Array();
 		var cur = -1;
 		var cur_item = "x";
@@ -140,11 +141,35 @@ table= [
   '<tbody>'
 ];
 
+var t = 0;
+
 for(var i=0; i<list.length; i++){
 	var point = list[i];
 
+	var partial = 0;
+	var xp=0;
+	var yp=0;
+	for(var j=0; j<point.length; j++){
+		if(point[j].x > 200 && point[j].y < 120){
+			partial++;
+			xp += parseFloat(point[j].x);
+			yp += parseFloat(point[j].y);
+		}	
+	}
+	t += partial;
 
-var cv = 1;//point[mode].length / total;
+	xp /= partial;
+	yp /= partial;
+
+
+	var r = point[0];
+	r.x = xp;
+	r.y = yp;
+	valid.push(r);
+
+	var cv = partial / point.length;
+
+//var cv = 1;//point[mode].length / total;
 var color = '#00C060';
 var checked = 'checked';
 if(cv < 0.75) color = '#00FA9A';
@@ -180,6 +205,10 @@ table.push(
 );
 
 container.innerHTML = table.join("\n");
+
+
+console.log(t);
+
 
 	}
 
@@ -231,17 +260,13 @@ container.innerHTML = table.join("\n");
 		var dones = document.getElementsByName("ck");
 		for(var i=0; i<dones.length; i++){
 			if(dones[i].checked){
-				var j=0;
-				//for(var j=0; j<list_points[i].length; j++){
-					delete list_points[i][j].fingerprint;
-					delete list_points[i][j].job_id;
-					delete list_points[i][j].candidates;
-					delete list_points[i][j].contributions;
-					delete list_points[i][j]._id;
-					list_points[i][j].convergence = '0';	
-					convergeds.push(list_points[i][j]);
-				//}
-
+					delete valid[i].fingerprint;
+					delete valid[i].job_id;
+					delete valid[i].candidates;
+					delete valid[i].contributions;
+					delete valid[i]._id;
+					valid[i].convergence = '0';	
+					convergeds.push(valid[i]);
 			}
 
 		}
