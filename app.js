@@ -1,10 +1,10 @@
 // ---------------------- Requires, Includes and Globals ------------------------
 
-var project = 'cscw_2018';
+var project = 'mtap_2018';
 var qtd_target = 0;
 var min_convergence = 0;
-var activeTask = 4;
-var kind = 'player';
+var activeTask = 0;
+var kind = 'job';
 var group = 'false';
 
 var Task;
