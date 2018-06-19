@@ -85,60 +85,222 @@ table td {
 
 </div>
 <script>
+        var vInfo = new Array();
+        vInfo[0] = {uri:'ALM8JW3O_3w',start:0,end:119};
+        vInfo[1] = {uri:'nWvdxcyI6DY',start:0,end:66};
+        vInfo[2] = {uri:'_vbPf-uouqA',start:0,end:116};
 
-	var list_points;
-	var segments;
-	var contributions;
-	var groups;
+	var fx = new Array();
+	fx[0] = new Array();
+	fx[0][0] = new Array();
+	fx[0][1] = new Array();
+	fx[1] = new Array();
+	fx[1][0] = new Array();
+	fx[1][1] = new Array();
+	fx[2] = new Array();
+	fx[2][0] = new Array();
+	fx[2][1] = new Array();
 
-//    	$.getJSON('https://novaes.tech/segments', function(data){loadContributions(data);});
+
+	var fxc = new Array();
+	fxc[0] = new Array();
+	fxc[0][0] = new Array();
+	fxc[0][1] = new Array();
+	fxc[1] = new Array();
+	fxc[1][0] = new Array();
+	fxc[1][1] = new Array();
+	fxc[2] = new Array();
+	fxc[2][0] = new Array();
+	fxc[2][1] = new Array();
+
+
+        var total = new Array();
+        total[0]=new Array();
+        total[0][0]=0;
+        total[0][1]=0;
+        total[1]=new Array();
+        total[1][0]=0;
+        total[1][1]=0;
+        total[2]=new Array();
+        total[2][0]=0;
+        total[2][1]=0;
+
+        var contribs = new Array();
+        contribs[0]=0;
+        contribs[1]=0;
+        contribs[2]=0;
 
     	$.getJSON('https://novaes.tech/contributions', function(data){init(data);});
 
-//	function loadContributions(s){
-//		segments = s;
-//    		$.getJSON('https://novaes.tech/contributions', function(data){init(data);});
-//	}
 
-	function init(c){
 
-		var list = new Array();
-		var cur = -1;
-		var cur_item = "x";
+  	function init(c){
+	
 
 		for(var i=0; i<c.length; i++){
+
 			
-			if(cur_item != c[i].item_id){
-				cur++;
-				list[cur] = new Array();
-				cur_item = c[i].item_id;
-			}
-			var valid=true;
-			var content = c[i].content;
-			switch(c[i].content_type){
-				case 'youtube':
-					var parts = content.split('?');
-                                        var delta = levenshtein('https://www.youtube.com/watch',parts[0]);
-					if(delta < 1){
-						console.log(parts);//https://www.youtube.com/watch
-					}
-					break;
-				case 'wikipedia':
+			var ranges = c[i].ranges.split(',');
+                	var v;        
+		        switch(c[i].uri){
+                                case vInfo[0].uri:
+                                        v=0;
+                                        break;
+                                case vInfo[1].uri:
+                                        v=1;
+                                        break;
+                                case vInfo[2].uri:
+                                        v=2;
+                                        break;
+                     	}
 
-					break;
-				case 'text':
-			}
+			contribs[v] = contribs[v] + 1;
 
-			if(valid){
-				list[cur].push(c[i]);
+			for(var j=0; j<ranges.length; j++){
+
+				var m = ranges[j].split(':');
+				var contrib = {start:parseFloat(m[1]),end:parseFloat(m[2])};
+
+				var f;
+				switch(m[0]){
+					case 'WIND': f=0; break;
+					case 'VIBRATION': f=1; break;
+				}
+
+				total[v][f] = total[v][f] + 1;
+				fx[v][f].push(contrib);
 			}
 		}
 
 
-		createTable(list)
+		for(var i=0; i<3; i++){
+			for(var j=0; j<2; j++){
+				fx[i][j] = fx[i][j].sort(function(a, b){return parseFloat(a.start)-parseFloat(b.end)});
+			}
+		}
+
+
+		console.log(contribs,total,fx);
+
+//		createTable(fx);
 	}
 
 
+	function createTable(list){
+
+
+
+console.log(cv,mt,mv,marks,videos);
+
+
+
+
+var container = document.getElementById("container");
+table= [];
+
+
+for(var v=0; v<3; v++){
+
+list_points = list[v];
+
+
+table.push(
+  '<table>',
+  '<thead>',
+  '<tr>',
+  '<th>Video</th>',
+  '<th>Contributions</th>',
+  '<!--th>Marks from Contributions</th-->',
+  '<th>Filtered Marks</th>',
+  '<th>Agreement Rate</th>',
+  '<th>Extracted Segments</th>',
+  '</tr>',
+  '</thead>',
+  '<tbody>',
+'<tr align=center>',
+'<td>',vInfo[v].uri,'</td>',
+'<!--td>',cv[v],'</td-->',
+'<td>',mt[v],'</td>',
+'<td>',mv[v],'</td>',
+'<td>',Math.ceil(100*mv[v]/mt[v]),'%</td>',
+'<td>',marks[v].length,'</td>',
+  '</tbody>',
+  '</table>',
+  '<table>',
+  '<thead>',
+  '<tr>',
+  '<th>Done</th>',
+  '<th>Instant</th>',
+  '<th>Convergence</th>',
+  '</tr>',
+  '</thead>',
+  '<tbody>'
+);
+
+
+
+
+
+
+
+for(var i=0; i<list_points.length; i++){
+var point = list_points[i];
+
+
+
+
+
+
+
+
+
+var color = '#00C060';
+var checked = 'checked';
+if(point.cvg < 30) color = '#00FA9A';
+if(point.cvg < 20){
+	color = '#FFD700';
+	checked = null;
+}
+if(point.cvg < 17) color = '#F4A460';
+if(point.cvg <= 15) color = '#CD5C5C';
+
+
+
+
+table.push(
+  '<tr bgcolor="'+color+'" align=center >',
+  '<td align="center"><input type="checkbox" name="ck" '+checked+'  ></td>',
+  '<td><b>'+point.mark+'</b></td>',
+  '<td><b>'+Math.ceil(point.cvg)+'%'+'</b></td>',
+  '</tr>'
+);
+
+}
+
+table.push(
+  '</tbody>',
+  '</table>'
+);
+
+
+}
+
+
+
+container.innerHTML = table.join("\n");
+
+	}
+
+
+	function addContribution(groups, c){
+		var i;
+		for(i=0; i<groups.length; i++){
+			if(parseInt(groups[i].segment.start) == parseInt(c.start)){
+				groups[i].contributions.push(c);
+				break;
+			}
+		}
+	}
 
         function levenshtein(a, b){
                 var tmp;
@@ -161,118 +323,23 @@ table td {
         }
 
 
-
-
-
-	function createTable(list){
-
-		list_points = list;
-
-var container = document.getElementById("container");
-table= [
-  '<table>',
-  '<thead>',
-  '<tr>',
-  '<th>Done</th>',
-  '<th>Contributions</th>',
-  '<th>Suggestions</th>',
-  '<th>Point</th>',
-  '</tr>',
-  '</thead>',
-  '<tbody>'
-];
-
-
-var t = 0;
-for(var i=0; i<list.length; i++){
-	var point = list[i];
-
-
-var qtd = list[i].length;
-t+=qtd;
-
-var s=0;
-/*var cur='';
-for(var j=0; j<point.length; j++){
-	if(){
+	function aggregate(){
+		alert('Aggregate');
 
 	}
-
-}
-*/
-
-
-var color = '#00C060';
-var checked = 'checked';
-if(qtd < 4) color = '#00FA9A';
-if(qtd < 3){
-        color = '#FFD700';
-        checked = null;
-}
-if(qtd < 2) color = '#F4A460';
-if(qtd <= 1) color = '#CD5C5C';
-table.push(
-  '<tr bgcolor="'+color+'">',
-  '<td align="center"><input type="checkbox" name="ck" '+checked+'  ></td>',
-  '<td align="center"><b>'+qtd+'</b></td>',
-  '<td align="center"><b>'+s+'</b></td>',
-  '<td><b>'+list[i][0].point+'</b></td>',
-  '</tr>'
-);
-/*
-table.push(
-  '<tr>',
-  '<td align="center"><input type="checkbox" name="ck" checked  ></td>',
-  '<td align="center">'+list[i].length+'</td>',
-  '<td>'+list[i][0].point+'</td>',
-  '</tr>'
-);
-*/
-}
-
-console.log('Valid Contributions: '+t);
-table.push(
-  '</tbody>',
-  '</table>'
-);
-
-container.innerHTML = table.join("\n");
-
-	}
-
-
-	function addContribution(groups, c){
-		var i;
-		for(i=0; i<groups.length; i++){
-			if(parseInt(groups[i].segment.start) == parseInt(c.start)){
-				groups[i].contributions.push(c);
-				break;
-			}
-		}
-	}
-
-	//function aggregate(){
-	//	alert('Aggregate');
-	//}
 
 	function updateConvergence(){
 		var convergeds = new Array();
 		var dones = document.getElementsByName("ck");
 		for(var i=0; i<dones.length; i++){
 			if(dones[i].checked){
-			
-				for(var j=0; j<list_points[i].length; j++){
-					delete list_points[i][j].fingerprint;
-					delete list_points[i][j].job_id;
-					delete list_points[i][j].candidates;
-					delete list_points[i][j].contributions;
-					delete list_points[i][j]._id;
-					list_points[i][j].convergence = '1';	
-					convergeds.push(list_points[i][j]);
-				}
-
+				delete list_points[i].fingerprint;
+				delete list_points[i].job_id;
+				delete list_points[i].candidates;
+				delete list_points[i].contributions;
+				delete list_points[i]._id;
+				convergeds.push(list_points[i]);
 			}
-
 		}
 
 	      $.ajax({
@@ -284,32 +351,39 @@ container.innerHTML = table.join("\n");
 	}
 
         function aggregate(){
-		var convergeds = new Array();
-		var dones = document.getElementsByName("ck");
-		for(var i=0; i<dones.length; i++){
-			if(dones[i].checked){
-			
-				for(var j=0; j<list_points[i].length; j++){
-					delete list_points[i][j].fingerprint;
-					delete list_points[i][j].job_id;
-					delete list_points[i][j].candidates;
-					delete list_points[i][j].contributions;
-					delete list_points[i][j]._id;
-					list_points[i][j].convergence = '0';	
-					convergeds.push(list_points[i][j]);
-				}
-
+		var contributions = new Array();
+		for(var i=0; i<3; i++){
+			for(var j=1; j<marks[i].length; j++){
+				var c = {};
+				c.uri = vInfo[i].uri;
+				c.start = marks[i][j-1].mark;
+				c.end = marks[i][j].mark;
+				contributions.push(c);
 			}
-
 		}
+/*
 
-	      $.ajax({
-	        	type: 'POST',
-      	 	 	url: 'https://novaes.tech/aggregate',
-        		data: {'points':convergeds},
-	        	success: function(result, status, request) {done(result);}
-      		});
-	}
+                var convergeds = new Array();
+                var dones = document.getElementsByName("ck");
+                for(var i=0; i<dones.length; i++){
+                        if(dones[i].checked){
+                                convergeds.push(contributions[i]);
+                        }
+                }
+
+
+console.log(convergeds);
+*/
+
+console.log(contributions);
+
+              $.ajax({
+                        type: 'POST',
+                        url: 'https://novaes.tech/aggregate',
+                        data: {'points':contributions},
+                        success: function(result, status, request) {done(result);}
+                });
+        }
 
 
 

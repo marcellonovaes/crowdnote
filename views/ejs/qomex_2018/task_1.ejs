@@ -131,12 +131,38 @@ label + input[type=radio] + label {
         <!--p id="presentation" style="display:none;max-width:960px;font-size:16px;color:white;text-align: justify;">
 Imagine that you are immersed in the environment of the movie. Taking it into account, you are going to point out exact time intervals that you think there is a wind or vibration effect. You shall provide the maximum time intervals you can and be trustful. If you realize the intensity of the same effect changes in the next time interval, you must add a new range.
 	</p-->
+
+<p id="presentation" style="max-width:960px;font-size:16px;color:white;text-align: justify;">
+Imagine that you are immersed in the environment of the movie. Taking it into account, you are going to point out exact time intervals that you think there is a wind or vibration effect. You shall provide the maximum time intervals you can and be trustful. If you realize the intensity of the same effect changes in the next time interval, you must add a new range.
+
+
+</p>
+
+
   <table>
     <tbody>
       <tr>
-        <td id="instructions" style="display:none;max-width:700px">
+
+        <td id="instructions" style="display:none;max-width:700px;padding:10px;">
+          <p style="font-size:18px;color:white;">
+1. Click on 'Play' to start the movie. 
+     </p>     <p style="font-size:18px;color:white;">
+2. Identify if there is a wind or vibration effect in some time interval.
+  </p>        <p style="font-size:18px;color:white;">
+3. Select 'Wind' or 'Vibration' on the radio box.
+</p>          <p style="font-size:18px;color:white;">
+4. Select the time interval on the slider you think there is a wind or vibration effect. 
+</p>          <p style="font-size:18px;color:white;">
+5. Click on 'Add range' to add the time interval of an effect. 
+</p>
+          <p style="font-size:18px;color:white;">
+6. Repeat the process until you think there is no more time interval of effects.
+</p>
+
+
+
+        <!--td id="instructions" style="display:none;max-width:700px">
 <textarea data-role="none" wrap="on" style="resize: none;width:690px; height:180px;border:0;v-align:top;padding-top:0px;overflow-y:scroll;">
-Imagine that you are immersed in the environment of the movie. Taking it into account, you are going to point out exact time intervals that you think there is a wind or vibration effect. You shall provide the maximum time intervals you can and be trustful. If you realize the intensity of the same effect changes in the next time interval, you must add a new range.
 
 1. Click on 'Play' to start the movie. 
 
@@ -151,7 +177,7 @@ Imagine that you are immersed in the environment of the movie. Taking it into ac
 6. Repeat the process until you think there is no more time interval of effects.
 </textarea>
 
-        </td>
+        </td-->
         <td>
 <br>
           <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="sendContribution()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Send Contributions</a> 
@@ -260,7 +286,8 @@ Imagine that you are immersed in the environment of the movie. Taking it into ac
  modal.style.display = "block";
   }
   function onYouTubeIframeAPIReady() {
-    $.getJSON('https://novaes.tech/job', function(data){init(data);});
+    	init({uri:'_vbPf-uouqA',start:35, end:37 });
+	//$.getJSON('https://novaes.tech/job', function(data){init(data);});
   }
   function init(data){
     list_ranges = document.getElementById("list_ranges");
