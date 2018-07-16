@@ -3,7 +3,7 @@
 var project = 'legendagem';
 var qtd_target = 0;
 var min_convergence = 0;
-var activeTask = 4;
+var activeTask = 0;
 var kind = 'player';
 var group = 'false';
 
