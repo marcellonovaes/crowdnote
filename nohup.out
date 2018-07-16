@@ -347,3 +347,271 @@ TypeError: Cannot read property 'qtd' of undefined
     at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
     at cors (/var/www/crowdnote/node_modules/cors/lib/index.js:188:7)
     at /var/www/crowdnote/node_modules/cors/lib/index.js:224:17
+2018-07-16T14:20:09.775+0000 I CONTROL  [initandlisten] MongoDB starting : pid=1489 port=27017 dbpath=./db 64-bit host=crowdsourcing
+2018-07-16T14:20:09.775+0000 I CONTROL  [initandlisten] db version v3.4.10
+2018-07-16T14:20:09.775+0000 I CONTROL  [initandlisten] git version: 078f28920cb24de0dd479b5ea6c66c644f6326e9
+2018-07-16T14:20:09.775+0000 I CONTROL  [initandlisten] OpenSSL version: OpenSSL 1.0.2g  1 Mar 2016
+2018-07-16T14:20:09.775+0000 I CONTROL  [initandlisten] allocator: tcmalloc
+2018-07-16T14:20:09.775+0000 I CONTROL  [initandlisten] modules: none
+2018-07-16T14:20:09.775+0000 I CONTROL  [initandlisten] build environment:
+2018-07-16T14:20:09.775+0000 I CONTROL  [initandlisten]     distmod: ubuntu1604
+2018-07-16T14:20:09.775+0000 I CONTROL  [initandlisten]     distarch: x86_64
+2018-07-16T14:20:09.775+0000 I CONTROL  [initandlisten]     target_arch: x86_64
+2018-07-16T14:20:09.775+0000 I CONTROL  [initandlisten] options: { storage: { dbPath: "./db" } }
+2018-07-16T14:20:09.808+0000 I -        [initandlisten] Detected data files in ./db created by the 'wiredTiger' storage engine, so setting the active storage engine to 'wiredTiger'.
+2018-07-16T14:20:09.809+0000 I STORAGE  [initandlisten] 
+2018-07-16T14:20:09.809+0000 I STORAGE  [initandlisten] ** WARNING: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine
+2018-07-16T14:20:09.809+0000 I STORAGE  [initandlisten] **          See http://dochub.mongodb.org/core/prodnotes-filesystem
+2018-07-16T14:20:09.809+0000 I STORAGE  [initandlisten] wiredtiger_open config: create,cache_size=488M,session_max=20000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000),checkpoint=(wait=60,log_size=2GB),statistics_log=(wait=0),
+2018-07-16T14:20:10.162+0000 I CONTROL  [initandlisten] 
+2018-07-16T14:20:10.162+0000 I CONTROL  [initandlisten] ** WARNING: Access control is not enabled for the database.
+2018-07-16T14:20:10.162+0000 I CONTROL  [initandlisten] **          Read and write access to data and configuration is unrestricted.
+2018-07-16T14:20:10.162+0000 I CONTROL  [initandlisten] ** WARNING: You are running this process as the root user, which is not recommended.
+2018-07-16T14:20:10.162+0000 I CONTROL  [initandlisten] 
+2018-07-16T14:20:10.162+0000 I CONTROL  [initandlisten] 
+2018-07-16T14:20:10.162+0000 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/defrag is 'always'.
+2018-07-16T14:20:10.162+0000 I CONTROL  [initandlisten] **        We suggest setting it to 'never'
+2018-07-16T14:20:10.162+0000 I CONTROL  [initandlisten] 
+2018-07-16T14:20:10.174+0000 I FTDC     [initandlisten] Initializing full-time diagnostic data capture with directory './db/diagnostic.data'
+2018-07-16T14:20:10.175+0000 I NETWORK  [thread1] waiting for connections on port 27017
+[33mwarn[39m:    --minUptime not set. Defaulting to: 1000ms
+[33mwarn[39m:    --spinSleepTime not set. Your script will exit if it does not stay up for at least 1000ms
+No custom config.js found, loading config.default.js
+Welcome to mongo-express
+------------------------
+
+
+2018-07-16T14:20:52.711+0000 I NETWORK  [thread1] connection accepted from 127.0.0.1:36302 #1 (1 connection now open)
+2018-07-16T14:20:52.742+0000 I NETWORK  [conn1] received client metadata from 127.0.0.1:36302 conn1: { driver: { name: "nodejs", version: "2.2.24" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "4.4.0-128-generic" }, platform: "Node.js v9.10.1, LE, mongodb-core: 2.1.8" }
+Database connected
+Admin Database connected
+2018-07-16T14:20:52.762+0000 I NETWORK  [thread1] connection accepted from 127.0.0.1:36304 #2 (2 connections now open)
+2018-07-16T14:20:52.765+0000 I NETWORK  [thread1] connection accepted from 127.0.0.1:36306 #3 (3 connections now open)
+2018-07-16T14:20:52.768+0000 I NETWORK  [thread1] connection accepted from 127.0.0.1:36308 #4 (4 connections now open)
+Mongo Express server listening at http://novaes.tech:8081
+2018-07-16T14:21:44.212+0000 I NETWORK  [thread1] connection accepted from 127.0.0.1:36310 #5 (5 connections now open)
+2018-07-16T14:21:44.241+0000 I NETWORK  [conn5] received client metadata from 127.0.0.1:36310 conn5: { driver: { name: "nodejs", version: "2.2.31" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "4.4.0-128-generic" }, platform: "Node.js v9.10.1, LE, mongodb-core: 2.1.15" }
+2018-07-16T14:21:44.257+0000 I NETWORK  [thread1] connection accepted from 127.0.0.1:36312 #6 (6 connections now open)
+2018-07-16T14:22:43.310+0000 I NETWORK  [thread1] connection accepted from 127.0.0.1:36314 #7 (7 connections now open)
+2018-07-16T14:22:43.317+0000 I -        [conn7] end connection 127.0.0.1:36314 (7 connections now open)
+2018-07-16T14:22:43.317+0000 I -        [conn6] end connection 127.0.0.1:36312 (6 connections now open)
+2018-07-16T14:22:43.317+0000 I -        [conn5] end connection 127.0.0.1:36310 (5 connections now open)
+[0mGET /db/crowdnote_cscw_2018/ [36m304 [0m76.475 ms - -[0m
+[0mGET /public/css/bootstrap.min.css [36m304 [0m2.727 ms - -[0m
+[0mGET /public/css/bootstrap-theme.min.css [36m304 [0m0.564 ms - -[0m
+[0mGET /public/vendor-7c974a20234ee74196be.min.js [36m304 [0m0.587 ms - -[0m
+[0mGET /public/css/style.css [36m304 [0m0.316 ms - -[0m
+[0mGET /public/database-a2a6263b2862ba8966c0.min.js [36m304 [0m0.285 ms - -[0m
+[0mGET /public/img/mongo-express-logo.png [36m304 [0m1.921 ms - -[0m
+[0mGET /public/img/gears.gif [36m304 [0m0.420 ms - -[0m
+[0mGET /public/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.423 ms - -[0m
+[0mGET /db/crowdnote_cscw_2018/items_100 [32m200 [0m93.602 ms - 31743[0m
+[0mGET /public/css/bootstrap.min.css [36m304 [0m0.391 ms - -[0m
+[0mGET /public/css/bootstrap-theme.min.css [36m304 [0m0.709 ms - -[0m
+[0mGET /public/css/style.css [36m304 [0m0.793 ms - -[0m
+[0mGET /public/css/codemirror.css [36m304 [0m0.317 ms - -[0m
+[0mGET /public/css/theme/rubyblue.css [36m304 [0m0.317 ms - -[0m
+[0mGET /public/img/mongo-express-logo.png [36m304 [0m0.382 ms - -[0m
+[0mGET /public/img/gears.gif [36m304 [0m0.319 ms - -[0m
+[0mGET /public/codemirror-1cf5d807764f361f5011.min.js [36m304 [0m1.583 ms - -[0m
+[0mGET /public/vendor-7c974a20234ee74196be.min.js [36m304 [0m0.663 ms - -[0m
+[0mGET /public/collection-d37339e950b2c60e8052.min.js [36m304 [0m0.745 ms - -[0m
+[0mGET /public/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.352 ms - -[0m
+[0mGET /db/crowdnote_cscw_2018/items_100/%25225ab4e213829f672f34a38db3%2522 [32m200 [0m24.211 ms - 6746[0m
+[0mGET /public/css/bootstrap.min.css [36m304 [0m0.410 ms - -[0m
+[0mGET /public/css/bootstrap-theme.min.css [36m304 [0m0.361 ms - -[0m
+[0mGET /public/vendor-7c974a20234ee74196be.min.js [36m304 [0m0.443 ms - -[0m
+[0mGET /public/css/style.css [36m304 [0m0.319 ms - -[0m
+[0mGET /public/css/theme/rubyblue.css [36m304 [0m1.639 ms - -[0m
+[0mGET /public/css/codemirror.css [36m304 [0m0.819 ms - -[0m
+[0mGET /public/img/gears.gif [36m304 [0m0.382 ms - -[0m
+[0mGET /public/codemirror-1cf5d807764f361f5011.min.js [36m304 [0m0.352 ms - -[0m
+[0mGET /public/document-a23d7614559f854746f3.min.js [36m304 [0m0.382 ms - -[0m
+[0mGET /public/img/mongo-express-logo.png [36m304 [0m0.373 ms - -[0m
+[0mGET /public/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.443 ms - -[0m
+[0mGET /db/crowdnote_legendagem/ [32m200 [0m26.245 ms - 10299[0m
+[0mGET /public/css/bootstrap.min.css [36m304 [0m0.379 ms - -[0m
+[0mGET /public/css/style.css [36m304 [0m0.781 ms - -[0m
+[0mGET /public/css/bootstrap-theme.min.css [36m304 [0m0.763 ms - -[0m
+[0mGET /public/vendor-7c974a20234ee74196be.min.js [36m304 [0m0.475 ms - -[0m
+[0mGET /public/img/mongo-express-logo.png [36m304 [0m0.329 ms - -[0m
+[0mGET /public/img/gears.gif [36m304 [0m0.527 ms - -[0m
+[0mGET /public/database-a2a6263b2862ba8966c0.min.js [36m304 [0m0.381 ms - -[0m
+[0mGET /public/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.626 ms - -[0m
+[0mPOST /db/crowdnote_legendagem/ [36m302 [0m44.700 ms - 112[0m
+[0mGET /db/crowdnote_legendagem/items_100 [32m200 [0m77.905 ms - 17240[0m
+[0mGET /public/css/bootstrap.min.css [36m304 [0m0.416 ms - -[0m
+[0mGET /public/css/bootstrap-theme.min.css [36m304 [0m0.387 ms - -[0m
+[0mGET /public/css/style.css [36m304 [0m0.354 ms - -[0m
+[0mGET /public/css/theme/rubyblue.css [36m304 [0m0.902 ms - -[0m
+[0mGET /public/css/codemirror.css [36m304 [0m1.096 ms - -[0m
+[0mGET /public/img/mongo-express-logo.png [36m304 [0m0.342 ms - -[0m
+[0mGET /public/vendor-7c974a20234ee74196be.min.js [36m304 [0m0.445 ms - -[0m
+[0mGET /public/codemirror-1cf5d807764f361f5011.min.js [36m304 [0m0.383 ms - -[0m
+[0mGET /public/collection-d37339e950b2c60e8052.min.js [36m304 [0m0.317 ms - -[0m
+[0mGET /public/img/gears.gif [36m304 [0m0.367 ms - -[0m
+[0mGET /public/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.355 ms - -[0m
+[0mPOST /checkValid [32m200 [0m6.577 ms - 5[0m
+[0mPOST /db/crowdnote_legendagem/items_100 [36m302 [0m14.402 ms - 112[0m
+[0mGET /db/crowdnote_legendagem/items_100 [32m200 [0m60.185 ms - 21722[0m
+[0mGET /public/css/bootstrap.min.css [36m304 [0m0.606 ms - -[0m
+[0mGET /public/css/bootstrap-theme.min.css [36m304 [0m0.368 ms - -[0m
+[0mGET /public/css/style.css [36m304 [0m0.379 ms - -[0m
+[0mGET /public/css/theme/rubyblue.css [36m304 [0m0.404 ms - -[0m
+[0mGET /public/img/mongo-express-logo.png [36m304 [0m0.371 ms - -[0m
+[0mGET /public/css/codemirror.css [36m304 [0m0.324 ms - -[0m
+[0mGET /public/vendor-7c974a20234ee74196be.min.js [36m304 [0m0.317 ms - -[0m
+[0mGET /public/img/gears.gif [36m304 [0m0.380 ms - -[0m
+[0mGET /public/codemirror-1cf5d807764f361f5011.min.js [36m304 [0m0.309 ms - -[0m
+[0mGET /public/collection-d37339e950b2c60e8052.min.js [36m304 [0m0.391 ms - -[0m
+[0mGET /public/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.411 ms - -[0m
+[0mPOST /checkValid [32m200 [0m7.096 ms - 5[0m
+[0mPOST /db/crowdnote_legendagem/items_100 [36m302 [0m40.375 ms - 112[0m
+[0mGET /db/crowdnote_legendagem/items_100 [32m200 [0m82.745 ms - 23074[0m
+[0mGET /public/css/bootstrap.min.css [36m304 [0m0.798 ms - -[0m
+[0mGET /public/css/bootstrap-theme.min.css [36m304 [0m0.462 ms - -[0m
+[0mGET /public/css/style.css [36m304 [0m0.302 ms - -[0m
+[0mGET /public/css/theme/rubyblue.css [36m304 [0m0.267 ms - -[0m
+[0mGET /public/css/codemirror.css [36m304 [0m1.235 ms - -[0m
+[0mGET /public/img/gears.gif [36m304 [0m1.151 ms - -[0m
+[0mGET /public/vendor-7c974a20234ee74196be.min.js [36m304 [0m0.278 ms - -[0m
+[0mGET /public/codemirror-1cf5d807764f361f5011.min.js [36m304 [0m0.381 ms - -[0m
+[0mGET /public/collection-d37339e950b2c60e8052.min.js [36m304 [0m0.321 ms - -[0m
+[0mGET /public/img/mongo-express-logo.png [36m304 [0m1.891 ms - -[0m
+[0mGET /public/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.670 ms - -[0m
+[0mPOST /checkValid [32m200 [0m5.354 ms - 5[0m
+[0mPOST /db/crowdnote_legendagem/items_100 [36m302 [0m9.538 ms - 112[0m
+[0mGET /db/crowdnote_legendagem/items_100 [32m200 [0m72.216 ms - 24426[0m
+[0mGET /public/css/bootstrap.min.css [36m304 [0m0.440 ms - -[0m
+[0mGET /public/img/mongo-express-logo.png [36m304 [0m0.741 ms - -[0m
+[0mGET /public/css/style.css [36m304 [0m0.443 ms - -[0m
+[0mGET /public/css/bootstrap-theme.min.css [36m304 [0m0.633 ms - -[0m
+[0mGET /public/css/codemirror.css [36m304 [0m1.051 ms - -[0m
+[0mGET /public/css/theme/rubyblue.css [36m304 [0m1.335 ms - -[0m
+[0mGET /public/vendor-7c974a20234ee74196be.min.js [36m304 [0m0.524 ms - -[0m
+[0mGET /public/collection-d37339e950b2c60e8052.min.js [36m304 [0m0.434 ms - -[0m
+[0mGET /public/img/gears.gif [36m304 [0m1.756 ms - -[0m
+[0mGET /public/codemirror-1cf5d807764f361f5011.min.js [36m304 [0m1.792 ms - -[0m
+[0mGET /public/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.378 ms - -[0m
+[0mPOST /checkValid [32m200 [0m6.299 ms - 5[0m
+[0mPOST /db/crowdnote_legendagem/items_100 [36m302 [0m10.669 ms - 112[0m
+[0mGET /db/crowdnote_legendagem/items_100 [32m200 [0m57.298 ms - 25780[0m
+[0mGET /public/css/bootstrap.min.css [36m304 [0m0.468 ms - -[0m
+[0mGET /public/css/bootstrap-theme.min.css [36m304 [0m0.387 ms - -[0m
+[0mGET /public/css/style.css [36m304 [0m0.392 ms - -[0m
+[0mGET /public/css/codemirror.css [36m304 [0m0.336 ms - -[0m
+[0mGET /public/css/theme/rubyblue.css [36m304 [0m0.445 ms - -[0m
+[0mGET /public/vendor-7c974a20234ee74196be.min.js [36m304 [0m0.368 ms - -[0m
+[0mGET /public/img/mongo-express-logo.png [36m304 [0m0.327 ms - -[0m
+[0mGET /public/codemirror-1cf5d807764f361f5011.min.js [36m304 [0m0.385 ms - -[0m
+[0mGET /public/collection-d37339e950b2c60e8052.min.js [36m304 [0m0.322 ms - -[0m
+[0mGET /public/img/gears.gif [36m304 [0m0.309 ms - -[0m
+[0mGET /public/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.373 ms - -[0m
+[0mPOST /checkValid [32m200 [0m4.630 ms - 5[0m
+[0mPOST /db/crowdnote_legendagem/items_100 [36m302 [0m10.129 ms - 112[0m
+[0mGET /db/crowdnote_legendagem/items_100 [32m200 [0m66.673 ms - 27134[0m
+[0mGET /public/css/bootstrap.min.css [36m304 [0m0.471 ms - -[0m
+[0mGET /public/css/bootstrap-theme.min.css [36m304 [0m0.373 ms - -[0m
+[0mGET /public/css/codemirror.css [36m304 [0m0.414 ms - -[0m
+[0mGET /public/css/style.css [36m304 [0m0.282 ms - -[0m
+[0mGET /public/vendor-7c974a20234ee74196be.min.js [36m304 [0m0.427 ms - -[0m
+[0mGET /public/css/theme/rubyblue.css [36m304 [0m0.277 ms - -[0m
+[0mGET /public/img/mongo-express-logo.png [36m304 [0m0.388 ms - -[0m
+[0mGET /public/img/gears.gif [36m304 [0m0.420 ms - -[0m
+[0mGET /public/codemirror-1cf5d807764f361f5011.min.js [36m304 [0m0.358 ms - -[0m
+[0mGET /public/collection-d37339e950b2c60e8052.min.js [36m304 [0m1.524 ms - -[0m
+[0mGET /public/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.425 ms - -[0m
+[0mPOST /checkValid [32m200 [0m6.872 ms - 5[0m
+[0mPOST /db/crowdnote_legendagem/items_100 [36m302 [0m59.668 ms - 112[0m
+[0mGET /db/crowdnote_legendagem/items_100 [32m200 [0m92.292 ms - 28488[0m
+[0mGET /public/css/bootstrap.min.css [36m304 [0m1.281 ms - -[0m
+[0mGET /public/css/style.css [36m304 [0m0.433 ms - -[0m
+[0mGET /public/css/bootstrap-theme.min.css [36m304 [0m0.363 ms - -[0m
+[0mGET /public/css/theme/rubyblue.css [36m304 [0m0.305 ms - -[0m
+[0mGET /public/css/codemirror.css [36m304 [0m0.346 ms - -[0m
+[0mGET /public/vendor-7c974a20234ee74196be.min.js [36m304 [0m0.362 ms - -[0m
+[0mGET /public/img/mongo-express-logo.png [36m304 [0m0.424 ms - -[0m
+[0mGET /public/codemirror-1cf5d807764f361f5011.min.js [36m304 [0m0.417 ms - -[0m
+[0mGET /public/collection-d37339e950b2c60e8052.min.js [36m304 [0m0.411 ms - -[0m
+[0mGET /public/img/gears.gif [36m304 [0m0.379 ms - -[0m
+[0mGET /public/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.382 ms - -[0m
+[0mGET /db/crowdnote_cscw_2018/ [36m304 [0m24.095 ms - -[0m
+[0mGET /public/css/bootstrap.min.css [36m304 [0m0.472 ms - -[0m
+[0mGET /public/css/bootstrap-theme.min.css [36m304 [0m0.368 ms - -[0m
+[0mGET /public/css/style.css [36m304 [0m0.275 ms - -[0m
+[0mGET /public/database-a2a6263b2862ba8966c0.min.js [36m304 [0m0.314 ms - -[0m
+[0mGET /public/vendor-7c974a20234ee74196be.min.js [36m304 [0m0.300 ms - -[0m
+[0mGET /public/img/gears.gif [36m304 [0m0.715 ms - -[0m
+[0mGET /public/img/mongo-express-logo.png [36m304 [0m0.841 ms - -[0m
+[0mGET /public/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.400 ms - -[0m
+[0mGET /db/crowdnote_cscw_2018/items_100 [36m304 [0m70.867 ms - -[0m
+[0mGET /public/css/bootstrap.min.css [36m304 [0m0.361 ms - -[0m
+[0mGET /public/css/bootstrap-theme.min.css [36m304 [0m0.281 ms - -[0m
+[0mGET /public/css/codemirror.css [36m304 [0m0.274 ms - -[0m
+[0mGET /public/css/style.css [36m304 [0m0.273 ms - -[0m
+[0mGET /public/css/theme/rubyblue.css [36m304 [0m0.282 ms - -[0m
+[0mGET /public/img/mongo-express-logo.png [36m304 [0m0.311 ms - -[0m
+[0mGET /public/vendor-7c974a20234ee74196be.min.js [36m304 [0m0.397 ms - -[0m
+[0mGET /public/collection-d37339e950b2c60e8052.min.js [36m304 [0m0.437 ms - -[0m
+[0mGET /public/codemirror-1cf5d807764f361f5011.min.js [36m304 [0m1.258 ms - -[0m
+[0mGET /public/img/gears.gif [36m304 [0m0.293 ms - -[0m
+[0mGET /public/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.323 ms - -[0m
+2018-07-16T14:27:41.984+0000 I NETWORK  [thread1] connection accepted from 127.0.0.1:36316 #8 (5 connections now open)
+2018-07-16T14:27:42.014+0000 I NETWORK  [conn8] received client metadata from 127.0.0.1:36316 conn8: { driver: { name: "nodejs", version: "2.2.31" }, os: { type: "Linux", name: "linux", architecture: "x64", version: "4.4.0-128-generic" }, platform: "Node.js v9.10.1, LE, mongodb-core: 2.1.15" }
+2018-07-16T14:27:42.032+0000 I NETWORK  [thread1] connection accepted from 127.0.0.1:36318 #9 (6 connections now open)
+2018-07-16T14:27:51.322+0000 I NETWORK  [thread1] connection accepted from 127.0.0.1:36320 #10 (7 connections now open)
+[0mGET /db/crowdnote_legendagem/ [32m200 [0m47.282 ms - 11706[0m
+[0mGET /public/css/bootstrap.min.css [36m304 [0m0.705 ms - -[0m
+[0mGET /public/database-a2a6263b2862ba8966c0.min.js [36m304 [0m1.024 ms - -[0m
+[0mGET /public/css/style.css [36m304 [0m0.559 ms - -[0m
+[0mGET /public/img/mongo-express-logo.png [36m304 [0m1.119 ms - -[0m
+[0mGET /public/css/bootstrap-theme.min.css [36m304 [0m0.999 ms - -[0m
+[0mGET /public/vendor-7c974a20234ee74196be.min.js [36m304 [0m1.054 ms - -[0m
+[0mGET /public/img/gears.gif [36m304 [0m0.420 ms - -[0m
+[0mGET /public/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.469 ms - -[0m
+[0mGET /db/crowdnote_legendagem/items_0 [32m200 [0m82.683 ms - 26862[0m
+[0mGET /public/css/bootstrap-theme.min.css [36m304 [0m0.787 ms - -[0m
+[0mGET /public/css/bootstrap.min.css [36m304 [0m0.942 ms - -[0m
+[0mGET /public/css/style.css [36m304 [0m0.327 ms - -[0m
+[0mGET /public/css/theme/rubyblue.css [36m304 [0m0.801 ms - -[0m
+[0mGET /public/css/codemirror.css [36m304 [0m0.911 ms - -[0m
+[0mGET /public/img/gears.gif [36m304 [0m0.401 ms - -[0m
+[0mGET /public/img/mongo-express-logo.png [36m304 [0m0.347 ms - -[0m
+[0mGET /public/vendor-7c974a20234ee74196be.min.js [36m304 [0m0.359 ms - -[0m
+[0mGET /public/codemirror-1cf5d807764f361f5011.min.js [36m304 [0m0.306 ms - -[0m
+[0mGET /public/collection-d37339e950b2c60e8052.min.js [36m304 [0m0.351 ms - -[0m
+[0mGET /public/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m1.463 ms - -[0m
+2018-07-16T14:28:14.864+0000 I COMMAND  [conn3] CMD: drop crowdnote_legendagem.items_0
+[0mDELETE /db/crowdnote_legendagem/items_0?key=&value=&type=&query=&projection= [36m302 [0m9.343 ms - 92[0m
+[0mGET /db/crowdnote_legendagem [32m200 [0m29.947 ms - 10506[0m
+[0mGET /public/css/bootstrap.min.css [36m304 [0m0.388 ms - -[0m
+[0mGET /public/css/bootstrap-theme.min.css [36m304 [0m0.603 ms - -[0m
+[0mGET /public/css/style.css [36m304 [0m0.756 ms - -[0m
+[0mGET /public/vendor-7c974a20234ee74196be.min.js [36m304 [0m0.423 ms - -[0m
+[0mGET /public/database-a2a6263b2862ba8966c0.min.js [36m304 [0m0.452 ms - -[0m
+[0mGET /public/img/mongo-express-logo.png [36m304 [0m0.513 ms - -[0m
+[0mGET /public/img/gears.gif [36m304 [0m0.293 ms - -[0m
+[0mGET /public/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.423 ms - -[0m
+2018-07-16T14:29:00.787+0000 I NETWORK  [thread1] connection accepted from 127.0.0.1:36322 #11 (8 connections now open)
+2018-07-16T14:29:00.793+0000 I NETWORK  [thread1] connection accepted from 127.0.0.1:36324 #12 (9 connections now open)
+[0mGET /db/crowdnote_legendagem [32m200 [0m21.925 ms - 11706[0m
+[0mGET /public/css/bootstrap.min.css [36m304 [0m0.374 ms - -[0m
+[0mGET /public/vendor-7c974a20234ee74196be.min.js [36m304 [0m1.049 ms - -[0m
+[0mGET /public/css/bootstrap-theme.min.css [36m304 [0m1.012 ms - -[0m
+[0mGET /public/css/style.css [36m304 [0m1.896 ms - -[0m
+[0mGET /public/img/mongo-express-logo.png [36m304 [0m0.791 ms - -[0m
+[0mGET /public/img/gears.gif [36m304 [0m0.264 ms - -[0m
+[0mGET /public/database-a2a6263b2862ba8966c0.min.js [36m304 [0m0.360 ms - -[0m
+[0mGET /public/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.409 ms - -[0m
+[0mGET /db/crowdnote_legendagem/items_0 [32m200 [0m73.073 ms - 34663[0m
+[0mGET /public/css/bootstrap.min.css [36m304 [0m0.975 ms - -[0m
+[0mGET /public/css/bootstrap-theme.min.css [36m304 [0m1.313 ms - -[0m
+[0mGET /public/css/style.css [36m304 [0m1.522 ms - -[0m
+[0mGET /public/css/theme/rubyblue.css [36m304 [0m0.653 ms - -[0m
+[0mGET /public/css/codemirror.css [36m304 [0m0.720 ms - -[0m
+[0mGET /public/img/mongo-express-logo.png [36m304 [0m0.465 ms - -[0m
+[0mGET /public/vendor-7c974a20234ee74196be.min.js [36m304 [0m0.416 ms - -[0m
+[0mGET /public/collection-d37339e950b2c60e8052.min.js [36m304 [0m0.729 ms - -[0m
+[0mGET /public/codemirror-1cf5d807764f361f5011.min.js [36m304 [0m0.790 ms - -[0m
+[0mGET /public/img/gears.gif [36m304 [0m0.278 ms - -[0m
+[0mGET /public/fonts/glyphicons-halflings-regular.woff2 [36m304 [0m0.374 ms - -[0m
