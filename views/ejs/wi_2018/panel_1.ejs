@@ -1,0 +1,325 @@
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Uma p&aacute;gina para anota&ccedil;&atilde;o de v&iacute;deo.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title></title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" rel="stylesheet" />
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+</script>
+<style type="text/css">.modal {
+  display: none;
+  font-size:30px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
+  position: fixed;
+  z-index: 100;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.75);
+}
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+table {
+  border: 1px #c0c0c0 solid;
+  width: 100%;
+}
+table th {
+  background-color: #00f;
+  color: #fff;
+}
+table td {
+  color: #0c0c0c;
+}
+
+</style>
+<div style='background:#3F51B5;'>
+<center>
+  <table>
+    <tbody>
+
+          <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="aggregate()" style="display:block;height:33px;width: 300px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Proceed Aggregation</a>
+<br>
+          <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="updateConvergence()" style="display:block;height:33px;width: 300px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Continue Collecting</a>
+
+
+    </tbody>
+  </table>
+</center>
+</div>
+
+<div id="container"></div>
+
+  </div>
+
+
+</div>
+
+</div>
+<script>
+
+	var list_points;
+	var segments;
+	var contributions;
+	var groups;
+
+//    	$.getJSON('https://novaes.tech/segments', function(data){loadContributions(data);});
+
+    	$.getJSON('https://novaes.tech/contributions', function(data){init(data);});
+
+//	function loadContributions(s){
+//		segments = s;
+//    		$.getJSON('https://novaes.tech/contributions', function(data){init(data);});
+//	}
+
+	function init(c){
+
+		var list = new Array();
+		var cur = -1;
+		var cur_item = "x";
+
+		for(var i=0; i<c.length; i++){
+			
+			if(cur_item != c[i].item_id){
+				cur++;
+				list[cur] = new Array();
+				cur_item = c[i].item_id;
+			}
+			var valid=true;
+			var content = c[i].content;
+			switch(c[i].content_type){
+				case 'youtube':
+					var parts = content.split('?');
+                                        var delta = levenshtein('https://www.youtube.com/watch',parts[0]);
+					if(delta < 1){
+						console.log(parts);//https://www.youtube.com/watch
+					}
+					break;
+				case 'wikipedia':
+
+					break;
+				case 'text':
+			}
+
+			if(valid){
+				list[cur].push(c[i]);
+			}
+		}
+
+
+		createTable(list)
+	}
+
+
+
+        function levenshtein(a, b){
+                var tmp;
+                if (a.length === 0) { return b.length; }
+                if (b.length === 0) { return a.length; }
+                if (a.length > b.length) { tmp = a; a = b; b = tmp; }
+
+                var i, j, res, alen = a.length, blen = b.length, row = Array(alen);
+                for (i = 0; i <= alen; i++) { row[i] = i; }
+
+                for (i = 1; i <= blen; i++) {
+                        res = i;
+                        for (j = 1; j <= alen; j++) {
+                                tmp = row[j - 1];
+                                row[j - 1] = res;
+                                res = b[i - 1] === a[j - 1] ? tmp : Math.min(tmp + 1, Math.min(res + 1, row[j] + 1));
+                        }
+                }
+                return res;
+        }
+
+
+
+
+
+	function createTable(list){
+
+		list_points = list;
+
+var container = document.getElementById("container");
+table= [
+  '<table>',
+  '<thead>',
+  '<tr>',
+  '<th>Done</th>',
+  '<th>Contributions</th>',
+  '<th>Suggestions</th>',
+  '<th>Point</th>',
+  '</tr>',
+  '</thead>',
+  '<tbody>'
+];
+
+
+var t = 0;
+for(var i=0; i<list.length; i++){
+	var point = list[i];
+
+
+var qtd = list[i].length;
+t+=qtd;
+
+var s=0;
+/*var cur='';
+for(var j=0; j<point.length; j++){
+	if(){
+
+	}
+
+}
+*/
+
+
+var color = '#00C060';
+var checked = 'checked';
+if(qtd < 4) color = '#00FA9A';
+if(qtd < 3){
+        color = '#FFD700';
+        checked = null;
+}
+if(qtd < 2) color = '#F4A460';
+if(qtd <= 1) color = '#CD5C5C';
+table.push(
+  '<tr bgcolor="'+color+'">',
+  '<td align="center"><input type="checkbox" name="ck" '+checked+'  ></td>',
+  '<td align="center"><b>'+qtd+'</b></td>',
+  '<td align="center"><b>'+s+'</b></td>',
+  '<td><b>'+list[i][0].point+'</b></td>',
+  '</tr>'
+);
+/*
+table.push(
+  '<tr>',
+  '<td align="center"><input type="checkbox" name="ck" checked  ></td>',
+  '<td align="center">'+list[i].length+'</td>',
+  '<td>'+list[i][0].point+'</td>',
+  '</tr>'
+);
+*/
+}
+
+console.log('Valid Contributions: '+t);
+table.push(
+  '</tbody>',
+  '</table>'
+);
+
+container.innerHTML = table.join("\n");
+
+	}
+
+
+	function addContribution(groups, c){
+		var i;
+		for(i=0; i<groups.length; i++){
+			if(parseInt(groups[i].segment.start) == parseInt(c.start)){
+				groups[i].contributions.push(c);
+				break;
+			}
+		}
+	}
+
+	//function aggregate(){
+	//	alert('Aggregate');
+	//}
+
+	function updateConvergence(){
+		var convergeds = new Array();
+		var dones = document.getElementsByName("ck");
+		for(var i=0; i<dones.length; i++){
+			if(dones[i].checked){
+			
+				for(var j=0; j<list_points[i].length; j++){
+					delete list_points[i][j].fingerprint;
+					delete list_points[i][j].job_id;
+					delete list_points[i][j].candidates;
+					delete list_points[i][j].contributions;
+					delete list_points[i][j]._id;
+					list_points[i][j].convergence = '1';	
+					convergeds.push(list_points[i][j]);
+				}
+
+			}
+
+		}
+
+	      $.ajax({
+	        	type: 'POST',
+      	 	 	url: 'https://novaes.tech/updateConvergence',
+        		data: {'points':convergeds},
+	        	success: function(result, status, request) {done(result);}
+      		});
+	}
+
+        function aggregate(){
+		var convergeds = new Array();
+		var dones = document.getElementsByName("ck");
+		for(var i=0; i<dones.length; i++){
+			if(dones[i].checked){
+			
+				for(var j=0; j<list_points[i].length; j++){
+					delete list_points[i][j].fingerprint;
+					delete list_points[i][j].job_id;
+					delete list_points[i][j].candidates;
+					delete list_points[i][j].contributions;
+					delete list_points[i][j]._id;
+					list_points[i][j].convergence = '0';	
+					convergeds.push(list_points[i][j]);
+				}
+
+			}
+
+		}
+
+	      $.ajax({
+	        	type: 'POST',
+      	 	 	url: 'https://novaes.tech/aggregate',
+        		data: {'points':convergeds},
+	        	success: function(result, status, request) {done(result);}
+      		});
+	}
+
+
+
+
+	function done(result){
+		alert('Success');
+	}
+
+ 
+</script>
+
+
+

@@ -1,0 +1,197 @@
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Uma p&aacute;gina para anota&ccedil;&atilde;o de v&iacute;deo.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title></title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" rel="stylesheet" />
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+</script>
+<style type="text/css">.modal {
+  display: none;
+  font-size:30px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
+  position: fixed;
+  z-index: 100;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.75);
+}
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+</style>
+<div style='background:#3F51B5;'>
+<center>
+  <table>
+    <tbody>
+      <tr>
+        <td>
+          <p align="center"><a id='t_100' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(100,'player','false',0,0)" style="vertical-align: middle;border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"><br>Set Video</a> 
+          </td><td><p align="center"><a id='t_101' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(101,'player','false',0,0)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"><br>Segment</a> 
+          </td><td><p align="center"><a id='t_102' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(102,'player','false',0,0)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"><br>GroundTruth</a> 
+          </td><td><p align="center"><a id='t_0' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(0,'job','false',100,60)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"><br>Task 0</a> 
+         </td><td> <p align="center"><a id='t_1'  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(1,'job','false',100,60)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"><br>Task 1</a> 
+         </td><td> <p align="center"><a id='t_2' class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(2,'job','true',100,60)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"><br>Task 2</a> 
+          </td><td><p align="center"><a id='t_3'  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(3,'job','false',100,60)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"><br>Task 3</a> 
+          </td><td><p align="center"><a id='t_4'  class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="setActiveTask(4,'player','false',0,0)" style="border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"><br>Player</a> 
+</td>
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</center>
+</div>
+
+<div style="padding: 10px;">
+	<iframe height='100%'> <!-- src="https://novaes.tech/panel"-->
+
+	</iframe>
+</div>
+
+
+<script>
+
+  var current;
+  var tasks;
+  var states = new Array();
+
+  $.getJSON('https://novaes.tech/tasks', function(data){init(data);});
+
+
+
+  function init(data){
+	initStates(data);
+  	updateTask();
+  }
+
+
+  function initStates(data){
+	tasks = data;
+	for(i=0; i<data.length; i++){
+		x = data[i].task_id;
+		if(x < 100){
+			states[i] = document.getElementById("t_"+x);
+			switch(data[i].state){
+				case '0':
+					states[i].style = "pointer-events:none; border-radius: 50%; height: 100px;   width: 100px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"
+					states[i].style.background = 'GRAY';
+					break;
+				case '1':
+					states[i].style.background = 'RED';
+					break;			
+				case '2':
+					states[i].style.background = 'GREEN';
+					current = i;
+					break;
+			}
+		}
+	}
+  }
+
+  function updateTask(){
+	$.getJSON('https://novaes.tech/current', function(data){updateState(data);});
+  }
+
+  function updateState(data){
+
+
+	if(current != data.task_id){
+
+		var a = current;
+		if(current < 100){
+                        tasks[current].state = 1;
+                        states[current].style.background = 'RED';
+		}else{
+			tasks[5].state = 1;
+		}
+		current = data.task_id;
+		var b = current;
+		if(current < 100){
+			tasks[current].state = 2;
+			states[current].style.background = 'GREEN';
+        	}else{
+			tasks[5].state = 2;
+		}	
+		//$.getJSON('https://novaes.tech/changeActiveTask?task_a='+a+'&task_b='+b, function(data){updateState(data);});
+		$.getJSON('https://novaes.tech/changeActiveTask?task_a='+a+'&task_b='+b, function(data){reLoad();});
+	
+ 	}else{
+		reLoad();
+	}
+
+ }
+
+function reLoad(){
+
+window.location.href = 'https://novaes.tech/admin';
+}
+
+
+  function setActiveTask(task,kind,group,qtd_target,min_convergence){
+        $.getJSON('https://novaes.tech/init?task='+task+'&kind='+kind+'&group='+group+'&qtd_target='+qtd_target+'&min_convergence='+min_convergence, function(){updateState();});
+
+	updateTask(); 
+
+  }
+
+
+  function sendContribution(){
+    var point = document.getElementById("point");
+    var type = document.getElementById("type");
+    if(point.value != ''){
+      var queryForm = "<form method='post' action='https://novaes.tech/store'>";
+      queryForm += "<input type='hidden' id='uri' name='uri'  value='"+input.uri+"' > ";
+      queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+input._id+"' > ";
+      queryForm += "<input type='hidden' id='start' name='start'  value='"+input.start+"' > ";
+      queryForm += "<input type='hidden' id='end' name='end'  value='"+input.end+"' > ";
+      queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+info.fingerprint+"' > ";
+      queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+info.job_id+"' > ";
+      queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+info.item_index+"' > ";
+      queryForm += "<input type='hidden' id='instant' name='instant'  value='"+player.getCurrentTime()+"' > ";
+      queryForm += "<input type='hidden' id='type' name='type'  value='"+type.value+"' > ";
+      queryForm += "<input type='hidden' id='point' name='point'  value='"+point.value+"' > ";
+      queryForm += "";
+      $.ajax({
+        type: 'POST',
+        url: $(queryForm).attr('action'),
+        data: $(queryForm).serialize(), 
+        success: function(result, status, request) {done();}
+      });
+    }else{
+      alert("You forgot to enter what you identified.\nYour contribution is important to us!!!");
+    }
+  }
+
+</script>
+
+
+
