@@ -1,6 +1,6 @@
 // ---------------------- Requires, Includes and Globals ------------------------
 
-var project = 'cscw_2018';
+var project = 'legendagem';
 var qtd_target = 0;
 var min_convergence = 0;
 var activeTask = 4;
@@ -14,7 +14,6 @@ Functions = new Functions.functions();
 
 var host = 'localhost';
 var http = require('http');
-var https = require('https');
 var path = require('path');
 var fs = require('fs');
 
@@ -649,13 +648,5 @@ app.get('/images', function(req, res) {
 
 // ------------- Create Server ------------------------------
 
-//http.createServer(app).listen(80);
-
-https.createServer({
-  	ca: fs.readFileSync("../../ssl/intermediate.crt"),
-	key: fs.readFileSync('../../ssl/novaes.tech.key'),
-	cert: fs.readFileSync('../../ssl/novaes.tech.crt')
-},app).listen(443);
-
-
+http.createServer(app).listen(80);
 
