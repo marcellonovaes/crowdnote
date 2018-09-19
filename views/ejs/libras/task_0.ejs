@@ -1,0 +1,446 @@
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Uma p&aacute;gina para anota&ccedil;&atilde;o de v&iacute;deo.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js">
+</script>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+</script>
+<script src="https://crowdnoter.app/include?name=client.min&amp;mime=js">
+</script>
+
+<style type="text/css">
+.modal {
+  display: none;
+  font-size:30px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
+  position: fixed;
+  z-index: 100;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.75);
+}
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+#circle {
+  float:left;
+  width: 40px;
+  height: 40px;
+  background: blue;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+}
+
+
+#retangle-space {
+        float:left;
+        height: 40px;
+        width:  1px;
+        background: light-grey;
+}
+
+#retangle-mark {
+        float:left;
+        height: 40px;
+        width:  1px;
+        background: orange;
+}
+
+
+.ui-draggable, .ui-droppable {
+  background-position: top;
+}
+
+.ui-widget-header{background-image:none;background-color: orange;}
+.ui-widget-content { background: light-grey; }
+
+
+$bg: #332f35;
+$fg: lighten($bg,20%);
+$borderWidth: 3px;
+
+input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+
+label {
+  color: lighten($bg,40%);
+  display: inline-block;
+  cursor: pointer;
+  font-weight: bold;
+  padding: 5px 20px;
+}
+
+input[type=radio]:checked + label{
+  color: lighten($bg,60%);
+  background: $fg;
+}
+
+label + input[type=radio] + label {
+  border-left: solid $borderWidth $fg;
+}
+.radio-group {
+  border: solid $borderWidth $fg;
+  display: inline-block;
+  margin: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+
+</style>
+<div style='background:#3F51B5;'>
+<center>
+
+
+<!--p id="presentation" style="max-width:960px;font-size:16px;color:white;text-align: justify;">
+This video shows an actor expressing himself in Brazilian sign language. Even if you do not know this language, identify the initial moment of the gestures.
+</p-->
+
+
+  <table>
+    <tbody>
+      <tr>
+
+        <td id="instructions" style="display:block;max-width:700px;padding:10px;">
+            <p style="font-size:18px;color:white;">1. Identifique o instante inicial de um sinal.
+              <br />
+              <i>(use os botões - e + para ajustar o inicio)</i>
+            </p>
+            <p style="font-size:18px;color:white;">2. Arraste o inicio do intervalo para este instante.
+            </p>
+            <p style="font-size:18px;color:white;">3. Identifique o instante final de um sinal.
+              <br />
+              <i>(use os botões - e + para ajustar o final)</i>
+            </p>
+        <td>
+
+
+        <td id="instructions" style="display:block;max-width:700px;padding:10px;">
+            <p style="font-size:18px;color:white;">4. Delimite o sinal com a barra amarela.
+            </p>
+            <p style="font-size:18px;color:white;">5. Clique no botão ADICIONAR.
+            </p>
+            <p style="font-size:18px;color:white;">6. Repita os passos 1, 2 e 3.
+            </p>
+            <p style="font-size:18px;color:white;">7. Clique no botão ENVIAR CONTRIBUIÇÕES.
+            </p>
+        <td>
+
+<br>
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="sendContribution()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Enviar Contribuições</a> 
+          </p>
+          <p align="center">
+<!--a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_instr" onclick="showInstructions()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Instructions</a--> 
+</p>
+
+
+          <p align="center">
+<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="addRange()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Adicionar Sinal</a>
+<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="delRange()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Remover Sinal</a>
+          <p align="center">
+            <select autofocus="" class="mdl-textfield__input" id="list_marks" name="list_marks" onchange="syncRange()" style="margin-top:10px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;" type="select">
+            </select>
+          </p>
+
+
+
+
+<p align='center'>
+                <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_play_pause" onclick="playPause()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Play</a>
+<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(-0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">- 0.1s</a> 
+
+<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">+ 0.1s</a> 
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</center>
+</div>
+<div style="padding: 10px;">
+  <div id="player" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"> 
+</div>
+
+<div class="w3-light-grey"> 
+  <div id="timeline" class='w3-red' style="height:30px; box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"></div>
+</div>
+
+
+<div id="slider"></div>
+
+</div>
+
+
+
+<input id="done" name="done" type="hidden" />
+<div class="modal" id="modal">
+  <div class="modal-content"><span class="close">X</span>
+  </div>
+</div>
+<script>
+  var data;
+  var info;
+  var source_id = 'r0';
+  var video_width = 640;
+  var list_marks;
+  var bt_play_pause;
+  var timeline;
+  var input;
+  var player;
+  var duration;
+  var instructions;
+
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  modal.onclick = function() {
+    modal.innerHTML = '';
+    modal.style.display = "none";
+    displayContent(cur,false);
+  }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.innerHTML = '';
+      modal.style.display = "none";
+      displayContent(cur,false);
+    }
+  }
+
+  function playPause(){
+        if(player.getPlayerState() == 1){
+                player.pauseVideo();
+    $("#bt_play_pause").text('Play');  
+        }else{
+                player.playVideo();
+    $("#bt_play_pause").text('Pause');  
+        }
+  }
+
+  function tiltTime(delta){
+    player.pauseVideo();
+  $("#bt_play_pause").text('Play');  
+  player.seekTo(player.getCurrentTime() + delta);
+  }
+  function showInstructions(){
+   
+    modal.innerHTML ='<div style="margin-top:0px; margin-left:50px;"><p style="text-align:justified;font-size:20px">Imagine that you are immersed in the environment of the movie.<br>Taking it into account, you are going to point out exact points in time that you think there is a lack of wind or vibration.</p><p style="text-align:left;font-size:20px">1. Find a calm moment.</p><p style="text-align:left;font-size:20px">2. Please pause the video at the beginning of this moment.<br><i>(use - and + buttons to adjust)</i></p><p style="text-align:left;font-size:20px">3. Click on ADD MARK button to add the mark.<br><i>(If you made a mistake, click on DEL MARK to delete it)</i></p><p style="text-align:left;font-size:20px">4. Do the steps 1, 2 and 3 until the end of the movie.</p><p style="text-align:left;font-size:20px">5. Click the SEND CONTRIBUTIONS button.</p>';
+
+ modal.style.display = "block";
+  }
+  function onYouTubeIframeAPIReady() {
+   //   init({uri:'_vbPf-uouqA',start:35, end:37 });
+  //$.getJSON('https://novaes.tech/job', function(data){init(data);});
+      $.getJSON('https://crowdnoter.app/job', function(d){init(d.info,d.data[0]);});
+
+  }
+  function init(f,d){
+    info = f;
+    data = d;
+    list_marks = document.getElementById("list_marks");
+    timeline = document.getElementById("timeline");
+    instructions = document.getElementById("instructions");
+    if(window.innerWidth >= 800){
+      instructions.style.display = 'block';
+    }
+    input = data;
+
+
+  $( function() {
+    var start = parseFloat(input.start);
+    var end = parseFloat(input.end);
+    $( "#slider" ).slider({
+      range: true,
+      step: 0.01,
+      min: start,
+      max: end,
+      values: [ start+1, end-1 ],
+      slide: function( event, ui ) {
+      //  $( "#amount" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+      }
+    });
+    //$( "#amount" ).val( $( "#slider-wind" ).slider( "values", 0 ) + " - " + $( "#slider-wind" ).slider( "values", 1 ) );
+  } );
+
+
+
+
+
+    player = new YT.Player(
+      'player',
+      {
+        playerVars: {cc_lang_pref:'en', cc_load_policy: 0, autoplay:0 ,rel: 0, controls: 0, disablekb: 1},
+        height: '360',
+        width: '640',
+  autohide: '1',
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      }
+    );
+  }
+  function onPlayerReady(event) {
+    duration = (input.end - input.start) + 0.5;
+    player.loadVideoById(input.uri, parseFloat(input.start));
+    setInterval(function() {syncTimeline();}, 100);
+ }
+
+ function syncTimeline(){
+  var progress = 100 * (player.getCurrentTime() - input.start) / (input.end -input.start );
+  timeline.style.width =  progress + '%';
+   }
+ 
+  function onPlayerStateChange(event) {
+    if(player.getCurrentTime() > input.end || player.getCurrentTime() < input.start){
+      player.seekTo(parseFloat(input.start));
+      player.pauseVideo();
+    $("#bt_play_pause").text('Play');  
+
+    }else{
+      if (event.data == YT.PlayerState.PLAYING) {
+        setTimeout(restartVideoSection, duration * 1000);
+      }
+    }
+  }
+  function restartVideoSection() {
+    if(player.getCurrentTime() > input.end){
+      player.seekTo(parseFloat(input.start));
+      player.pauseVideo();
+    $("#bt_play_pause").text('Play');  
+    }
+  }
+
+  function syncRange(){
+    var index = list_marks.selectedIndex;
+  var range = (list_marks.options[index].value).split(':');
+  player.seekTo(range[0]);
+  $( "#slider" ).slider( "values", [parseFloat(range[0])-0.1,parseFloat(range[1])] );
+  }
+
+  function delRange(){        
+        var r = confirm('Are you sure that want remove this range?');
+        if(r == true){
+                var range = list_marks.selectedIndex;
+                list_marks.selectedIndex = range - 1;
+                list_marks.remove(range);
+      }
+  }
+
+  function addRange(){
+      var start = parseFloat($( "#slider" ).slider( "values", 0 ))+0.1 ;
+      var stop =  parseFloat($( "#slider" ).slider( "values", 1 )) ;
+            var Op = document.createElement("OPTION");
+            Op.text = start + " - " + stop;
+            Op.value = start+":"+stop;
+            list_marks.options[list_marks.options.length] = Op;
+            list_marks.selectedIndex = list_marks.options.length -1;
+    
+  }
+
+
+  function initRange(start,stop){
+            var Op = document.createElement("OPTION");
+            Op.text = start + " - " + stop;
+            Op.value = start+":"+stop;
+            list_marks.options[list_marks.options.length] = Op;
+            list_marks.selectedIndex = list_marks.options.length -1;
+    
+  }
+
+
+
+
+  function sendContribution(){
+
+if(list_marks.options.length < 1){
+  alert('Please, do the job before finish your contribution.');
+  return;
+}
+
+
+var list = list_marks.options;
+var marks = new Array();
+for(var i=0; i < list.length; i++){
+  marks.push(list_marks.options[i].value);
+}
+
+var r = confirm('Are you done?');
+if(r == true){
+
+
+
+
+        var queryForm = "<form method='post' action='https://crowdnoter.app/store'>";
+        queryForm += "<input type='hidden' id='uri' name='uri'  value='"+data.uri+"' > ";
+        queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+data._id+"' > ";
+        queryForm += "<input type='hidden' id='start' name='start'  value='"+data.start+"' > ";
+        queryForm += "<input type='hidden' id='end' name='end'  value='"+data.end+"' > ";
+        queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+info.fingerprint+"' > ";
+        queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+info.job_id+"' > ";
+        queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+info.item_index+"' > ";
+        queryForm += "<input type='hidden' id='source_id' name='source_id'  value='"+source_id+"' > ";
+        queryForm += "<input type='hidden' id='marks' name='marks'  value='"+marks+"' > ";
+        queryForm += "";
+
+
+      $.ajax({
+        type: 'POST',
+        url: $(queryForm).attr('action'),
+        data: $(queryForm).serialize(), 
+        success: function(result, status, request) {done();}
+      });
+
+}
+  }
+  function done(){
+    var done = document.getElementById("done");
+    var bt = document.getElementById("bt");
+    bt.style='visibility: hidden;';
+    done.value='ok';
+    player.stopVideo();
+    alert("Thanks, now you can click the FINISH button.");
+    //$(location).attr('href', 'https://novaes.tech/thanks');
+  }       
+</script>
+
+
+
