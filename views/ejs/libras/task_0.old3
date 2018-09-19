@@ -1,0 +1,308 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Uma p&aacute;gina para anota&ccedil;&atilde;o de v&iacute;deo.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" rel="stylesheet" />
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+<script src="https://crowdnoter.app/include?name=client.min&amp;mime=js">
+</script>
+<style type="text/css">.modal {
+  display: none;
+  font-size:30px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
+  position: fixed;
+  z-index: 100;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.75);
+}
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  #circle {
+    float:left;
+    width: 40px;
+    height: 40px;
+    background: blue;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+  }
+  #retangle-space {
+    float:left;
+    height: 40px;
+    width:  1px;
+    background: light-grey;
+  }
+  #retangle-mark {
+    float:left;
+    height: 40px;
+    width:  1px;
+    background: orange;
+  }
+</style>
+<div style="background:#3F51B5;">
+  <center>
+    <table>
+      <tbody>
+        <tr>
+          <td id="presentation" style="display:none;max-width:800px;padding:1px;">
+            <p style="font-size:18px;color:white;text-align: justify;">This video shows an actor expressing himself in Brazilian sign language. Even if you do not know this language, identify the initial moment of the gestures.
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <table>
+      <tbody>
+        <tr>
+          <td id="instructions" style="display:none;max-width:500px;padding:10px;">
+            <p style="font-size:18px;color:white;">1. Find the initial moment for a gesture.
+            </p>
+            <p style="font-size:18px;color:white;">2. Please pause the video at the beginning of this moment.
+              <br />
+              <i>(use - and + buttons to adjust)</i>
+            </p>
+            <p style="font-size:18px;color:white;">3. Click on 'ADD MARK' button to add the mark.
+              <br />
+              <i>(If you made a mistake, click on 'DEL MARK' to delete it)</i>
+            </p>
+            <p style="font-size:18px;color:white;">4. Do the steps 1, 2 and 3 until the end of the movie.
+            </p>
+            <p style="font-size:18px;color:white;">5. Click the SEND CONTRIBUTIONS button.
+            </p>
+          </td>
+          <td>
+            <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="sendContribution()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Send Contributions</a>
+            </p>
+            <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="addMark()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Add Mark</a>
+            </p>
+            <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_add" onclick="delMark()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Del Mark</a>
+            </p>
+            <p align="center">
+              <select autofocus="" class="mdl-textfield__input" id="list_marks" name="list_marks" onchange="syncMark()" style="margin-top:10px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;" type="select"><option value="0">0</option>
+              </select>
+            </p>
+            <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_instr" onclick="showInstructions()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Instructions</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(-0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">- 0.1s</a> <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">+ 0.1s</a>
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </center>
+</div>
+<div style="padding: 10px;">
+  <div id="player" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">?|
+  </div>
+  <div class="w3-light-grey" id="mark_bar"> 
+  </div>
+</div>
+<input id="done" name="done" type="hidden" />
+<div class="modal" id="modal">
+  <div class="modal-content"><span class="close">X</span>
+  </div>
+</div>
+<script>
+  var video_width = 640;
+  var mark_bar;
+  var marks = new Array();
+  var list_marks;
+  var info;
+  var data;
+  var player;
+  var duration;
+  var instructions;
+  var presentation;
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  modal.onclick = function() {
+    modal.innerHTML = '';
+    modal.style.display = "none";
+    displayContent(cur,false);
+  }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.innerHTML = '';
+      modal.style.display = "none";
+      displayContent(cur,false);
+    }
+  }
+  function tiltTime(delta){
+    player.pauseVideo();
+    player.seekTo(player.getCurrentTime() + delta);
+  }
+  function showInstructions(){
+    modal.innerHTML ='<div style="margin-top:0px; margin-left:50px;"><p style="text-align:justified;font-size:20px">This video shows an actor expressing himself in Brazilian sign language. Even if you do not know this language, identify the initial moment of the gestures.<p style="text-align:left;font-size:20px">1. Find the initial moment for a gesture.<p style="text-align:left;font-size:20px">2. Please pause the video at the beginning of this moment.<br><i>(use - and + buttons to adjust)<p style="text-align:left;font-size:20px">3. Click on ADD MARK button to add the mark.<br><i>(If you made a mistake, click on DEL MARK to delete it)<p style="text-align:left;font-size:20px">4. Do the steps 1, 2 and 3 until the end of the movie.<p style="text-align:left;font-size:20px">5. Click the SEND CONTRIBUTIONS button.';
+    modal.style.display = "block";
+  }
+  function onYouTubeIframeAPIReady() {
+    $.getJSON('https://crowdnoter.app/job', function(d){init(d.info,d.data[0]);});
+  }
+  function init(reg_info,reg_data){
+
+    info = reg_info;
+    data = reg_data;
+
+    list_marks = document.getElementById("list_marks");
+    list_marks.remove(0);
+    mark_bar = document.getElementById("mark_bar");
+    presentation = document.getElementById("presentation");
+    instructions = document.getElementById("instructions");
+    if(window.innerWidth >= 800){
+      presentation.style.display = 'block';
+      instructions.style.display = 'block';
+    }
+
+    player = new YT.Player(
+      'player',
+      {
+        playerVars: {cc_lang_pref:'en', cc_load_policy: 0, autoplay:0 ,rel: 0, controls: 2, disablekb: 1},
+        height: '360',
+        width: '640',
+        autohide: '0',
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      }
+    );
+  }
+  function onPlayerReady(event) {
+
+
+    duration = (data.end - data.start) + 0.5;
+    player.loadVideoById(data.uri, parseFloat(data.start));
+  }
+  function onPlayerStateChange(event) {
+    if(player.getCurrentTime() > data.end || player.getCurrentTime() < data.start){
+      player.seekTo(parseFloat(data.start));
+      player.pauseVideo();
+    }else{
+      if (event.data == YT.PlayerState.PLAYING) {
+        setTimeout(restartVideoSection, duration * 1000);
+      }
+    }
+  }
+  function restartVideoSection() {
+    if(player.getCurrentTime() > data.end){
+      player.seekTo(parseFloat(data.start));
+      player.pauseVideo();
+    }
+  }
+  function delMark(){
+    var r = confirm('Are you sure that want remove this mark?');
+    if(r == true){
+      var mark = list_marks.selectedIndex;
+      list_marks.selectedIndex = mark - 1;
+      list_marks.remove(mark);
+      var m = document.getElementsByTagName("MARK")[mark];
+      m.remove(m);
+    }
+  }
+  function addMark(){
+    var instant = player.getCurrentTime();
+    var Op = document.createElement("OPTION");
+    Op.text = instant;
+    Op.value = instant;
+    list_marks.options[list_marks.options.length] = Op;
+    list_marks.selectedIndex = list_marks.options.length -1;
+    var w = parseFloat($("#player").css("width"));
+    var t = player.getCurrentTime();
+    var e = data.end;
+    var position = 10 + ( w * t / e);
+    //var h = parseFloat($("#player").css("heigth")) +40 +60;
+    h = 672;
+    if(window.innerWidth < 800){
+      h -= 83;
+    }
+    var mark = document.createElement("MARK");
+    mark.value = instant;
+    mark.onclick = function(){
+      for(var index=0; index<list_marks.options.length; index++){
+        if(list_marks.options[index].value == instant){
+          list_marks.selectedIndex = index;
+          break;
+        }
+      }
+      player.seekTo(instant);
+      player.pauseVideo();
+    }
+    //mark.style = 'pointer-events: none; float:left;top:'+h+'px; left:'+position+'px; position:absolute; background:blue; width:10px; height:5px;';
+    mark.style = 'float:left;top:'+h+'px; left:'+position+'px; position:absolute; background:blue; width:10px; height:5px;';
+    mark_bar.append(mark);
+  }
+  function syncMark(){
+    player.seekTo(list_marks.value);
+    player.pauseVideo();
+  }
+  function sendContribution(){
+    var r = confirm('Are you done?');
+    if(r == true){
+      if(list_marks.options.length > 1){
+        for(var i=0; i<list_marks.options.length; i++){
+          marks.push(list_marks.options[i].value);
+        }
+        var queryForm = "<form method='post' action='https://crowdnoter.app/store'>";
+        queryForm += "<input type='hidden' id='uri' name='uri'  value='"+data.uri+"' > ";
+        queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+data._id+"' > ";
+        queryForm += "<input type='hidden' id='start' name='start'  value='"+data.start+"' > ";
+        queryForm += "<input type='hidden' id='end' name='end'  value='"+data.end+"' > ";
+        queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+info.fingerprint+"' > ";
+        queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+info.job_id+"' > ";
+        queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+info.item_index+"' > ";
+        queryForm += "<input type='hidden' id='marks' name='marks'  value='"+marks+"' > ";
+        queryForm += "";
+        $.ajax({
+          type: 'POST',
+          url: $(queryForm).attr('action'),
+          data: $(queryForm).serialize(),
+          success: function(result, status, request) {done();}
+        });
+      }else{
+        alert("You forgot to identified the markers.\nYour contribution is important to us!!!");
+      }
+    }
+  }
+  function done(){
+    var done = document.getElementById("done");
+    var bt = document.getElementById("bt");
+    bt.style='visibility: hidden;';
+    done.value='ok';
+    player.stopVideo();
+    alert("Thanks, now you can click the FINISH button.");
+    //$(location).attr('href', 'https://crowdnoter.app/thanks');
+  }
+</script>
+
+<script type="text/javascript" src="https://cdn.ywxi.net/js/1.js" async></script>

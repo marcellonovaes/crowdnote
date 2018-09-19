@@ -3,7 +3,7 @@
 var project = 'legendagem';
 var qtd_target = 0;
 var min_convergence = 0;
-var activeTask = 0;
+var activeTask = 4;
 var kind = 'player';
 var group = 'false';
 
@@ -130,11 +130,11 @@ function init(pars){
 
 
 	if(pars){
-		qtd_target = pars.qtd_target;
-		min_convergence = pars.min_convergence;
-		activeTask = pars.task;
-		kind = pars.kind;//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
-		group = pars.group;//Tasks 1, 3, 4: false; Task 2: true;
+//		qtd_target = pars.qtd_target;
+//		min_convergence = pars.min_convergence;
+//		activeTask = pars.task;
+//		kind = pars.kind;//Tasks 1, 2 and 3: 'job' ; Task 4: 'player'
+//		group = pars.group;//Tasks 1, 3, 4: false; Task 2: true;
 	}
 	else{
 
@@ -408,6 +408,14 @@ app.get('/thanks', function(req, res) {
         //res.render('ejs/'+project+'/task_'+activeTask, null);
         res.render('ejs/thanks', null);
 });
+
+
+
+app.get('/enrichment01', function(req, res) {
+	res.render('ejs/'+project+'/task_0', null);
+});
+
+
 
 
 function b64EncodeUnicode(str) {

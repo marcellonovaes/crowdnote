@@ -1,0 +1,432 @@
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Uma p&aacute;gina para anota&ccedil;&atilde;o de v&iacute;deo.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="https://novaes.tech/include?name=jquery-ui&mime=css" />
+<link rel="stylesheet" type="text/css" href="https://novaes.tech/include?name=jquery-ui-12&mime=css" />
+<link rel="stylesheet" type="text/css" href="https://novaes.tech/include?name=nouislider&mime=css" />
+<script type="text/javascript" src="https://novaes.tech/include?name=client.min&mime=js"></script>
+<script type="text/javascript" src="https://novaes.tech/include?name=client.min&mime=js"></script>
+<script type="text/javascript" src="https://novaes.tech/include?name=jquery-1.9.1&mime=js"></script>
+<script type="text/javascript" src="https://novaes.tech/include?name=jquery-ui&mime=js"></script>
+<script type="text/javascript" src="https://novaes.tech/include?name=jquery-ui-12&mime=js"></script>
+<!-- script type="text/javascript" src="https://novaes.tech/include?name=sliders&mime=js"></script-->
+
+<script type="text/javascript" src="https://novaes.tech/include?name=nouislider&mime=js"></script>
+<style type="text/css">
+        body {
+            background: #fff;
+        }
+        .ui-slider-horizontal .ui-slider-range {
+            background-color: #97ce00;
+        }
+.ui-slider-control-plus, .ui-slider-control-minus {
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    z-index: 99;
+    margin: -7px 0 0 -13px;
+    border: 1px solid #d3d3d3;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    background: #97ce00;
+    line-height:26px;
+}
+.ui-slider-control-plus:after, .ui-slider-control-minus:after {
+    position:absolute;
+    width:26px;
+    height:26px;
+    color:#fff;
+    text-align:center;
+    right:1px;
+    top:-2px;
+    line-height:26px;
+    font-size:26px;
+}
+.ui-slider-control-plus:after {
+    content:"+";
+}
+.ui-slider-control-minus:after {
+    content:"-";
+}
+.ui-slider-control-minus, .ui-slider-control-plus, .ui-slider-handle {
+    cursor: pointer;
+}
+.ui-slider-handle.arrow-left, .ui-slider-handle.arrow-right {
+    width: 0;
+    height: 0;
+    border: none;
+    background: none;
+    outline: none;
+    cursor: pointer;
+}
+.ui-slider-handle.arrow-left {
+    margin-left: -16px;
+    border-top: 0.8em solid transparent;
+    border-bottom: 0.8em solid transparent;
+    border-right: 0.8em solid #e6e6e6;
+}
+.ui-slider-handle.arrow-right {
+    margin-left: 0px;
+    border-top: 0.8em solid transparent;
+    border-bottom: 0.8em solid transparent;
+    border-left: 0.8em solid #e6e6e6;
+}
+
+
+.modal {
+  display: none;
+  font-size:30px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
+  position: fixed;
+  z-index: 100;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.75);
+}
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+#circle {
+	float:left;
+	width: 40px;
+	height: 40px;
+	background: blue;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+}
+
+
+#retangle-space {
+        float:left;
+        height: 40px;
+        width:  1px;
+        background: light-grey;
+}
+
+#retangle-mark {
+        float:left;
+        height: 40px;
+        width:  1px;
+        background: orange;
+}
+
+
+.ui-draggable, .ui-droppable {
+	background-position: top;
+}
+
+.ui-widget-header{background-image:none;background-color: orange;}
+.ui-widget-content { background: light-grey; }
+
+</style>
+
+<!--
+<p><div id="slider"></div></p><p><div id="onhandleslide_info"></p><p></div><div id="onhandlemouseenter_info"></div></p>
+ -->
+
+<div style='background:#3F51B5;'>
+<center>
+  <table>
+    <tbody>
+      <tr>
+        <td id="presentation" style="display:none;max-width:800px;padding:1px;">
+          <p style="font-size:18px;color:white;text-align: justify;">Imagine that you are immersed in the environment of the movie. Taking it into account, you are going to point out exact points in time that you think there is a lack of wind or vibration effects. </p>
+	</td>
+	</tr>     
+</tbody>
+</table>
+  <table>
+    <tbody>
+      <tr>
+        <td id="instructions" style="display:none;max-width:500px;padding:10px;">
+	<p style="font-size:18px;color:white;">5. Click the SEND CONTRIBUTIONS button.</p>
+        </td>
+        <td>
+          <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="sendContribution()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Send Contributions</a> 
+          </p>
+          <p align="center">
+
+		<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_instr" onclick="showInstructions()" style="width: 260px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Instructions</a> 
+        </p>
+
+	<p align="center">
+<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(-0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">- 0.1s</a> 
+
+<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">+ 0.1s</a> 
+	 	<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_play_pause" onclick="playPause()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Play</a> 
+
+          </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</center>
+</div>
+<div style="padding: 10px;">
+  <div id="player" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"> 
+</div>
+
+<div class="w3-light-grey"> 
+	<div id="timeline" class='w3-red' style="height:30px; box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"></div>
+
+
+
+</div>
+
+
+
+<div id="slider_wind" class="noUi-target noUi-ltr noUi-horizontal"></div>
+<!--p><input id='check_wind' type='checkbox'><input type="text" id="wind_range" readonly style="background:none; border:0; color:#f6931f; font-weight:bold;"></p>
+-->
+<div id="slider_vibration" class="noUi-target noUi-ltr noUi-horizontal"></div>
+<!--p><input id='check_vib' type='checkbox'><input type="text" id="vib_range" readonly style="background:none; border:0; color:#f6931f; font-weight:bold;"></p-->
+
+
+</div>
+
+<input id="done" name="done" type="hidden" />
+<div class="modal" id="modal">
+  <div class="modal-content"><span class="close">X</span>
+  </div>
+</div>
+<script>
+  var video_width = 640;
+  var timeline;
+  var input;
+  var player;
+  var duration;
+  var instructions;
+  var presentation;
+  var bt_play_pause;
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  modal.onclick = function() {
+    modal.innerHTML = '';
+    modal.style.display = "none";
+    displayContent(cur,false);
+  }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.innerHTML = '';
+      modal.style.display = "none";
+      displayContent(cur,false);
+    }
+  }
+
+
+  function playPause(){
+	if(player.getPlayerState() == 1){
+		player.pauseVideo();
+		bt_play_pause.text = 'Play';
+	}else{
+		player.playVideo();
+		bt_play_pause.text = 'Pause';
+	}
+  }
+
+  function tiltTime(delta){
+    player.pauseVideo();
+	bt_play_pause.text = 'Play';
+    player.seekTo(player.getCurrentTime() + delta);
+  }
+
+  function showInstructions(){
+   
+    modal.innerHTML ='<div style="margin-top:0px; margin-left:50px;"><p style="text-align:justified;font-size:20px">Imagine that you are immersed in the environment of the movie.<br>Taking it into account, you are going to point out exact points in time that you think there is a lack of wind or vibration.</p><p style="text-align:left;font-size:20px">1. Find a calm moment.</p><p style="text-align:left;font-size:20px">2. Please pause the video at the beginning of this moment.<br><i>(use - and + buttons to adjust)</i></p><p style="text-align:left;font-size:20px">3. Click on ADD MARK button to add the mark.<br><i>(If you made a mistake, click on DEL MARK to delete it)</i></p><p style="text-align:left;font-size:20px">4. Do the steps 1, 2 and 3 until the end of the movie.</p><p style="text-align:left;font-size:20px">5. Click the SEND CONTRIBUTIONS button.</p>';
+
+ modal.style.display = "block";
+  }
+  function onYouTubeIframeAPIReady() {
+    $.getJSON('https://novaes.tech/job', function(data){init(data);});
+  }
+  function init(data){
+    timeline = document.getElementById("timeline");
+    presentation = document.getElementById("presentation");
+    instructions = document.getElementById("instructions");
+
+   
+   bt_play_pause = document.getElementById("bt_play_pause");
+
+
+slider_vibration = document.getElementById('slider_vibration');
+noUiSlider.create(slider_vibration, {
+	start: [20, 40, 60],
+	connect: [true, false, true, true],
+	range: {
+	  'min': 0,
+	  'max': 80
+	}
+});
+
+
+
+slider_wind = document.getElementById('slider_wind');
+noUiSlider.create(slider_wind, {
+	start: [20, 40, 60],
+	connect: [true, false, true, true],
+	range: {
+	  'min': 0,
+	  'max': 80
+	}
+});
+
+
+    if(window.innerWidth >= 866){
+      presentation.style.display = 'block';
+      instructions.style.display = 'block';
+    }
+    input = data;
+
+/*
+	$( function() {
+		var start = parseFloat(input.start);
+		var end = parseFloat(input.end);
+		$( "#slider-vibration" ).slider({
+			range: true,
+			step: 0.01,
+			min: start,
+			max: end,
+			values: [ start+1, end-1 ],
+			slide: function( event, ui ) {
+				$( "#vib_range" ).val("Vibration: " + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+			}
+		});
+		$( "#vib_range" ).val("Vibration: " + $( "#slider-vibration" ).slider( "values", 0 ) + " - " + $( "#slider-vibration" ).slider( "values", 1 ) );
+	} );
+
+
+
+	$( function() {
+		var start = parseFloat(input.start);
+		var end = parseFloat(input.end);
+		$( "#slider-wind" ).slider({
+			range: true,
+			step: 0.01,
+			min: start,
+			max: end,
+			values: [ start+1, end-1 ],
+			slide: function( event, ui ) {
+				$( "#wind_range" ).val("Wind: " + ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+			}
+		});
+		$( "#wind_range" ).val("Wind: " + $( "#slider-wind" ).slider( "values", 0 ) + " - " + $( "#slider-wind" ).slider( "values", 1 ) );
+	} );
+
+*/
+    player = new YT.Player(
+      'player',
+      {
+        playerVars: {cc_lang_pref:'en', cc_load_policy: 0, autoplay:0 ,rel: 0, controls: 0, disablekb: 1},
+        height: '360',
+        width: '640',
+	autohide: '1',
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      }
+    );
+  }
+  function onPlayerReady(event) {
+    duration = (input.end - input.start) + 0.5;
+    player.loadVideoById(input.uri, parseFloat(input.start));
+    setInterval(function() {syncTimeline();}, 100);
+ }
+
+ function syncTimeline(){
+ 	var progress = 100 * (player.getCurrentTime() - input.start) / (input.end -input.start );
+ 	if(progress <= 100)timeline.style.width =	progress + '%';
+   }
+ 
+  function onPlayerStateChange(event) {
+    if(player.getCurrentTime() > input.end || player.getCurrentTime() < input.start){
+      player.seekTo(parseFloat(input.start));
+      player.pauseVideo();
+	bt_play_pause.text = 'Play';
+    }else{
+      if (event.data == YT.PlayerState.PLAYING) {
+        setTimeout(restartVideoSection, duration * 1000);
+      }
+    }
+  }
+  function restartVideoSection() {
+    if(player.getCurrentTime() > input.end){
+      player.seekTo(parseFloat(input.start));
+      player.pauseVideo();
+	bt_play_pause.text = 'Play';
+    }
+  }
+  function sendContribution(){
+
+var r = confirm('Are you done?');
+if(r == true){
+
+
+
+      var queryForm = "<form method='post' action='https://novaes.tech/store'>";
+      queryForm += "<input type='hidden' id='uri' name='uri'  value='"+input.uri+"' > ";
+      queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+input._id+"' > ";
+      queryForm += "<input type='hidden' id='start' name='start'  value='"+input.start+"' > ";
+      queryForm += "<input type='hidden' id='end' name='end'  value='"+input.end+"' > ";
+      queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+input.fingerprint+"' > ";
+      queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+input.job_id+"' > ";
+       queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+input.item_index+"' > ";  
+      queryForm += "";
+
+      $.ajax({
+        type: 'POST',
+        url: $(queryForm).attr('action'),
+        data: $(queryForm).serialize(), 
+        success: function(result, status, request) {done();}
+      });
+
+}
+  }
+  function done(){
+    var done = document.getElementById("done");
+    var bt = document.getElementById("bt");
+    bt.style='visibility: hidden;';
+    done.value='ok';
+    player.stopVideo();
+    alert("Thanks, now you can click the FINISH button.");
+    //$(location).attr('href', 'https://novaes.tech/thanks');
+  }       
+</script>
+
+
+
