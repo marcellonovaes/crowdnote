@@ -1,0 +1,157 @@
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Uma p&aacute;gina para anota&ccedil;&atilde;o de v&iacute;deo.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title></title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" rel="stylesheet" />
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+</script>
+<style type="text/css">.modal {
+  display: none;
+  font-size:30px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
+  position: fixed;
+  z-index: 100;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.75);
+}
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+</style>
+<div style='background:#3F51B5;'>
+<center>
+  <table>
+    <tbody>
+<input placeholder="Youtube Video ID" autocomplete="off"  name="tx_uri" id="tx_uri"  style="height:33px;text-align:center;width: 265px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">
+
+          <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_load_video" onclick="loadVideo()" style="display:block;height:33px;width: 150px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Load Video</a>
+
+	          <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_save_video" onclick="saveVideo()" style="display:none;height:33px;width: 150px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Save Video</a>          
+	
+
+    </tbody>
+  </table>
+</center>
+</div>
+<div style="padding: 10px;">
+  <div id="player" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"> 
+  </div>
+
+
+</div>
+
+</div>
+<script>
+  var uri;
+  var player;
+
+
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+
+
+  function onYouTubeIframeAPIReady() { //gOQPS_ILrEo
+    $.getJSON('http://marcellonovaes.com/video', function(data){init(data);});
+  }
+
+
+
+  function init(data){
+
+
+	if(data){
+        	document.getElementById("bt_load_video").style.display = 'none';  
+        	document.getElementById("tx_uri").style.display = 'none';  
+    		uri = data.uri;
+		initYT();
+	}
+
+  }
+
+	function loadVideo(){
+                var tx_uri = document.getElementById("tx_uri");
+                uri = tx_uri.value;
+        	document.getElementById("bt_load_video").style.display = 'none';  
+        	document.getElementById("bt_save_video").style.display = 'block';  
+        	document.getElementById("bt_save_video").style.height = '33px';  
+		initYT();
+
+	}
+
+
+	function initYT(){
+    player = new YT.Player(
+      'player',
+      {
+        playerVars: {cc_lang_pref:'en', cc_load_policy: 1, autoplay:0 ,rel: 0, controls: 2, disablekb: 1},
+        height: '360',
+        width: '640',
+        events: {
+          'onReady': onPlayerReady,
+        }
+      }
+    );
+	}
+
+  function onPlayerReady(event) {
+    player.loadVideoById(uri);
+  }
+   
+function saveVideo(){
+      var queryForm = "<form method='post' action='http://marcellonovaes.com/save_video'>";
+      queryForm += "<input type='hidden' id='uri' name='uri'  value='"+uri+"' > ";
+      queryForm += "<input type='hidden' id='start' name='start'  value='"+0+"' > ";
+      queryForm += "<input type='hidden' id='end' name='end'  value='"+player.getDuration()+"' > ";
+      queryForm += "";
+
+      $.ajax({
+        type: 'POST',
+        url: $(queryForm).attr('action'),
+        data: $(queryForm).serialize(),
+        success: function(result, status, request) {done();}
+      });
+
+}
+
+function done(){
+	console.log('OK');
+
+}
+ 
+</script>
+
+
+

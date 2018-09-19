@@ -1,0 +1,358 @@
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Uma p&aacute;gina para anota&ccedil;&atilde;o de v&iacute;deo.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title></title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" rel="stylesheet" />
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+<script src="http://marcellonovaes.com/include?name=client.min&amp;mime=js">
+</script>
+<style type="text/css">.modal {
+  display: none;
+  font-size:30px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
+  position: fixed;
+  z-index: 100;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.75);
+}
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+</style>
+<div style="background:#3F51B5;">
+  <center>
+    <table>
+      <tbody>
+        <tr>
+          <td id="instructions" style="display:block;max-width:500px;padding:10px;">
+          
+          
+          
+              <p style="font-size:18px;color:white;">Based on the video, suggest content about this <span id='point_type'>person</span>:
+              </p>
+              <p id="tx_point" style="font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;"> 
+              </p>
+              <p style="font-size:18px;color:white;">1. Select the type of content to send.
+              </p>
+              
+              <span style='text-align:center;'>
+              <p style="font-size:18px;color:rgb(68,138,255);">You can upload an image, write a short text,</p>
+              <p style="font-size:18px;color:rgb(68,138,255);">or paste a link to Youtube or Wikipedia.</p>
+			  </span>
+              
+              <p style="font-size:18px;color:white;">2. Type, paste or choose the content.
+              </p>
+              <p style="font-size:18px;color:white;">3. Click the 'SUBMIT' button.
+              </p>
+            
+            
+            
+          </td>
+          <td style='border: 1px solid white; padding:10px;'>
+          
+                <p style="font-size:18px;color:white;">
+                  	<input checked="checked" class="option" id="type" name="type" onchange="getOption(1)" type="radio" value="text" /> An explanatory text
+                </p>
+				<!--p style="font-size:18px;color:white;">                  
+					<input class="option" id="type" name="type" onchange="getOption(2)" type="radio" value="image" /> An image
+                </p-->
+				<p style="font-size:18px;color:white;">                  
+					<input class="option" id="type" name="type" onchange="getOption(3)" type="radio" value="youtube" /> A Youtube video
+                </p>
+				<p style="font-size:18px;color:white;">                  
+					<input class="option" id="type" name="type" onchange="getOption(4)" type="radio" value="wikipedia" /> A Wikipedia page
+                </p>
+<br>
+<br>
+                       <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt_instr" onclick="showInstructions()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Instructions</a> </p>
+
+            
+          </td>
+          
+          
+         <td style='border: 1px solid white; padding:10px;'>
+
+              <p align="center" id="contribPanel" > </p>
+
+              <p><textarea class="answer" id="contrib" name="contrib"></textarea></p>
+              <p><img id="Image" style="position: fixed; margin-top: -100px ;margin-left: 2px;max-height:80px;width:160px;" />
+              </p>
+              <p align="center"><a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="sendContribution()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">SEND</a> 
+              </p>
+    	</td>
+          
+          
+        </tr>
+      </tbody>
+    </table>
+  </center>
+</div>
+<div style="padding: 10px;">
+  <div id="player" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"> 
+  </div>
+</div>
+<input id="done" name="done" type="hidden" />
+<div class="modal" id="modal">
+  <div class="modal-content"><span class="close">×</span>
+  </div>
+</div>
+
+<script>
+  var input;
+  var player;
+  var delta;
+  var duration;
+  var content_type;
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+  var image = null;
+  getOption(1);
+  
+  modal.onclick = function() {
+    modal.innerHTML = '';
+    modal.style.display = "none";
+    displayContent(cur,false);
+  }
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.innerHTML = '';
+      modal.style.display = "none";
+      displayContent(cur,false);
+    }
+  }
+  
+  
+
+
+ function showInstructions(){
+    var msg = 'person';
+    switch(input.type){
+    	case 'tech': msg = 'technology'; break;
+    	case 'theory': msg = 'theory'; break;
+
+    }
+    modal.innerHTML = '<div style="margin-top:0px; margin-left:50px; "><p style="font-size:18px;color:white;">Based on the video, suggest content about this '+msg+':</p><p  style="font-size:22px;text-align:center;background:white;vertical-align: middle; color: rgb(68,138,255);font-style: italic;border-style:solid;height:50px;line-height:50px;">'+ input.point +'</p><p style="font-size:18px;color:white;">1. Select the type of content to send.</p><p style="font-size:18px;color:rgb(68,138,255);">You can upload an image, write a short text,</p><p style="font-size:18px;color:rgb(68,138,255);">or paste a link to Youtube or Wikipedia.</p></span><p style="font-size:18px;color:white;">2. Type, paste or choose the content.</p><p style="font-size:18px;color:white;">3. Click the SEND button.</p>';
+    modal.style.display = "block";
+  }
+  
+
+              
+
+  
+  function readURL(input,output) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        output.attr('src', e.target.result);
+        image = e.target.result;
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+  
+  
+  function getOption(op){
+    var contribPanel = document.getElementById('contribPanel');
+    var contrib = document.getElementById('contrib');
+    var lbImage =  document.getElementById('lbImage');
+    if(lbImage)lbImage.remove();
+    $('#Image').attr("height","0");
+    contrib.remove();
+    switch(op){
+      case 1:
+        content_type = 'text';
+        contrib = document.createElement("textarea");
+        contrib.setAttribute("name","contrib");
+        contrib.setAttribute("id","contrib");
+        contrib.setAttribute("placeholder","Write an explanatory text here.");
+contrib.style.height = '136px';        break; 
+      case 2:
+        content_type = 'image';
+        /*      lbImage = document.createElement("label");
+                        lbImage.setAttribute("id","lbImage");
+                        lbImage.setAttribute("for","contrib");
+                        lbImage.innerHTML = "Choose Image";
+                        contribPanel.appendChild(lbImage);
+*/
+        contrib = document.createElement("input");
+        contrib.setAttribute("name","contrib");
+        contrib.setAttribute("id","contrib");
+        contrib.setAttribute("type","file");
+        contrib.setAttribute("class","contrib");
+        contrib.setAttribute("accept","image/*");
+        contrib.style.height = '84px';
+        contrib.addEventListener('change', function(){
+          $('#Image').attr("height","300");               
+          var str = this.value;
+          readURL(this,$('#Image'));
+          if(str) lbImage.innerHTML = 'Change Image';
+        });
+contrib.style.height = '140px';        break; 
+      case 3:
+        content_type = 'youtube';
+        contrib = document.createElement("textarea");
+        contrib.setAttribute("name","contrib");
+        contrib.setAttribute("id","contrib");
+        contrib.setAttribute("placeholder","Paste a link to a Youtube video here.\nEx:\nhttps://www.youtube.com/watch?v=...");
+contrib.style.height = '136px';        break; 
+      case 4:
+        content_type = 'wikipedia';
+        contrib = document.createElement("textarea");
+        contrib.setAttribute("name","contrib");
+        contrib.setAttribute("id","contrib");
+        contrib.setAttribute("placeholder","Paste a link to a Wikipedia page here.\nEx:\nhttps://pt.wikipedia.org/wiki/...");
+contrib.style.height = '136px';        break; 
+    }
+    contrib.style.width = '160px';//document.getElementById("bt").style.width;
+    
+    contribPanel.appendChild(contrib);
+  }
+  
+  
+  function onYouTubeIframeAPIReady() {
+    $.getJSON('http://marcellonovaes.com/job', function(data){init(data);});
+  }
+  
+  
+  
+  function init(data){    
+    
+    instructions = document.getElementById("instructions");
+    if(window.innerWidth < 800){
+      instructions.style.display = 'none';
+    }
+   
+
+    input = data.data[0];
+
+
+    info = data.info;
+    var point_type =  document.getElementById('point_type');
+      switch(input.type){    	
+      case 'person': point_type.innerHTML = 'person'; break;
+    	case 'tech': point_type.innerHTML = 'technology'; break;
+    	case 'theory': point_type.innerHTML = 'theory'; break;
+
+    }
+    
+    document.getElementById("tx_point").innerHTML = input.point;
+
+player = new YT.Player(
+      'player',
+      {
+        playerVars: {cc_lang_pref:'en', cc_load_policy: 1, autoplay:0 ,rel: 0, controls: 2, disablekb: 1},
+        height: '360',
+        width: '640',
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      }
+    );
+  }
+
+  function onPlayerReady(event) {
+    duration = (input.end - input.start) + 0.5;
+    player.loadVideoById(input.uri, parseFloat(input.start));
+  }
+  function onPlayerStateChange(event) {
+    if(player.getCurrentTime() > input.end || player.getCurrentTime() < input.start){
+      player.seekTo(parseFloat(input.start));
+      player.pauseVideo();
+    }else{
+      if (event.data == YT.PlayerState.PLAYING) {
+        setTimeout(restartVideoSection, duration * 1000);
+      }
+    }
+  }
+  function restartVideoSection() {
+    if(player.getCurrentTime() > input.end){
+      player.seekTo(parseFloat(input.start));
+      player.pauseVideo();
+    }
+  }
+
+  function sendContribution(){
+
+if(contrib.value == 'https://youtu.be/gOQPS_ILrEo'){
+
+      alert("Why are you trying to paste the link to our own video ???.\nPlease, do serios work, your contribution is important to us!!!");
+
+}else{
+
+    if(contrib.value != ''){
+      var queryForm = "<form method='post' action='http://marcellonovaes.com/store'>";
+      queryForm += "<input type='hidden' id='uri' name='uri'  value='"+input.uri+"' > ";
+      queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+input._id+"' > ";
+      queryForm += "<input type='hidden' id='start' name='start'  value='"+input.start+"' > ";
+      queryForm += "<input type='hidden' id='end' name='end'  value='"+input.end+"' > ";
+      queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+info.fingerprint+"' > ";
+      queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+info.job_id+"' > ";
+      queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+info.item_index+"' > ";
+      queryForm += "<input type='hidden' id='instant' name='instant'  value='"+input.instant+"' > ";
+      queryForm += "<input type='hidden' id='point' name='point'  value='"+input.point+"' > ";
+      queryForm += "<input type='hidden' id='content_type' name='content_type'  value='"+content_type+"' > ";
+      queryForm += "<input type='hidden' id='convergence' name='convergence'  value='"+0+"' > ";
+      if(image == null){
+        queryForm += "<input type='hidden' id='content' name='content'  value='"+contrib.value+"' > ";
+      }else{
+        queryForm += "<input type='hidden' id='content' name='content'  value='"+image+"' > ";
+      }
+      queryForm += "";
+      $.ajax({
+        type: 'POST',
+        url: $(queryForm).attr('action'),
+        data: $(queryForm).serialize(),
+        success: function(result, status, request) {done();}
+      });
+    }else{
+      alert("You forgot to suggest some content.\nYour contribution is important to us!!!");
+    }
+}
+  }
+  function done(){
+    var done = document.getElementById("done");
+    var bt = document.getElementById("bt");
+    bt.style='visibility: hidden;';
+    done.value='ok';
+    player.stopVideo();
+    alert("Thanks, now you can click the FINISH button.");
+    //$(location).attr('href', 'http://marcellonovaes.com');
+  }
+</script>
+
+
+
+

@@ -1,0 +1,391 @@
+
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Uma p&aacute;gina para anota&ccedil;&atilde;o de v&iacute;deo.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title></title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" rel="stylesheet" />
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+</script>
+<style type="text/css">.modal {
+  display: none;
+  font-size:30px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
+  position: fixed;
+  z-index: 100;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.75);
+}
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+table {
+  border: 1px #c0c0c0 solid;
+  width: 100%;
+}
+table th {
+  background-color: #00f;
+  color: #fff;
+}
+table td {
+  color: #0c0c0c;
+}
+
+</style>
+<div style='background:#3F51B5;'>
+<center>
+  <table>
+    <tbody>
+
+          <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="aggregate()" style="display:block;height:33px;width: 300px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Proceed Aggregation</a>
+<br>
+          <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="updateConvergence()" style="display:block;height:33px;width: 300px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Continue Collecting</a>
+
+
+    </tbody>
+  </table>
+</center>
+</div>
+
+<div id="container"></div>
+
+  </div>
+
+
+</div>
+
+</div>
+<script>
+
+	var list_points;
+	var segments;
+	var contributions;
+	var groups;
+
+    	$.getJSON('http://marcellonovaes.com/segments', function(data){loadContributions(data);});
+
+
+	function loadContributions(s){
+		segments = s;
+    		$.getJSON('http://marcellonovaes.com/contributions', function(data){init(data);});
+	}
+
+
+  	function init(c){
+
+		contributions = c;
+		groups = new Array();
+		for(var i=0; i<segments.length; i++){
+			groups[i] = {'segment':segments[i],'contributions':new Array(),'candidates':new Array(), 'points':new Array()};
+		}
+
+
+		for(var i=0; i<contributions.length; i++){
+				addContribution(groups, contributions[i]);
+		}
+
+		for(var g=0; g<groups.length; g++){
+
+			var delta = 0;
+			for(var i=0; i<groups[g].contributions.length - 1; i++){
+				delta += Math.abs(parseFloat(groups[g].contributions[i+1].instant) - parseFloat(groups[g].contributions[i].instant)) ;
+			}
+			if(delta > 0)
+				delta /= groups[g].contributions.length - 1;
+			var cur = new Array();
+
+			if(groups[g].contributions.length == 0) continue;
+
+			var instant = parseFloat(groups[g].contributions[0].instant);
+			for(var i=0; i< groups[g].contributions.length; i++){
+
+				var limit = 3*delta;
+				if(limit < 1) limit = 1;
+
+				if( parseFloat(groups[g].contributions[i].instant) -  instant < limit ){
+					cur.push(groups[g].contributions[i]);
+				}else{
+					if(cur.length>0)
+						groups[g].candidates.push(cur);
+					//instant = parseFloat(groups[g].contributions[i].instant);
+					cur = new Array();
+					cur.push(groups[g].contributions[i]);
+				}	
+					instant = parseFloat(groups[g].contributions[i].instant);
+			}
+			if(cur.length>0)
+				groups[g].candidates.push(cur);
+		}
+	
+
+		for(var i=0; i<groups.length; i++){
+
+
+			for(var j=0; j<groups[i].candidates.length; j++){
+
+
+				if(groups[i].candidates[j].length < 2) continue;
+					var tx = '';
+					var grp = new Array();
+					grp[0] = new Array();
+					pos = -1;
+
+				          groups[i].candidates[j].sort(
+				          function(x, y)
+				          {
+				                      if(x.point.toLowerCase() > y.point.toLowerCase())
+								return -1;
+							return 1;
+				          }
+				        );
+
+
+					for(var k=0; k<groups[i].candidates[j].length; k++){
+
+						if(groups[i].candidates[j][k].point.trim().length < 1) continue;
+
+						var delta = levenshtein(tx.toLowerCase(),groups[i].candidates[j][k].point.toLowerCase());					
+						//console.log(delta,tx,groups[i].candidates[j][k].point);
+						if(delta < 3){//console.log('A')
+							grp[pos].push(groups[i].candidates[j][k]);
+						}else{//console.log('B');
+							pos++;
+							grp[pos] = new Array();
+							tx = groups[i].candidates[j][k].point;
+							grp[pos].push(groups[i].candidates[j][k]);
+						}
+
+
+					
+					}
+
+
+					var m = 0;
+					var total = 0;
+					for(var x=0; x < grp.length; x++){
+						total += grp[x].length;
+						if(grp[x].length > grp[m].length){
+							m = x;
+						}
+					}
+					var converg = grp[m].length / total;
+
+					if(grp[m].length > 1){
+						var point = grp[m][0];
+						var inst = 0;
+						var t = 0;
+						for(var v=0; v<grp[m].length; v++){
+									inst += parseFloat(grp[m][v].instant);
+						}
+						point.instant = parseFloat(inst) / grp[m].length;
+						point.convergence = converg;
+						point.candidates = groups[i].candidates.length;
+						point.contributions = total;//groups[i].contributions.length;
+						groups[i].points.push(point);
+					}
+
+			}
+
+		}
+	
+
+		var list = new Array();
+		for(var i=0; i<groups.length; i++){
+			for(var j=0; j<groups.length; j++){
+				var point = groups[i].points[j];
+				if(point){
+					list.push(point);
+				}
+			}
+		}
+
+		createTable(list);
+
+
+	}
+
+
+	function createTable(list){
+
+		list_points = list;
+
+var container = document.getElementById("container");
+table= [
+  '<table>',
+  '<thead>',
+  '<tr>',
+  '<th>Done</th>',
+  '<th>Contributions</th>',
+  '<th>Instant</th>',
+  '<th>Point</th>',
+  '<th>Convergence</th>',
+  '</tr>',
+  '</thead>',
+  '<tbody>'
+];
+
+var t = 0;
+
+for(var i=0; i<list.length; i++){
+var point = list[i];
+
+
+t+=list[i].contributions;
+
+
+var color = '#00C060';
+var checked = 'checked';
+if(point.convergence < 0.75) color = '#00FA9A';
+if(point.convergence < 0.6){
+	color = '#FFD700';
+	checked = null;
+}
+if(point.convergence < 0.5) color = '#F4A460';
+if(point.convergence <= 0.4) color = '#CD5C5C';
+table.push(
+  '<tr bgcolor="'+color+'">',
+  '<td align="center"><input type="checkbox" name="ck" '+checked+'  ></td>',
+  '<td align="center"><b>'+list[i].contributions+'</b></td>',
+  '<td><b>'+list[i].instant+'</b></td>',
+  '<td><b>'+list[i].point+'</b></td>',
+  '<td><b>'+parseInt(100*point.convergence)+'%'+'</b></td>',
+  '</tr>'
+);
+
+
+
+}
+console.log('Filtered Contributions: ',t);
+
+
+table.push(
+  '</tbody>',
+  '</table>'
+);
+
+container.innerHTML = table.join("\n");
+
+	}
+
+
+	function addContribution(groups, c){
+		var i;
+		for(i=0; i<groups.length; i++){
+			if(parseInt(groups[i].segment.start) == parseInt(c.start)){
+				groups[i].contributions.push(c);
+				break;
+			}
+		}
+	}
+
+        function levenshtein(a, b){
+                var tmp;
+                if (a.length === 0) { return b.length; }
+                if (b.length === 0) { return a.length; }
+                if (a.length > b.length) { tmp = a; a = b; b = tmp; }
+
+                var i, j, res, alen = a.length, blen = b.length, row = Array(alen);
+                for (i = 0; i <= alen; i++) { row[i] = i; }
+
+                for (i = 1; i <= blen; i++) {
+                        res = i;
+                        for (j = 1; j <= alen; j++) {
+                                tmp = row[j - 1];
+                                row[j - 1] = res;
+                                res = b[i - 1] === a[j - 1] ? tmp : Math.min(tmp + 1, Math.min(res + 1, row[j] + 1));
+                        }
+                }
+                return res;
+        }
+
+
+	function aggregate(){
+		alert('Aggregate');
+
+	}
+
+	function updateConvergence(){
+		var convergeds = new Array();
+		var dones = document.getElementsByName("ck");
+		for(var i=0; i<dones.length; i++){
+			if(dones[i].checked){
+				delete list_points[i].fingerprint;
+				delete list_points[i].job_id;
+				delete list_points[i].candidates;
+				delete list_points[i].contributions;
+				delete list_points[i]._id;
+				convergeds.push(list_points[i]);
+			}
+		}
+
+	      $.ajax({
+	        	type: 'POST',
+      	 	 	url: 'http://marcellonovaes.com/updateConvergence',
+        		data: {'points':convergeds},
+	        	success: function(result, status, request) {done(result);}
+      		});
+	}
+
+        function aggregate(){
+                var convergeds = new Array();
+                var dones = document.getElementsByName("ck");
+                for(var i=0; i<dones.length; i++){
+                        if(dones[i].checked){
+                                delete list_points[i].fingerprint;
+                                delete list_points[i].job_id;
+                                delete list_points[i].candidates;
+                                delete list_points[i].contributions;
+                                delete list_points[i]._id;
+                                convergeds.push(list_points[i]);
+                        }
+                }
+
+              $.ajax({
+                        type: 'POST',
+                        url: 'http://marcellonovaes.com/aggregate',
+                        data: {'points':convergeds},
+                        success: function(result, status, request) {done(result);}
+                });
+        }
+
+
+
+
+	function done(result){
+		alert('Success');
+	}
+
+ 
+</script>
+
+
+

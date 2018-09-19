@@ -1,0 +1,375 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Uma p&aacute;gina para anota&ccedil;&atilde;o de v&iacute;deo.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title></title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://www.w3schools.com/w3css/4/w3.css" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" rel="stylesheet" />
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js">
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
+</script>
+<script src="https://crowdnoter.app/include?name=client.min&amp;mime=js">
+</script>
+<style type="text/css">.modal {
+  display: none;
+  font-size:30px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
+  position: fixed;
+  z-index: 100;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.75);
+}
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  #circle {
+    float:left;
+    width: 40px;
+    height: 40px;
+    background: blue;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+  }
+  #retangle-space {
+    float:left;
+    height: 40px;
+    width:  1px;
+    background: light-grey;
+  }
+  #retangle-mark {
+    float:left;
+    height: 40px;
+    width:  1px;
+    background: orange;
+  }
+</style>
+
+
+<div style="background:#3F51B5;">
+  <center>
+<br>
+      <p>
+    <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="playPause()" style="width: 130px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Play</a>
+  </p>
+    <table>
+      <tbody>
+        <tr>
+          <td style="width: 500px;">
+            <p align="center" style="font-size:28px;color:white;">Intérpretes</p>
+            <p align="center">
+              <select autofocus="" class="mdl-textfield__input" id="list_marks" name="list_marks" onchange="syncMark()" style="margin-top:10px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;" type="select"><option value="0">0</option>
+              </select>
+            </p>
+            <p align="center">
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(-0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">- 0.1s</a> 
+
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">+ 0.1s</a>
+            </p>
+              <div id="player" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">?|</div>
+          </td>
+          <td style="width: 500px;">
+            <p align="center" style="font-size:28px;color:white;">Crowd</p>
+            <p align="center">
+              <select autofocus="" class="mdl-textfield__input" id="list_marks2" name="list_marks2" onchange="syncMark2()" style="margin-top:10px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;" type="select"><option value="0">0</option>
+              </select>
+            </p>
+            <p align="center">
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime2(-0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">- 0.1s</a> 
+
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime2(0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">+ 0.1s</a>
+            </p>
+              <div id="player2" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">?|</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </center>
+</div>
+
+
+
+
+<script>
+  var source_id = '001';
+  var video_width = 640;
+  var mark_bar;
+  var mark_bar2;
+  var marks = new Array();
+  var marks2 = new Array();
+  var list_marks;
+  var list_marks2;
+  var info;
+  var data;
+  var signals;  
+  var signals2;
+  var player;
+  var player2;
+  var duration;
+  var instructions;
+  var presentation;
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  function tiltTime(delta){
+    player.pauseVideo();
+    player2.pauseVideo();
+    player.seekTo(player.getCurrentTime() + delta);
+    $("#bt_play_pause").text('Play');
+
+  }
+  function tiltTime2(delta){
+    player2.pauseVideo();
+    player.pauseVideo();
+    player2.seekTo(player2.getCurrentTime() + delta);
+    $("#bt_play_pause").text('Play');
+
+  }
+
+  function onYouTubeIframeAPIReady() {
+
+    var input = {
+      "data":{"_id":"5ab108a1f847f62ed85e1569","uri":"bWG9alyOBQw","item_id":"5a7089ec94ed6e6180e914ff","convergence":"0","start":"0.5","end":"20"},
+      "info":{"item_index":0,"job_id":"989ae1f54d9ed2bf54b1cea6bbe42df5","fingerprint":"576c0bee555952903379d5cd85c15a8e"}}
+      ;
+
+        var signals = [2.76 ,3.47 ,4.07 ,4.67 ,5.28 ,5.89 ,6.28 ,6.79 ,7.38 ,8.58 ,9.38 ,9.88 ,10.79 ,11.11 ,12.09 ,13.29 ,13.89 ,14.53 ,15.11 ,15.70 ,16.22];
+
+
+        var signals2 = [2.63 ,3.53 ,4.09 ,4.68 ,5.23 ,5.87 ,6.28 ,6.60 ,7.20 ,8.38 ,9.13 ,10.01 ,'Não Identificado pela Crowd',11.13 ,12.01 ,13.50 ,'Não Identificado pela Crowd',14.19 ,15.02 ,15.73 ,'Não Identificado pela Crowd'];
+  	init(input.info,input.data, signals, signals2);
+  }
+  function init(reg_info,reg_data,reg_signals,reg_signals2){
+
+    info = reg_info;
+    data = reg_data;
+    signals = reg_signals;    
+    signals2 = reg_signals2;
+
+    list_marks = document.getElementById("list_marks");
+    list_marks.remove(0);
+    mark_bar = document.getElementById("mark_bar");
+
+    list_marks2 = document.getElementById("list_marks2");
+    list_marks2.remove(0);
+    mark_bar2 = document.getElementById("mark_bar2");
+
+    player = new YT.Player(
+      'player',
+      {
+        playerVars: {cc_lang_pref:'en', cc_load_policy: 0, autoplay:0 ,rel: 0, controls: 2, disablekb: 1},
+        height: '360',
+        width: '640',
+        autohide: '0',
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      }
+    );
+    
+    player2 = new YT.Player(
+      'player2',
+      {
+        playerVars: {cc_lang_pref:'en', cc_load_policy: 0, autoplay:0 ,rel: 0, controls: 2, disablekb: 1},
+        height: '360',
+        width: '640',
+        autohide: '0',
+        events: {
+          'onReady': onPlayerReady2,
+          'onStateChange': onPlayerStateChange2
+        }
+      }
+    );
+
+
+    for(var v=0; v < signals.length; v++){
+        initMark(signals[v]);
+    }
+    list_marks.selectedIndex = 0;
+    //player.seekTo(list_marks.value);
+    //player.pauseVideo();  
+    
+
+    for(var v=0; v < signals2.length; v++){
+        initMark2(signals2[v]);
+    }
+    list_marks2.selectedIndex = 0;
+    //player2.seekTo(list_marks2.value);
+    //player2.pauseVideo(); 
+
+
+  }
+
+  function onPlayerReady(event) {
+    duration = (data.end - data.start) + 0.5;
+    player.loadVideoById(data.uri, parseFloat(data.start));     
+  }
+  function onPlayerReady2(event) {
+    duration = (data.end - data.start) + 0.5;
+    player2.loadVideoById(data.uri, parseFloat(data.start));     
+  }
+
+  function onPlayerStateChange(event) {
+    if(player.getCurrentTime() > data.end || player.getCurrentTime() < data.start){
+      player.seekTo(parseFloat(data.start));
+      player.pauseVideo();
+    $("#bt_play_pause").text('Play');
+    }else{
+      if (event.data == YT.PlayerState.PLAYING) {
+        setTimeout(restartVideoSection, duration * 1000);
+      }
+    }
+  }
+  function onPlayerStateChange2(event) {
+    if(player2.getCurrentTime() > data.end || player2.getCurrentTime() < data.start){
+      player2.seekTo(parseFloat(data.start));
+      player2.pauseVideo();
+    $("#bt_play_pause").text('Play');
+    }else{
+      if (event.data == YT.PlayerState.PLAYING) {
+        setTimeout(restartVideoSection, duration * 1000);
+      }
+    }
+  }
+
+  function restartVideoSection() {
+    if(player.getCurrentTime() > data.end){
+      player.seekTo(parseFloat(data.start));
+      player.pauseVideo();
+    $("#bt_play_pause").text('Play');
+    }
+  }
+  function restartVideoSection2() {
+    if(player2.getCurrentTime() > data.end){
+      player2.seekTo(parseFloat(data.start));
+      player2.pauseVideo();
+    $("#bt_play_pause").text('Play');
+    }
+  }
+
+  function initMark(instant){
+    var Op = document.createElement("OPTION");
+    Op.text = instant;
+    Op.value = instant;
+    list_marks.options[list_marks.options.length] = Op;
+    list_marks.selectedIndex = list_marks.options.length -1;
+   /* var w = parseFloat($("#player").css("width"));
+    var t = instant;
+    var e = data.end;
+    var position = 10 + ( w * t / e);
+    h = 672;
+    if(window.innerWidth < 800){
+      h -= 83;
+    }
+    var mark = document.createElement("MARK");
+    mark.value = instant;
+    mark.onclick = function(){
+      for(var index=0; index<list_marks.options.length; index++){
+        if(list_marks.options[index].value == instant){
+          list_marks.selectedIndex = index;
+          break;
+        }
+      }
+      player.seekTo(instant);
+      player.pauseVideo();
+    }
+    mark.style = 'float:left;top:'+h+'px; left:'+position+'px; position:absolute; background:blue; width:10px; height:5px;';
+    mark_bar.append(mark);*/
+  }
+  function initMark2(instant){
+    var Op = document.createElement("OPTION");
+    Op.text = instant;
+    Op.value = instant;
+    list_marks2.options[list_marks2.options.length] = Op;
+    list_marks2.selectedIndex = list_marks2.options.length -1;
+    /*var w = parseFloat($("#player2").css("width"));
+    var t = instant;
+    var e = data.end;
+    var position = 10 + ( w * t / e);
+    h = 672;
+    if(window.innerWidth < 800){
+      h -= 83;
+    }
+    var mark = document.createElement("MARK");
+    mark.value = instant;
+    mark.onclick = function(){
+      for(var index=0; index<list_marks2.options.length; index++){
+        if(list_marks2.options[index].value == instant){
+          list_marks2.selectedIndex = index;
+          break;
+        }
+      }
+      player2.seekTo(instant);
+      player2.pauseVideo();
+    }
+    mark.style = 'float:left;top:'+h+'px; left:'+position+'px; position:absolute; background:blue; width:10px; height:5px;';
+    mark_bar2.append(mark);*/
+  } 
+  function syncMark(){
+    player.seekTo(list_marks.value);
+    player.pauseVideo();
+    list_marks2.selectedIndex = list_marks.selectedIndex;
+    player2.seekTo(list_marks2.value);
+    player2.pauseVideo();
+    $("#bt_play_pause").text('Play');
+  }  
+  function syncMark2(){
+    player2.seekTo(list_marks2.value);
+    player2.pauseVideo();
+    list_marks.selectedIndex = list_marks2.selectedIndex;
+    player.seekTo(list_marks.value);
+    player.pauseVideo();
+    $("#bt_play_pause").text('Play');
+  }
+
+
+      function playPause(){
+        if(player.getPlayerState() == 1){
+                player.pauseVideo();
+                player2.pauseVideo();
+                $("#bt_play_pause").text('Play');
+
+        }else{
+                player.playVideo();
+                player2.playVideo();
+                $("#bt_play_pause").text('Pause');
+        }
+  }
+
+</script>
+
+
+
+
+
+
