@@ -87,6 +87,8 @@
 
 
 <div style="background:#3F51B5;">
+
+
   <center>
 
     <br>
@@ -94,6 +96,7 @@
     <table>
       <tbody>
         <tr>
+
           <td style="width: 500px;">
                        <p align="center">
     <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_prev" onclick="navigate(-1)" style="border-radius: 10px;width: 190px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"><img src="http://www.clker.com/cliparts/9/4/2/7/13498058381938458744Back%20Button.svg.med.png" width="30">&nbsp;&nbsp;Sinal Anterior</a>
@@ -149,6 +152,7 @@
 
 
 <script>
+  var input;
   var index;
   var timeline;
   var timeline2;
@@ -191,18 +195,12 @@
   }
 
   function onYouTubeIframeAPIReady() {
-/*
-    var input = {
-      "data":{"_id":"5ab10895f847f62ed85e1568","uri":"6PURz91hDlY","item_id":"5a70898694ed6e6180e914fd","convergence":"0","start":"0.5","end":"14","groundtruth":"1.94 ,2.75 ,3.25 ,4.36 ,5.65 ,6.34 ,7.47 ,8.47 ,9.26 ,10.36,11.81","crowd":"1.96,2.74,3.76,4.73,5.76,6.58,7.53,8.39,9.30,10.40,11.55"},
-      "info":{"item_index":3,"job_id":"61790435c27b9016a87616d3c6c08599","fingerprint":"576c0bee555952903379d5cd85c15a8e"}
-    };
-
-    init(input);
-*/
     $.getJSON('https://crowdnoter.app/job', function(d){init(d);});
   }
 
-  function init(input){
+  function init(d){
+
+    input = d;
 
     index = 0;
 
@@ -221,6 +219,7 @@
     list_marks2 = document.getElementById("list_marks2");
     list_marks2.remove(0);
     mark_bar2 = document.getElementById("mark_bar2");
+
 
   $( function() {
     var start = parseFloat(data.start);
@@ -421,6 +420,7 @@
     }
     syncMark(0);
   }
+
 
 
 </script>

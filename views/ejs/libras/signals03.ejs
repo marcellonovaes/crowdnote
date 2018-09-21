@@ -90,26 +90,25 @@
   <center>
 
     <br>
-    <p>
-    <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_prev" onclick="navigate(-1)" style="width: 230px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Sinal Anterior</a>
 
-    <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_next" onclick="navigate(1)" style="width: 230px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Próximo Sinal</a>
-
-    <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="playPause()" style="width: 230px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Reproduzir Sinal</a>
-    </p>
     <table>
       <tbody>
         <tr>
           <td style="width: 500px;">
-            <p align="center" style="font-size:28px;color:white;">Intérpretes</p>
+                <p align="center">
+    <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_prev" onclick="navigate(-1)" style="border-radius: 10px;width: 190px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"><img src="http://www.clker.com/cliparts/9/4/2/7/13498058381938458744Back%20Button.svg.med.png" width="30">&nbsp;&nbsp;Sinal Anterior</a>
+
+    <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_next" onclick="navigate(1)" style="border-radius: 10px;width: 190px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Próximo Sinal&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/1/f/a/2/1349807104707654381Next%20Button.svg.med.png" width="30"></a>
+            </p>
+            <p align="center" style="font-size:28px;color:white;">Segmentação dos Intérpretes</p>
             <p align="center">
-              <select autofocus="" class="mdl-textfield__input" id="list_marks" name="list_marks" onchange="syncMark(1)" style="margin-top:10px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;" type="select"><option value="0">0</option>
+              <select autofocus="" class="mdl-textfield__input" id="list_marks" name="list_marks" onchange="syncMark(1)" style="margin-top:10px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;width: 380px;" type="select"><option value="0">0</option>
               </select>
             </p>
             <p align="center">
-              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(-0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">- 0.1s</a> 
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(-0.1)" style="border-radius: 10px;width: 180px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Ajustar - 0.1 seg</a> 
 
-              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">+ 0.1s</a>
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(0.1)" style="border-radius: 10px;width: 180px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Ajustar + 0.1 seg</a> 
             </p>
               <div id="player" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">?|</div>
               <div class="w3-light-grey"> 
@@ -118,15 +117,20 @@
               <div id="slider"></div>             
           </td>
           <td style="width: 500px;">
-            <p align="center" style="font-size:28px;color:white;">Crowd</p>
+
+    <p align="center">
+    <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="playPause()" style="border-radius: 10px;width: 360px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Reproduzir Sinal&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/7/x/D/A/T/W/blue-play-button-md.png" width="30"></a>
+    </p>
+
+            <p align="center" style="font-size:28px;color:white;">Segmentação da Crowd</p>
             <p align="center">
-              <select autofocus="" class="mdl-textfield__input" id="list_marks2" name="list_marks2" onchange="syncMark(2)" style="margin-top:10px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;" type="select"><option value="0">0</option>
+              <select autofocus="" class="mdl-textfield__input" id="list_marks2" name="list_marks2" onchange="syncMark(2)" style="margin-top:10px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;width: 360px;" type="select"><option value="0">0</option>
               </select>
             </p>
             <p align="center">
-              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime2(-0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">- 0.1s</a> 
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime2(-0.1)" style="border-radius: 10px;width: 180px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Ajustar - 0.1 seg</a> 
 
-              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime2(0.1)" style="width: 20px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">+ 0.1s</a>
+              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime2(0.1)" style="border-radius: 10px;width: 180px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Ajustar + 0.1 seg</a>
             </p>
               <div id="player2" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">?|</div>
               <div class="w3-light-grey"> 

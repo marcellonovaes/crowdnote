@@ -10,11 +10,16 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 <link href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" rel="stylesheet" />
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="https://crowdnoter.app/include?name=client.min&amp;mime=js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
 
 <style type="text/css">.modal {
   display: none;
@@ -80,6 +85,9 @@
 .ui-widget-content { background: light-grey; }
 
 
+.checked {
+    color: orange;
+}
 
 
 
@@ -95,7 +103,7 @@
       <tbody>
         <tr>
           <td style="width: 500px;">
-                       <p align="center">
+            <p align="center">
     <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_prev" onclick="navigate(-1)" style="border-radius: 10px;width: 190px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"><img src="http://www.clker.com/cliparts/9/4/2/7/13498058381938458744Back%20Button.svg.med.png" width="30">&nbsp;&nbsp;Sinal Anterior</a>
 
     <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_next" onclick="navigate(1)" style="border-radius: 10px;width: 190px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Próximo Sinal&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/1/f/a/2/1349807104707654381Next%20Button.svg.med.png" width="30"></a>
@@ -119,7 +127,9 @@
           <td style="width: 500px;">
 
     <p align="center">
-    <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="playPause()" style="border-radius: 10px;width: 360px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Reproduzir Sinal&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/7/x/D/A/T/W/blue-play-button-md.png" width="30"></a>
+    <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="playPause()" style="border-radius: 10px;width: 210px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Reproduzir Sinal&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/7/x/D/A/T/W/blue-play-button-md.png" width="30"></a>
+
+    <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="sendContribution()" style="border-radius: 10px;width: 150px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Finalizar&nbsp;&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/p/M/1/8/q/8/documnet-save-md.png" width="30"></a>    
     </p>
 
             <p align="center" style="font-size:28px;color:white;">Segmentação da Crowd</p>
@@ -145,10 +155,62 @@
   </center>
 </div>
 
+<center>
+  <table style="border-radius: 10px;margin-top:10px;align:center;background-color:#3368E6;font-size:18px;color:white;width: 1000px;">
+      <tr align="center">
+          <td align="center">
+A delimitação feita pela crowd permite a compreensão deste sinal? <div id="q1"></div>
+          </td>
+          <td>
+Que significado você atribuiria a este sinal ? <br><textarea id="q2" style="border-radius: 10px;"></textarea>
+          </td>
+      </tr>
+      <tr>
+          <td align="center">
+O inicio deste sinal foi identificado corretamente pela crowd ?<div id="q3"></div> 
+          </td>
+          <td align="center">
+Observação<br><textarea id="q4" style="border-radius: 10px;"></textarea>          </td>
+      </tr>
+  </table>
+</center>
+
+
+
+
+
+
+
 
 
 
 <script>
+
+$(function () {
+ 
+  $("#q1").rateYo({
+    starWidth: "30px"
+  });
+
+ $("#q3").rateYo({
+    starWidth: "30px"
+  });
+
+
+ 
+});
+
+  var q1_list = new Array();
+  var q2_list = new Array();
+  var q3_list = new Array();
+  var q4_list = new Array();
+
+  var q1;
+  var q2;
+  var q3;
+  var q4;
+
+
   var index;
   var timeline;
   var timeline2;
@@ -191,14 +253,6 @@
   }
 
   function onYouTubeIframeAPIReady() {
-/*
-    var input = {
-      "data":{"_id":"5ab10895f847f62ed85e1568","uri":"6PURz91hDlY","item_id":"5a70898694ed6e6180e914fd","convergence":"0","start":"0.5","end":"14","groundtruth":"1.94 ,2.75 ,3.25 ,4.36 ,5.65 ,6.34 ,7.47 ,8.47 ,9.26 ,10.36,11.81","crowd":"1.96,2.74,3.76,4.73,5.76,6.58,7.53,8.39,9.30,10.40,11.55"},
-      "info":{"item_index":3,"job_id":"61790435c27b9016a87616d3c6c08599","fingerprint":"576c0bee555952903379d5cd85c15a8e"}
-    };
-
-    init(input);
-*/
     $.getJSON('https://crowdnoter.app/job', function(d){init(d);});
   }
 
@@ -221,6 +275,14 @@
     list_marks2 = document.getElementById("list_marks2");
     list_marks2.remove(0);
     mark_bar2 = document.getElementById("mark_bar2");
+
+
+    q1 = document.getElementById("q1");
+    q2 = document.getElementById("q2");
+    q3 = document.getElementById("q3");
+    q4 = document.getElementById("q4");
+
+
 
   $( function() {
     var start = parseFloat(data.start);
@@ -271,8 +333,15 @@
       }
     );
 
-
+    q1_list[0] = 0;
+    q2_list[0] = "";
+    q3_list[0] = 0;
+    q4_list[0] = "";
     for(var v=1; v < signals.length; v++){
+        q1_list[v] = 0;
+        q2_list[v] = "";
+        q3_list[v] = 0;
+        q4_list[v] = "";
         initMark(1,signals[v-1],signals[v]);
     }
     list_marks.selectedIndex = 0;
@@ -400,6 +469,15 @@
     $( "#slider" ).slider( "values", [start_1,end_1] );
     $( "#slider2" ).slider( "values", [start_2,end_2] );
 
+    $("#q1").rateYo("rating",q1_list[index]);
+
+    q2.value = q2_list[index];
+
+    $("#q3").rateYo("rating",q3_list[index]);
+
+    q4.value = q4_list[index];
+
+
   }  
 
 
@@ -410,6 +488,13 @@
 
 
   function navigate(delta){
+
+    q1_list[index] = $("#q1").rateYo("rating");
+    q2_list[index] = q2.value;
+    q3_list[index] = $("#q3").rateYo("rating");
+    q4_list[index] = q4.value;
+
+
     if( (index + delta) < 0 ){
       index = 0;
     }else{
@@ -422,6 +507,63 @@
     syncMark(0);
   }
 
+  function sendContribution(){
+
+    q1_list[index] = $("#q1").rateYo("rating");
+    q2_list[index] = q2.value;
+    q3_list[index] = $("#q3").rateYo("rating");
+    q4_list[index] = q4.value;
+
+
+    var r = confirm('Are you done?');
+    if(r == true){
+      if(list_marks.options.length > 1){
+        for(var i=0; i<list_marks.options.length; i++){
+          marks.push(list_marks.options[i].value);
+        }
+        var queryForm = "<form method='post' action='https://crowdnoter.app/store'>";
+        queryForm += "<input type='hidden' id='uri' name='uri'  value='"+data.uri+"' > ";
+        queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+data._id+"' > ";
+        queryForm += "<input type='hidden' id='start' name='start'  value='"+data.start+"' > ";
+        queryForm += "<input type='hidden' id='end' name='end'  value='"+data.end+"' > ";
+        queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+info.fingerprint+"' > ";
+        queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+info.job_id+"' > ";
+        queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+info.item_index+"' > ";
+        queryForm += "<input type='hidden' id='source_id' name='source_id'  value='"+source_id+"' > ";
+
+        queryForm += "<input type='hidden' id='groundtruth' name='groundtruth'  value='"+data.groundtruth+"' > ";
+        queryForm += "<input type='hidden' id='crowd' name='crowd'  value='"+data.crowd+"' > ";
+
+
+        queryForm += "<input type='hidden' id='segmentation' name='segmentation'  value='"+compactArray(q1_list)+"' > ";
+        queryForm += "<input type='hidden' id='translation' name='translation'  value='"+compactArray(q2_list)+"' > ";
+        queryForm += "<input type='hidden' id='starts' name='starts'  value='"+compactArray(q3_list)+"' > ";
+        queryForm += "<input type='hidden' id='observation' name='observation'  value='"+compactArray(q4_list)+"' > ";
+
+        queryForm += "";
+        $.ajax({
+          type: 'POST',
+          url: $(queryForm).attr('action'),
+          data: $(queryForm).serialize(),
+          success: function(result, status, request) {done();}
+        });
+      }else{
+        alert("You forgot to identified the markers.\nYour contribution is important to us!!!");
+      }
+    }
+  }
+
+  function done(){
+    $(location).attr('href', 'https://crowdnoter.app/eval');
+  }
+
+  function compactArray(v){
+      var str = "";
+      for(var i=0; i < (v.length - 1); i++){
+          str = str+v[i]+',';
+      }
+      return str+v[v.length - 1];
+  }
 
 </script>
 

@@ -3,8 +3,8 @@
 var project = 'libras';
 var qtd_target = 0;
 var min_convergence = 0;
-var activeTask = 0;
-var kind = 'task';
+var activeTask = 2;
+var kind = 'job';
 var group = 'false';
 
 var Task;
@@ -92,7 +92,15 @@ itemSchema = Schema({
 	source_id: String,
 
 	//LIBRAS
-	marks: String	
+	marks: String,
+	groundtruth: String,
+	crowd: String,
+	segmentation: String,
+	translation: String,
+	starts: String,
+	observation: String
+
+
 
 });
 
@@ -431,6 +439,15 @@ app.get('/signals03', function(req, res) {
 app.get('/signals04', function(req, res) {
         res.render('ejs/'+project+'/signals04', null);
 });
+
+app.get('/signals', function(req, res) {
+        res.render('ejs/'+project+'/signals', null);
+});
+
+app.get('/eval', function(req, res) {
+        res.render('ejs/'+project+'/eval', null);
+});
+
 
 
 app.get('/enrichment01', function(req, res) {
