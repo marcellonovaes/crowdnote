@@ -1242,3 +1242,9 @@ Error: Failed to lookup view "ejs/libras/eval" in views directory "/var/www/crow
     at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
     at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
     at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+Fri, 21 Sep 2018 20:05:53 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:4302) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Fri, 21 Sep 2018 20:10:55 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:4425) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Mon, 24 Sep 2018 12:45:34 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:29179) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client

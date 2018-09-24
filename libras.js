@@ -98,8 +98,8 @@ itemSchema = Schema({
 	segmentation: String,
 	translation: String,
 	starts: String,
-	observation: String
-
+	observation: String,
+	interpreter: String
 
 
 });
