@@ -300,6 +300,12 @@ $(function () {
     data = input.data[0];
     signals = data.groundtruth.split(',');    
     signals2 = data.crowd.split(',');
+    translations = data.translation.split(',');
+    observations = data.observation.split(',');
+    segmentations = data.segmentation.split(',');
+    starts = data.starts.split(',');
+
+
 
     timeline = document.getElementById("timeline");
     timeline2 = document.getElementById("timeline2");
@@ -372,16 +378,16 @@ $(function () {
       }
     );
 
-    q1_list[0] = 0;
-    q2_list[0] = "";
-    q3_list[0] = 0;
-    q4_list[0] = "";
+    q1_list[0] = segmentations[0];
+    q2_list[0] = translations[0];
+    q3_list[0] = starts[0];
+    q4_list[0] = observations[0];
     for(var v=1; v < signals.length; v++){
-        q1_list[v] = 0;
-        q2_list[v] = "";
-        q3_list[v] = 0;
-        q4_list[v] = "";
-        initMark(1,signals[v-1],signals[v]);
+      q1_list[v] = segmentations[v];
+      q2_list[v] = translations[v];
+      q3_list[v] = starts[v];
+      q4_list[v] = observations[v];
+      initMark(1,signals[v-1],signals[v]);
     }
     list_marks.selectedIndex = 0;
 
@@ -495,45 +501,38 @@ $(function () {
     if(range[0] != 'Não Identificado pela Crowd'){
       player2.seekTo(range[0]);
       start_2 = range[0];
-    }else{
+      if(range[1] != 'Não Identificado pela Crowd'){
+        end_2 = range[1];
+      }else{
+        end_2 = parseFloat(end_1) + 0.05;
+      }
+    }else{      
+      ck1.checked = true;
+      player2.seekTo(start_1);
       start_2 = start_1;
-    }
-    if(range[1] != 'Não Identificado pela Crowd'){
-      end_2 = range[1];
-    }else{
-      end_2 = end_1;
+      end_2 = parseFloat(end_1) + 0.05;
     }
     player2.pauseVideo();
-
     $( "#slider" ).slider( "values", [start_1,end_1] );
     $( "#slider2" ).slider( "values", [start_2,end_2] );
-
     $("#q1").rateYo("rating",q1_list[index]);
-
     q2.value = q2_list[index];
-
     $("#q3").rateYo("rating",q3_list[index]);
-
     q4.value = q4_list[index];
-
-
   }  
 
 
   function playPause(){
-                if(ck1.checked == true) player.playVideo();
-                if(ck2.checked == true) player2.playVideo();
+    if(ck1.checked == true) player.playVideo();
+    if(ck2.checked == true) player2.playVideo();
   }
 
 
   function navigate(delta){
-
     q1_list[index] = $("#q1").rateYo("rating");
     q2_list[index] = q2.value;
     q3_list[index] = $("#q3").rateYo("rating");
     q4_list[index] = q4.value;
-
-
     if( (index + delta) < 0 ){
       index = 0;
     }else{

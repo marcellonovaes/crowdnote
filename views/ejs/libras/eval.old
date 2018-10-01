@@ -495,28 +495,24 @@ $(function () {
     if(range[0] != 'Não Identificado pela Crowd'){
       player2.seekTo(range[0]);
       start_2 = range[0];
-    }else{
+    }else{      
+      ck1.checked = true;
+      player2.seekTo(start_1);
       start_2 = start_1;
+      end_2 = parseFloat(end_1) + 0.05;
     }
     if(range[1] != 'Não Identificado pela Crowd'){
       end_2 = range[1];
     }else{
-      end_2 = end_1;
+      end_2 = parseFloat(end_1) + 0.05;
     }
     player2.pauseVideo();
-
     $( "#slider" ).slider( "values", [start_1,end_1] );
     $( "#slider2" ).slider( "values", [start_2,end_2] );
-
     $("#q1").rateYo("rating",q1_list[index]);
-
     q2.value = q2_list[index];
-
     $("#q3").rateYo("rating",q3_list[index]);
-
     q4.value = q4_list[index];
-
-
   }  
 
 
@@ -554,9 +550,9 @@ $(function () {
     q4_list[index] = q4.value;
 
 
-    var r = confirm('Are you done?');
+    var r = confirm('Deseja finalizar a contribuição para este vídeo?');
     if(r == true){
-      if(list_marks.options.length > 1){
+
         for(var i=0; i<list_marks.options.length; i++){
           marks.push(list_marks.options[i].value);
         }
@@ -588,9 +584,7 @@ $(function () {
           data: $(queryForm).serialize(),
           success: function(result, status, request) {done();}
         });
-      }else{
-        alert("You forgot to identified the markers.\nYour contribution is important to us!!!");
-      }
+
     }
   }
 
