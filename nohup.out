@@ -1339,3 +1339,76 @@ TypeError: Cannot read property 'qtd' of undefined
     at /var/www/crowdnote/node_modules/cors/lib/index.js:224:17
 Mon, 01 Oct 2018 16:40:53 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
 (node:29425) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Mon, 01 Oct 2018 17:46:57 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:29779) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Mon, 01 Oct 2018 18:47:59 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:30081) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Mon, 01 Oct 2018 18:51:23 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:30112) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Mon, 01 Oct 2018 19:09:44 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:30208) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Mon, 01 Oct 2018 19:19:10 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:30251) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Mon, 01 Oct 2018 19:46:48 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:30390) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 02 Oct 2018 13:41:17 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:16876) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+TypeError: Cannot read property 'qtd' of undefined
+    at /var/www/crowdnote/libras.js:651:7
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/libras.js:39:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at cors (/var/www/crowdnote/node_modules/cors/lib/index.js:188:7)
+    at /var/www/crowdnote/node_modules/cors/lib/index.js:224:17
+TypeError: Cannot read property 'qtd' of undefined
+    at /var/www/crowdnote/libras.js:651:7
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/libras.js:39:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at cors (/var/www/crowdnote/node_modules/cors/lib/index.js:188:7)
+    at /var/www/crowdnote/node_modules/cors/lib/index.js:224:17
+Tue, 02 Oct 2018 14:10:15 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:17066) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 02 Oct 2018 14:19:02 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:17470) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 02 Oct 2018 14:27:31 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:17502) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Error: Failed to lookup view "ejs/libras/task_3" in views directory "/var/www/crowdnote/views"
+    at Function.render (/var/www/crowdnote/node_modules/express/lib/application.js:580:17)
+    at ServerResponse.render (/var/www/crowdnote/node_modules/express/lib/response.js:971:7)
+    at /var/www/crowdnote/libras.js:418:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/libras.js:39:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+Mon, 08 Oct 2018 11:38:51 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:25246) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client

@@ -95,6 +95,7 @@ itemSchema = Schema({
 	marks: String,
 	groundtruth: String,
 	crowd: String,
+	ends: String,
 	segmentation: String,
 	translation: String,
 	starts: String,

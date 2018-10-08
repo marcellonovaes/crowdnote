@@ -103,15 +103,22 @@
 <center>
   <table style="border-radius: 10px;margin-top:0px;align:center;background-color:#3368E6;font-size:18px;color:white;width: 1000px;border-style: groove; border-color: #555555;border-width: 1px;">
       <tr align="center">
-          <td align="center" >
-A delimitação feita pela crowd permite a compreensão deste sinal? <div id="q1"></div>
-          </td>
+
+           <td align="center" >
+Conteúdo Completo<br><textarea id="content" style="border-radius: 10px;width: 620px"></textarea>
+          </td>       
+
           <td>
 Que significado você atribuiria a este sinal ? <br><textarea id="q2" style="border-radius: 10px;width: 360px" onclick="q2.select();"></textarea>
           </td>
       </tr>
       <tr>
-          <td align="center">
+
+          <td align="center" >
+A delimitação feita pela crowd permite a compreensão deste sinal? <div id="q1"></div>
+          </td>
+
+          <td style="display:none;" align="center">
 O inicio deste sinal foi identificado corretamente pela crowd ?<div id="q3"></div> 
           </td>
           <td align="center">
@@ -130,18 +137,25 @@ Observação<br><textarea id="q4" style="border-radius: 10px;width: 360px" oncli
           <td style="width: 1000px;">
             <center>
 
-                <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_prev" onclick="navigate(-1)" style="border-radius: 10px;width: 210px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"><img src="http://www.clker.com/cliparts/9/4/2/7/13498058381938458744Back%20Button.svg.med.png" width="30">&nbsp;&nbsp;Sinal Anterior</a>
+                <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_prev" onclick="navigate(-1)" style="border-radius: 10px;width: 145px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"><img src="http://www.clker.com/cliparts/9/4/2/7/13498058381938458744Back%20Button.svg.med.png" width="30">&nbsp;&nbsp;Anterior</a>
 
-                <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_next" onclick="navigate(1)" style="border-radius: 10px;width: 210px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Próximo Sinal&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/1/f/a/2/1349807104707654381Next%20Button.svg.med.png" width="30"></a>
+                <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_next" onclick="navigate(1)" style="border-radius: 10px;width: 145px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Próximo&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/1/f/a/2/1349807104707654381Next%20Button.svg.med.png" width="30"></a>
 
-    <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="playPause()" style="border-radius: 10px;width: 210px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Reproduzir Sinal&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/7/x/D/A/T/W/blue-play-button-md.png" width="30"></a>
+                <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt_context' id="bt_context" onclick="contextualize()" style="border-radius: 10px;width: 160px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Contexto&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/C/0/j/q/E/J/blue-chain-md.png" width="30"></a>
 
-                <input type="text" style="border-radius: 10px;width: 137px;height: 36px;font-size:14px;color:#3368E6;" id="interpreter" value=" Nome do Intérprete" onclick="interpreter.select();">
+
+                <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="playPause()" style="border-radius: 10px;width: 165px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Reproduzir&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/7/x/D/A/T/W/blue-play-button-md.png" width="30"></a>
+
+                <input type="text" style="display:none;border-radius: 10px;width: 137px;height: 36px;font-size:14px;color:#3368E6;" id="interpreter" value=" Nome do Intérprete" onclick="interpreter.select();">
 
                 </input>
 
-    <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="sendContribution()" style="border-radius: 10px;width: 210px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Finalizar&nbsp;&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/p/M/1/8/q/8/documnet-save-md.png" width="30"></a>    
+    <!--a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="sendContribution()" style="display:none;border-radius: 10px;width: 210px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Finalizar&nbsp;&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/p/M/1/8/q/8/documnet-save-md.png" width="30"></a-->    
  
+    <select autofocus="" class="mdl-button mdl-js-button" id="list_marks2" name="list_marks2" onchange="syncMark(2)" style="margin-top:0px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;width: 350px;" type="select"><option value="0">0</option>
+    </select>  
+    
+
       </center>
           </td>
         </tr>
@@ -150,7 +164,7 @@ Observação<br><textarea id="q4" style="border-radius: 10px;width: 360px" oncli
     <table style="margin-top:10px;">
       <tbody>
         <tr>
-          <td style="width: 500px;">
+          <td style="width: 500px;display:none;">
             <p align="center" style="font-size:22px;color:white;">
               <input type="checkbox"  id="ck1" > &nbsp;
               Reproduzir Sinais dos Intérpretes
@@ -161,38 +175,21 @@ Observação<br><textarea id="q4" style="border-radius: 10px;width: 360px" oncli
               </select>               
               
             </p>
-            <p align="center">
-
-
-
-
-              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(-0.1)" style="border-radius: 10px;width: 210px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Ajustar - 0.1 seg</a> 
-
-              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime(0.1)" style="border-radius: 10px;width: 210px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Ajustar + 0.1 seg</a> 
-            </p>
               <div id="player" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">?|</div>
               <div class="w3-light-grey"> 
                 <div id="timeline" class='w3-red' style="height:30px; box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"></div>
               </div> 
               <div id="slider"></div>             
           </td>
-          <td style="width: 500px;">
+          <td style="width: 1000px;">
 
 
 
-            <p align="center" style="font-size:22px;color:white;">
+            <p align="center" style="font-size:22px;color:white;display:none;">
               <input type="checkbox" checked="checked" id="ck2" > &nbsp;
               Reproduzir Sinais da Crowd
             </p>
-            <p align="center">
-              <select autofocus="" class="mdl-textfield__input" id="list_marks2" name="list_marks2" onchange="syncMark(2)" style="margin-top:10px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;width: 360px;" type="select"><option value="0">0</option>
-              </select>
-            </p>
-            <p align="center">
-              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime2(-0.1)" style="border-radius: 10px;width: 180px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Ajustar - 0.1 seg</a> 
 
-              <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="bt" onclick="tiltTime2(0.1)" style="border-radius: 10px;width: 180px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Ajustar + 0.1 seg</a>
-            </p>
               <div id="player2" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">?|</div>
               <div class="w3-light-grey"> 
                 <div id="timeline2" class='w3-red' style="height:30px; box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"></div>
@@ -206,7 +203,7 @@ Observação<br><textarea id="q4" style="border-radius: 10px;width: 360px" oncli
   </center>
 </div>
 
-
+<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="sendContribution()" style="margin-top: 10px;margin-left: 10px;border-radius: 10px;width: 180px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Finalizar&nbsp;&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/p/M/1/8/q/8/documnet-save-md.png" width="30"></a> 
 
 
 
@@ -263,6 +260,7 @@ $(function () {
   var data;
   var signals;  
   var signals2;
+  var ends;
   var player;
   var player2;
   var duration;
@@ -270,6 +268,7 @@ $(function () {
   var presentation;
   var ck1;
   var ck2;
+  var bt_context;
   var interpreter;
   var tag = document.createElement('script');
   tag.src = "https://www.youtube.com/iframe_api";
@@ -299,13 +298,12 @@ $(function () {
     info = input.info;
     data = input.data[0];
     signals = data.groundtruth.split(',');    
-    signals2 = data.crowd.split(',');
+    signals2 = data.crowd.split(',');   
+    ends = data.ends.split(',');
     translations = data.translation.split(',');
     observations = data.observation.split(',');
     segmentations = data.segmentation.split(',');
     starts = data.starts.split(',');
-
-
 
     timeline = document.getElementById("timeline");
     timeline2 = document.getElementById("timeline2");
@@ -318,7 +316,6 @@ $(function () {
     list_marks2.remove(0);
     mark_bar2 = document.getElementById("mark_bar2");
 
-
     q1 = document.getElementById("q1");
     q2 = document.getElementById("q2");
     q3 = document.getElementById("q3");
@@ -327,7 +324,14 @@ $(function () {
     ck1 = document.getElementById("ck1");
     ck2 = document.getElementById("ck2");
 
+    bt_context = document.getElementById("bt_context");
+    bt_context.style.opacity = 0.3;
+
+
     interpreter = document.getElementById("interpreter");
+    interpreter.value = "Leonardo";
+
+    document.getElementById("content").value = data.content;
 
   $( function() {
     var start = parseFloat(data.start);
@@ -378,36 +382,17 @@ $(function () {
       }
     );
 
-    q1_list[0] = segmentations[0];
-    q2_list[0] = translations[0];
-    q3_list[0] = starts[0];
-    q4_list[0] = observations[0];
-    for(var v=1; v < signals.length; v++){
+    for(var v=0; v < signals.length; v++){
       q1_list[v] = segmentations[v];
       q2_list[v] = translations[v];
       q3_list[v] = starts[v];
       q4_list[v] = observations[v];
-      initMark(1,signals[v-1],signals[v]);
+      initMark(1,signals[v],ends[v]);
+      initMark(2,signals2[v],ends[v]);
     }
     list_marks.selectedIndex = 0;
-
-    for(var v=1; v < signals2.length; v++){
-        var s1 = signals2[v-1];
-        var s2 = signals2[v];
-
-        if(s1 == 'Não Identificado pela Crowd'){
-          s2 = "";
-        }else{
-          if(s2 == 'Não Identificado pela Crowd'){
-            s2 = signals[v];
-          }
-        }
-        initMark(2,s1,s2);
-    }
     list_marks2.selectedIndex = 0;
-
-    
-
+    setValues(0);
   }
 
   function onPlayerReady(event) {
@@ -418,8 +403,11 @@ $(function () {
     duration = (data.end - data.start) ;
     player.loadVideoById(data.uri, parseFloat(data.start)); 
     player2.loadVideoById(data.uri, parseFloat(data.start));    
+
+    syncMark(0);
+
+
     setInterval(function() {syncTimeline();}, 100);
-    
     
   }
 
@@ -469,10 +457,10 @@ $(function () {
     if(l==2) list = list_marks2;
     stop = parseFloat(stop) - 0.1;
     stop = stop.toFixed(2);
-    if(start== 'Não Identificado pela Crowd'){
-      Op.text = start;
+    if(start != 'Não Identificado pela Crowd'){
+      Op.text = translations[list.options.length];
     }else{
-      Op.text = start + " - " + stop;
+      Op.text = start;
     }
     Op.value = start+":"+ stop;
     list.options[list.options.length] = Op;
@@ -480,6 +468,8 @@ $(function () {
   } 
 
   function syncMark(l){
+    bt_context.style.opacity = 0.3;
+
     if(l == 0){
       list_marks.selectedIndex = index;
       list_marks2.selectedIndex = index;
@@ -515,15 +505,63 @@ $(function () {
     player2.pauseVideo();
     $( "#slider" ).slider( "values", [start_1,end_1] );
     $( "#slider2" ).slider( "values", [start_2,end_2] );
-    $("#q1").rateYo("rating",q1_list[index]);
-    q2.value = q2_list[index];
-    $("#q3").rateYo("rating",q3_list[index]);
-    q4.value = q4_list[index];
+    setValues(index);
+  }  
+
+  function contextualize(){
+
+    var range, start, end, pos, prev, next;
+
+
+    if(bt_context.style.opacity == 0.3){
+
+        bt_context.style.opacity = 1;
+
+        prev = list_marks2.options[index];
+        pos = index;
+        if(index > 0){
+          prev = list_marks2.options[index-1];
+          pos = index - 1;
+        }
+        range = (prev.value).split(':');
+        start = range[0];
+        if(start == 'Não Identificado pela Crowd'){
+          range = (list_marks.options[pos].value).split(':');
+          start = range[0];
+        }
+
+        next = list_marks2.options[index];
+        pos = index;
+        if(index < list_marks2.options.length -1){
+          next = list_marks2.options[index+1];
+          pos = index + 1;
+        }
+        range = (next.value).split(':');
+        end = range[1];
+        if(end == 'Não Identificado pela Crowd'){
+          range = (list_marks.options[pos].value).split(':');
+          end = range[1];
+        }
+
+        player2.seekTo(start);
+        $( "#slider2" ).slider( "values", [start,end] );
+    }else{
+        syncMark(0);
+    }
+
   }  
 
 
+  function setValues(i){
+    $("#q1").rateYo("rating",q1_list[i]);
+    q2.value = q2_list[i];
+    $("#q3").rateYo("rating",q3_list[i]);
+    q4.value = q4_list[i];
+  }
+
+
   function playPause(){
-    if(ck1.checked == true) player.playVideo();
+    //if(ck1.checked == true) player.playVideo();
     if(ck2.checked == true) player2.playVideo();
   }
 
@@ -572,8 +610,11 @@ $(function () {
         queryForm += "<input type='hidden' id='groundtruth' name='groundtruth'  value='"+data.groundtruth+"' > ";
         queryForm += "<input type='hidden' id='crowd' name='crowd'  value='"+data.crowd+"' > ";
 
+        queryForm += "<input type='hidden' id='ends' name='ends'  value='"+data.ends+"' > ";
+
         queryForm += "<input type='hidden' id='interpreter' name='interpreter'  value='"+interpreter.value+"' > ";
 
+        queryForm += "<input type='hidden' id='content' name='content'  value='"+data.content+"' > ";
 
         queryForm += "<input type='hidden' id='segmentation' name='segmentation'  value='"+compactArray(q1_list)+"' > ";
         queryForm += "<input type='hidden' id='translation' name='translation'  value='"+compactArray(q2_list)+"' > ";
