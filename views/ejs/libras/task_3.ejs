@@ -150,7 +150,7 @@ Observação<br><textarea id="q4" style="border-radius: 10px;width: 360px" oncli
 
                 </input>
 
-    <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="sendContribution()" style="display:none;border-radius: 10px;width: 210px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Finalizar&nbsp;&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/p/M/1/8/q/8/documnet-save-md.png" width="30"></a>    
+    <!--a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="sendContribution()" style="display:none;border-radius: 10px;width: 210px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Finalizar&nbsp;&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/p/M/1/8/q/8/documnet-save-md.png" width="30"></a-->    
  
     <select autofocus="" class="mdl-button mdl-js-button" id="list_marks2" name="list_marks2" onchange="syncMark(2)" style="margin-top:0px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;width: 350px;" type="select"><option value="0">0</option>
     </select>  
@@ -203,6 +203,7 @@ Observação<br><textarea id="q4" style="border-radius: 10px;width: 360px" oncli
   </center>
 </div>
 
+<!--a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="sendContribution()" style="margin-top: 10px;margin-left: 10px;border-radius: 10px;width: 180px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Finalizar&nbsp;&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/p/M/1/8/q/8/documnet-save-md.png" width="30"></a--> 
 
 
 
@@ -287,6 +288,11 @@ $(function () {
   }
 
   function onYouTubeIframeAPIReady() {
+
+
+
+
+
     $.getJSON('https://crowdnoter.app/job', function(d){init(d);});
   }
 
@@ -302,7 +308,7 @@ $(function () {
     translations = data.translation.split(',');
     observations = data.observation.split(',');
     segmentations = data.segmentation.split(',');
-    starts = data.starts.split(',');
+    starts = data.crowd.split(',');
 
     timeline = document.getElementById("timeline");
     timeline2 = document.getElementById("timeline2");

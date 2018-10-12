@@ -1,0 +1,392 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Uma p&aacute;gina para anota&ccedil;&atilde;o de v&iacute;deo.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title></title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://crowdnoter.app/include?name=client.min&amp;mime=js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+
+<style type="text/css">.modal {
+  display: none;
+  font-size:30px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
+  position: fixed;
+  z-index: 100;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.75);
+}
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  #circle {
+    float:left;
+    width: 40px;
+    height: 40px;
+    background: blue;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+  }
+  #retangle-space {
+    float:left;
+    height: 40px;
+    width:  1px;
+    background: light-grey;
+  }
+  #retangle-mark {
+    float:left;
+    height: 40px;
+    width:  1px;
+    background: orange;
+  }
+  .ui-draggable, .ui-droppable {
+  background-position: top;
+}
+
+.ui-widget-header{background-image:none;background-color: orange;}
+.ui-widget-content { background: light-grey; }
+
+
+.checked {
+    color: orange;
+}
+
+
+
+</style>
+
+
+
+
+
+<div style="background:#3F51B5;">
+
+
+<center>
+  <table style="border-radius: 10px;margin-top:0px;align:center;background-color:#3368E6;font-size:18px;color:white;width: 1000px;border-style: groove; border-color: #555555;border-width: 1px;">
+      <tr align="center">
+<br>
+           <td align="left"  style="margin-top:10px;">
+            <p style="font-size:18px;">1. Adjust the interval to isolate the first signal performed by the actor.</p>
+            <p style="font-size:18px;">2. Adjust the START and the END using the buttons <img style="margin-top:5px;" src="http://www.clker.com/cliparts/y/q/u/g/k/i/list-remove-md.png" width="20"> and <img style="margin-top:5px;" src="http://www.clker.com/cliparts/v/k/7/C/B/W/list-add-md.png" width="20">.</p>
+            <p style="font-size:18px;">3. Optionally, you can adjust the interval by dragging the ends of the yellow bar.</p>
+            <p style="font-size:18px;">4. When you have finished adjusting the range, click the Finish Job <img src="http://www.clker.com/cliparts/p/M/1/8/q/8/documnet-save-md.png" width="30"> button.</p>
+
+          </td>       
+
+      </tr>
+  </table>
+</center>
+
+
+  <center>
+
+    <table style="margin-top:10px;">
+      <tbody>
+        <tr>
+
+          <td style="width: 1000px;">
+            <p align="center">            
+              
+            </p>
+              <div id="player" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">?|</div>
+                 <div id="slider"></div>             
+          </td>
+     
+        </tr>
+      </tbody>
+    </table>
+    <table style="margin-top:10px;">
+      <tbody>
+        <tr>
+
+          <td >
+            <p align="center" style="border-radius: 10px;margin-top:0px;align:center;background-color:#3368E6;font-size:18px;color:white;width: 140px;border-style: groove; border-color: #555555;border-width: 1px;">Adjust the Start</p>
+
+            <p align="center">           
+ 
+
+                      <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_next" onclick="adjust('s',-0.05)" style="border-radius: 10px;width: 60px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"><img  style="margin-top:15px;" src="http://www.clker.com/cliparts/y/q/u/g/k/i/list-remove-md.png" width="20"></a>
+
+                      <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_next" onclick="adjust('s',0.05)" style="border-radius: 10px;width: 60px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"><img style="margin-top:5px;" src="http://www.clker.com/cliparts/v/k/7/C/B/W/list-add-md.png" width="20"></a>
+              </p>
+          </td>
+          <td width="720" align="center">
+
+            <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="playPause()" style="border-radius: 10px;width: 165px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Play Signal&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/7/x/D/A/T/W/blue-play-button-md.png" width="30"></a>
+
+
+            <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt_finish' id="bt_finish" onclick="sendContribution()" style="margin-left: 70px;border-radius: 10px;width: 180px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Finish Job&nbsp;&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/p/M/1/8/q/8/documnet-save-md.png" width="30"></a> 
+
+
+          </td>
+          <td>
+                        <p align="center" style="border-radius: 10px;margin-top:0px;align:center;background-color:#3368E6;font-size:18px;color:white;width: 140px;border-style: groove; border-color: #555555;border-width: 1px;">Adjust the End</p>
+
+              <p align="center"> 
+                      <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_next" onclick="adjust('e',-0.05)" style="border-radius: 10px;width: 60px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"><img  style="margin-top:15px;" src="http://www.clker.com/cliparts/y/q/u/g/k/i/list-remove-md.png" width="20"></a>
+
+                      <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_next" onclick="adjust('e',0.05)" style="border-radius: 10px;width: 60px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"><img style="margin-top:5px;" src="http://www.clker.com/cliparts/v/k/7/C/B/W/list-add-md.png" width="20"></a>
+              </p>
+          </td>  
+
+        </tr>
+      </tbody>
+    </table>
+
+  </center>
+</div>
+
+
+<input id="done" name="done" type="hidden" />
+
+
+
+
+
+
+
+
+
+<script>
+
+  var timeline;
+  var start;
+  var end;
+
+  var source_id = '000';
+  var mark_bar;
+
+  var info;
+  var data;
+
+  var player;
+  var duration;
+  var instructions;
+  var presentation;
+
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  function tiltTime(delta){
+    player.pauseVideo();
+    player.pauseVideo();
+    player.seekTo(player.getCurrentTime() + delta);
+  }
+  function tiltTime2(delta){
+    player.pauseVideo();
+    player.pauseVideo();
+    player.seekTo(player.getCurrentTime() + delta);
+  }
+
+  function onYouTubeIframeAPIReady() {
+    $.getJSON('https://crowdnoter.app/job', function(d){init(d);});
+  }
+
+  function init(input){
+
+    index = 0;
+
+    info = input.info;
+    data = input.data[0];
+
+    start = parseFloat(data.start) - 0.1;
+    end = parseFloat(data.end) + 0.1;
+
+    timeline = document.getElementById("timeline");
+    mark_bar = document.getElementById("mark_bar");
+
+
+
+  $( function() {
+   $( "#slider" ).slider({
+      range: true,
+      step: 0.01,
+      min: start,
+      max: end,
+      values: [ start  , end  ],
+      slide: function( event, ui ) {}
+    });
+  } );
+
+    player = new YT.Player(
+      'player',
+      {
+        playerVars: {cc_lang_pref:'en', cc_load_policy: 0, autoplay:0 ,rel: 0, controls: 0, disablekb: 1},
+        height: '360',
+        width: '640',
+        autohide: '0',
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      }
+    );
+    
+
+
+  }
+
+  function onPlayerReady(event) {
+
+    duration = (end - start) ;
+    player.loadVideoById(data.uri, parseFloat(start)); 
+
+
+
+
+
+    setInterval(function() {syncTimeline();}, 100);
+    
+  }
+
+ function syncTimeline(){
+
+  if(player.getCurrentTime() > end || player.getCurrentTime() < start){
+        player.pauseVideo();
+        player.seekTo(parseFloat($( "#slider" ).slider( "values", 0 )));
+  }
+
+  setTimeout(restartVideoSection,  duration * 100);
+ }
+
+  function onPlayerStateChange(event) {
+    if(player.getCurrentTime() > end || player.getCurrentTime() < start){
+      player.pauseVideo();
+      player.seekTo(parseFloat($( "#slider" ).slider( "values", 0 )));
+    }
+
+    if (event.data == YT.PlayerState.PLAYING) {
+        setTimeout(restartVideoSection,  duration * 50);
+    }
+  }
+
+  function restartVideoSection() {
+    if( player.getCurrentTime() > parseFloat($( "#slider" ).slider( "values", 1 ))){
+      player.pauseVideo();
+      player.seekTo(parseFloat($( "#slider" ).slider( "values", 0 )));
+    }
+  }
+
+
+
+  function adjust(x,d){ 
+    if(x == 's'){
+        var s = parseFloat(start) + parseFloat(d);
+        if(s >= parseFloat(data.start) - parseFloat(0.1) && s < parseFloat(end) - parseFloat(0.1)){
+            start += d;
+        }
+
+       
+    }else{
+        var e = parseFloat(end) + parseFloat(d);
+        if(e <= parseFloat(data.end) + parseFloat(0.1) && e > parseFloat(start) + parseFloat(0.1)){
+            end += d;
+        }
+    }
+
+    if(start < end){
+      player.seekTo(start);
+      $( "#slider" ).slider( "values", [start,end] );
+    }
+  }  
+
+
+
+
+
+
+  function playPause(){
+    player.playVideo();
+  }
+
+
+
+
+  function sendContribution(){
+
+    var r = confirm('Did you set the signal interval correctly?');
+    if(r == true){
+
+
+        var queryForm = "<form method='post' action='https://crowdnoter.app/store'>";
+        queryForm += "<input type='hidden' id='uri' name='uri'  value='"+data.uri+"' > ";
+        queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+data._id+"' > ";
+        queryForm += "<input type='hidden' id='start' name='start'  value='"+$( "#slider" ).slider( "values")[0]+"' > ";
+        queryForm += "<input type='hidden' id='end' name='end'  value='"+$( "#slider" ).slider( "values")[1]+"' > ";
+        queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+info.fingerprint+"' > ";
+        queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+info.job_id+"' > ";
+        queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+info.item_index+"' > ";
+        queryForm += "<input type='hidden' id='source_id' name='source_id'  value='"+source_id+"' > ";
+        queryForm += "";
+        $.ajax({
+          type: 'POST',
+          url: $(queryForm).attr('action'),
+          data: $(queryForm).serialize(),
+          success: function(result, status, request) {done();}
+        });
+
+    }
+  }
+
+  function done(){
+    var done = document.getElementById("done");
+    var bt = document.getElementById("bt_finish");
+    bt.style='visibility: hidden;';
+    done.value='ok';
+    player.stopVideo();
+    alert("Thanks, now you can click the FINISH button.");
+  }
+
+
+
+</script>
+
+
+
+
+
+
+
+

@@ -150,7 +150,7 @@ Observação<br><textarea id="q4" style="border-radius: 10px;width: 360px" oncli
 
                 </input>
 
-    <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="sendContribution()" style="display:none;border-radius: 10px;width: 210px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Finalizar&nbsp;&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/p/M/1/8/q/8/documnet-save-md.png" width="30"></a>    
+    <!--a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="sendContribution()" style="display:none;border-radius: 10px;width: 210px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Finalizar&nbsp;&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/p/M/1/8/q/8/documnet-save-md.png" width="30"></a-->    
  
     <select autofocus="" class="mdl-button mdl-js-button" id="list_marks2" name="list_marks2" onchange="syncMark(2)" style="margin-top:0px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;width: 350px;" type="select"><option value="0">0</option>
     </select>  
@@ -203,6 +203,7 @@ Observação<br><textarea id="q4" style="border-radius: 10px;width: 360px" oncli
   </center>
 </div>
 
+<!--a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="sendContribution()" style="margin-top: 10px;margin-left: 10px;border-radius: 10px;width: 180px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Finalizar&nbsp;&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/p/M/1/8/q/8/documnet-save-md.png" width="30"></a--> 
 
 
 
@@ -287,6 +288,11 @@ $(function () {
   }
 
   function onYouTubeIframeAPIReady() {
+
+
+
+
+
     $.getJSON('https://crowdnoter.app/job', function(d){init(d);});
   }
 
@@ -468,7 +474,7 @@ $(function () {
 
   function syncMark(l){
     bt_context.style.opacity = 0.3;
-    
+
     if(l == 0){
       list_marks.selectedIndex = index;
       list_marks2.selectedIndex = index;
@@ -508,23 +514,39 @@ $(function () {
   }  
 
   function contextualize(){
+
+    var range, start, end, pos, prev, next;
+
+
     if(bt_context.style.opacity == 0.3){
 
         bt_context.style.opacity = 1;
 
-        var prev = list_marks2.options[index];
+        prev = list_marks2.options[index];
+        pos = index;
         if(index > 0){
           prev = list_marks2.options[index-1];
+          pos = index - 1;
         }
-        var range = (prev.value).split(':');
-        var start = range[0];
+        range = (prev.value).split(':');
+        start = range[0];
+        if(start == 'Não Identificado pela Crowd'){
+          range = (list_marks.options[pos].value).split(':');
+          start = range[0];
+        }
 
-        var next = list_marks2.options[index];
+        next = list_marks2.options[index];
+        pos = index;
         if(index < list_marks2.options.length -1){
           next = list_marks2.options[index+1];
+          pos = index + 1;
         }
         range = (next.value).split(':');
-        var end = range[1];
+        end = range[1];
+        if(end == 'Não Identificado pela Crowd'){
+          range = (list_marks.options[pos].value).split(':');
+          end = range[1];
+        }
 
         player2.seekTo(start);
         $( "#slider2" ).slider( "values", [start,end] );

@@ -1412,3 +1412,85 @@ Error: Failed to lookup view "ejs/libras/task_3" in views directory "/var/www/cr
     at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
 Mon, 08 Oct 2018 11:38:51 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
 (node:25246) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 09 Oct 2018 12:20:11 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:3005) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 09 Oct 2018 16:37:46 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:5121) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 09 Oct 2018 16:42:14 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:5263) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 09 Oct 2018 16:47:58 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:5367) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 09 Oct 2018 16:49:05 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:5385) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 09 Oct 2018 16:51:27 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:5411) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 09 Oct 2018 16:53:23 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:5442) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 09 Oct 2018 18:02:08 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+module.js:545
+    throw err;
+    ^
+
+Error: Cannot find module './aggregation/libras/task_4.js'
+    at Function.Module._resolveFilename (module.js:543:15)
+    at Function.Module._load (module.js:470:25)
+    at Module.require (module.js:593:17)
+    at require (internal/module.js:11:18)
+    at init (/var/www/crowdnote/libras.js:186:28)
+    at Object.<anonymous> (/var/www/crowdnote/libras.js:121:1)
+    at Module._compile (module.js:649:30)
+    at Object.Module._extensions..js (module.js:660:10)
+    at Module.load (module.js:561:32)
+    at tryModuleLoad (module.js:501:12)
+    at Function.Module._load (module.js:493:3)
+    at Function.Module.runMain (module.js:690:10)
+    at startup (bootstrap_node.js:194:16)
+    at bootstrap_node.js:666:3
+Tue, 09 Oct 2018 18:04:18 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:5982) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 09 Oct 2018 18:18:29 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:6088) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 09 Oct 2018 21:58:23 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:7942) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 09 Oct 2018 22:12:09 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:8108) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 09 Oct 2018 22:14:07 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:8188) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Thu, 11 Oct 2018 13:16:43 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:26777) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Thu, 11 Oct 2018 18:35:18 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+module.js:545
+    throw err;
+    ^
+
+Error: Cannot find module './aggregation/libras/task_5.js'
+    at Function.Module._resolveFilename (module.js:543:15)
+    at Function.Module._load (module.js:470:25)
+    at Module.require (module.js:593:17)
+    at require (internal/module.js:11:18)
+    at init (/var/www/crowdnote/libras.js:186:28)
+    at Object.<anonymous> (/var/www/crowdnote/libras.js:121:1)
+    at Module._compile (module.js:649:30)
+    at Object.Module._extensions..js (module.js:660:10)
+    at Module.load (module.js:561:32)
+    at tryModuleLoad (module.js:501:12)
+    at Function.Module._load (module.js:493:3)
+    at Function.Module.runMain (module.js:690:10)
+    at startup (bootstrap_node.js:194:16)
+    at bootstrap_node.js:666:3
+Thu, 11 Oct 2018 18:38:11 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:29961) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Thu, 11 Oct 2018 22:56:26 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:5745) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Fri, 12 Oct 2018 02:00:38 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:8321) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Fri, 12 Oct 2018 02:09:30 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:8505) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Fri, 12 Oct 2018 02:11:46 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:8539) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Fri, 12 Oct 2018 02:22:55 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:8649) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Fri, 12 Oct 2018 02:29:02 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:8718) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Fri, 12 Oct 2018 02:43:17 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:8951) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
