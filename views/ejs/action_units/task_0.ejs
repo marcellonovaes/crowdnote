@@ -1,0 +1,487 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Uma p&aacute;gina para anota&ccedil;&atilde;o de v&iacute;deo.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+<link href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel='stylesheet' href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.css'>
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css'>
+
+<style>
+
+
+.quizimgblock {
+  text-align: center;
+  margin-bottom: 2em;
+}
+
+.wrapper {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+}
+
+.quizimgblock img.quizitems {
+  width: 100%;
+  height: auto;
+}
+.quizimgblock a:hover img{
+  opacity: 0.5;
+}
+.quizimgblock .check {
+  position: absolute;
+  top:47%;
+  left:47%;
+  transform:translate(-45%, -45%);
+}
+.quizimgblock a .check {
+  opacity: 0;
+  z-index: 9;
+  transition:opacity .5s ease
+}
+.quizimgblock .check img {
+  border: 0px !important;
+}
+.quizimgblock a:hover .check {
+  opacity: 1;
+}
+.quiz-answer.active .check {
+  opacity: 1;
+}
+.quizimgblock a:hover .check img {
+  opacity: 1 !important;
+}
+
+
+
+.quizbutton {
+  text-align: center;
+  margin: 1.25em auto 3em;
+}
+.quizbutton .quizbtn {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0.65em 1.75em;
+  background-color: #f6700e;
+  -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4), inset 0 1px rgba(255, 255, 255, 0.6);
+  -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4), inset 0 1px rgba(255, 255, 255, 0.6);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.4), inset 0 1px rgba(255, 255, 255, 0.6);
+  border: solid 1px #f06c0b;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  line-height: 16px;
+  text-transform: uppercase;
+  color: white;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3);
+}
+.quizbutton .quizbtn:hover {
+  color: white;
+  text-decoration: none;
+  background-color: #f77f27;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f77f27), to(#f6700e));
+  background-image: -webkit-linear-gradient(top, #f77f27, #f6700e);
+  background-image: -moz-linear-gradient(top, #f77f27, #f6700e);
+  background-image: -o-linear-gradient(top, #f77f27, #f6700e);
+  background-image: linear-gradient(to bottom, #f77f27, #f6700e);
+}
+.quizbutton .quizbtn:active {
+  color: white;
+  text-decoration: none;
+  background-color: #f6700e;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#f6700e), to(#f77f27));
+  background-image: -webkit-linear-gradient(top, #f6700e, #f77f27);
+  background-image: -moz-linear-gradient(top, #f6700e, #f77f27);
+  background-image: -o-linear-gradient(top, #f6700e, #f77f27);
+  background-image: linear-gradient(to bottom, #f6700e, #f77f27);
+  -webkit-box-shadow: 0 0 0 1px #f58029, inset 0 1px 1px #b14f07;
+  box-shadow: 0 0 0 1px #f58029, inset 0 1px 1px #b14f07;
+}
+
+
+
+@media only screen and (max-width: 767px) {
+  .check { 
+    top:35%; 
+    left:35%; 
+    transform:translate(-35%, -35%);
+  }
+
+  .quizimgblock .check img { 
+      max-width: 40px; 
+      max-height: 40px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .quizimgblock a .check {
+    vertical-align: middle;
+  }
+
+  .check { 
+    top:35%; 
+    left:35%; 
+    transform:translate(-35%, -35%);
+  }
+
+  .quizimgblock .check img { 
+     max-width: 55px; 
+    max-height: 55px;
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  
+}
+
+@media screen (min-width: 1200px) {
+ 
+}
+
+
+
+</style>
+
+<!--
+Watch this short video and check the expressions that most resemble those that the actor performs.
+You can check and uncheck expressions clicking on it.
+You can check more than one expression.
+The video will be repeated automatically to make your job easier.
+Please try to mark the expressions that you really believe have identified on the actor's face.
+
+-->
+
+<center>
+
+<div style="border-radius: 10px;margin-top:0px;align:center;background-color:#3368E6;font-size:18px;color:white;width: 95%;border-style: groove; border-color: #555555;border-width: 0px;">
+
+<p align="left" style="border-radius: 10px;margin-top:0px;align:left;background-color:#3368E6;font-size:20px;color:white;width: 90%;border-style: groove; border-color: #555555;border-width: 0px;">
+1. Watch this short video and check the expressions that most resemble those that the actor performs.
+</p>
+<p align="left" style="border-radius: 10px;margin-top:0px;align:left;background-color:#3368E6;font-size:20px;color:white;width: 90%;border-style: groove; border-color: #555555;border-width: 0px;">
+2. You can check and uncheck expressions clicking on it.
+</p>
+
+<p align="left" style="border-radius: 10px;margin-top:0px;align:left;background-color:#3368E6;font-size:20px;color:white;width: 90%;border-style: groove; border-color: #555555;border-width: 0px;">
+3. You can check more than one expression.
+</p>
+<p align="left" style="border-radius: 10px;margin-top:0px;align:left;background-color:#3368E6;font-size:20px;color:white;width: 90%;border-style: groove; border-color: #555555;border-width: 0px;">
+4. The video will be repeated automatically to make your job easier.
+</p>
+<p align="left" style="border-radius: 10px;margin-top:0px;align:left;background-color:#3368E6;font-size:20px;color:white;width: 90%;border-style: groove; border-color: #555555;border-width: 0px;">
+5. Please try to mark the expressions that you really believe have identified on the actor's face.
+</p>
+</div>
+
+
+<table style="width: 90%;">
+  <tr>
+    <td style="width: 49%;">
+<div id="player" style="padding-top: -30px;width:100%;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">
+</div>
+    </td>
+    <td>
+<section> 
+    <div class="quizimgblock">
+    <div class="container" style="width:530px;padding-top: 5px;">
+
+    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3"  style="width: 125px; height: 85px;padding-top: 10px;">
+          <a  class="quiz-answer multiple-answers"  id="AU1" >
+            <span class="check"><img src="http://icons.iconarchive.com/icons/cheezen/web-2/64/check-icon.png" alt="Inner Brow Raiser"></span>
+            <img style="width: 120px; height: 80px;"class="quizitems" src="https://imotions.com/wp-content/uploads/2016/12/AU1-FACS.gif" alt="AU1">
+          </a>
+    </div>
+    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3" style="width: 125px; height: 85px;padding-top: 10px;">
+          <a  class="quiz-answer multiple-answers"  id="AU2">
+            <span class="check"><img src="http://icons.iconarchive.com/icons/cheezen/web-2/64/check-icon.png" alt="Outer Brow Raiser (unilateral, right side)"></span>
+            <img style="width: 120px; height: 80px;"class="quizitems" src="https://imotions.com/wp-content/uploads/2016/12/AU2-right-only.gif" alt="AU2">
+          </a>
+    </div>
+    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3" style="width: 125px; height: 85px;padding-top: 10px;">
+          <a  class="quiz-answer multiple-answers"  id="AU43">
+            <span class="check"><img src="http://icons.iconarchive.com/icons/cheezen/web-2/64/check-icon.png" alt="Eyes Closed"></span>
+            <img style="width: 120px; height: 80px;"class="quizitems" src="https://imotions.com/wp-content/uploads/2016/12/AU43-eyes-closed.gif" alt="AU43">
+          </a>
+    </div>
+    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3" style="width: 125px; height: 85px;padding-top: 10px;">
+          <a  class="quiz-answer multiple-answers"  id="AU4">
+            <span class="check"><img src="http://icons.iconarchive.com/icons/cheezen/web-2/64/check-icon.png" alt="Brow Lowerer"></span>
+            <img style="width: 120px; height: 80px;"class="quizitems" src="https://imotions.com/wp-content/uploads/2016/12/AU4-brow-lowerer.gif" alt="AU4">
+          </a>
+    </div>
+    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3" style="width: 125px; height: 85px;padding-top: 10px;">
+          <a  class="quiz-answer multiple-answers"  id="AU12">
+            <span class="check"><img src="http://icons.iconarchive.com/icons/cheezen/web-2/64/check-icon.png" alt="Lip Corner Puller"></span>
+            <img style="width: 120px; height: 80px;"class="quizitems" src="https://imotions.com/wp-content/uploads/2016/12/AU12.gif" alt="AU12">
+          </a>
+    </div>
+    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3" style="width: 125px; height: 85px;padding-top: 10px;">
+          <a  class="quiz-answer multiple-answers"  id="AU14">
+            <span class="check"><img src="http://icons.iconarchive.com/icons/cheezen/web-2/64/check-icon.png" alt="Dimpler"></span>
+            <img style="width: 120px; height: 80px;"class="quizitems" src="https://imotions.com/wp-content/uploads/2016/12/AU14-dimpler.gif" alt="AU14">
+          </a>
+    </div>
+    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3" style="width: 125px; height: 85px;padding-top: 10px;">
+          <a  class="quiz-answer multiple-answers"  id="AU23">
+            <span class="check"><img src="http://icons.iconarchive.com/icons/cheezen/web-2/64/check-icon.png" alt="Lip Tightener"></span>
+            <img style="width: 120px; height: 80px;"class="quizitems" src="https://imotions.com/wp-content/uploads/2016/12/AU23-lip-tightener.gif" alt="AU23">
+          </a>
+    </div>
+    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3" style="width: 125px; height: 85px;padding-top: 10px;">
+          <a  class="quiz-answer multiple-answers"  id="AU20">
+            <span class="check"><img src="http://icons.iconarchive.com/icons/cheezen/web-2/64/check-icon.png" alt="Lip stretcher"></span>
+            <img style="width: 120px; height: 80px;"class="quizitems" src="https://imotions.com/wp-content/uploads/2016/12/AU20-lip-stretcher.gif" alt="AU20">
+          </a>
+    </div>
+    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3" style="width: 125px; height: 85px;padding-top: 10px;">
+          <a  class="quiz-answer multiple-answers"  id="AU25">
+            <span class="check"><img src="http://icons.iconarchive.com/icons/cheezen/web-2/64/check-icon.png" alt="Lips part"></span>
+            <img style="width: 120px; height: 80px;"class="quizitems" src="https://imotions.com/wp-content/uploads/2016/12/AU25-lips-part.gif" alt="AU25">
+          </a>
+    </div>
+    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3" style="width: 125px; height: 85px;padding-top: 10px;">
+          <a  class="quiz-answer multiple-answers"  id="AU26">
+            <span class="check"><img src="http://icons.iconarchive.com/icons/cheezen/web-2/64/check-icon.png" alt="Jaw Drop"></span>
+            <img style="width: 120px; height: 80px;"class="quizitems" src="https://imotions.com/wp-content/uploads/2016/12/AU26-with-25.gif" alt="AU26">
+          </a>
+    </div>
+
+     <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3" style="width: 125px; height: 85px;padding-top: 10px;">
+          <a  class="quiz-answer multiple-answers"  id="AU15">
+            <span class="check"><img src="http://icons.iconarchive.com/icons/cheezen/web-2/64/check-icon.png" alt="Chin Raiser"></span>
+            <img style="width: 120px; height: 80px;"class="quizitems" src="https://imotions.com/wp-content/uploads/2016/12/AU15.gif" alt="AU15">
+          </a>
+    </div>    
+
+     <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3" style="width: 125px; height: 85px;padding-top: 10px;">
+          <a  class="quiz-answer multiple-answers"  id="AU17">
+            <span class="check"><img src="http://icons.iconarchive.com/icons/cheezen/web-2/64/check-icon.png" alt="Chin Raiser"></span>
+            <img style="width: 120px; height: 80px;"class="quizitems" src="https://imotions.com/wp-content/uploads/2016/12/AU17.gif" alt="AU17">
+          </a>
+    </div>      
+    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3" style="width: 125px; height: 85px;padding-top: 10px;">
+          <a  class="quiz-answer multiple-answers"  id="AU10">
+            <span class="check"><img src="http://icons.iconarchive.com/icons/cheezen/web-2/64/check-icon.png" alt="Upper Lip Raiser"></span>
+            <img style="width: 120px; height: 80px;"class="quizitems" src="https://imotions.com/wp-content/uploads/2016/12/AU10-with-25.gif" alt="AU10">
+          </a>
+    </div>
+    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3" style="width: 125px; height: 85px;padding-top: 10px;">
+          <a  class="quiz-answer multiple-answers"  id="AU16">
+            <span class="check"><img src="http://icons.iconarchive.com/icons/cheezen/web-2/64/check-icon.png" alt="Lower Lip Depressor"></span>
+            <img style="width: 120px; height: 80px;"class="quizitems" src="https://imotions.com/wp-content/uploads/2016/12/AU16-with-25.gif" alt="AU16">
+          </a>
+    </div>   
+    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3" style="width: 125px; height: 85px;padding-top: 10px;">
+          <a  class="quiz-answer multiple-answers"  id="AU22">
+            <span class="check"><img src="http://icons.iconarchive.com/icons/cheezen/web-2/64/check-icon.png" alt="Chin Raiser"></span>
+            <img style="width: 120px; height: 80px;"class="quizitems" src="https://imotions.com/wp-content/uploads/2016/12/AU22-with-25.gif" alt="AU22">
+          </a>
+    </div>    
+    <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3" style="width: 125px; height: 85px;padding-top: 10px;">
+          <a  class="quiz-answer multiple-answers"  id="AU27">
+            <span class="check"><img src="http://icons.iconarchive.com/icons/cheezen/web-2/64/check-icon.png" alt="Mouth Stretch"></span>
+            <img style="width: 120px; height: 80px;"class="quizitems" src="https://imotions.com/wp-content/uploads/2016/12/AU27-mouth-stretcher.gif" alt="AU27">
+          </a>
+    </div>   
+    
+
+    </div>
+  </div>
+</section>
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+<section>
+  <div class="quizbutton">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+          <a class="quizbtn" onClick="process();">Send Contribution</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+</center>
+
+<input id="fingerprint" name="fingerprint" type="hidden" />
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js'></script>
+
+  
+
+
+
+
+<script>
+
+
+
+  var source_id = '001';
+
+  var info;
+  var data;
+
+  var player;
+
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+
+  var items = document.getElementBy
+
+
+  function onYouTubeIframeAPIReady() {
+
+
+    //var input = {"data":[{"_id":"5c096b3032c5d7037abe0d24","uri":"mKsd9Sfw_CI","item_id":"001","convergence":"0","start":"0.0","end":"0.5"}],"info":{"item_index":1,"qtd":0,"job_id":"f427c59ad08d7d4c1a0f69256d7094d9","fingerprint":"7e96ec29b0726713033b4173a3adeed6"}};
+
+
+    //init(input);
+
+    $.getJSON('https://crowdnoter.app/job', function(d){init(d);});
+  }
+
+
+
+
+  function init(input){
+
+    index = 0;
+
+    info = input.info;
+    data = input.data[0];
+
+
+
+    player = new YT.Player(
+      'player',
+      {
+        playerVars: {cc_lang_pref:'en', cc_load_policy: 0, autoplay:0 ,rel: 0, loop:1, controls: 0, mute:1, disablekb: 1},
+        height: '360',
+        width: '640',
+        autohide: '0',
+        events: {
+          'onReady': onPlayerReady
+        }
+      }
+    );
+    
+
+  }
+
+  function onPlayerReady(event) {
+    duration = (data.end - data.start) ;
+    player.loadVideoById(data.uri, parseFloat(data.start)); 
+    player.playVideo();
+    setInterval(function() {restartVideoSection();}, 100);   
+  }
+
+  function restartVideoSection() {
+    if( player.getCurrentTime() > parseFloat(data.end)){
+      player.seekTo(data.start);
+    }
+  }
+
+
+  function sendContribution(ua_list){
+
+
+
+    var r = confirm('Are you sure that you checked the expressions performed by the actor during the video?');
+    if(r == true){
+
+        var queryForm = "<form method='post' action='https://crowdnoter.app/store'>";
+        queryForm += "<input type='hidden' id='uri' name='uri'  value='"+data.uri+"' > ";
+        queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+data._id+"' > ";
+        queryForm += "<input type='hidden' id='start' name='start'  value='"+data.start+"' > ";
+        queryForm += "<input type='hidden' id='end' name='end'  value='"+data.end+"' > ";
+        queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+info.fingerprint+"' > ";
+        queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+info.job_id+"' > ";
+        queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+info.item_index+"' > ";
+        queryForm += "<input type='hidden' id='source_id' name='source_id'  value='"+source_id+"' > ";
+
+
+        queryForm += "<input type='hidden' id='content' name='action_units'  value='"+ua_list+"' > ";
+
+        queryForm += "";
+        $.ajax({
+          type: 'POST',
+          url: $(queryForm).attr('action'),
+          data: $(queryForm).serialize(),
+          success: function(result, status, request) {done();}
+        });
+        //console.log(queryForm);
+
+    }
+  }
+
+  function done(){
+    document.getElementById("fingerprint").value = data.fingerprint;
+     $('.quizbutton').hide();
+  }
+
+
+
+
+
+
+
+  function process(){
+
+
+    var selected = document.getElementsByClassName('quiz-answer multiple-answers active');
+
+    var ua_list = selected[0].id;
+
+    for(var i=1; i < selected.length; i++){
+      ua_list += "+"+selected[i].id;
+    }
+
+    sendContribution(ua_list);
+    
+
+  }
+
+
+
+
+$('.quizbutton').hide();
+
+$( ".quiz-answer" ).click(function() {
+  $( this ).toggleClass( "active" );  
+
+  if ($(".quiz-answer.active").length > 0) {
+    $('.quizbutton').show();
+  }
+
+  else {
+    $('.quizbutton').hide();
+  }
+
+});
+    </script>
+
+
+
+
+
+

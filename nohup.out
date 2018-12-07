@@ -1494,3 +1494,570 @@ Fri, 12 Oct 2018 02:29:02 GMT body-parser deprecated undefined extended: provide
 (node:8718) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
 Fri, 12 Oct 2018 02:43:17 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
 (node:8951) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Fri, 12 Oct 2018 02:56:01 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:9083) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Fri, 12 Oct 2018 03:12:27 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:9319) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Fri, 12 Oct 2018 03:38:22 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:9545) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Fri, 12 Oct 2018 03:41:46 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:9631) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Mon, 15 Oct 2018 13:51:27 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:19626) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Mon, 15 Oct 2018 13:57:00 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:19665) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Mon, 15 Oct 2018 13:59:07 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:19693) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Mon, 15 Oct 2018 14:00:32 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:19720) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Mon, 15 Oct 2018 14:13:25 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:19872) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Wed, 17 Oct 2018 14:56:50 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:7203) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Wed, 17 Oct 2018 17:02:21 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:7890) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Thu, 18 Oct 2018 12:03:58 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:14549) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Thu, 18 Oct 2018 12:43:09 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:14791) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Thu, 18 Oct 2018 12:53:00 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:14826) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Thu, 18 Oct 2018 13:02:31 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:14886) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Thu, 18 Oct 2018 16:10:51 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:16116) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Thu, 18 Oct 2018 16:17:28 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:16142) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 23 Oct 2018 11:54:09 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:1435) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+events.js:165
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: listen EADDRINUSE :::443
+    at Server.setupListenHandle [as _listen2] (net.js:1345:14)
+    at listenInCluster (net.js:1386:12)
+    at Server.listen (net.js:1474:7)
+    at Object.<anonymous> (/var/www/crowdnote/libras.js:704:8)
+    at Module._compile (module.js:649:30)
+    at Object.Module._extensions..js (module.js:660:10)
+    at Module.load (module.js:561:32)
+    at tryModuleLoad (module.js:501:12)
+    at Function.Module._load (module.js:493:3)
+    at Function.Module.runMain (module.js:690:10)
+    at startup (bootstrap_node.js:194:16)
+    at bootstrap_node.js:666:3
+Emitted 'error' event at:
+    at emitErrorNT (net.js:1365:8)
+    at process._tickCallback (internal/process/next_tick.js:114:19)
+    at Function.Module.runMain (module.js:692:11)
+    at startup (bootstrap_node.js:194:16)
+    at bootstrap_node.js:666:3
+Tue, 23 Oct 2018 11:56:23 GMT body-parser deprecated undefined extended: provide extended option at retina.js:29:20
+(node:1452) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 23 Oct 2018 15:45:49 GMT body-parser deprecated undefined extended: provide extended option at retina.js:29:20
+(node:2192) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 23 Oct 2018 15:46:42 GMT body-parser deprecated undefined extended: provide extended option at retina.js:29:20
+(node:2206) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+_http_outgoing.js:503
+    throw new errors.Error('ERR_HTTP_HEADERS_SENT', 'set');
+    ^
+
+Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+    at validateHeader (_http_outgoing.js:503:11)
+    at ServerResponse.setHeader (_http_outgoing.js:510:3)
+    at Array.write (/var/www/crowdnote/node_modules/finalhandler/index.js:254:9)
+    at listener (/var/www/crowdnote/node_modules/on-finished/index.js:169:15)
+    at onFinish (/var/www/crowdnote/node_modules/on-finished/index.js:100:5)
+    at callback (/var/www/crowdnote/node_modules/ee-first/index.js:55:10)
+    at IncomingMessage.onevent (/var/www/crowdnote/node_modules/ee-first/index.js:93:5)
+    at IncomingMessage.emit (events.js:180:13)
+    at endReadableNT (_stream_readable.js:1106:12)
+    at process._tickCallback (internal/process/next_tick.js:114:19)
+Tue, 23 Oct 2018 16:11:10 GMT body-parser deprecated undefined extended: provide extended option at retina.js:29:20
+(node:2525) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 23 Oct 2018 16:44:42 GMT body-parser deprecated undefined extended: provide extended option at retina.js:29:20
+(node:2696) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 23 Oct 2018 16:45:34 GMT body-parser deprecated undefined extended: provide extended option at retina.js:29:20
+(node:2711) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Tue, 23 Oct 2018 17:00:18 GMT body-parser deprecated undefined extended: provide extended option at retina.js:29:20
+(node:2780) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Wed, 24 Oct 2018 17:50:21 GMT body-parser deprecated undefined extended: provide extended option at retina.js:29:20
+(node:11719) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Fri, 26 Oct 2018 14:27:28 GMT body-parser deprecated undefined extended: provide extended option at retina.js:29:20
+(node:30950) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Fri, 26 Oct 2018 17:29:57 GMT body-parser deprecated undefined extended: provide extended option at retina.js:29:20
+(node:32315) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Wed, 31 Oct 2018 13:00:59 GMT body-parser deprecated undefined extended: provide extended option at mtap.js:29:20
+(node:11334) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Error: Failed to lookup view "ejs/mtap_2018/task_0" in views directory "/var/www/crowdnote/views"
+    at Function.render (/var/www/crowdnote/node_modules/express/lib/application.js:580:17)
+    at ServerResponse.render (/var/www/crowdnote/node_modules/express/lib/response.js:971:7)
+    at /var/www/crowdnote/mtap.js:429:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/mtap.js:44:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+Error: Failed to lookup view "ejs/mtap_2018/task_0" in views directory "/var/www/crowdnote/views"
+    at Function.render (/var/www/crowdnote/node_modules/express/lib/application.js:580:17)
+    at ServerResponse.render (/var/www/crowdnote/node_modules/express/lib/response.js:971:7)
+    at /var/www/crowdnote/mtap.js:429:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/mtap.js:44:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+Error: Failed to lookup view "ejs/mtap_2018/task_0" in views directory "/var/www/crowdnote/views"
+    at Function.render (/var/www/crowdnote/node_modules/express/lib/application.js:580:17)
+    at ServerResponse.render (/var/www/crowdnote/node_modules/express/lib/response.js:971:7)
+    at /var/www/crowdnote/mtap.js:429:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/mtap.js:44:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+Error: Failed to lookup view "ejs/mtap_2018/task_0" in views directory "/var/www/crowdnote/views"
+    at Function.render (/var/www/crowdnote/node_modules/express/lib/application.js:580:17)
+    at ServerResponse.render (/var/www/crowdnote/node_modules/express/lib/response.js:971:7)
+    at /var/www/crowdnote/mtap.js:429:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/mtap.js:44:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+TypeError: Cannot read property 'qtd' of undefined
+    at /var/www/crowdnote/mtap.js:583:17
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/mtap.js:44:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at cors (/var/www/crowdnote/node_modules/cors/lib/index.js:188:7)
+    at /var/www/crowdnote/node_modules/cors/lib/index.js:224:17
+TypeError: Cannot read property 'qtd' of undefined
+    at /var/www/crowdnote/mtap.js:583:17
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/mtap.js:44:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at cors (/var/www/crowdnote/node_modules/cors/lib/index.js:188:7)
+    at /var/www/crowdnote/node_modules/cors/lib/index.js:224:17
+TypeError: Cannot read property 'qtd' of undefined
+    at /var/www/crowdnote/mtap.js:583:17
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/mtap.js:44:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at cors (/var/www/crowdnote/node_modules/cors/lib/index.js:188:7)
+    at /var/www/crowdnote/node_modules/cors/lib/index.js:224:17
+TypeError: Cannot read property 'qtd' of undefined
+    at /var/www/crowdnote/mtap.js:583:17
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/mtap.js:44:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at cors (/var/www/crowdnote/node_modules/cors/lib/index.js:188:7)
+    at /var/www/crowdnote/node_modules/cors/lib/index.js:224:17
+TypeError: Cannot read property 'qtd' of undefined
+    at /var/www/crowdnote/mtap.js:583:17
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/mtap.js:44:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at cors (/var/www/crowdnote/node_modules/cors/lib/index.js:188:7)
+    at /var/www/crowdnote/node_modules/cors/lib/index.js:224:17
+TypeError: Cannot read property 'qtd' of undefined
+    at /var/www/crowdnote/mtap.js:583:17
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/mtap.js:44:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at cors (/var/www/crowdnote/node_modules/cors/lib/index.js:188:7)
+    at /var/www/crowdnote/node_modules/cors/lib/index.js:224:17
+Wed, 31 Oct 2018 13:14:10 GMT body-parser deprecated undefined extended: provide extended option at mtap.js:29:20
+(node:11955) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+TypeError: Cannot read property 'qtd' of undefined
+    at /var/www/crowdnote/mtap.js:583:17
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/mtap.js:44:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at cors (/var/www/crowdnote/node_modules/cors/lib/index.js:188:7)
+    at /var/www/crowdnote/node_modules/cors/lib/index.js:224:17
+TypeError: Cannot read property 'qtd' of undefined
+    at /var/www/crowdnote/mtap.js:583:17
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/mtap.js:44:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at cors (/var/www/crowdnote/node_modules/cors/lib/index.js:188:7)
+    at /var/www/crowdnote/node_modules/cors/lib/index.js:224:17
+Wed, 31 Oct 2018 13:15:35 GMT body-parser deprecated undefined extended: provide extended option at mtap.js:29:20
+(node:11983) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Wed, 31 Oct 2018 14:12:41 GMT body-parser deprecated undefined extended: provide extended option at mtap.js:29:20
+module.js:545
+    throw err;
+    ^
+
+Error: Cannot find module './aggregation/mtap_2018/task_4.js'
+    at Function.Module._resolveFilename (module.js:543:15)
+    at Function.Module._load (module.js:470:25)
+    at Module.require (module.js:593:17)
+    at require (internal/module.js:11:18)
+    at init (/var/www/crowdnote/mtap.js:197:28)
+    at Object.<anonymous> (/var/www/crowdnote/mtap.js:132:1)
+    at Module._compile (module.js:649:30)
+    at Object.Module._extensions..js (module.js:660:10)
+    at Module.load (module.js:561:32)
+    at tryModuleLoad (module.js:501:12)
+    at Function.Module._load (module.js:493:3)
+    at Function.Module.runMain (module.js:690:10)
+    at startup (bootstrap_node.js:194:16)
+    at bootstrap_node.js:666:3
+Wed, 31 Oct 2018 14:13:46 GMT body-parser deprecated undefined extended: provide extended option at mtap.js:29:20
+(node:12222) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Error: Failed to lookup view "ejs/mtap_2018/task_4" in views directory "/var/www/crowdnote/views"
+    at Function.render (/var/www/crowdnote/node_modules/express/lib/application.js:580:17)
+    at ServerResponse.render (/var/www/crowdnote/node_modules/express/lib/response.js:971:7)
+    at /var/www/crowdnote/mtap.js:429:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/mtap.js:44:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+events.js:165
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: EBADF: bad file descriptor, read
+Emitted 'error' event at:
+    at fs.read (fs.js:2122:12)
+    at FSReqWrap.wrapper [as oncomplete] (fs.js:680:17)
+Fri, 30 Nov 2018 14:19:01 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:29604) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Fri, 30 Nov 2018 14:19:09 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:29620) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Fri, 30 Nov 2018 14:23:50 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+module.js:545
+    throw err;
+    ^
+
+Error: Cannot find module './aggregation/libras/task_6.js'
+    at Function.Module._resolveFilename (module.js:543:15)
+    at Function.Module._load (module.js:470:25)
+    at Module.require (module.js:593:17)
+    at require (internal/module.js:11:18)
+    at init (/var/www/crowdnote/libras.js:186:28)
+    at Object.<anonymous> (/var/www/crowdnote/libras.js:121:1)
+    at Module._compile (module.js:649:30)
+    at Object.Module._extensions..js (module.js:660:10)
+    at Module.load (module.js:561:32)
+    at tryModuleLoad (module.js:501:12)
+    at Function.Module._load (module.js:493:3)
+    at Function.Module.runMain (module.js:690:10)
+    at startup (bootstrap_node.js:194:16)
+    at bootstrap_node.js:666:3
+Fri, 30 Nov 2018 14:25:08 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+module.js:545
+    throw err;
+    ^
+
+Error: Cannot find module './aggregation/libras/task_6.js'
+    at Function.Module._resolveFilename (module.js:543:15)
+    at Function.Module._load (module.js:470:25)
+    at Module.require (module.js:593:17)
+    at require (internal/module.js:11:18)
+    at init (/var/www/crowdnote/libras.js:186:28)
+    at Object.<anonymous> (/var/www/crowdnote/libras.js:121:1)
+    at Module._compile (module.js:649:30)
+    at Object.Module._extensions..js (module.js:660:10)
+    at Module.load (module.js:561:32)
+    at tryModuleLoad (module.js:501:12)
+    at Function.Module._load (module.js:493:3)
+    at Function.Module.runMain (module.js:690:10)
+    at startup (bootstrap_node.js:194:16)
+    at bootstrap_node.js:666:3
+Fri, 30 Nov 2018 14:25:14 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+module.js:545
+    throw err;
+    ^
+
+Error: Cannot find module './aggregation/libras/task_6.js'
+    at Function.Module._resolveFilename (module.js:543:15)
+    at Function.Module._load (module.js:470:25)
+    at Module.require (module.js:593:17)
+    at require (internal/module.js:11:18)
+    at init (/var/www/crowdnote/libras.js:186:28)
+    at Object.<anonymous> (/var/www/crowdnote/libras.js:121:1)
+    at Module._compile (module.js:649:30)
+    at Object.Module._extensions..js (module.js:660:10)
+    at Module.load (module.js:561:32)
+    at tryModuleLoad (module.js:501:12)
+    at Function.Module._load (module.js:493:3)
+    at Function.Module.runMain (module.js:690:10)
+    at startup (bootstrap_node.js:194:16)
+    at bootstrap_node.js:666:3
+Fri, 30 Nov 2018 14:25:55 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:29766) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Error: Failed to lookup view "ejs/libras/task_6" in views directory "/var/www/crowdnote/views"
+    at Function.render (/var/www/crowdnote/node_modules/express/lib/application.js:580:17)
+    at ServerResponse.render (/var/www/crowdnote/node_modules/express/lib/response.js:971:7)
+    at /var/www/crowdnote/libras.js:418:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/libras.js:39:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+Error: Failed to lookup view "ejs/libras/task_6" in views directory "/var/www/crowdnote/views"
+    at Function.render (/var/www/crowdnote/node_modules/express/lib/application.js:580:17)
+    at ServerResponse.render (/var/www/crowdnote/node_modules/express/lib/response.js:971:7)
+    at /var/www/crowdnote/libras.js:423:13
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/libras.js:39:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+Error: Failed to lookup view "ejs/libras/task_6" in views directory "/var/www/crowdnote/views"
+    at Function.render (/var/www/crowdnote/node_modules/express/lib/application.js:580:17)
+    at ServerResponse.render (/var/www/crowdnote/node_modules/express/lib/response.js:971:7)
+    at /var/www/crowdnote/libras.js:418:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/libras.js:39:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+Error: Failed to lookup view "ejs/libras/task_6" in views directory "/var/www/crowdnote/views"
+    at Function.render (/var/www/crowdnote/node_modules/express/lib/application.js:580:17)
+    at ServerResponse.render (/var/www/crowdnote/node_modules/express/lib/response.js:971:7)
+    at /var/www/crowdnote/libras.js:418:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/libras.js:39:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+Error: Failed to lookup view "ejs/libras/task_6" in views directory "/var/www/crowdnote/views"
+    at Function.render (/var/www/crowdnote/node_modules/express/lib/application.js:580:17)
+    at ServerResponse.render (/var/www/crowdnote/node_modules/express/lib/response.js:971:7)
+    at /var/www/crowdnote/libras.js:418:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/libras.js:39:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+Error: Failed to lookup view "ejs/libras/task_6" in views directory "/var/www/crowdnote/views"
+    at Function.render (/var/www/crowdnote/node_modules/express/lib/application.js:580:17)
+    at ServerResponse.render (/var/www/crowdnote/node_modules/express/lib/response.js:971:7)
+    at /var/www/crowdnote/libras.js:418:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/libras.js:39:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+Error: Failed to lookup view "ejs/libras/task_6" in views directory "/var/www/crowdnote/views"
+    at Function.render (/var/www/crowdnote/node_modules/express/lib/application.js:580:17)
+    at ServerResponse.render (/var/www/crowdnote/node_modules/express/lib/response.js:971:7)
+    at /var/www/crowdnote/libras.js:418:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/libras.js:39:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+Fri, 30 Nov 2018 18:19:53 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:32108) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Fri, 30 Nov 2018 18:24:32 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:32168) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Error: Failed to lookup view "ejs/libras/libras001" in views directory "/var/www/crowdnote/views"
+    at Function.render (/var/www/crowdnote/node_modules/express/lib/application.js:580:17)
+    at ServerResponse.render (/var/www/crowdnote/node_modules/express/lib/response.js:971:7)
+    at /var/www/crowdnote/libras.js:537:13
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/route.js:137:13)
+    at Route.dispatch (/var/www/crowdnote/node_modules/express/lib/router/route.js:112:3)
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:281:22
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+    at /var/www/crowdnote/libras.js:39:6
+    at Layer.handle [as handle_request] (/var/www/crowdnote/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/var/www/crowdnote/node_modules/express/lib/router/index.js:317:13)
+    at /var/www/crowdnote/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/var/www/crowdnote/node_modules/express/lib/router/index.js:335:12)
+    at next (/var/www/crowdnote/node_modules/express/lib/router/index.js:275:10)
+Fri, 30 Nov 2018 18:25:20 GMT body-parser deprecated undefined extended: provide extended option at libras.js:29:20
+(node:32195) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Thu, 06 Dec 2018 19:09:04 GMT body-parser deprecated undefined extended: provide extended option at libras.js:31:20
+(node:21102) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Thu, 06 Dec 2018 19:14:56 GMT body-parser deprecated undefined extended: provide extended option at libras.js:31:20
+(node:21189) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Fri, 07 Dec 2018 11:56:22 GMT body-parser deprecated undefined extended: provide extended option at libras.js:31:20
+(node:851) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client
+Fri, 07 Dec 2018 12:23:22 GMT body-parser deprecated undefined extended: provide extended option at libras.js:31:20
+(node:1049) DeprecationWarning: `open()` is deprecated in mongoose >= 4.11.0, use `openUri()` instead, or set the `useMongoClient` option if using `connect()` or `createConnection()`. See http://mongoosejs.com/docs/connections.html#use-mongo-client

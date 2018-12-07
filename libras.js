@@ -1,9 +1,11 @@
 // ---------------------- Requires, Includes and Globals ------------------------
 
-var project = 'libras';
+var project = 'action_units';
+//var project = 'libras';
 var qtd_target = 0;
 var min_convergence = 0;
-var activeTask = 3;
+var activeTask = 1;
+//var activeTask = 6;
 var kind = 'job';
 var group = 'false';
 
@@ -92,6 +94,7 @@ itemSchema = Schema({
 	source_id: String,
 
 	//LIBRAS
+	action_units: String,
 	marks: String,
 	groundtruth: String,
 	crowd: String,
@@ -531,6 +534,28 @@ res.writeHead(200, {'Content-Type':  response.headers["content-type"] });
 });
 	
 });
+
+
+app.get('/libras01', function(req, res) {
+        res.render('ejs/libras/libras01', null);
+});
+
+app.get('/libras02', function(req, res) {
+        res.render('ejs/libras/libras02', null);
+});
+
+
+app.get('/libras03', function(req, res) {
+        res.render('ejs/libras/libras03', null);
+});
+
+
+app.get('/libras04', function(req, res) {
+        res.render('ejs/libras/libras04', null);
+});
+
+
+
 
 app.get('/player', function(req, res) {
 	var contents = new Array()

@@ -1,0 +1,690 @@
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Uma p&aacute;gina para anota&ccedil;&atilde;o de v&iacute;deo.">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<title></title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link href="https://code.getmdl.io/1.3.0/material.indigo-blue.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://crowdnoter.app/include?name=client.min&amp;mime=js"></script>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/rateYo/2.3.2/jquery.rateyo.min.js"></script>
+
+<style type="text/css">.modal {
+  display: none;
+  font-size:30px;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  color: white;
+  position: fixed;
+  z-index: 100;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.75);
+}
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  #circle {
+    float:left;
+    width: 40px;
+    height: 40px;
+    background: blue;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+  }
+  #retangle-space {
+    float:left;
+    height: 40px;
+    width:  1px;
+    background: light-grey;
+  }
+  #retangle-mark {
+    float:left;
+    height: 40px;
+    width:  1px;
+    background: orange;
+  }
+  .ui-draggable, .ui-droppable {
+  background-position: top;
+}
+
+.ui-widget-header{background-image:none;background-color: orange;}
+.ui-widget-content { background: light-grey; }
+
+
+.checked {
+    color: orange;
+}
+
+
+
+</style>
+
+
+
+
+
+<div style="background:#3F51B5;">
+
+
+<center>
+  <table style="border-radius: 10px;margin-top:0px;align:center;background-color:#3368E6;font-size:18px;color:white;width: 1000px;border-style: groove; border-color: #555555;border-width: 1px;">
+      <tr align="center">
+
+           <td align="center" >
+Conteúdo Completo<br><textarea id="content" style="border-radius: 10px;width: 620px"></textarea>
+          </td>       
+
+          <td>
+Que significado você atribuiria a este sinal ? <br><textarea id="q2" style="border-radius: 10px;width: 360px" onclick="q2.select();"></textarea>
+          </td>
+      </tr>
+      <tr>
+
+          <td align="center" >
+A delimitação feita pela crowd permite a compreensão deste sinal? <div id="q1"></div>
+          </td>
+
+          <td style="display:none;" align="center">
+O inicio deste sinal foi identificado corretamente pela crowd ?<div id="q3"></div> 
+          </td>
+          <td align="center">
+Observação<br><textarea id="q4" style="border-radius: 10px;width: 360px" onclick="q4.select();"></textarea>          </td>
+      </tr>
+  </table>
+</center>
+
+
+  <center>
+   
+    <table style="margin-top:10px;">
+      <tbody>
+           <tr>
+
+          <td style="width: 1000px;">
+            <center>
+
+                <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_prev" onclick="navigate(-1)" style="border-radius: 10px;width: 145px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"><img src="http://www.clker.com/cliparts/9/4/2/7/13498058381938458744Back%20Button.svg.med.png" width="30">&nbsp;&nbsp;Anterior</a>
+
+                <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_next" onclick="navigate(1)" style="border-radius: 10px;width: 145px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Próximo&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/1/f/a/2/1349807104707654381Next%20Button.svg.med.png" width="30"></a>
+
+                <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt_context' id="bt_context" onclick="contextualize()" style="border-radius: 10px;width: 160px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Contexto&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/C/0/j/q/E/J/blue-chain-md.png" width="30"></a>
+
+
+                <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="playPause()" style="border-radius: 10px;width: 165px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Reproduzir&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/7/x/D/A/T/W/blue-play-button-md.png" width="30"></a>
+
+
+                </input>
+
+    <!--a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="sendContribution()" style="display:none;border-radius: 10px;width: 210px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Finalizar&nbsp;&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/p/M/1/8/q/8/documnet-save-md.png" width="30"></a-->    
+ 
+    <select autofocus="" class="mdl-button mdl-js-button" id="list_marks2" name="list_marks2" onchange="syncMark(2)" style="margin-top:0px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;width: 350px;" type="select"><option value="0">0</option>
+    </select>  
+    
+
+      </center>
+          </td>
+        </tr>
+</tbody>
+</table>
+    <table style="margin-top:10px;">
+      <tbody>
+        <tr>
+          <td style="width: 500px;display:none;">
+            <p align="center" style="font-size:22px;color:white;">
+              <input type="checkbox"  id="ck1" > &nbsp;
+              Reproduzir Sinais dos Intérpretes
+            </p>
+            <p align="center">
+
+              <select autofocus="" class="mdl-textfield__input" id="list_marks" name="list_marks" onchange="syncMark(1)" style="margin-top:10px;margin-left:0px;background-color:#3368E6;font-size:18px;color:white;width: 420px;" type="select"><option value="0">0</option>
+              </select>               
+              
+            </p>
+              <div id="player" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">?|</div>
+              <div class="w3-light-grey"> 
+                <div id="timeline" class='w3-red' style="height:30px; box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"></div>
+              </div> 
+              <div id="slider"></div>             
+          </td>
+          <td style="width: 1000px;">
+
+
+
+            <p align="center" style="font-size:22px;color:white;display:none;">
+              <input type="checkbox" checked="checked" id="ck2" > &nbsp;
+              Reproduzir Sinais da Crowd
+            </p>
+
+              <div id="player2" style="box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">?|</div>
+              <div class="w3-light-grey"> 
+                <div id="timeline2" class='w3-red' style="height:30px; box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);"></div>
+              </div>
+              <div id="slider2"></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+  </center>
+</div>
+
+<!--a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" name='bt' id="bt_play_pause" onclick="sendContribution()" style="margin-top: 10px;margin-left: 10px;border-radius: 10px;width: 180px;box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-moz-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);-webkit-box-shadow: 12px 29px 81px 0px rgba(0,0,0,0.75);">Finalizar&nbsp;&nbsp;&nbsp;<img src="http://www.clker.com/cliparts/p/M/1/8/q/8/documnet-save-md.png" width="30"></a--> 
+
+
+
+
+
+
+
+
+
+
+<script>
+
+$(function () {
+ 
+  $("#q1").rateYo({
+    starWidth: "30px"
+  });
+
+ $("#q3").rateYo({
+    starWidth: "30px"
+  });
+
+
+ 
+});
+
+  var q1_list = new Array();
+  var q2_list = new Array();
+  var q3_list = new Array();
+  var q4_list = new Array();
+
+  var q1;
+  var q2;
+  var q3;
+  var q4;
+
+
+  var display = 0;
+
+  var index;
+  var timeline;
+  var timeline2;
+  var start_1;
+  var end_1;
+  var start_2;
+  var end_2;
+  var source_id = '001';
+  var video_width = 640;
+  var mark_bar;
+  var mark_bar2;
+  var marks = new Array();
+  var marks2 = new Array();
+  var list_marks;
+  var list_marks2;
+  var info;
+  var data;
+  var signals;  
+  var signals2;
+  var ends;
+  var player;
+  var player2;
+  var duration;
+  var instructions;
+  var presentation;
+  var ck1;
+  var ck2;
+  var bt_context;
+  var tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+
+  var firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  function tiltTime(delta){
+    player.pauseVideo();
+    player2.pauseVideo();
+    player.seekTo(player.getCurrentTime() + delta);
+  }
+  function tiltTime2(delta){
+    player.pauseVideo();
+    player2.pauseVideo();
+    player2.seekTo(player2.getCurrentTime() + delta);
+  }
+
+  function onYouTubeIframeAPIReady() {
+
+
+    //var input = {"data":[{"_id":"5bb24cf3facbbf5f955d17b9","uri":"6PURz91hDlY","item_id":"5ba52358facbbf5f955d17b5","start":"0.5","end":"14","groundtruth":"1.94,3.25 ,4.36 ,5.65 ,6.34 ,7.47 ,8.47 ,9.26 ,10.36","crowd":"1.9663,3.43675,4.68392,5.75355,6.579289999999999,7.58353,8.640000000000004,9.4,10.4593960252809","ends":"3.066299999999996,4.236749999999997,5.333919999999997,6.203549999999998,7.329289999999997,8.233530000000002,9.140000000000011,10.400000000000015,11.559396025280916","content":"Há muito tempo atrás a humanidade aprendeu a utilizar a força do vento.","segmentation":"5,5,4.9,5,5,5,5,5,4.9","translation":"Intensificador,Tempo,Passado,Coisas,Humanidade,Aprender,Usar,Esforço,Vento","observation":"Voltando MUITO tempo atrás.,,Tempo passado.,,,Aprendeu.,Utilizar.,Ação que gera trabalho.,","starts":"4.8,4,4,4.5,5,4.6,4.5,4.6,5","convergence":"0"}],"info":{"item_index":1,"job_id":"04be605b0430a585b3a6d52af452e64e","fingerprint":"3238a4d3b387799ee5ff8f6c000a9503"}};
+
+
+    //var input = {"data":[{"_id":"5bb24d14facbbf5f955d17ba","uri":"K6Omajhj-pQ","item_id":"5ba52371facbbf5f955d17b6","start":"0.5","end":"15","groundtruth":"2.01,2.71,4.01,5.74,6.82,7.57,8.62,9.74,10.65","crowd":"2.03044,2.72,3.913830671734672,5.76432,6.9661599999999995,7.61204,8.610000000000005,9.590000000000002,10.844270000000003,12.843397164954656","ends":"2.4304399999999986,3.7699999999999965,5.513830671734667,6.614319999999997,7.5161599999999975,8.162040000000001,9.410000000000016,10.390000000000013,12.144270000000022,13.79339716495467","content":"Este esforço contínuo que gera energia se chama energia eólica.","segmentation":"3.9,5,5,5,4.8,4.9,5,5,5","translation":"Este,Esforço,Contínuo,Movimento,Fazer,Energia,Se Chama,Energia,Eólica","observation":"Contextualização.,,Continuidade ou progressão.,,Que faz.,,É conhecido como.,,Sinal específico.","starts":"5,4.9,4.9,5,4.6,4.4,4.5,4.6,4.6","convergence":"0"}],"info":{"item_index":2,"qtd":null,"job_id":"6c17f7169aedcc1341022f131f0b50c2","fingerprint":"3238a4d3b387799ee5ff8f6c000a9503"}};
+
+
+    //var input = {"data":[{"_id":"5bb24d40facbbf5f955d17bb","uri":"L7M26dOa194","item_id":"5ba52388facbbf5f955d17b7","start":"0.5","end":"31","groundtruth":"1.73 ,2.93 ,4.16 ,5.33 ,6.14 ,6.76 ,8.29 ,8.65 ,9.69 ,10.53 ,11.85 ,13.26 ,14.05 ,14.84 ,15.43 ,16.15 ,17.37 ,17.96 ,18.51 ,20.27 ,20.83 ,21.63 ,22.87 ,24.33 ,25.75 ,26.37 ,27.03","crowd":"2.04,3.37628719862434,4.861909999999998,5.51795,6.03,6.7299999999999995,8.23825070645731,8.868956815745635,9.7414,10.730000000000002,12.12223,13.48846,14.200000000000003,14.91841,15.776100000000003,16.27,17.439999999999998,18.080000000000002,18.755730000000003,20.51792,21.12,21.82,23.300950000000004,24.590000000000003,25.88025784311815,26.625931765212236,27.07593,28.68466","ends":"3.2899999999999956,4.076287198624338,5.211909999999997,5.9179499999999985,6.629999999999998,8.179999999999998,8.588250706457314,9.418956815745643,10.44140000000001,11.830000000000018,12.922230000000011,14.23846000000001,14.75000000000001,15.368410000000006,16.026100000000007,17.12000000000001,17.940000000000005,18.430000000000007,19.455730000000013,20.917920000000006,21.570000000000007,22.770000000000014,24.200950000000017,25.340000000000014,26.130257843118155,26.97593176521224,28.125930000000015,29.084660000000007","content":"As pás do moinho são movimentadas pelo vento, como um cata-vento, e essa energia pode ser uzado para moer grãos produzindo farinha.","segmentation":"5,4.8,3,4.8,5,5,4.8,5,5,5,5,3,5,5,2,5,4.8,5,5,5,5,5,5,5,5,3,4.9,5","translation":"Classificador Descritivo,Giro,Vento,Classificador Descritivo,Classificador Descritivo,Giro,Marcação,Usar,Energia,Eólica,Trabalho,Este,Movimento,Classificador Descritivo,Classificador Descritivo,Giro,Tal qual,Classificador Descritivo,Cata-Vento,É possível,Usar,Grão,Moer,Preparar,Letra F,Farinha,Branco","observation":"Representando um Moinho de Vento.,Contextualizado no moinho ilustrado anteriormente.,,Objeto horizontal largo e plano. Pá horizontal do moinho.,Objeto vertical largo e plano. Pá vertical do moinho.,Girando as pás do moinho.,Contextualização.,Utilizar. Isso usa energia.,,Energia do Vento. Sinal específico.,Movimento ou Produção,Contextualização.,Movimento de trabalho.,Objeto horizontal largo e plano. Pá horizontal do moinho.,Objeto vertical largo e plano. Pá vertical do moinho.,Este movimento gira as pás.,Assim como um...,Numeral 1. Haste do catavento.,,,,Cereal ou amendoim.,Moer grãos.,,F de farinha.,Poeira ou terra.,Farinha branca é a farinha de trigo.","starts":"4.5,5,4.6,4.9,4.9,4.9,0,5,4.6,4.4,4.5,4.2,4.7,4.9,5,4.6,5,4.7,0,4.8,4.8,5,0,4.7,4.6,4.9,5,4.8","convergence":"0"}],"info":{"item_index":3,"job_id":"b0ce415b926da8feb441c8ac8f3c6aba","fingerprint":"3238a4d3b387799ee5ff8f6c000a9503"}};
+
+
+    var input = {"data":[{"_id":"5bb24d59facbbf5f955d17bc","uri":"bWG9alyOBQw","item_id":"5ba523a1facbbf5f955d17b8","start":"0.5","end":"20","groundtruth":"2.35, 2.76 ,3.47 ,4.07 ,4.67 ,5.28 ,5.89 ,6.28 ,6.79 ,7.38 ,8.58 ,9.38 ,9.88  ,11.11 ,12.09 ,13.29 ,13.89 ,14.53 ,15.11 ,15.70 ,16.22","crowd":"2.29237,2.9559257512430195,3.48,3.99,4.66741,Não Identificado pela Crowd,5.80143,6.180000000000001,6.63752,7.53623,8.908515703679668,9.33852,9.88,11.109270000000016,12.15428,13.218883761568048,13.81888,14.50076,Não Identificado pela Crowd,15.690000000000001,16.497180000000007,17.54008,","ends":"2.6923699999999986,3.405925751243018,3.9299999999999984,4.589999999999998,5.117409999999999,5.89,6.151429999999999,6.679999999999999,7.187519999999998,8.386230000000003,9.318515703679682,9.688520000000006,11.01,11.809270000000026,12.954280000000011,13.768883761568055,14.268880000000006,14.900760000000005,15.11,16.040000000000006,16.897180000000013,18.29008000000001,","content":"PHOTODISC/GETTY/IMAGES","segmentation":"5,5,4.9,4.9,4.8,5,5,5,4.9,4.9,4.9,5,5,5,5,4.9,5,5,5,4.9,5,5","translation":"Letra P,Letra H,Letra O,Letra T,Letra O,Letra D,Letra I,Letra S,Letra C,/ barra,Letra G,Letra E,Letra T,Letra Y,/ barra,Letra I,Letra M,Letra A,Letra G,Letra E,Letra S","observation":", ,,,,,,,,,,,A Crowd identificou as duas letras T consecutivas por conta da fluência.,,,,,,,,","starts":"0,2.9,4.9,4.9,4.8,4.9,4.9,4.5,4.8,4.6,4.5,4.3,4.8,5,5,4.6,4.6,4.8,4.6,4.6,4.9,4","convergence":"0"}],"info":{"item_index":0,"job_id":"de54b5a5bcb207d6418f1197d176a5ff","fingerprint":"3238a4d3b387799ee5ff8f6c000a9503"}};
+
+
+
+
+    init(input);
+
+    //$.getJSON('https://crowdnoter.app/job', function(d){init(d);});
+  }
+
+  function init(input){
+
+    index = 0;
+
+    info = input.info;
+    data = input.data[0];
+    signals = data.groundtruth.split(',');    
+    signals2 = data.crowd.split(',');   
+    ends = data.ends.split(',');
+    translations = data.translation.split(',');
+    observations = data.observation.split(',');
+    segmentations = data.segmentation.split(',');
+    starts = data.starts.split(',');
+
+    timeline = document.getElementById("timeline");
+    timeline2 = document.getElementById("timeline2");
+
+    list_marks = document.getElementById("list_marks");
+    list_marks.remove(0);
+    mark_bar = document.getElementById("mark_bar");
+
+    list_marks2 = document.getElementById("list_marks2");
+    list_marks2.remove(0);
+    mark_bar2 = document.getElementById("mark_bar2");
+
+    q1 = document.getElementById("q1");
+    q2 = document.getElementById("q2");
+    q3 = document.getElementById("q3");
+    q4 = document.getElementById("q4");
+
+    ck1 = document.getElementById("ck1");
+    ck2 = document.getElementById("ck2");
+
+    bt_context = document.getElementById("bt_context");
+    bt_context.style.opacity = 0.3;
+
+    document.getElementById("content").value = data.content;
+
+  $( function() {
+    var start = parseFloat(data.start);
+    var end = parseFloat(data.end);
+    $( "#slider" ).slider({
+      range: true,
+      step: 0.01,
+      min: start,
+      max: end,
+      values: [ parseFloat(data.start) + 1, parseFloat(data.end)-1 ],
+      slide: function( event, ui ) {}
+    });
+    $( "#slider2" ).slider({
+      range: true,
+      step: 0.01,
+      min: start,
+      max: end,
+      values: [ parseFloat(data.start) + 1, parseFloat(data.end)-1 ],
+      slide: function( event, ui ) {}
+    });
+  } );
+
+    player = new YT.Player(
+      'player',
+      {
+        playerVars: {cc_lang_pref:'en', cc_load_policy: 0, autoplay:0 ,rel: 0, controls: 2, disablekb: 1},
+        height: '360',
+        width: '640',
+        autohide: '0',
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      }
+    );
+    
+    player2 = new YT.Player(
+      'player2',
+      {
+        playerVars: {cc_lang_pref:'en', cc_load_policy: 0, autoplay:0 ,rel: 0, controls: 2, disablekb: 1},
+        height: '360',
+        width: '640',
+        autohide: '0',
+        events: {
+          'onReady': onPlayerReady,
+          'onStateChange': onPlayerStateChange
+        }
+      }
+    );
+
+    for(var v=0; v < signals.length; v++){
+      q1_list[v] = segmentations[v];
+      q2_list[v] = translations[v];
+      q3_list[v] = starts[v];
+      q4_list[v] = observations[v];
+      initMark(1,signals[v],ends[v]);
+      initMark(2,signals2[v],ends[v]);
+    }
+    list_marks.selectedIndex = 0;
+    list_marks2.selectedIndex = 0;
+    setValues(0);
+  }
+
+  function onPlayerReady(event) {
+    start_1 = data.start;
+    end_1 = data.end
+    start_2 = data.start;
+    end_2 = data.end
+    duration = (data.end - data.start) ;
+    player.loadVideoById(data.uri, parseFloat(data.start)); 
+    player2.loadVideoById(data.uri, parseFloat(data.start));    
+
+    syncMark(0);
+
+
+    setInterval(function() {syncTimeline();}, 100);
+    
+  }
+
+ function syncTimeline(){
+  var progress = 100 * (player.getCurrentTime() - data.start) / (data.end - data.start );
+  timeline.style.width =  progress + '%';
+  progress = 100 * (player2.getCurrentTime() - data.start) / (data.end - data.start );
+  timeline2.style.width =  progress + '%';
+  if(player.getCurrentTime() > data.end || player.getCurrentTime() < data.start){
+        player.pauseVideo();
+        player.seekTo(parseFloat($( "#slider" ).slider( "values", 0 )));
+  }
+  if(player2.getCurrentTime() > data.end || player2.getCurrentTime() < data.start){
+        player2.pauseVideo();
+        player2.seekTo(parseFloat($( "#slider2" ).slider( "values", 0 )));
+  }
+  setTimeout(restartVideoSection,  duration * 100);
+ }
+
+  function onPlayerStateChange(event) {
+    if(player.getCurrentTime() > data.end || player.getCurrentTime() < data.start){
+      player.pauseVideo();
+      player.seekTo(parseFloat($( "#slider" ).slider( "values", 0 )));
+    }
+    if(player2.getCurrentTime() > data.end || player2.getCurrentTime() < data.start){
+      player2.pauseVideo();
+      player2.seekTo(parseFloat($( "#slider2" ).slider( "values", 0 )));
+    }
+    if (event.data == YT.PlayerState.PLAYING) {
+        setTimeout(restartVideoSection,  duration * 50);
+    }
+  }
+
+  function restartVideoSection() {
+    if( (player.getCurrentTime() > parseFloat($( "#slider" ).slider( "values", 1 ))) || (player2.getCurrentTime() > parseFloat($( "#slider2" ).slider( "values", 1 )))){
+            player2.pauseVideo();
+      player2.seekTo(parseFloat($( "#slider2" ).slider( "values", 0 )));
+      player.pauseVideo();
+      player.seekTo(parseFloat($( "#slider" ).slider( "values", 0 )));
+    }
+  }
+
+  function initMark(l,start,stop){
+    var list;
+    var Op = document.createElement("OPTION");
+    if(l==1) list = list_marks;
+    if(l==2) list = list_marks2;
+    stop = parseFloat(stop) - 0.1;
+    stop = stop.toFixed(2);
+    if(start != 'Não Identificado pela Crowd'){
+      Op.text = translations[list.options.length];
+    }else{
+      Op.text = start;
+    }
+    Op.value = start+":"+ stop;
+    list.options[list.options.length] = Op;
+    list.selectedIndex = list.options.length -1;
+  } 
+
+  function syncMark(l){
+
+    if(player2.getCurrentTime() > ends[display]){
+      display++;
+    }else{
+      if(player2.getCurrentTime() < signals2[display]){
+        display--;
+      }
+    }
+
+console.log(display,index,player2.getCurrentTime());
+
+    bt_context.style.opacity = 0.3;
+
+    if(l == 0){
+      list_marks.selectedIndex = index;
+      list_marks2.selectedIndex = index;
+    }
+    if(l == 2){
+      list_marks.selectedIndex = list_marks2.selectedIndex;
+      index = list_marks2.selectedIndex;
+    }
+    var range = (list_marks.value).split(':');
+    player.seekTo(range[0]);
+    start_1 = range[0];
+    end_1 = range[1];
+    player.pauseVideo();
+    if(l == 1){
+      list_marks2.selectedIndex = list_marks.selectedIndex;
+      index = list_marks.selectedIndex;
+    }
+    range = (list_marks2.value).split(':');
+    if(range[0] != 'Não Identificado pela Crowd'){
+      player2.seekTo(range[0]);
+      start_2 = range[0];
+      if(range[1] != 'Não Identificado pela Crowd'){
+        end_2 = range[1];
+      }else{
+        end_2 = parseFloat(end_1) + 0.05;
+      }
+    }else{      
+      ck1.checked = true;
+      player2.seekTo(start_1);
+      start_2 = start_1;
+      end_2 = parseFloat(end_1) + 0.05;
+    }
+    player2.pauseVideo();
+    $( "#slider" ).slider( "values", [start_1,end_1] );
+    $( "#slider2" ).slider( "values", [start_2,end_2] );
+    setValues(index);
+  }  
+
+  function contextualize(){
+
+    var range, start, end, pos, prev, next;
+
+
+    if(bt_context.style.opacity == 0.3){
+
+        bt_context.style.opacity = 1;
+
+        prev = list_marks2.options[index];
+        pos = index;
+        if(index > 0){
+          prev = list_marks2.options[index-1];
+          pos = index - 1;
+        }
+        range = (prev.value).split(':');
+        start = range[0];
+        if(start == 'Não Identificado pela Crowd'){
+          range = (list_marks.options[pos].value).split(':');
+          start = range[0];
+        }
+
+        next = list_marks2.options[index];
+        pos = index;
+        if(index < list_marks2.options.length -1){
+          next = list_marks2.options[index+1];
+          pos = index + 1;
+        }
+        range = (next.value).split(':');
+        end = range[1];
+        if(end == 'Não Identificado pela Crowd'){
+          range = (list_marks.options[pos].value).split(':');
+          end = range[1];
+        }
+
+        player2.seekTo(start);
+        $( "#slider2" ).slider( "values", [start,end] );
+    }else{
+        syncMark(0);
+    }
+
+  }  
+
+
+  function setValues(i){
+    $("#q1").rateYo("rating",q1_list[i]);
+    q2.value = q2_list[i];
+    $("#q3").rateYo("rating",q3_list[i]);
+    q4.value = q4_list[i];
+  }
+
+
+  function playPause(){
+    //if(ck1.checked == true) player.playVideo();
+    if(ck2.checked == true) player2.playVideo();
+  }
+
+
+  function navigate(delta){
+
+    display = index;
+
+    q1_list[index] = $("#q1").rateYo("rating");
+    q2_list[index] = q2.value;
+    q3_list[index] = $("#q3").rateYo("rating");
+    q4_list[index] = q4.value;
+    if( (index + delta) < 0 ){
+      index = 0;
+    }else{
+      if( (index + delta) > ( list_marks.options.length -1)){
+        index = list_marks.options.length -1;
+      }else{
+        index += delta;
+      }
+    }
+    syncMark(0);
+  }
+
+  function sendContribution(){
+
+    q1_list[index] = $("#q1").rateYo("rating");
+    q2_list[index] = q2.value;
+    q3_list[index] = $("#q3").rateYo("rating");
+    q4_list[index] = q4.value;
+
+
+    var r = confirm('Deseja finalizar a contribuição para este vídeo?');
+    if(r == true){
+
+        for(var i=0; i<list_marks.options.length; i++){
+          marks.push(list_marks.options[i].value);
+        }
+        var queryForm = "<form method='post' action='https://crowdnoter.app/store'>";
+        queryForm += "<input type='hidden' id='uri' name='uri'  value='"+data.uri+"' > ";
+        queryForm += "<input type='hidden' id='item_id' name='item_id'  value='"+data._id+"' > ";
+        queryForm += "<input type='hidden' id='start' name='start'  value='"+data.start+"' > ";
+        queryForm += "<input type='hidden' id='end' name='end'  value='"+data.end+"' > ";
+        queryForm += "<input type='hidden' id='fingerprint' name='fingerprint'  value='"+info.fingerprint+"' > ";
+        queryForm += "<input type='hidden' id='job_id' name='job_id'  value='"+info.job_id+"' > ";
+        queryForm += "<input type='hidden' id='item_index' name='item_index'  value='"+info.item_index+"' > ";
+        queryForm += "<input type='hidden' id='source_id' name='source_id'  value='"+source_id+"' > ";
+
+        queryForm += "<input type='hidden' id='groundtruth' name='groundtruth'  value='"+data.groundtruth+"' > ";
+        queryForm += "<input type='hidden' id='crowd' name='crowd'  value='"+data.crowd+"' > ";
+
+        queryForm += "<input type='hidden' id='ends' name='ends'  value='"+data.ends+"' > ";
+
+        queryForm += "<input type='hidden' id='content' name='content'  value='"+data.content+"' > ";
+
+        queryForm += "<input type='hidden' id='segmentation' name='segmentation'  value='"+compactArray(q1_list)+"' > ";
+        queryForm += "<input type='hidden' id='translation' name='translation'  value='"+compactArray(q2_list)+"' > ";
+        queryForm += "<input type='hidden' id='starts' name='starts'  value='"+compactArray(q3_list)+"' > ";
+        queryForm += "<input type='hidden' id='observation' name='observation'  value='"+compactArray(q4_list)+"' > ";
+
+        queryForm += "";
+        $.ajax({
+          type: 'POST',
+          url: $(queryForm).attr('action'),
+          data: $(queryForm).serialize(),
+          success: function(result, status, request) {done();}
+        });
+
+    }
+  }
+
+  function done(){
+    $(location).attr('href', 'https://crowdnoter.app/eval');
+  }
+
+  function compactArray(v){
+      var str = "";
+      for(var i=0; i < (v.length - 1); i++){
+          str = str+v[i]+',';
+      }
+      return str+v[v.length - 1];
+  }
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+

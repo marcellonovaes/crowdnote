@@ -416,6 +416,25 @@ app.get('/enrichment01', function(req, res) {
 });
 
 
+app.get('/signals01', function(req, res) {
+	res.render('ejs/libras/player_01', null);
+});
+
+app.get('/signals02', function(req, res) {
+	res.render('ejs/libras/player_02', null);
+});
+
+app.get('/signals03', function(req, res) {
+	res.render('ejs/libras/player_03', null);
+});
+
+app.get('/signals04', function(req, res) {
+	res.render('ejs/libras/player_04', null);
+});
+
+
+
+
 
 
 function b64EncodeUnicode(str) {
