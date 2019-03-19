@@ -415,6 +415,21 @@ app.get('/enrichment01', function(req, res) {
 	res.render('ejs/'+project+'/task_0', null);
 });
 
+app.get('/signs01', function(req, res) {
+        res.render('ejs/libras/player_01', null);
+});
+
+app.get('/signs02', function(req, res) {
+        res.render('ejs/libras/player_02', null);
+});
+
+app.get('/signs03', function(req, res) {
+        res.render('ejs/libras/player_03', null);
+});
+
+app.get('/signs04', function(req, res) {
+        res.render('ejs/libras/player_04', null);
+});
 
 app.get('/signals01', function(req, res) {
 	res.render('ejs/libras/player_01', null);

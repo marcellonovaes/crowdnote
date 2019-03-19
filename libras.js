@@ -431,21 +431,39 @@ app.get('/thanks', function(req, res) {
         res.render('ejs/thanks', null);
 });
 
-app.get('/signals01', function(req, res) {
-        res.render('ejs/'+project+'/signals01', null);
-});
-app.get('/signals02', function(req, res) {
-        res.render('ejs/'+project+'/signals02', null);
-});
-app.get('/signals03', function(req, res) {
-        res.render('ejs/'+project+'/signals03', null);
-});
-app.get('/signals04', function(req, res) {
-        res.render('ejs/'+project+'/signals04', null);
+
+
+
+app.get('/signs01', function(req, res) {
+        res.render('ejs/libras/player_01', null);
 });
 
-app.get('/signals', function(req, res) {
-        res.render('ejs/'+project+'/signals', null);
+app.get('/signs02', function(req, res) {
+        res.render('ejs/libras/player_02', null);
+});
+
+app.get('/signs03', function(req, res) {
+        res.render('ejs/libras/player_03', null);
+});
+
+app.get('/signs04', function(req, res) {
+        res.render('ejs/libras/player_04', null);
+});
+
+app.get('/signals01', function(req, res) {
+        res.render('ejs/libras/player_01', null);
+});
+
+app.get('/signals02', function(req, res) {
+        res.render('ejs/libras/player_02', null);
+});
+
+app.get('/signals03', function(req, res) {
+        res.render('ejs/libras/player_03', null);
+});
+
+app.get('/signals04', function(req, res) {
+        res.render('ejs/libras/player_04', null);
 });
 
 app.get('/eval', function(req, res) {
